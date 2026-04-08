@@ -1,0 +1,52 @@
+a.grown-btn {
+  text-decoration: none;
+}
+
+a.grown-btn--ghost:hover {
+  color: var(--color-green);
+}
+
+.grown-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-6);
+  font-size: var(--text-small);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.grown-btn--primary {
+  background-color: var(--color-accent);
+  color: var(--color-text-on-accent);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.12) inset;
+}
+
+.grown-btn--primary:hover {
+  filter: brightness(1.06);
+}
+
+.grown-btn--primary:active {
+  filter: brightness(0.96);
+}
+
+.grown-btn--ghost {
+  background: transparent;
+  color: var(--color-green);
+  border: 1px solid var(--color-border-subtle);
+}
+
+.grown-btn--ghost:hover {
+  background: var(--color-bg-secondary);
+  border-color: transparent;
+}
+
+.grown-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

@@ -1,0 +1,20 @@
+.grown-section {
+  padding: var(--space-10) var(--space-6);
+}
+
+.grown-section--white {
+  background: var(--color-bg-primary);
+}
+
+.grown-section--blush {
+  background: var(--color-bg-secondary);
+}
+
+.grown-section--warm {
+  background: var(--color-bg-warm);
+}
+
+.grown-section__inner {
+  max-width: var(--content-max);
+  margin: 0 auto;
+}

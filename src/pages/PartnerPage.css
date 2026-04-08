@@ -1,0 +1,123 @@
+.partner-hero {
+  padding-bottom: var(--space-6);
+}
+
+.partner-eyebrow {
+  font-size: var(--text-small);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-green);
+  margin: 0 0 var(--space-3);
+}
+
+.partner-title {
+  font-size: var(--text-display-xl);
+  margin: 0 0 var(--space-3);
+  max-width: 20ch;
+}
+
+.partner-lede {
+  margin: 0;
+  max-width: 36rem;
+  color: var(--color-text-secondary);
+  font-size: 1.125rem;
+}
+
+.partner-section-heading {
+  font-size: var(--text-display-lg);
+  margin: 0 0 var(--space-6);
+  text-align: center;
+}
+
+.partner-audience-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+}
+
+@media (max-width: 800px) {
+  .partner-audience-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.partner-audience-card {
+  background: var(--color-bg-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  border: 1px solid var(--color-border-subtle);
+  box-shadow: var(--shadow-soft);
+}
+
+.partner-audience-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  margin: 0 0 var(--space-3);
+}
+
+.partner-audience-card p {
+  margin: 0;
+  color: var(--color-text-secondary);
+}
+
+.partner-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-5);
+  max-width: 40rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.partner-step {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-4);
+  align-items: flex-start;
+}
+
+.partner-step__index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  background: var(--color-green);
+  color: var(--color-text-on-accent);
+  font-size: var(--text-small);
+  font-weight: 700;
+}
+
+.partner-step__title {
+  font-family: var(--font-body);
+  font-size: var(--text-title);
+  font-weight: 600;
+  margin: 0 0 var(--space-2);
+}
+
+.partner-step__body {
+  margin: 0;
+  color: var(--color-text-secondary);
+}
+
+.partner-cta {
+  text-align: center;
+}
+
+.partner-cta .grown-section__inner {
+  max-width: 36rem;
+}
+
+.partner-cta__title {
+  font-size: var(--text-display-lg);
+  margin: 0 0 var(--space-3);
+}
+
+.partner-cta__text {
+  margin: 0 0 var(--space-6);
+  color: var(--color-text-secondary);
+}

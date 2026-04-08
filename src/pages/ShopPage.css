@@ -1,0 +1,119 @@
+.shop-hero {
+  padding-bottom: var(--space-6);
+}
+
+.shop-eyebrow {
+  font-size: var(--text-small);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-green);
+  margin: 0 0 var(--space-3);
+}
+
+.shop-title {
+  font-size: var(--text-display-xl);
+  margin: 0 0 var(--space-3);
+}
+
+.shop-lede {
+  margin: 0;
+  max-width: 32rem;
+  color: var(--color-text-secondary);
+  font-size: 1.125rem;
+}
+
+.shop-feature-visual .grown-section__inner {
+  max-width: 900px;
+}
+
+.shop-feature-visual .placeholder-image {
+  min-height: 320px;
+}
+
+.shop-filters {
+  padding-top: 0;
+  padding-bottom: var(--space-4);
+}
+
+.shop-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  padding: var(--space-2);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-subtle);
+  background: var(--color-bg-primary);
+}
+
+.shop-filter-bar__item {
+  font-size: var(--text-small);
+  font-weight: 500;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-secondary);
+}
+
+.shop-filter-bar__item--active {
+  background: var(--color-blush);
+  color: var(--color-charcoal);
+  font-weight: 600;
+}
+
+.shop-grid-section {
+  padding-top: var(--space-4);
+}
+
+.shop-product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+@media (max-width: 960px) {
+  .shop-product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .shop-product-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.shop-strip {
+  text-align: center;
+}
+
+.shop-strip .grown-section__inner {
+  max-width: 36rem;
+}
+
+.shop-strip__title {
+  font-size: var(--text-display-lg);
+  margin: 0 0 var(--space-3);
+}
+
+.shop-strip__text {
+  margin: 0;
+  color: var(--color-text-secondary);
+}
+
+.shop-subscribe {
+  text-align: center;
+}
+
+.shop-subscribe .grown-section__inner {
+  max-width: 34rem;
+}
+
+.shop-subscribe__title {
+  font-size: 1.75rem;
+  margin: 0 0 var(--space-3);
+}
+
+.shop-subscribe__text {
+  margin: 0;
+  color: var(--color-text-secondary);
+}
