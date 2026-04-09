@@ -18,6 +18,25 @@ export function Footer() {
           <Link to="/contact">Contact</Link>
           <Link to="/about">About</Link>
         </nav>
+        <nav className="site-footer__social" aria-label="Social media">
+          <p className="site-footer__social-label">@grownhydrofarms</p>
+          <div className="site-footer__social-links">
+            <a
+              href="https://www.instagram.com/grownhydrofarms/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Instagram
+            </a>
+            <a
+              href="https://www.tiktok.com/@grownhydrofarms"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              TikTok
+            </a>
+          </div>
+        </nav>
         <p className="site-footer__legal">
           © GROWN Hydroponic Farms
         </p>
