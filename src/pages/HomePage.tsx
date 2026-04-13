@@ -1,10 +1,24 @@
+import { useMemo } from "react";
 import { LinkButton } from "../components/LinkButton";
 import { PlaceholderImage } from "../components/PlaceholderImage";
 import { Section } from "../components/sections/Section";
 import { ProductCard } from "../components/sections/ProductCard";
+import {
+  featuredProductIds,
+  products,
+  getFulfillmentBadge,
+} from "../data/products";
+import { useProductModal } from "../context/useProductModal";
 import "./HomePage.css";
 
 export function HomePage() {
+  const { openProductById } = useProductModal();
+
+  const featured = useMemo(() => {
+    const set = new Set(featuredProductIds);
+    return products.filter((p) => set.has(p.id));
+  }, []);
+
   return (
     <>
       <Section bg="white" className="home-hero">
@@ -69,9 +83,18 @@ export function HomePage() {
         <p className="home-section-label">Product preview</p>
         <h2 className="home-section-title">A taste of what we grow</h2>
         <div className="home-preview-grid">
-          <ProductCard name="Sunflower microgreens" price="From $8" />
-          <ProductCard name="Salad mix blend" price="From $10" />
-          <ProductCard name="Pantry herb kit" price="From $14" />
+          {featured.map((p) => (
+            <ProductCard
+              key={p.id}
+              name={p.name}
+              subtitle={p.subtitle}
+              shortDescription={p.shortDescription}
+              priceOneTime={`${p.priceOneTime} one-time`}
+              priceSubscription={p.priceSubscription}
+              fulfillmentBadge={getFulfillmentBadge(p)}
+              onOpenDetails={() => openProductById(p.id)}
+            />
+          ))}
         </div>
       </Section>
 

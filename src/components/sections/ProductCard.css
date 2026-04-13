@@ -8,6 +8,28 @@
   flex-direction: column;
   gap: var(--space-3);
   min-height: 100%;
+  text-align: left;
+}
+
+.product-card--interactive {
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+  width: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.product-card--interactive:hover {
+  border-color: rgba(22, 57, 52, 0.28);
+  box-shadow: 0 20px 44px rgba(38, 19, 17, 0.09);
+}
+
+.product-card--interactive:focus {
+  outline: none;
+}
+
+.product-card--interactive:focus-visible {
+  box-shadow: 0 0 0 2px var(--color-bg-primary), 0 0 0 4px var(--color-green);
 }
 
 .product-card__visual {
@@ -27,13 +49,72 @@
   margin: 0;
 }
 
+.product-card__subtitle {
+  margin: calc(-1 * var(--space-2)) 0 0;
+  font-size: var(--text-small);
+  font-weight: 500;
+  color: var(--color-green);
+}
+
+.product-card__blurb {
+  margin: 0;
+  font-size: var(--text-small);
+  color: var(--color-text-secondary);
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
 .product-card__price {
   margin: 0;
-  color: var(--color-text-secondary);
+  color: var(--color-text-primary);
   font-size: var(--text-small);
+  font-weight: 600;
+}
+
+.product-card__subprice {
+  margin: calc(-1 * var(--space-2)) 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.8125rem;
+}
+
+.product-card__fulfillment {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--color-terracotta);
+  font-weight: 500;
 }
 
 .product-card__btn {
   margin-top: auto;
   width: 100%;
+}
+
+.product-card__btn--fake {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: auto;
+  width: 100%;
+  min-height: 2.75rem;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-green);
+  background: var(--color-green);
+  color: var(--color-text-on-accent);
+  font-size: var(--text-small);
+  font-weight: 600;
+  pointer-events: none;
+}
+
+.product-card--interactive .product-card__btn--fake {
+  background: var(--color-bg-primary);
+  color: var(--color-green);
+}
+
+.product-card--interactive:hover .product-card__btn--fake {
+  background: var(--color-green);
+  color: var(--color-text-on-accent);
 }

@@ -47,11 +47,20 @@
 }
 
 .shop-filter-bar__item {
+  font: inherit;
   font-size: var(--text-small);
   font-weight: 500;
   padding: var(--space-2) var(--space-4);
   border-radius: var(--radius-sm);
+  border: none;
+  background: transparent;
   color: var(--color-text-secondary);
+  cursor: pointer;
+}
+
+.shop-filter-bar__item:focus-visible {
+  outline: 2px solid var(--color-green);
+  outline-offset: 2px;
 }
 
 .shop-filter-bar__item--active {
