@@ -1,5 +1,13 @@
 import { useEffect, useId, useRef } from "react";
 import type { Product } from "../../data/products";
+import { useCart } from "../../context/useCart";
+import { Button } from "../Button";
+import {
+  canPurchaseOneTime,
+  canPurchaseSubscription,
+  getOneTimeUnitCents,
+  getSubscriptionUnitCents,
+} from "../../lib/productPricing";
 import "./ProductDetailModal.css";
 
 type Props = {
@@ -8,6 +16,7 @@ type Props = {
 };
 
 export function ProductDetailModal({ product, onClose }: Props) {
+  const { addLine } = useCart();
   const dialogRef = useRef<HTMLDialogElement>(null);
   const titleId = useId();
   const closeBtnRef = useRef<HTMLButtonElement>(null);
@@ -103,6 +112,60 @@ export function ProductDetailModal({ product, onClose }: Props) {
                 <dd>{product.priceSubscription ?? "N/A"}</dd>
               </div>
             </dl>
+
+            <div className="product-modal__cart-actions">
+              <Button
+                type="button"
+                variant="primary"
+                className="product-modal__add"
+                disabled={!canPurchaseOneTime(product)}
+                title={
+                  canPurchaseOneTime(product)
+                    ? undefined
+                    : "One-time price unavailable for checkout"
+                }
+                onClick={() => {
+                  const cents = getOneTimeUnitCents(product);
+                  if (cents == null) return;
+                  addLine({
+                    productId: product.id,
+                    purchaseMode: "one_time",
+                    unitAmountCents: cents,
+                    productName: subLine,
+                  });
+                }}
+              >
+                Add one-time
+              </Button>
+              <Button
+                type="button"
+                variant="ghost"
+                className="product-modal__add"
+                disabled={!canPurchaseSubscription(product)}
+                title={
+                  canPurchaseSubscription(product)
+                    ? undefined
+                    : "Subscription not available or price TBD"
+                }
+                onClick={() => {
+                  const cents = getSubscriptionUnitCents(product);
+                  if (cents == null) return;
+                  addLine({
+                    productId: product.id,
+                    purchaseMode: "subscription",
+                    unitAmountCents: cents,
+                    productName: subLine,
+                  });
+                }}
+              >
+                Add subscription
+              </Button>
+            </div>
+            <p className="product-modal__stripe-hint">
+              Checkout uses sample cart totals. Map Stripe Price IDs in{" "}
+              <code className="product-modal__code">src/config/stripe.ts</code>{" "}
+              for live Stripe Checkout or a backend session.
+            </p>
 
             <p className="product-modal__fulfillment">
               <strong>Fulfillment:</strong> {product.fulfillment}

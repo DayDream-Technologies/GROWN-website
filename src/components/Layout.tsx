@@ -1,6 +1,8 @@
 import { Outlet } from "react-router-dom";
+import { CartProvider } from "../context/CartContext";
 import { ProductModalProvider } from "../context/ProductModalProvider";
 import { useProductModal } from "../context/useProductModal";
+import { CartDrawer } from "./cart/CartDrawer";
 import { ProductDetailModal } from "./shop/ProductDetailModal";
 import { Header } from "./Header";
 import { Footer } from "./Footer";
@@ -17,14 +19,17 @@ function LayoutShell() {
       </main>
       <Footer />
       <ProductDetailModal product={selectedProduct} onClose={closeProduct} />
+      <CartDrawer />
     </>
   );
 }
 
 export function Layout() {
   return (
-    <ProductModalProvider>
-      <LayoutShell />
-    </ProductModalProvider>
+    <CartProvider>
+      <ProductModalProvider>
+        <LayoutShell />
+      </ProductModalProvider>
+    </CartProvider>
   );
 }

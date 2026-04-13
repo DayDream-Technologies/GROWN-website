@@ -112,6 +112,33 @@
   color: var(--color-charcoal);
 }
 
+.product-modal__cart-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
+.product-modal__add {
+  flex: 1;
+  min-width: 8rem;
+}
+
+.product-modal__stripe-hint {
+  margin: 0 0 var(--space-4);
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  line-height: 1.45;
+}
+
+.product-modal__code {
+  font-size: 0.75em;
+  padding: 0.1em 0.35em;
+  border-radius: var(--radius-sm);
+  background: var(--color-blush);
+  color: var(--color-charcoal);
+}
+
 .product-modal__fulfillment {
   margin: 0 0 var(--space-4);
   font-size: var(--text-small);
