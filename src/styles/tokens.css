@@ -4,11 +4,11 @@
  * names follow the style system doc.
  *
  * Color PDF: F9EDF0, E6C8B7, C3955B, BA6A36, 163934, 261311
- * Typography: Paloma (headlines) → Fraunces via Google Fonts; Avenir Next → DM Sans.
+ * Typography: system-first, web-safe stack for a professional style.
  */
 :root {
   /* Brand palette */
-  --color-blush: #f9edf0;
+  --color-blush: #e6c8b7;
   --color-warm-neutral: #e6c8b7;
   --color-gold: #c3955b;
   --color-terracotta: #ba6a36;
@@ -27,9 +27,9 @@
   --color-card: #ffffff;
 
   /* Typography */
-  --font-display: "Fraunces", "Paloma", Georgia, "Times New Roman", serif;
-  --font-body: "DM Sans", "Avenir Next", -apple-system, BlinkMacSystemFont,
-    "Segoe UI", sans-serif;
+  --font-display: Georgia, "Times New Roman", Times, serif;
+  --font-body: "Segoe UI", "Helvetica Neue", Arial, -apple-system,
+    BlinkMacSystemFont, sans-serif;
 
   --text-display-xl: clamp(2.25rem, 4vw + 1rem, 3.5rem);
   --text-display-lg: clamp(1.75rem, 2.5vw + 1rem, 2.5rem);

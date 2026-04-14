@@ -1,6 +1,5 @@
 import { useMemo } from "react";
 import { LinkButton } from "../components/LinkButton";
-import { PlaceholderImage } from "../components/PlaceholderImage";
 import { Section } from "../components/sections/Section";
 import { ProductCard } from "../components/sections/ProductCard";
 import {
@@ -13,6 +12,7 @@ import "./HomePage.css";
 
 export function HomePage() {
   const { openProductById } = useProductModal();
+  const heroImageSrc = `${import.meta.env.BASE_URL}images/Danelle.jpg`;
 
   const featured = useMemo(() => {
     const set = new Set(featuredProductIds);
@@ -32,15 +32,16 @@ export function HomePage() {
               for everyday life.
             </p>
             <div className="home-hero__actions">
-              <LinkButton to="/shop">Shop for Your Home</LinkButton>
-              <LinkButton to="/partner" variant="ghost">
-                Partner With Us
+              <LinkButton to="/shop">Shop Fresh Produce</LinkButton>
+              <LinkButton to="/shop" variant="ghost">
+                Shop Smoothie & Pantry Blends
               </LinkButton>
             </div>
           </div>
-          <PlaceholderImage
-            label="Hero imagery — greens, kitchen, or farm context"
-            tone="blush"
+          <img
+            className="home-hero__image"
+            src={heroImageSrc}
+            alt="Woman standing in a kitchen holding a mug."
           />
         </div>
       </Section>
@@ -104,9 +105,9 @@ export function HomePage() {
           Explore the shop or reach out to talk wholesale and partnerships.
         </p>
         <div className="home-cta__actions">
-          <LinkButton to="/shop">Shop for Your Home</LinkButton>
-          <LinkButton to="/contact" variant="ghost">
-            Contact us
+          <LinkButton to="/shop">Shop Fresh Produce</LinkButton>
+          <LinkButton to="/shop" variant="ghost">
+            Shop Smoothie & Pantry Blends
           </LinkButton>
         </div>
       </Section>
