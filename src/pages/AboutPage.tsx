@@ -1,6 +1,6 @@
 import { LinkButton } from "../components/LinkButton";
 import { Section } from "../components/sections/Section";
-import { PlaceholderImage } from "../components/PlaceholderImage";
+import { siteImage } from "../lib/images";
 import "./AboutPage.css";
 
 const values = [
@@ -49,9 +49,14 @@ export function AboutPage() {
 
       <Section bg="white">
         <div className="about-split">
-          <PlaceholderImage
-            label="Picture of Danelle smiling and holding the tray"
-            tone="blush"
+          <img
+            className="about-photo"
+            src={siteImage("site/about-founder.jpg")}
+            alt="Founder in a bright home kitchen with a mug"
+            loading="lazy"
+            decoding="async"
+            width={800}
+            height={1000}
           />
           <div className="about-split__copy">
             <h2 className="about-subheading">Built to make healthy eating easier</h2>
@@ -89,9 +94,14 @@ export function AboutPage() {
               freshness.
             </p>
           </div>
-          <PlaceholderImage
-            label="Picture of greens — transparent background style"
-            tone="white"
+          <img
+            className="about-photo about-photo--rounded"
+            src={siteImage("site/about-freeze-dry.jpg")}
+            alt="Fresh produce on trays inside a freeze dryer"
+            loading="lazy"
+            decoding="async"
+            width={800}
+            height={800}
           />
         </div>
       </Section>

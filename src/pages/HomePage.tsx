@@ -7,12 +7,13 @@ import {
   products,
   getFulfillmentBadge,
 } from "../data/products";
+import { getProductImageUrl, siteImage } from "../lib/images";
 import { useProductModal } from "../context/useProductModal";
 import "./HomePage.css";
 
 export function HomePage() {
   const { openProductById } = useProductModal();
-  const heroImageSrc = `${import.meta.env.BASE_URL}images/Danelle.jpg`;
+  const heroImageSrc = siteImage("site/hero-home.jpg");
 
   const featured = useMemo(() => {
     const set = new Set(featuredProductIds);
@@ -90,9 +91,14 @@ export function HomePage() {
               name={p.name}
               subtitle={p.subtitle}
               shortDescription={p.shortDescription}
-              priceOneTime={`${p.priceOneTime} one-time`}
+              priceOneTime={
+                p.contactForPricing
+                  ? p.priceOneTime
+                  : `${p.priceOneTime} one-time`
+              }
               priceSubscription={p.priceSubscription}
               fulfillmentBadge={getFulfillmentBadge(p)}
+              imageSrc={getProductImageUrl(p)}
               onOpenDetails={() => openProductById(p.id)}
             />
           ))}

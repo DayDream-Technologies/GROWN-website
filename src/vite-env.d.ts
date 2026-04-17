@@ -2,6 +2,7 @@
 
 interface ImportMetaEnv {
   readonly VITE_STRIPE_PUBLISHABLE_KEY?: string;
+  readonly VITE_CONTACT_EMAIL?: string;
 }
 
 interface ImportMeta {

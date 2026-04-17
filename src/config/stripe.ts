@@ -24,7 +24,7 @@ const STRIPE_PRICE_CATALOG: Partial<
   Record<string, { oneTime?: string; subscription?: string }>
 > = {
   // Example wiring (uncomment and replace when ready):
-  // "immunity-smoothie-booster": {
+  // "green-leaf": {
   //   oneTime: "price_xxxxxxxxxxxxxxxx",
   //   subscription: "price_yyyyyyyyyyyyyyyy",
   // },

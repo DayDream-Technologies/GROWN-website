@@ -1,0 +1,67 @@
+.fresh-inquiry {
+  margin: 0;
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-subtle);
+  background: var(--color-blush);
+}
+
+.fresh-inquiry__intro {
+  margin: 0 0 var(--space-4);
+  font-size: var(--text-small);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-body);
+}
+
+.fresh-inquiry__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.fresh-inquiry__field label {
+  font-size: var(--text-small);
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.fresh-inquiry__field input,
+.fresh-inquiry__field textarea {
+  padding: var(--space-3);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-sm);
+  font: inherit;
+  font-size: var(--text-body);
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+}
+
+.fresh-inquiry__field input:focus,
+.fresh-inquiry__field textarea:focus {
+  outline: none;
+  border-color: var(--color-green);
+  box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.2);
+}
+
+.fresh-inquiry__field textarea {
+  resize: vertical;
+  min-height: 6rem;
+}
+
+.fresh-inquiry__submit {
+  width: 100%;
+  margin-top: var(--space-2);
+}
+
+.fresh-inquiry__hint {
+  margin: var(--space-4) 0 0;
+  font-size: var(--text-small);
+  color: var(--color-text-secondary);
+  line-height: var(--leading-body);
+}
+
+.fresh-inquiry__hint a {
+  color: var(--color-green);
+  font-weight: 600;
+}

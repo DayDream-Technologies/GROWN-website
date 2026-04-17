@@ -26,3 +26,4 @@ dist-ssr
 # Temp extraction (local only)
 _pdf_extract.txt
 _desktop_extract.txt
+public/images/_extracted/

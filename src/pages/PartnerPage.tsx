@@ -1,6 +1,6 @@
 import { LinkButton } from "../components/LinkButton";
 import { Section } from "../components/sections/Section";
-import { PlaceholderImage } from "../components/PlaceholderImage";
+import { siteImage } from "../lib/images";
 import "./PartnerPage.css";
 
 const audiences = [
@@ -50,11 +50,18 @@ export function PartnerPage() {
         </div>
       </Section>
 
-      <Section bg="white">
-        <PlaceholderImage
-          label="Picture with glasses with smoothies"
-          tone="blush"
-        />
+      <Section bg="white" className="partner-feature-photo">
+        <div className="partner-feature-photo__inner">
+          <img
+            className="partner-feature-photo__img"
+            src={siteImage("site/partner-hydroponic.jpg")}
+            alt="Rows of leafy greens growing in an indoor hydroponic system"
+            loading="lazy"
+            decoding="async"
+            width={1200}
+            height={900}
+          />
+        </div>
       </Section>
 
       <Section bg="blush" id="how">

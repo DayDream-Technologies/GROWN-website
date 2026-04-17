@@ -9,6 +9,8 @@ type Props = {
   priceOneTime?: string;
   priceSubscription?: string | null;
   fulfillmentBadge?: string;
+  /** When set, shown in the card header area */
+  imageSrc?: string;
   onOpenDetails?: () => void;
 };
 
@@ -20,6 +22,7 @@ export function ProductCard({
   priceOneTime,
   priceSubscription,
   fulfillmentBadge,
+  imageSrc,
   onOpenDetails,
 }: Props) {
   const primaryPrice = priceOneTime ?? price ?? "";
@@ -30,7 +33,23 @@ export function ProductCard({
 
   const inner = (
     <>
-      <div className="product-card__visual" aria-hidden />
+      <div
+        className={
+          imageSrc
+            ? "product-card__visual product-card__visual--photo"
+            : "product-card__visual"
+        }
+      >
+        {imageSrc ? (
+          <img
+            src={imageSrc}
+            alt={`${name} — product photo`}
+            className="product-card__photo"
+            loading="lazy"
+            decoding="async"
+          />
+        ) : null}
+      </div>
       <h3 className="product-card__name">{name}</h3>
       {subtitle ? (
         <p className="product-card__subtitle">{subtitle}</p>

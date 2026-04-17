@@ -1,13 +1,13 @@
 import { useMemo, useState } from "react";
 import { Section } from "../components/sections/Section";
 import { ProductCard } from "../components/sections/ProductCard";
-import { PlaceholderImage } from "../components/PlaceholderImage";
 import {
   products,
   type Product,
   type ProductCategory,
   getFulfillmentBadge,
 } from "../data/products";
+import { getProductImageUrl, siteImage } from "../lib/images";
 import { useProductModal } from "../context/useProductModal";
 import "./ShopPage.css";
 
@@ -47,10 +47,17 @@ export function ShopPage() {
       </Section>
 
       <Section bg="white" className="shop-feature-visual">
-        <PlaceholderImage
-          label="Picture of kitchen — lifestyle photography"
-          tone="warm"
-        />
+        <div className="shop-feature-visual__frame">
+          <img
+            className="shop-feature-visual__img"
+            src={siteImage("site/shop-powders.jpg")}
+            alt="Pantry blend powders on a kitchen counter"
+            loading="lazy"
+            decoding="async"
+            width={1600}
+            height={1200}
+          />
+        </div>
       </Section>
 
       <Section bg="white" className="shop-filters">
@@ -81,9 +88,14 @@ export function ShopPage() {
               name={p.name}
               subtitle={p.subtitle}
               shortDescription={p.shortDescription}
-              priceOneTime={`${p.priceOneTime} one-time`}
+              priceOneTime={
+                p.contactForPricing
+                  ? p.priceOneTime
+                  : `${p.priceOneTime} one-time`
+              }
               priceSubscription={p.priceSubscription}
               fulfillmentBadge={getFulfillmentBadge(p)}
+              imageSrc={getProductImageUrl(p)}
               onOpenDetails={() => openProductById(p.id)}
             />
           ))}
@@ -101,8 +113,11 @@ export function ShopPage() {
       <Section bg="warm" className="shop-subscribe">
         <h2 className="shop-subscribe__title">Subscribe & save</h2>
         <p className="shop-subscribe__text">
-          Many powders and pantry items include a subscription price—open any
-          product for one-time and subscription options.
+          Monthly subscriptions save 7% and include free shipping. Build a box
+          of any three seasonings, or any two products from our other categories
+          (Golden Calm and Lemon Zest are one-time only). Orders of $60 or more
+          qualify for free shipping. Open any eligible product for one-time and
+          subscription options.
         </p>
       </Section>
     </>

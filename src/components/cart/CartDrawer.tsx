@@ -124,8 +124,9 @@ export function CartDrawer() {
                 <strong>{formatUsdFromCents(subtotalCents)}</strong>
               </div>
               <p className="cart-drawer__hint">
-                Taxes and shipping calculated at checkout. Subscription items can
-                be billed via Stripe when Price IDs are configured.
+                Free shipping on orders over $60. Subscription orders include free
+                shipping and 7% off eligible items. Taxes calculated at checkout.
+                Stripe Price IDs can be configured for live subscription billing.
               </p>
               <div className="cart-drawer__actions">
                 <button

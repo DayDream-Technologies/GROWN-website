@@ -1,6 +1,7 @@
 import { LinkButton } from "../components/LinkButton";
 import { Button } from "../components/Button";
 import { Section } from "../components/sections/Section";
+import { contactEmail } from "../config/contact";
 import "./ContactPage.css";
 
 export function ContactPage() {
@@ -60,7 +61,7 @@ export function ContactPage() {
               <p>
                 <strong>Email</strong>
                 <br />
-                <a href="mailto:hello@grown.example">hello@grown.example</a>
+                <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
               </p>
               <p>
                 <strong>Farm</strong>

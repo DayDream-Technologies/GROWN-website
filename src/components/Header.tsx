@@ -4,8 +4,8 @@ import "./Header.css";
 
 const links = [
   { to: "/", label: "Home" },
-  { to: "/shop", label: "Shop Fresh Produce" },
-  { to: "/partner", label: "Shop Smoothie & Pantry Blends" },
+  { to: "/shop", label: "Fresh Produce" },
+  { to: "/partner", label: "Smoothie & Pantry" },
   { to: "/contact", label: "Contact" },
   { to: "/about", label: "About" },
 ] as const;
