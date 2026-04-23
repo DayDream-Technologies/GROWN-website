@@ -13,7 +13,9 @@ import "./HomePage.css";
 
 export function HomePage() {
   const { openProductById } = useProductModal();
-  const heroImageSrc = siteImage("site/hero-home.jpg");
+  const heroBackgroundSrc = siteImage(
+    "Picture for top section of website/IMG_3610.jpg",
+  );
 
   const featured = useMemo(() => {
     const set = new Set(featuredProductIds);
@@ -23,8 +25,18 @@ export function HomePage() {
   return (
     <>
       <Section bg="white" className="home-hero">
-        <div className="home-hero__grid">
-          <div className="home-hero__copy">
+        <div className="home-hero__shell">
+          <img
+            className="home-hero__bg"
+            src={heroBackgroundSrc}
+            alt=""
+            width={2400}
+            height={1600}
+            decoding="async"
+            fetchPriority="high"
+          />
+          <div className="home-hero__scrim" aria-hidden />
+          <div className="home-hero__content">
             <h1 className="home-hero__title">
               Nutrient-rich food, grown with intention — from seed to shelf
             </h1>
@@ -39,11 +51,6 @@ export function HomePage() {
               </LinkButton>
             </div>
           </div>
-          <img
-            className="home-hero__image"
-            src={heroImageSrc}
-            alt="Woman standing in a kitchen holding a mug."
-          />
         </div>
       </Section>
 
