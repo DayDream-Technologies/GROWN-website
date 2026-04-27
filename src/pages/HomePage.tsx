@@ -146,12 +146,12 @@ export function HomePage() {
             natural.
           </blockquote>
         </div>
-        <div className="home-mission__bands" aria-hidden="true">
-          <span className="home-mission__band home-mission__band--green" />
-          <span className="home-mission__band home-mission__band--maroon" />
-          <span className="home-mission__band home-mission__band--brown" />
-        </div>
       </Section>
+      <div className="home-mission__bands" aria-hidden="true">
+        <span className="home-mission__band home-mission__band--green" />
+        <span className="home-mission__band home-mission__band--maroon" />
+        <span className="home-mission__band home-mission__band--brown" />
+      </div>
     </>
   );
 }
