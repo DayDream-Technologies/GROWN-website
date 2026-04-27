@@ -37,6 +37,9 @@ export function ContactPage() {
               <label htmlFor="topic">Topic</label>
               <select id="topic" name="topic" defaultValue="general">
                 <option value="general">General question</option>
+                <option value="fresh-pricing">
+                  Fresh produce &amp; microgreens pricing
+                </option>
                 <option value="partner">Wholesale / partner</option>
                 <option value="press">Press</option>
               </select>
@@ -45,7 +48,9 @@ export function ContactPage() {
               <label htmlFor="message">Message</label>
               <textarea id="message" name="message" rows={5} />
             </div>
-            <Button type="submit">Send message</Button>
+            <Button type="submit" variant="rose" className="contact-form__submit">
+              Send message
+            </Button>
           </form>
 
           <aside className="contact-aside">

@@ -11,6 +11,8 @@ type Props = {
   fulfillmentBadge?: string;
   /** When set, shown in the card header area */
   imageSrc?: string;
+  /** Prefer top of image in frame (e.g. jar lids) */
+  imageAlignTop?: boolean;
   onOpenDetails?: () => void;
 };
 
@@ -23,6 +25,7 @@ export function ProductCard({
   priceSubscription,
   fulfillmentBadge,
   imageSrc,
+  imageAlignTop,
   onOpenDetails,
 }: Props) {
   const primaryPrice = priceOneTime ?? price ?? "";
@@ -44,7 +47,11 @@ export function ProductCard({
           <img
             src={imageSrc}
             alt={`${name} — product photo`}
-            className="product-card__photo"
+            className={
+              imageAlignTop
+                ? "product-card__photo product-card__photo--top"
+                : "product-card__photo"
+            }
             loading="lazy"
             decoding="async"
           />

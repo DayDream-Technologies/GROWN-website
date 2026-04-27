@@ -27,3 +27,4 @@ dist-ssr
 _pdf_extract.txt
 _desktop_extract.txt
 public/images/_extracted/
+public/images/_unpack/

@@ -101,7 +101,11 @@ export function ProductDetailModal({ product, onClose }: Props) {
           <div className="product-modal__body">
             <div className="product-modal__hero">
               <img
-                className="product-modal__hero-img"
+                className={
+                  product.category === "seasoning"
+                    ? "product-modal__hero-img product-modal__hero-img--top"
+                    : "product-modal__hero-img"
+                }
                 src={getProductImageUrl(product)}
                 alt={`${subLine} — product photo`}
                 loading="lazy"

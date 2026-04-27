@@ -6,6 +6,10 @@ a.grown-btn--ghost:hover {
   color: var(--color-green);
 }
 
+a.grown-btn--rose:hover {
+  color: var(--color-heading);
+}
+
 .grown-btn {
   display: inline-flex;
   align-items: center;
@@ -44,6 +48,20 @@ a.grown-btn--ghost:hover {
 .grown-btn--ghost:hover {
   background: var(--color-bg-secondary);
   border-color: transparent;
+}
+
+.grown-btn--rose {
+  background-color: var(--color-rose);
+  color: var(--color-heading);
+  box-shadow: none;
+}
+
+.grown-btn--rose:hover {
+  background-color: var(--color-rose-hover);
+}
+
+.grown-btn--rose:active {
+  filter: brightness(0.97);
 }
 
 .grown-btn:disabled {

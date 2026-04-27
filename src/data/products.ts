@@ -26,45 +26,13 @@ export type Product = {
   /** When true, card shows “Local only” and can be filtered */
   localOnly?: boolean;
   /**
-   * Fresh items: show inquiry form instead of cart; omit listed prices on the card.
-   * Exception: microgreens tray keeps on-site pricing (`contactForPricing` false).
+   * When true, show inquiry form instead of cart and omit purchasable price parsing.
+   * Used for fresh produce, microgreens trays, and any SKU priced manually off-site.
    */
   contactForPricing?: boolean;
 };
 
 export const products: Product[] = [
-  {
-    id: "berry-sweet",
-    name: "Berry Sweet",
-    subtitle: "Powered by Spirulina",
-    size: "8.7 oz (30 servings)",
-    shortDescription:
-      "Refreshing blue spirulina blend for a calming boost.",
-    priceOneTime: "$49.99",
-    priceSubscription: "$46.49 / month",
-    fulfillment: "Local and shipping available",
-    longDescription:
-      "Our Blue Calm Spirulina Refresher combines the nutrient-rich power of spirulina with calming adaptogens to support tranquility and wellness. This refreshing drink mix is designed for busy individuals looking to enhance their hydration without compromising their health goals. Packed with antioxidants, vitamins, and minerals, this blend gives you a quick energy boost while calming your mind and body, making it perfect for on-the-go lifestyles. Mix it into water or your favorite beverage for a deliciously nutritious uplift.",
-    ingredients:
-      "Organic Blue Spirulina, Organic Wheatgrass, Organic Barley Grass, Organic Lemon Powder, Organic Chlorella, Organic Passion Fruit Juice Powder, Organic Baobab Fruit Powder, Organic Pineapple Juice Powder, Organic Mint, Organic Blackberry, Organic Coconut (powder), Organic VitaFiber, Organic Stevia Leaf Extract, Organic Monk Fruit Extract, Natural Flavors, Malic Acid.",
-    recipes: [
-      {
-        title: "Blue Spritz Refresher",
-        body: "1 scoop + 1 cup water + ice, shake.",
-      },
-      {
-        title: "Lemon Spirulina Cooler",
-        body: "1 scoop + 1 cup lemonade + mint garnish.",
-      },
-      {
-        title: "Spirulina Power Smoothie",
-        body: "1 scoop + 1 banana + 1/2 cup pineapple + 1 cup coconut milk, blend.",
-      },
-    ],
-    labelNotes:
-      "Net weight, ingredient list, serving size/directions, organic claims, allergen note for coconut, storage.",
-    category: "powder",
-  },
   {
     id: "elevated-brew-mushroom",
     name: "Elevated Brew Mushroom",
@@ -76,7 +44,7 @@ export const products: Product[] = [
     priceSubscription: "$22.31 / month",
     fulfillment: "Local and shipping available",
     longDescription:
-      "Our Elevated Brew Mushroom Coffee provides a rich and smooth flavor by combining high-quality organic instant coffee with a blend of functional mushrooms. Infused with Lion’s Mane and Reishi, this carefully crafted mix delivers focused energy, cognitive support, and immune resilience without the jitters or crashes. Enjoy it in hot coffee, iced coffee, or smoothies, and experience the delicious fusion of taste and health.",
+      "Our Elevated Brew Mushroom Coffee provides a rich and smooth flavor by combining high-quality organic instant coffee with a blend of functional mushrooms. Infused with Lion’s Mane and Reishi, this carefully crafted mix delivers focused energy, cognitive support, and immune resilience without the jitters or crashes. Enjoy it in hot coffee, iced coffee, or smoothies, and experience the delicious fusion of taste and health. Each serving is built with freeze-dried microgreens—roughly one-quarter to one-half a tray of fresh greens—for concentrated nutrition in every scoop.",
     ingredients:
       "Organic Instant Coffee (Arabica), Organic Lion’s Mane Powder, Organic Reishi Powder, Organic Chaga Powder, Organic Cordyceps Powder, Organic Turkey Tail Powder, Organic Shiitake Powder, Organic Maitake Powder, Organic Mesima Powder, Organic Wood Ear Powder, Organic Oyster Powder.",
     recipes: [
@@ -108,7 +76,7 @@ export const products: Product[] = [
     priceSubscription: "$46.49 / month",
     fulfillment: "Local and shipping available",
     longDescription:
-      "Unlock the power of fresh greens with our Immunity Smoothie Booster. Crafted from a premium greens blend—Organic Broccoli, Alfalfa Grass, Kale, Spinach, Spirulina, and Wheatgrass—and enhanced with Organic Inulin, Ashwagandha, Panax Ginseng, and the probiotic Bacillus subtilis, this clean formula delivers concentrated vitamins, antioxidants, and prebiotic fiber without fillers or additives. Use daily in smoothies, bowls, and baking for a nutritional kick that supports your health.",
+      "Unlock the power of fresh greens with our Immunity Smoothie Booster. Crafted from a premium greens blend—Organic Broccoli, Alfalfa Grass, Kale, Spinach, Spirulina, and Wheatgrass—and enhanced with Organic Inulin, Ashwagandha, Panax Ginseng, and the probiotic Bacillus subtilis, this clean formula delivers concentrated vitamins, antioxidants, and prebiotic fiber without fillers or additives. Use daily in smoothies, bowls, and baking for a nutritional kick that supports your health. Each serving is built with freeze-dried microgreens—roughly one-quarter to one-half a tray of fresh greens—for concentrated nutrition in every scoop.",
     ingredients:
       "Organic Broccoli Powder, Organic Alfalfa Grass Powder, Organic Kale Powder, Organic Spinach Powder, Organic Spirulina Powder, Organic Wheatgrass Powder, Organic Inulin (chicory root), Organic Ashwagandha Root Powder, Organic Panax Ginseng Root Powder, Bacillus subtilis (probiotic), Hydroponic Microgreens Blend.",
     recipes: [
@@ -133,30 +101,32 @@ export const products: Product[] = [
     id: "berry-gut-glow",
     name: "Berry Gut Glow",
     subtitle: "Powered by Microgreens",
-    size: "8 oz (20 servings; 11.5 g, 1 scoop)",
+    size: "Serving 2 Tbsp; 22.5 servings per container",
     shortDescription:
-      "Sweet berry blend enriched with gut-supporting fibers.",
-    priceOneTime: "$36.99",
-    priceSubscription: "$34.40 / month",
+      "Berry-forward blend powered by microgreens—easy to stir into smoothies, oats, or yogurt.",
+    priceOneTime: "$35.99",
+    priceSubscription: "$33.47 / month",
     fulfillment: "Local and shipping available",
     longDescription:
-      "Our Berry Gut Smoothie Blend combines the delicious taste of mixed berries with prebiotic fibers and gut-supporting nutrients. Packed with a rich array of organic super fruits, vegetables, and digestive aids, this smoothie mix is designed to help maintain a healthy gut while delivering a tasty and nutritious flavor. Perfect for people on the go looking for a nutritious boost in their smoothies, breakfast bowls, or on-the-go snacks.",
+      "Berry Gut Glow brings together clean berry superfoods and freeze-dried microgreens for a simple daily boost you can blend into smoothies, bowls, or snacks. Each serving is built with freeze-dried microgreens—roughly one-quarter to one-half a tray of fresh greens—for concentrated nutrition in every scoop.",
     ingredients:
-      "Organic Prebiotic Blend (2800 mg): Acacia Gum, Guar Gum, Jerusalem Artichoke Inulin, Blue Agave Inulin. Organic Garden Vegetable & Super Fruit Antioxidant Blend (2000 mg): Beet Root, Apple, Barley Grass, Amla, Cauliflower, Celery, Moringa Leaf, Parsley, Alfalfa Sprouts, Chlorella, Spirulina, Blueberry, Raspberry, Strawberry, Carrot, Broccoli, Green Cabbage, Kale, Spinach, Tomato, Acai Berry, Banana, Cherry, Pomegranate, Black Currant, Bilberry, Pineapple, Papaya, Cranberry, Acerola, Blackberry, Mango, Peach, Pear, Goji Berry, Elderberry, Grape, Maqui Berry, Lemon Peel, hydroponic microgreen blend. Organic Soluble and Insoluble Fiber Blend (1480 mg): Oat Fiber, Flaxseed. Organic Fruit Blend (1000 mg): Apple Fiber, Orange Peel, Lemon. Organic Focus/Adaptogen Blend (100 mg): Dried Coffee Bean, Green Tea Leaf, Ashwagandha Root. Enzyme Blend (50 mg): Cellulase, Fungal Protease, Acid Protease, Bromelain, Protease, Papain, Alkaline Protease. Probiotic Blend (Dairy Free) (500 million CFU / 7.5 mg): B. subtilis, L. rhamnosus, B. bifidum, B. longum, L. acidophilus, L. casei, S. thermophilus.",
+      "Organic blueberry powder, organic chia seeds, organic flax berry powder, organic Acai Powder, Organic Camu Camu Powder, Sea Salt.",
     recipes: [
       {
         title: "Berry Gut Smoothie",
-        body: "1 scoop + 1 cup mixed berries + 1 cup almond milk + 1 tbsp chia seeds, blend.",
+        body: "2 Tbsp + 1 cup mixed berries + 1 cup almond milk + extra chia if you like, blend.",
       },
       {
         title: "Tropical Digestive Smoothie",
-        body: "1 scoop + 1/2 banana + 1/2 cup pineapple + 1 cup coconut milk, blend.",
+        body: "2 Tbsp + 1/2 banana + 1/2 cup pineapple + 1 cup coconut milk, blend.",
       },
       {
         title: "Green Detox Shake",
-        body: "1 scoop + 1/2 avocado + 1 cup spinach + 1 cup cucumber juice, blend.",
+        body: "2 Tbsp + 1/2 avocado + 1 cup spinach + 1 cup cucumber juice, blend.",
       },
     ],
+    labelNotes:
+      "Net weight, ingredient list, serving size/directions, organic claims where applicable, allergen/processing, manufacturer.",
     category: "powder",
   },
   {
@@ -263,7 +233,7 @@ export const products: Product[] = [
     priceSubscription: "$13.94 / month",
     fulfillment: "Local and shipping available",
     longDescription:
-      "Medi Green Salt is a finishing salt that brings savory, herbaceous flavor and concentrated microgreen nutrition to everyday dishes. Freeze-dried pea microgreens and organic spinach powder lend vitamins and phytonutrients to a balanced blend of oregano, basil, garlic, and pepper. Use it as a table seasoning or finishing sprinkle to boost flavor and micronutrients with a single pinch.",
+      "Medi Green Salt is a finishing salt that brings savory, herbaceous flavor and concentrated microgreen nutrition to everyday dishes. Freeze-dried pea microgreens and organic spinach powder lend vitamins and phytonutrients to a balanced blend of oregano, basil, garlic, and pepper. Use it as a table seasoning or finishing sprinkle to boost flavor and micronutrients with a single pinch. Each jar contains one-quarter to one-half a tray of fresh microgreens, boosting nutrition in every sprinkle.",
     ingredients:
       "Sea Salt, Organic Spinach Powder, Organic Oregano, Organic Basil, Organic Garlic Powder, Organic Black Pepper, Hydroponic Microgreen Blend.",
     recipes: [
@@ -302,7 +272,7 @@ export const products: Product[] = [
     priceSubscription: "$10.22 / month",
     fulfillment: "Local and shipping available",
     longDescription:
-      "Our Plant-Based Ranch Seasoning recreates the classic creamy ranch flavor in a dry, vegan-friendly seasoning. Organic herbs, garlic, and onion, along with nutritional yeast, provide savory depth while freeze-dried pea microgreens contribute extra micronutrients. Use it to make quick dips, dressings, or to season roasted vegetables for a familiar, health-forward flavor.",
+      "Our Plant-Based Ranch Seasoning recreates the classic creamy ranch flavor in a dry, vegan-friendly seasoning. Organic herbs, garlic, and onion, along with nutritional yeast, provide savory depth while freeze-dried pea microgreens contribute extra micronutrients. Use it to make quick dips, dressings, or to season roasted vegetables for a familiar, health-forward flavor. Each jar contains one-quarter to one-half a tray of fresh microgreens, boosting nutrition in every sprinkle.",
     ingredients:
       "Organic Nutritional Yeast, Organic Garlic Powder, Organic Onion Powder, Organic Dried Dill, Organic Dried Parsley, Organic Dried Chives, Organic Black Pepper, Organic Sea Salt, Hydroponic Microgreen Blend.",
     recipes: [
@@ -341,7 +311,7 @@ export const products: Product[] = [
     priceSubscription: "$10.22 / month",
     fulfillment: "Local and shipping available",
     longDescription:
-      "This Plant-Based Salsa Verde Seasoning captures the bright citrus herb profile of salsa verde in a dry, concentrated form. Organic cilantro, lime zest, cumin, and oregano combine with freeze-dried microgreens to add freshness and nutrition to salsas, marinades, and dressings — no preservatives, just clean organic herbs.",
+      "This Plant-Based Salsa Verde Seasoning captures the bright citrus herb profile of salsa verde in a dry, concentrated form. Organic cilantro, lime zest, cumin, and oregano combine with freeze-dried microgreens to add freshness and nutrition to salsas, marinades, and dressings — no preservatives, just clean organic herbs. Each jar contains one-quarter to one-half a tray of fresh microgreens, boosting nutrition in every sprinkle.",
     ingredients:
       "Organic Dried Cilantro, Organic Lime Zest (powder), Organic Garlic Powder, Organic Cumin, Organic Dried Oregano, Organic Sea Salt, Organic Black Pepper, Hydroponic Microgreen Blend.",
     recipes: [
@@ -380,7 +350,7 @@ export const products: Product[] = [
     priceSubscription: "$10.22 / month",
     fulfillment: "Local and shipping available",
     longDescription:
-      "Plant-Based Pesto Seasoning brings the bright basil-forward taste of pesto to a convenient, shelf-stable format. Nutritional yeast and ground seeds create a creamy umami backbone while freeze-dried microgreens add extra vitamins. Use as an instant sauce base, spread, or finishing seasoning for broad culinary uses.",
+      "Plant-Based Pesto Seasoning brings the bright basil-forward taste of pesto to a convenient, shelf-stable format. Nutritional yeast and ground seeds create a creamy umami backbone while freeze-dried microgreens add extra vitamins. Use as an instant sauce base, spread, or finishing seasoning for broad culinary uses. Each jar contains one-quarter to one-half a tray of fresh microgreens, boosting nutrition in every sprinkle.",
     ingredients:
       "Organic Nutritional Yeast, Organic Dried Basil, Organic Dried Oregano, Organic Garlic Powder, Organic Pine Nuts (or Organic Sunflower Seeds), Organic Sea Salt, Organic Black Pepper, Hydroponic Microgreen Blend.",
     recipes: [
@@ -456,15 +426,14 @@ export const products: Product[] = [
     id: "microgreens-full-tray",
     name: "Microgreens (full tray)",
     subtitle: "Pea, Radish, Spicy Salad, Broccoli, Arugula, Mustard",
-    size: 'One full 10"×20" tray',
+    size: 'One full 10"×20" tray (contact us for availability)',
     shortDescription:
       "Fresh microgreen trays grown locally; also available freeze-dried for powders.",
-    priceOneTime: "$20 per tray (retail); restaurant/wholesale $18/tray (2-month min)",
-    priceSubscription:
-      "Weekly subscription at wholesale rate (e.g., $18/tray)",
-    fulfillment: "Local only for now",
+    priceOneTime: "Contact for pricing",
+    priceSubscription: null,
+    fulfillment: "Local only",
     longDescription:
-      "Fresh microgreens harvested at peak nutrient density — pea, radish, spicy salad, broccoli, arugula and mustard. Microgreens are tiny nutrition powerhouses (vitamins, minerals, antioxidants); we also freeze-dry surplus greens to make shelf-stable powders so families can access produce nutrition year-round. Sustainable, flavor-rich and perfect for busy households and restaurants.",
+      "Fresh microgreens harvested at peak nutrient density — pea, radish, spicy salad, broccoli, arugula and mustard. Microgreens are tiny nutrition powerhouses (vitamins, minerals, antioxidants); we also freeze-dry surplus greens to make shelf-stable powders so families can access produce nutrition year-round. Sustainable, flavor-rich and perfect for busy households and restaurants. Pricing, subscriptions, and wholesale are handled directly — reach out via the form and we will reply with options.",
     ingredients: "Live microgreens (variety).",
     recipes: [
       { title: "Garnish salads", body: "Top finished salads for crunch and flavor." },
@@ -473,10 +442,11 @@ export const products: Product[] = [
     ],
     labelNotes: "Variety, harvest date, storage & shelf life, local farm origin.",
     extraNotes: [
-      "Harvest & packaging add-on available for restaurant orders—ask for details.",
+      "Harvest and packaging add-ons available for restaurant orders—ask when you reach out.",
     ],
     category: "fresh",
     localOnly: true,
+    contactForPricing: true,
   },
   {
     id: "fresh-rosemary",
@@ -546,9 +516,9 @@ export const products: Product[] = [
     shortDescription: "Fresh mint for beverages and cooking.",
     priceOneTime: "Contact for pricing",
     priceSubscription: null,
-    fulfillment: "Local; can ship",
+    fulfillment: "Local only",
     longDescription:
-      "Cooling, aromatic mint for cocktails, teas and cooking — grown and harvested locally then packaged fresh or freeze-dried for shelf-stable options.",
+      "Cooling, aromatic mint for cocktails, teas and cooking — grown and harvested locally then packaged fresh. Freeze-dried herb options may be available through our pantry line—ask when you reach out.",
     ingredients: "Fresh mint.",
     recipes: [
       { title: "Mint iced tea", body: "Steep leaves with black tea, chill, sweeten." },
@@ -557,6 +527,7 @@ export const products: Product[] = [
     ],
     labelNotes: "Local origin, storage.",
     category: "fresh",
+    localOnly: true,
     contactForPricing: true,
   },
   {
@@ -568,7 +539,7 @@ export const products: Product[] = [
     priceSubscription: null,
     fulfillment: "Local only",
     longDescription:
-      "Vibrant, aromatic basil grown locally — ideal for pesto, salads and finishing dishes. We also offer freeze-dried basil for shipping.",
+      "Vibrant, aromatic basil grown locally — ideal for pesto, salads and finishing dishes. Shelf-stable freeze-dried basil may be available as a pantry item—ask when you reach out.",
     ingredients: "Fresh basil.",
     recipes: [
       { title: "Classic pesto", body: "Blend with pine nuts, garlic, oil, and cheese." },
@@ -583,7 +554,7 @@ export const products: Product[] = [
   {
     id: "fresh-baby-kale",
     name: "Baby Kale",
-    size: "Priced per lb (weekly delivery; min 8 lb for weekly route)",
+    size: "By the pound; weekly route options (contact us for sizing and minimums)",
     shortDescription:
       "Tender, nutrient-dense baby kale for salads and cooking.",
     priceOneTime: "Contact for pricing",
@@ -609,7 +580,7 @@ export const products: Product[] = [
 export const featuredProductIds: string[] = [
   "green-leaf",
   "elevated-brew-mushroom",
-  "berry-sweet",
+  "berry-gut-glow",
 ];
 
 export function getProductById(id: string): Product | undefined {

@@ -13,9 +13,7 @@ import "./HomePage.css";
 
 export function HomePage() {
   const { openProductById } = useProductModal();
-  const heroBackgroundSrc = siteImage(
-    "Picture for top section of website/IMG_3610.jpg",
-  );
+  const heroBackgroundSrc = siteImage("site/hero-home.jpg");
 
   const featured = useMemo(() => {
     const set = new Set(featuredProductIds);

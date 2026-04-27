@@ -4,20 +4,25 @@
 }
 
 .contact-title {
+  font-family: var(--font-display);
   font-size: var(--text-display-xl);
+  font-weight: 600;
+  color: var(--color-heading);
   margin: 0 0 var(--space-3);
 }
 
 .contact-lede {
   margin: 0 0 var(--space-2);
+  font-family: var(--font-body);
   font-size: 1.25rem;
-  color: var(--color-text-primary);
+  color: var(--color-heading);
 }
 
 .contact-note {
   margin: 0;
+  font-family: var(--font-body);
   font-size: var(--text-small);
-  color: var(--color-text-secondary);
+  color: var(--color-text-taupe);
 }
 
 .contact-body {
@@ -42,10 +47,17 @@
   flex-direction: column;
   gap: var(--space-4);
   padding: var(--space-6);
-  border: 1px solid var(--color-border-subtle);
+  border: 1px solid var(--color-card-border);
   border-radius: var(--radius-lg);
-  background: var(--color-bg-primary);
+  background: var(--color-card);
   box-shadow: var(--shadow-soft);
+}
+
+.contact-form__submit {
+  width: 100%;
+  margin-top: var(--space-2);
+  padding-block: var(--space-4);
+  font-size: 1rem;
 }
 
 .contact-field {
@@ -55,20 +67,22 @@
 }
 
 .contact-field label {
+  font-family: var(--font-body);
   font-size: var(--text-small);
   font-weight: 600;
-  color: var(--color-text-primary);
+  color: var(--color-heading);
 }
 
 .contact-field input,
 .contact-field select,
 .contact-field textarea {
-  font: inherit;
+  font-family: var(--font-body);
+  font-size: var(--text-body);
   padding: var(--space-3) var(--space-4);
   border-radius: var(--radius-sm);
-  border: 1px solid var(--color-border-subtle);
-  background: var(--color-bg-primary);
-  color: var(--color-text-primary);
+  border: 1px solid var(--color-card-border);
+  background: var(--color-field-fill);
+  color: var(--color-charcoal);
 }
 
 .contact-field textarea {
@@ -91,7 +105,8 @@
 
 .contact-aside__text {
   margin: 0 0 var(--space-4);
-  color: var(--color-text-secondary);
+  font-family: var(--font-body);
+  color: var(--color-text-taupe);
 }
 
 .contact-aside__meta {
@@ -120,7 +135,8 @@
 
 .contact-cta__text {
   margin: 0 0 var(--space-5);
-  color: var(--color-text-secondary);
+  font-family: var(--font-body);
+  color: var(--color-text-taupe);
 }
 
 .contact-cta__actions {

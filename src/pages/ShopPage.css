@@ -2,37 +2,47 @@
   padding-bottom: var(--space-6);
 }
 
-.shop-eyebrow {
-  font-size: var(--text-small);
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--color-green);
-  margin: 0 0 var(--space-3);
+.shop-hero__inner {
+  max-width: 40rem;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .shop-title {
+  font-family: var(--font-display);
   font-size: var(--text-display-xl);
-  margin: 0 0 var(--space-3);
+  font-weight: 600;
+  color: var(--color-heading);
+  margin: 0 0 var(--space-4);
+  line-height: var(--leading-tight);
+}
+
+.shop-hero__rule {
+  width: min(12rem, 50%);
+  height: 1px;
+  margin: 0 auto var(--space-5);
+  border: none;
+  background: var(--color-border-subtle);
 }
 
 .shop-lede {
   margin: 0;
-  max-width: 32rem;
-  color: var(--color-text-secondary);
+  font-family: var(--font-body);
   font-size: 1.125rem;
+  line-height: var(--leading-body);
+  color: var(--color-text-taupe);
 }
 
 .shop-feature-visual .grown-section__inner {
-  max-width: 900px;
+  max-width: 920px;
 }
 
 .shop-feature-visual__frame {
   border-radius: var(--radius-lg);
   overflow: hidden;
-  border: 1px solid var(--color-border-subtle);
+  border: 1px solid var(--color-card-border);
   box-shadow: var(--shadow-soft);
-  background: var(--color-warm-neutral);
+  background: var(--color-field-fill);
 }
 
 .shop-feature-visual__img {
@@ -40,7 +50,7 @@
   width: 100%;
   height: auto;
   vertical-align: middle;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 10;
   object-fit: cover;
 }
 
@@ -52,22 +62,23 @@
 .shop-filter-bar {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: var(--space-2);
-  padding: var(--space-2);
+  padding: var(--space-3);
   border-radius: var(--radius-md);
-  border: 1px solid var(--color-border-subtle);
-  background: var(--color-bg-primary);
+  border: 1px solid var(--color-card-border);
+  background: var(--color-card);
 }
 
 .shop-filter-bar__item {
-  font: inherit;
+  font-family: var(--font-body);
   font-size: var(--text-small);
   font-weight: 500;
   padding: var(--space-2) var(--space-4);
   border-radius: var(--radius-sm);
   border: none;
   background: transparent;
-  color: var(--color-text-secondary);
+  color: var(--color-text-taupe);
   cursor: pointer;
 }
 
@@ -77,8 +88,8 @@
 }
 
 .shop-filter-bar__item--active {
-  background: var(--color-blush);
-  color: var(--color-charcoal);
+  background: var(--color-price-pill);
+  color: var(--color-heading);
   font-weight: 600;
 }
 
@@ -89,7 +100,7 @@
 .shop-product-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-6);
+  gap: var(--space-8) var(--space-6);
 }
 
 @media (max-width: 960px) {
@@ -104,6 +115,36 @@
   }
 }
 
+.shop-connect {
+  text-align: center;
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.shop-connect .grown-section__inner {
+  max-width: 32rem;
+}
+
+.shop-connect__title {
+  font-family: var(--font-display);
+  font-size: var(--text-display-lg);
+  font-weight: 600;
+  color: var(--color-heading);
+  margin: 0 0 var(--space-3);
+}
+
+.shop-connect__text {
+  margin: 0 0 var(--space-6);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: var(--leading-body);
+  color: var(--color-text-taupe);
+}
+
+.shop-connect__btn {
+  min-width: 12rem;
+}
+
 .shop-strip {
   text-align: center;
 }
@@ -113,13 +154,23 @@
 }
 
 .shop-strip__title {
+  font-family: var(--font-display);
   font-size: var(--text-display-lg);
+  font-weight: 600;
+  color: var(--color-heading);
   margin: 0 0 var(--space-3);
 }
 
 .shop-strip__text {
   margin: 0;
-  color: var(--color-text-secondary);
+  font-family: var(--font-body);
+  color: var(--color-text-taupe);
+}
+
+.shop-strip__link {
+  color: var(--color-heading);
+  font-weight: 600;
+  text-underline-offset: 2px;
 }
 
 .shop-subscribe {
@@ -131,11 +182,15 @@
 }
 
 .shop-subscribe__title {
+  font-family: var(--font-display);
   font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--color-heading);
   margin: 0 0 var(--space-3);
 }
 
 .shop-subscribe__text {
   margin: 0;
-  color: var(--color-text-secondary);
+  font-family: var(--font-body);
+  color: var(--color-text-taupe);
 }

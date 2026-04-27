@@ -1,43 +1,51 @@
 /**
- * GROWN design tokens — sourced from `colors grown.pdf` (1st option) and
- * `grown_style_system.pdf`. Hex values below match the color PDF; semantic
- * names follow the style system doc.
- *
- * Color PDF: F9EDF0, E6C8B7, C3955B, BA6A36, 163934, 261311
- * Typography: system-first, web-safe stack for a professional style.
+ * GROWN design tokens — aligned with site mockups (cream, forest serif,
+ * dusty rose accents). Earlier PDF palette is mapped into this system where
+ * it still fits (e.g. terracotta for small accents).
  */
 :root {
-  /* Brand palette */
-  --color-blush: #e6c8b7;
-  --color-warm-neutral: #e6c8b7;
+  /* Surfaces */
+  --color-page-cream: #fdf9f3;
+  --color-card: #fffefb;
+  --color-field-fill: #f2ebe1;
+  --color-blush: #f3e8e4;
+  --color-warm-neutral: #efe6dc;
+
+  /* Brand / text */
+  --color-heading: #1b3022;
+  --color-green: #1b3022;
+  --color-charcoal: #2a2118;
+  --color-text-taupe: #6b5c52;
   --color-gold: #c3955b;
-  --color-terracotta: #ba6a36;
-  --color-green: #163934;
-  --color-charcoal: #261311;
+  --color-terracotta: #9a5c45;
+
+  /* Accents (mockups: price chips, submit, soft highlights) */
+  --color-price-pill: #e9c1c1;
+  --color-rose: #d9b4b0;
+  --color-rose-hover: #cfaaa5;
 
   /* Semantic */
-  --color-bg-primary: #ffffff;
+  --color-bg-primary: var(--color-page-cream);
   --color-bg-secondary: var(--color-blush);
   --color-bg-warm: var(--color-warm-neutral);
   --color-accent: var(--color-green);
   --color-text-primary: var(--color-charcoal);
-  --color-text-secondary: rgba(38, 19, 17, 0.62);
-  --color-text-on-accent: #ffffff;
-  --color-border-subtle: rgba(38, 19, 17, 0.12);
-  --color-card: #ffffff;
+  --color-text-secondary: rgba(42, 33, 24, 0.72);
+  --color-text-on-accent: #fffefb;
+  --color-border-subtle: rgba(27, 48, 34, 0.14);
+  --color-card-border: rgba(27, 48, 34, 0.1);
 
   /* Typography */
-  --font-display: Georgia, "Times New Roman", Times, serif;
-  --font-body: "Segoe UI", "Helvetica Neue", Arial, -apple-system,
-    BlinkMacSystemFont, sans-serif;
+  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-body: "Source Serif 4", Georgia, "Times New Roman", serif;
 
-  --text-display-xl: clamp(2.25rem, 4vw + 1rem, 3.5rem);
-  --text-display-lg: clamp(1.75rem, 2.5vw + 1rem, 2.5rem);
-  --text-title: 1.25rem;
+  --text-display-xl: clamp(2rem, 3.5vw + 1rem, 3.25rem);
+  --text-display-lg: clamp(1.65rem, 2.2vw + 1rem, 2.35rem);
+  --text-title: 1.2rem;
   --text-body: 1.0625rem;
   --text-small: 0.9375rem;
-  --leading-tight: 1.15;
-  --leading-body: 1.6;
+  --leading-tight: 1.2;
+  --leading-body: 1.65;
 
   /* Spacing scale */
   --space-1: 0.25rem;
@@ -50,11 +58,11 @@
   --space-10: 4rem;
   --space-12: 5rem;
 
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
-  --shadow-soft: 0 18px 40px rgba(38, 19, 17, 0.06);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --shadow-soft: 0 20px 48px rgba(27, 48, 34, 0.06);
 
-  --content-max: 1120px;
+  --content-max: 1080px;
   --header-height: 72px;
 }

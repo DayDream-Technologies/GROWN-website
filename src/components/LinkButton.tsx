@@ -4,7 +4,7 @@ import "./Button.css";
 
 type Props = {
   to: string;
-  variant?: "primary" | "ghost";
+  variant?: "primary" | "ghost" | "rose";
   children: ReactNode;
   className?: string;
 };

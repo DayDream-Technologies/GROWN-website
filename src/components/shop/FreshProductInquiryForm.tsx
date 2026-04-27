@@ -94,7 +94,7 @@ export function FreshProductInquiryForm({ productLabel }: Props) {
           onChange={(e) => setMessage(e.target.value)}
         />
       </div>
-      <Button type="submit" variant="primary" className="fresh-inquiry__submit">
+      <Button type="submit" variant="rose" className="fresh-inquiry__submit">
         Email to request pricing
       </Button>
       {submitted ? (
