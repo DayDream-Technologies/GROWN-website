@@ -1,5 +1,5 @@
-import { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useMemo, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import { LinkButton } from "../components/LinkButton";
 import { Section } from "../components/sections/Section";
 import { ProductCard } from "../components/sections/ProductCard";
@@ -13,18 +13,25 @@ import { getProductImageUrl, siteImage } from "../lib/images";
 import { useProductModal } from "../context/useProductModal";
 import "./ShopPage.css";
 
-type FilterId = "all" | ProductCategory | "local-only";
+type ShopFilterId =
+  | "all"
+  | ProductCategory
+  | "local-only"
+  | "fresh-produce"
+  | "microgreens";
 
-const FILTERS: { id: FilterId; label: string }[] = [
+const FILTERS: { id: ShopFilterId; label: string }[] = [
   { id: "all", label: "All products" },
   { id: "powder", label: "Powders & drinks" },
   { id: "seasoning", label: "Seasonings" },
-  { id: "fresh", label: "Fresh & local" },
+  { id: "fresh-produce", label: "Fresh produce" },
+  { id: "microgreens", label: "Microgreens" },
+  { id: "fresh", label: "All fresh" },
   { id: "local-only", label: "Local pickup only" },
 ];
 
 const SHOP_EDITORIAL: Record<
-  FilterId,
+  ShopFilterId,
   { title: string; lede: string; image: string; imageAlt: string }
 > = {
   all: {
@@ -46,10 +53,22 @@ const SHOP_EDITORIAL: Record<
     imageAlt: "Bright kitchen with microgreens and pantry items",
   },
   fresh: {
-    title: "Fresh produce & microgreens",
-    lede: "We supply restaurants, cafés, juice bars, and health-focused homes with herbs, microgreens, leafy greens, and more. Connect for pricing, delivery, and tray orders across West Michigan.",
+    title: "Fresh & local",
+    lede: "Everything we harvest for pickup and delivery in West Michigan — produce, herbs, microgreens, and more. Connect for pricing when you see “Contact for pricing.”",
     image: "site/smoothies-lifestyle.jpg",
     imageAlt: "Fresh greens, smoothies, and microgreens",
+  },
+  "fresh-produce": {
+    title: "Fresh produce",
+    lede: "Herbs, leafy greens, lettuce, and more for restaurants, cafés, and home kitchens. Connect for pricing, delivery, and volume across West Michigan.",
+    image: "fresh/fresh-butter-lettuce.jpg",
+    imageAlt: "Fresh butter lettuce and greens",
+  },
+  microgreens: {
+    title: "Fresh microgreens",
+    lede: "Full trays of pea, radish, spicy salad, broccoli, arugula, mustard, and more — grown locally. Connect for pricing, subscriptions, and wholesale.",
+    image: "fresh/microgreens-full-tray.jpg",
+    imageAlt: "Full tray of fresh microgreens",
   },
   "local-only": {
     title: "Local pickup",
@@ -59,15 +78,41 @@ const SHOP_EDITORIAL: Record<
   },
 };
 
-function matchesFilter(product: Product, filter: FilterId): boolean {
+const FILTER_PARAM = "filter";
+
+function isShopFilterId(v: string | null): v is ShopFilterId {
+  if (v == null) return false;
+  return (FILTERS as { id: ShopFilterId }[]).some((f) => f.id === v);
+}
+
+function parseFilterFromParams(searchParams: URLSearchParams): ShopFilterId {
+  const raw = searchParams.get(FILTER_PARAM);
+  if (raw && isShopFilterId(raw)) return raw;
+  return "all";
+}
+
+function matchesFilter(product: Product, filter: ShopFilterId): boolean {
   if (filter === "all") return true;
   if (filter === "local-only") return !!product.localOnly;
+  if (filter === "fresh-produce") {
+    return product.category === "fresh" && product.id !== "microgreens-full-tray";
+  }
+  if (filter === "microgreens") {
+    return product.id === "microgreens-full-tray";
+  }
   return product.category === filter;
 }
 
 export function ShopPage() {
   const { openProductById } = useProductModal();
-  const [filter, setFilter] = useState<FilterId>("all");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [filter, setFilter] = useState<ShopFilterId>(() =>
+    parseFilterFromParams(searchParams),
+  );
+
+  useEffect(() => {
+    setFilter(parseFilterFromParams(searchParams));
+  }, [searchParams]);
 
   const visible = useMemo(
     () => products.filter((p) => matchesFilter(p, filter)),
@@ -75,6 +120,15 @@ export function ShopPage() {
   );
 
   const editorial = SHOP_EDITORIAL[filter];
+
+  const setFilterAndUrl = (next: ShopFilterId) => {
+    setFilter(next);
+    if (next === "all") {
+      setSearchParams({});
+    } else {
+      setSearchParams({ [FILTER_PARAM]: next });
+    }
+  };
 
   return (
     <>
@@ -112,7 +166,7 @@ export function ShopPage() {
                   : "shop-filter-bar__item"
               }
               aria-pressed={f.id === filter}
-              onClick={() => setFilter(f.id)}
+              onClick={() => setFilterAndUrl(f.id)}
             >
               {f.label}
             </button>

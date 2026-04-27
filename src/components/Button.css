@@ -25,6 +25,10 @@ a.grown-btn--rose:hover {
   transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
 
+.grown-btn--sharp {
+  border-radius: 2px;
+}
+
 .grown-btn--primary {
   background-color: var(--color-accent);
   color: var(--color-text-on-accent);
@@ -62,6 +66,20 @@ a.grown-btn--rose:hover {
 
 .grown-btn--rose:active {
   filter: brightness(0.97);
+}
+
+.grown-btn--maroon {
+  background-color: var(--color-maroon);
+  color: var(--color-text-on-accent);
+  box-shadow: none;
+}
+
+.grown-btn--maroon:hover {
+  background-color: var(--color-maroon-hover);
+}
+
+.grown-btn--maroon:active {
+  filter: brightness(0.96);
 }
 
 .grown-btn:disabled {
