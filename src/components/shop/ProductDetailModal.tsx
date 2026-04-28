@@ -1,19 +1,12 @@
 import { useEffect, useId, useRef } from "react";
-import type { Product } from "../../data/products";
-import { getProductImageUrl } from "../../lib/images";
+import type { SquareCatalogItem } from "../../types/square";
 import { useCart } from "../../context/useCart";
 import { Button } from "../Button";
-import {
-  canPurchaseOneTime,
-  canPurchaseSubscription,
-  getOneTimeUnitCents,
-  getSubscriptionUnitCents,
-} from "../../lib/productPricing";
-import { FreshProductInquiryForm } from "./FreshProductInquiryForm";
+import { formatUsdFromCents } from "../../lib/money";
 import "./ProductDetailModal.css";
 
 type Props = {
-  product: Product | null;
+  product: SquareCatalogItem | null;
   onClose: () => void;
 };
 
@@ -63,8 +56,8 @@ export function ProductDetailModal({ product, onClose }: Props) {
   };
 
   const subLine = product
-    ? product.subtitle
-      ? `${product.name} — ${product.subtitle}`
+    ? product.variationName
+      ? `${product.name} — ${product.variationName}`
       : product.name
     : "";
 
@@ -101,153 +94,36 @@ export function ProductDetailModal({ product, onClose }: Props) {
           <div className="product-modal__body">
             <div className="product-modal__hero">
               <img
-                className={
-                  product.category === "seasoning"
-                    ? "product-modal__hero-img product-modal__hero-img--top"
-                    : "product-modal__hero-img"
-                }
-                src={getProductImageUrl(product)}
+                className="product-modal__hero-img"
+                src={product.imageUrls[0]}
                 alt={`${subLine} — product photo`}
                 loading="lazy"
                 decoding="async"
               />
             </div>
-            <p className="product-modal__meta">
-              <strong>Size:</strong> {product.size}
-            </p>
-            <p className="product-modal__lede">{product.shortDescription}</p>
-
-            {product.contactForPricing ? (
-              <>
-                <p className="product-modal__pricing-note">
-                  <strong>Pricing</strong> — Send a quick note and we&apos;ll
-                  reply with availability and pricing.
-                </p>
-                <FreshProductInquiryForm productLabel={subLine} />
-              </>
-            ) : (
-              <>
-                <dl className="product-modal__prices">
-                  <div>
-                    <dt>One-time</dt>
-                    <dd>{product.priceOneTime}</dd>
-                  </div>
-                  <div>
-                    <dt>Subscription</dt>
-                    <dd>{product.priceSubscription ?? "N/A"}</dd>
-                  </div>
-                </dl>
-
-                <div className="product-modal__cart-actions">
-                  <Button
-                    type="button"
-                    variant="primary"
-                    className="product-modal__add"
-                    disabled={!canPurchaseOneTime(product)}
-                    title={
-                      canPurchaseOneTime(product)
-                        ? undefined
-                        : "One-time price unavailable for checkout"
-                    }
-                    onClick={() => {
-                      const cents = getOneTimeUnitCents(product);
-                      if (cents == null) return;
-                      addLine({
-                        productId: product.id,
-                        purchaseMode: "one_time",
-                        unitAmountCents: cents,
-                        productName: subLine,
-                      });
-                    }}
-                  >
-                    Add one-time
-                  </Button>
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    className="product-modal__add"
-                    disabled={!canPurchaseSubscription(product)}
-                    title={
-                      canPurchaseSubscription(product)
-                        ? undefined
-                        : "Subscription not available or price TBD"
-                    }
-                    onClick={() => {
-                      const cents = getSubscriptionUnitCents(product);
-                      if (cents == null) return;
-                      addLine({
-                        productId: product.id,
-                        purchaseMode: "subscription",
-                        unitAmountCents: cents,
-                        productName: subLine,
-                      });
-                    }}
-                  >
-                    Add subscription
-                  </Button>
-                </div>
-                <p className="product-modal__stripe-hint">
-                  Checkout uses sample cart totals. Map Stripe Price IDs in{" "}
-                  <code className="product-modal__code">src/config/stripe.ts</code>{" "}
-                  for live Stripe Checkout or a backend session.
-                </p>
-              </>
-            )}
-
-            <p className="product-modal__fulfillment">
-              <strong>Fulfillment:</strong> {product.fulfillment}
-            </p>
-
-            <section className="product-modal__section">
-              <h3 className="product-modal__section-title">About</h3>
-              <p className="product-modal__long">{product.longDescription}</p>
-            </section>
-
-            <section className="product-modal__section">
-              <h3 className="product-modal__section-title">Ingredients</h3>
-              <p className="product-modal__ingredients">{product.ingredients}</p>
-            </section>
-
-            <section className="product-modal__section">
-              <h3 className="product-modal__section-title">Recipes &amp; uses</h3>
-              <ol className="product-modal__recipes">
-                {product.recipes.map((r) => (
-                  <li key={r.title}>
-                    <strong>{r.title}</strong> — {r.body}
-                  </li>
-                ))}
-              </ol>
-              {product.suggestedUses && product.suggestedUses.length > 0 ? (
-                <div className="product-modal__suggested">
-                  <p className="product-modal__suggested-label">Suggested uses</p>
-                  <ul>
-                    {product.suggestedUses.map((u) => (
-                      <li key={u}>{u}</li>
-                    ))}
-                  </ul>
-                </div>
-              ) : null}
-            </section>
-
-            {product.labelNotes ? (
-              <section className="product-modal__section">
-                <h3 className="product-modal__section-title">Label notes</h3>
-                <p className="product-modal__notes">{product.labelNotes}</p>
-              </section>
-            ) : null}
-
-            {product.extraNotes && product.extraNotes.length > 0 ? (
-              <section className="product-modal__section">
-                <h3 className="product-modal__section-title">
-                  Additional details
-                </h3>
-                <ul className="product-modal__extra">
-                  {product.extraNotes.map((n) => (
-                    <li key={n}>{n}</li>
-                  ))}
-                </ul>
-              </section>
-            ) : null}
+            <p className="product-modal__lede">{product.description}</p>
+            <dl className="product-modal__prices">
+              <div>
+                <dt>Price</dt>
+                <dd>{formatUsdFromCents(product.amountCents)}</dd>
+              </div>
+            </dl>
+            <div className="product-modal__cart-actions">
+              <Button
+                type="button"
+                variant="primary"
+                className="product-modal__add"
+                onClick={() => {
+                  addLine({
+                    productId: product.id,
+                    unitAmountCents: product.amountCents,
+                    productName: subLine,
+                  });
+                }}
+              >
+                Add to cart
+              </Button>
+            </div>
           </div>
         </div>
       ) : null}

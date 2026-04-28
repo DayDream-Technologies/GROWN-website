@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { LinkButton } from "../components/LinkButton";
 import { Section } from "../components/sections/Section";
 import { siteImage } from "../lib/images";
@@ -5,36 +6,36 @@ import "./HomePage.css";
 
 const CATEGORY_CARDS = [
   {
-    title: "Shop Fresh Produce",
-    subtitle: "For restaurants",
-    image: "fresh/fresh-baby-kale.jpg",
+    title: "Fresh Produce (Bulk)",
+    subtitle: "Local restaurants",
+    image: "site/home-produce.png",
     imageAlt: "Fresh leafy greens",
     href: "/shop?filter=fresh-produce",
     cta: "Explore produce",
     buttonVariant: "primary" as const,
   },
   {
-    title: "Shop Fresh Microgreens",
-    subtitle: "For restaurants & consumers",
-    image: "fresh/microgreens-full-tray.jpg",
+    title: "Fresh Microgreens",
+    subtitle: "For local restaurants & home kitchens",
+    image: "_unpack/Fw__microgreen_pics_for_home_page/IMG_4187.jpeg",
     imageAlt: "Tray of fresh microgreens",
     href: "/shop?filter=microgreens",
     cta: "Explore microgreens",
     buttonVariant: "maroon" as const,
   },
   {
-    title: "Shop Microgreen Seasonings",
-    subtitle: "For consumers & wholesale",
-    image: "products/medi-green-salt.jpg",
+    title: "Microgreen Seasonings",
+    subtitle: "For home kitchens & wholesale",
+    image: "site/home-seasoning.png",
     imageAlt: "Jars of microgreen seasonings",
     href: "/shop?filter=seasoning",
     cta: "Explore seasonings",
     buttonVariant: "maroon" as const,
   },
   {
-    title: "Shop Pantry Blends",
-    subtitle: "For home kitchens",
-    image: "site/shop-powders.jpg",
+    title: "Pantry Blends",
+    subtitle: "For boosting drinks in home kitchens",
+    image: "site/home-pantry-blend.png",
     imageAlt: "Pantry blend jars",
     href: "/shop?filter=powder",
     cta: "Explore pantry blends",
@@ -42,22 +43,44 @@ const CATEGORY_CARDS = [
   },
 ];
 
+const HERO_IMAGE_PATHS = [
+  "site/hero-home.png",
+  "_unpack/Fw__microgreen_pics_for_home_page/IMG_4190.jpeg",
+  "fresh/fresh-baby-kale.jpg",
+  "products/medi-green-salt.jpg",
+  "site/shop-powders.jpg",
+];
+
 export function HomePage() {
-  const heroBackgroundSrc = siteImage("site/hero-home.jpg");
+  const [heroIndex, setHeroIndex] = useState(0);
+
+  useEffect(() => {
+    const intervalId = window.setInterval(() => {
+      setHeroIndex((previousIndex) => (previousIndex + 1) % HERO_IMAGE_PATHS.length);
+    }, 5000);
+
+    return () => {
+      window.clearInterval(intervalId);
+    };
+  }, []);
 
   return (
     <>
       <Section bg="white" className="home-hero">
         <div className="home-hero__shell">
-          <img
-            className="home-hero__bg"
-            src={heroBackgroundSrc}
-            alt=""
-            width={2400}
-            height={1600}
-            decoding="async"
-            fetchPriority="high"
-          />
+          {HERO_IMAGE_PATHS.map((imagePath, index) => (
+            <img
+              key={imagePath}
+              className={`home-hero__bg ${index === heroIndex ? "is-active" : ""}`}
+              src={siteImage(imagePath)}
+              alt=""
+              width={2400}
+              height={1600}
+              decoding="async"
+              loading={index === 0 ? "eager" : "lazy"}
+              fetchPriority={index === 0 ? "high" : "auto"}
+            />
+          ))}
           <div className="home-hero__scrim" aria-hidden />
           <div className="home-hero__content">
             <h1 className="home-hero__title">
@@ -67,22 +90,6 @@ export function HomePage() {
               Microgreens, pantry blends, and nutrient-dense blends designed for
               everyday life.
             </p>
-            <div className="home-hero__actions">
-              <LinkButton
-                to="/shop?filter=fresh-produce"
-                variant="primary"
-                className="grown-btn--sharp"
-              >
-                Shop fresh produce
-              </LinkButton>
-              <LinkButton
-                to="/shop?filter=powder"
-                variant="maroon"
-                className="grown-btn--sharp"
-              >
-                Shop pantry &amp; blends
-              </LinkButton>
-            </div>
           </div>
         </div>
       </Section>

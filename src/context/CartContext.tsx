@@ -6,10 +6,8 @@ import {
   useRef,
   type ReactNode,
 } from "react";
-import type { PurchaseMode } from "../lib/productPricing";
 import { CART_STORAGE_KEY, type CartLine } from "./cartTypes";
 import type { CheckoutPayload } from "./checkoutPayload";
-import { buildStripeLineItemsFromPriceIds } from "../config/stripe";
 import { CartContext } from "./cartContextInstance";
 
 type CartState = {
@@ -32,21 +30,20 @@ type CartAction =
   | { type: "TOGGLE" }
   | { type: "HYDRATE"; lines: CartLine[] };
 
-function lineKey(productId: string, mode: PurchaseMode): string {
-  return `${productId}::${mode}`;
+function lineKey(productId: string): string {
+  return productId;
 }
 
 function cartReducer(state: CartState, action: CartAction): CartState {
   switch (action.type) {
     case "ADD": {
       const qty = Math.max(1, action.payload.quantity ?? 1);
-      const key = lineKey(action.payload.productId, action.payload.purchaseMode);
+      const key = lineKey(action.payload.productId);
       const idx = state.lines.findIndex((l) => l.lineKey === key);
       if (idx === -1) {
         const line: CartLine = {
           lineKey: key,
           productId: action.payload.productId,
-          purchaseMode: action.payload.purchaseMode,
           quantity: qty,
           unitAmountCents: action.payload.unitAmountCents,
           currency: action.payload.currency,
@@ -148,7 +145,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const addLine = useCallback(
     (args: {
       productId: string;
-      purchaseMode: PurchaseMode;
       unitAmountCents: number;
       productName: string;
       quantity?: number;
@@ -157,7 +153,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
         type: "ADD",
         payload: {
           productId: args.productId,
-          purchaseMode: args.purchaseMode,
           unitAmountCents: args.unitAmountCents,
           currency: "usd",
           productName: args.productName,
@@ -179,25 +174,13 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const clearCart = useCallback(() => dispatch({ type: "CLEAR" }), []);
 
   const getCheckoutPayload = useCallback((): CheckoutPayload => {
-    const lines = state.lines.map((l) => ({
-      productId: l.productId,
-      purchaseMode: l.purchaseMode,
-      quantity: l.quantity,
-      unitAmountCents: l.unitAmountCents,
-      productName: l.productName,
-    }));
-    const stripeLineItems = buildStripeLineItemsFromPriceIds(
-      state.lines.map((l) => ({
-        productId: l.productId,
-        mode: l.purchaseMode,
-        quantity: l.quantity,
-      })),
-    );
     return {
       currency: "usd",
-      lines,
+      lines: state.lines.map((l) => ({
+        catalogObjectId: l.productId,
+        quantity: l.quantity,
+      })),
       subtotalCents,
-      stripeLineItems,
     };
   }, [state.lines, subtotalCents]);
 

@@ -30,13 +30,13 @@ a.grown-btn--rose:hover {
 }
 
 .grown-btn--primary {
-  background-color: var(--color-accent);
+  background-color: #163934;
   color: var(--color-text-on-accent);
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.12) inset;
 }
 
 .grown-btn--primary:hover {
-  filter: brightness(1.06);
+  background-color: #1b463f;
 }
 
 .grown-btn--primary:active {
@@ -55,13 +55,13 @@ a.grown-btn--rose:hover {
 }
 
 .grown-btn--rose {
-  background-color: var(--color-rose);
-  color: var(--color-heading);
+  background-color: #163934;
+  color: var(--color-text-on-accent);
   box-shadow: none;
 }
 
 .grown-btn--rose:hover {
-  background-color: var(--color-rose-hover);
+  background-color: #1b463f;
 }
 
 .grown-btn--rose:active {
@@ -69,13 +69,13 @@ a.grown-btn--rose:hover {
 }
 
 .grown-btn--maroon {
-  background-color: var(--color-maroon);
+  background-color: #163934;
   color: var(--color-text-on-accent);
   box-shadow: none;
 }
 
 .grown-btn--maroon:hover {
-  background-color: var(--color-maroon-hover);
+  background-color: #1b463f;
 }
 
 .grown-btn--maroon:active {

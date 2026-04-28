@@ -1,142 +1,72 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { LinkButton } from "../components/LinkButton";
 import { Section } from "../components/sections/Section";
 import { ProductCard } from "../components/sections/ProductCard";
-import {
-  products,
-  type Product,
-  type ProductCategory,
-  getFulfillmentBadge,
-} from "../data/products";
-import { getProductImageUrl, siteImage } from "../lib/images";
+import { siteImage } from "../lib/images";
+import { useSquareCatalog } from "../context/useSquareCatalog";
 import { useProductModal } from "../context/useProductModal";
+import { formatUsdFromCents } from "../lib/money";
 import "./ShopPage.css";
 
-type ShopFilterId =
-  | "all"
-  | ProductCategory
-  | "local-only"
-  | "fresh-produce"
-  | "microgreens";
-
-const FILTERS: { id: ShopFilterId; label: string }[] = [
-  { id: "all", label: "All products" },
-  { id: "powder", label: "Powders & drinks" },
-  { id: "seasoning", label: "Seasonings" },
-  { id: "fresh-produce", label: "Fresh produce" },
-  { id: "microgreens", label: "Microgreens" },
-  { id: "fresh", label: "All fresh" },
-  { id: "local-only", label: "Local pickup only" },
-];
-
-const SHOP_EDITORIAL: Record<
-  ShopFilterId,
-  { title: string; lede: string; image: string; imageAlt: string }
-> = {
-  all: {
-    title: "Shop GROWN",
-    lede: "Pantry blends, microgreen seasonings, and fresh local produce — clean ingredients that boost nutrition in everyday meals.",
-    image: "site/shop-powders.jpg",
-    imageAlt: "Pantry blend jars and fresh ingredients on a counter",
-  },
-  powder: {
-    title: "Pantry Blends — Fresh, Functional, and Clean",
-    lede: "Our smoothie boosters and drink refreshers are powered by microgreens, mushrooms, spirulina, or saffron. Fresh, healthy ingredients that boost nutrition in every scoop.",
-    image: "site/shop-powders.jpg",
-    imageAlt: "Pantry blend powders on a kitchen counter",
-  },
-  seasoning: {
-    title: "Microgreen Seasonings — Flavor Elevated",
-    lede: "Crafted from freeze-dried microgreens to boost nutrition in every sprinkle and add flavor to every dish. Clean ingredients. Pure taste.",
-    image: "site/hero-home.jpg",
-    imageAlt: "Bright kitchen with microgreens and pantry items",
-  },
-  fresh: {
-    title: "Fresh & local",
-    lede: "Everything we harvest for pickup and delivery in West Michigan — produce, herbs, microgreens, and more. Connect for pricing when you see “Contact for pricing.”",
-    image: "site/smoothies-lifestyle.jpg",
-    imageAlt: "Fresh greens, smoothies, and microgreens",
-  },
-  "fresh-produce": {
-    title: "Fresh produce",
-    lede: "Herbs, leafy greens, lettuce, and more for restaurants, cafés, and home kitchens. Connect for pricing, delivery, and volume across West Michigan.",
-    image: "fresh/fresh-butter-lettuce.jpg",
-    imageAlt: "Fresh butter lettuce and greens",
-  },
-  microgreens: {
-    title: "Fresh microgreens",
-    lede: "Full trays of pea, radish, spicy salad, broccoli, arugula, mustard, and more — grown locally. Connect for pricing, subscriptions, and wholesale.",
-    image: "fresh/microgreens-full-tray.jpg",
-    imageAlt: "Full tray of fresh microgreens",
-  },
-  "local-only": {
-    title: "Local pickup",
-    lede: "These favorites are available for local delivery and pickup in the West Michigan area. Reach out for pricing, schedules, or wholesale.",
-    image: "site/smoothies-lifestyle.jpg",
-    imageAlt: "Fresh local produce from GROWN",
-  },
+const SHOP_EDITORIAL = {
+  title: "Shop GROWN",
+  lede: "Available products are loaded directly from our Square catalog.",
+  image: "site/shop-powders.jpg",
+  imageAlt: "Pantry blend jars and fresh ingredients on a counter",
 };
 
-const FILTER_PARAM = "filter";
+const PRODUCE_KEYWORDS = [
+  "produce",
+  "fresh",
+  "microgreen",
+  "lettuce",
+  "kale",
+  "spinach",
+  "arugula",
+  "basil",
+  "mint",
+  "cilantro",
+  "parsley",
+  "herb",
+  "greens",
+];
 
-function isShopFilterId(v: string | null): v is ShopFilterId {
-  if (v == null) return false;
-  return (FILTERS as { id: ShopFilterId }[]).some((f) => f.id === v);
-}
-
-function parseFilterFromParams(searchParams: URLSearchParams): ShopFilterId {
-  const raw = searchParams.get(FILTER_PARAM);
-  if (raw && isShopFilterId(raw)) return raw;
-  return "all";
-}
-
-function matchesFilter(product: Product, filter: ShopFilterId): boolean {
-  if (filter === "all") return true;
-  if (filter === "local-only") return !!product.localOnly;
-  if (filter === "fresh-produce") {
-    return product.category === "fresh" && product.id !== "microgreens-full-tray";
-  }
-  if (filter === "microgreens") {
-    return product.id === "microgreens-full-tray";
-  }
-  return product.category === filter;
+function isLikelyProduce(name: string, description: string) {
+  const text = `${name} ${description}`.toLowerCase();
+  return PRODUCE_KEYWORDS.some((keyword) => text.includes(keyword));
 }
 
 export function ShopPage() {
   const { openProductById } = useProductModal();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [filter, setFilter] = useState<ShopFilterId>(() =>
-    parseFilterFromParams(searchParams),
-  );
-
-  useEffect(() => {
-    setFilter(parseFilterFromParams(searchParams));
-  }, [searchParams]);
+  const { items, isLoading, error, reload } = useSquareCatalog();
+  const [searchParams] = useSearchParams();
+  const [search, setSearch] = useState("");
+  const freshProduceMode = searchParams.get("filter") === "fresh-produce";
 
   const visible = useMemo(
-    () => products.filter((p) => matchesFilter(p, filter)),
-    [filter],
+    () =>
+      items.filter((item) => {
+        if (freshProduceMode && !isLikelyProduce(item.name, item.description)) {
+          return false;
+        }
+        const q = search.trim().toLowerCase();
+        if (!q) return true;
+        return (
+          item.name.toLowerCase().includes(q) ||
+          item.description.toLowerCase().includes(q)
+        );
+      }),
+    [freshProduceMode, items, search],
   );
-
-  const editorial = SHOP_EDITORIAL[filter];
-
-  const setFilterAndUrl = (next: ShopFilterId) => {
-    setFilter(next);
-    if (next === "all") {
-      setSearchParams({});
-    } else {
-      setSearchParams({ [FILTER_PARAM]: next });
-    }
-  };
 
   return (
     <>
       <Section bg="white" className="shop-hero">
         <div className="shop-hero__inner">
-          <h1 className="shop-title">{editorial.title}</h1>
+          <h1 className="shop-title">{SHOP_EDITORIAL.title}</h1>
           <hr className="shop-hero__rule" />
-          <p className="shop-lede">{editorial.lede}</p>
+          <p className="shop-lede">{SHOP_EDITORIAL.lede}</p>
         </div>
       </Section>
 
@@ -144,8 +74,8 @@ export function ShopPage() {
         <div className="shop-feature-visual__frame">
           <img
             className="shop-feature-visual__img"
-            src={siteImage(editorial.image)}
-            alt={editorial.imageAlt}
+            src={siteImage(SHOP_EDITORIAL.image)}
+            alt={SHOP_EDITORIAL.imageAlt}
             loading="lazy"
             decoding="async"
             width={1600}
@@ -155,46 +85,53 @@ export function ShopPage() {
       </Section>
 
       <Section bg="white" className="shop-filters">
-        <div className="shop-filter-bar" role="group" aria-label="Product filters">
-          {FILTERS.map((f) => (
-            <button
-              key={f.id}
-              type="button"
-              className={
-                f.id === filter
-                  ? "shop-filter-bar__item shop-filter-bar__item--active"
-                  : "shop-filter-bar__item"
-              }
-              aria-pressed={f.id === filter}
-              onClick={() => setFilterAndUrl(f.id)}
-            >
-              {f.label}
-            </button>
-          ))}
+        <div className="shop-filter-bar" aria-label="Catalog search">
+          <input
+            type="search"
+            className="shop-filter-bar__item"
+            placeholder={
+              freshProduceMode ? "Search fresh produce" : "Search catalog"
+            }
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
         </div>
       </Section>
 
       <Section bg="white" className="shop-grid-section">
-        <div className="shop-product-grid">
-          {visible.map((p) => (
-            <ProductCard
-              key={p.id}
-              name={p.name}
-              subtitle={p.subtitle}
-              shortDescription={p.shortDescription}
-              priceOneTime={
-                p.contactForPricing
-                  ? p.priceOneTime
-                  : `${p.priceOneTime} one-time`
-              }
-              priceSubscription={p.priceSubscription}
-              fulfillmentBadge={getFulfillmentBadge(p)}
-              imageSrc={getProductImageUrl(p)}
-              imageAlignTop={p.category === "seasoning"}
-              onOpenDetails={() => openProductById(p.id)}
-            />
-          ))}
-        </div>
+        {isLoading ? (
+          <p className="shop-connect__text">Loading products from Square...</p>
+        ) : error ? (
+          <div>
+            <p className="shop-connect__text">
+              We could not load the Square catalog right now.
+            </p>
+            <button type="button" className="shop-filter-bar__item" onClick={() => void reload()}>
+              Retry
+            </button>
+          </div>
+        ) : (
+          <div className="shop-product-grid">
+            {freshProduceMode && visible.length === 0 ? (
+              <p className="shop-connect__text">
+                No produce items matched. Add produce items in Square and they will
+                appear here.
+              </p>
+            ) : null}
+            {visible.map((item) => (
+              <ProductCard
+                key={item.id}
+                name={item.name}
+                shortDescription={item.description}
+                priceOneTime={`${formatUsdFromCents(item.amountCents)} one-time`}
+                priceSubscription={null}
+                fulfillmentBadge="Square catalog item"
+                imageSrc={item.imageUrls[0]}
+                onOpenDetails={() => openProductById(item.id)}
+              />
+            ))}
+          </div>
+        )}
       </Section>
 
       <Section bg="white" className="shop-connect">

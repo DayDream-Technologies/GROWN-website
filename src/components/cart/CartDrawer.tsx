@@ -1,9 +1,12 @@
-import { useEffect, useId, useRef } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { formatUsdFromCents } from "../../lib/money";
 import { useCart } from "../../context/useCart";
+import { createSquareCheckout } from "../../lib/squareApi";
 import "./CartDrawer.css";
 
 export function CartDrawer() {
+  const [checkoutError, setCheckoutError] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const panelId = useId();
   const closeRef = useRef<HTMLButtonElement>(null);
   const {
@@ -34,10 +37,19 @@ export function CartDrawer() {
 
   if (!isOpen) return null;
 
-  const handleCheckoutSample = () => {
-    const payload = getCheckoutPayload();
-    // Replace with: POST /api/checkout-sessions → redirectToCheckout(sessionId)
-    console.info("[GROWN] Sample checkout payload (wire to Stripe later)", payload);
+  const handleCheckout = async () => {
+    try {
+      setCheckoutError(null);
+      setIsSubmitting(true);
+      const payload = getCheckoutPayload();
+      const checkoutUrl = await createSquareCheckout(payload.lines);
+      window.location.assign(checkoutUrl);
+    } catch (error) {
+      setCheckoutError(
+        error instanceof Error ? error.message : "Unable to create checkout link.",
+      );
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -88,11 +100,6 @@ export function CartDrawer() {
                       Remove
                     </button>
                   </div>
-                  <p className="cart-drawer__line-mode">
-                    {line.purchaseMode === "one_time"
-                      ? "One-time purchase"
-                      : "Subscription"}
-                  </p>
                   <div className="cart-drawer__line-controls">
                     <label className="cart-drawer__qty">
                       <span className="cart-drawer__qty-label">Qty</span>
@@ -126,15 +133,18 @@ export function CartDrawer() {
               <p className="cart-drawer__hint">
                 Free shipping on orders over $60. Subscription orders include free
                 shipping and 7% off eligible items. Taxes calculated at checkout.
-                Stripe Price IDs can be configured for live subscription billing.
               </p>
+              {checkoutError ? (
+                <p className="cart-drawer__hint">{checkoutError}</p>
+              ) : null}
               <div className="cart-drawer__actions">
                 <button
                   type="button"
                   className="cart-drawer__checkout"
-                  onClick={handleCheckoutSample}
+                  onClick={() => void handleCheckout()}
+                  disabled={isSubmitting}
                 >
-                  Checkout (sample)
+                  {isSubmitting ? "Redirecting..." : "Checkout"}
                 </button>
                 <button
                   type="button"

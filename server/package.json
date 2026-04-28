@@ -1,0 +1,16 @@
+{
+  "name": "grown-square-bff",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node --env-file=../.env ./src/index.js",
+    "start": "node --env-file=../.env ./src/index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^16.6.1",
+    "express": "^4.22.1",
+    "square": "^43.2.1"
+  }
+}

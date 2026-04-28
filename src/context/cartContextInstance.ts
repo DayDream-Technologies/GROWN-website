@@ -1,5 +1,4 @@
 import { createContext } from "react";
-import type { PurchaseMode } from "../lib/productPricing";
 import type { CartLine } from "./cartTypes";
 import type { CheckoutPayload } from "./checkoutPayload";
 
@@ -13,7 +12,6 @@ export type CartContextValue = {
   toggleCart: () => void;
   addLine: (args: {
     productId: string;
-    purchaseMode: PurchaseMode;
     unitAmountCents: number;
     productName: string;
     quantity?: number;
