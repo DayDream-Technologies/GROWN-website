@@ -186,3 +186,25 @@
   justify-content: center;
   gap: var(--space-3);
 }
+
+@media (max-width: 640px) {
+  .about-hero {
+    padding-bottom: var(--space-6);
+  }
+
+  .about-tagline {
+    font-size: 1.05rem;
+  }
+
+  .about-value-card {
+    padding: var(--space-5);
+  }
+
+  .about-photo {
+    max-width: 100%;
+  }
+
+  .about-cta__actions > * {
+    width: 100%;
+  }
+}

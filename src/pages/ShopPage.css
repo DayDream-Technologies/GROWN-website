@@ -93,6 +93,20 @@
   font-weight: 600;
 }
 
+@media (max-width: 700px) {
+  .shop-filter-bar {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: var(--space-2);
+  }
+
+  .shop-filter-bar__item {
+    white-space: nowrap;
+  }
+}
+
 .shop-grid-section {
   padding-top: var(--space-4);
 }
@@ -112,6 +126,19 @@
 @media (max-width: 560px) {
   .shop-product-grid {
     grid-template-columns: 1fr;
+  }
+
+  .shop-hero {
+    padding-bottom: var(--space-4);
+  }
+
+  .shop-lede {
+    font-size: 1rem;
+  }
+
+  .shop-connect__btn {
+    width: 100%;
+    min-width: 0;
   }
 }
 

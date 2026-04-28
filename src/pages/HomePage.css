@@ -95,6 +95,27 @@
   }
 }
 
+@media (max-width: 600px) {
+  .home-hero__shell {
+    min-height: min(82vh, 38rem);
+  }
+
+  .home-hero__content {
+    padding: var(--space-8) var(--space-4);
+    min-height: min(72vh, 31rem);
+  }
+
+  .home-hero__title {
+    font-size: clamp(1.75rem, 7vw, 2.2rem);
+    margin-bottom: var(--space-4);
+  }
+
+  .home-hero__lede {
+    font-size: 1rem;
+    margin-bottom: var(--space-4);
+  }
+}
+
 .home-hero__title {
   font-size: var(--text-display-xl);
   font-weight: 600;
@@ -225,6 +246,21 @@
   margin-top: var(--space-2);
   min-width: 12rem;
   justify-content: center;
+}
+
+@media (max-width: 600px) {
+  .home-categories__grid {
+    gap: var(--space-6);
+  }
+
+  .home-cat-card__body {
+    padding: var(--space-5) var(--space-4);
+  }
+
+  .home-cat-card__btn {
+    width: 100%;
+    min-width: 0;
+  }
 }
 
 /* Mission */

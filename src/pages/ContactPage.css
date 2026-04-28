@@ -145,3 +145,27 @@
   justify-content: center;
   gap: var(--space-3);
 }
+
+@media (max-width: 640px) {
+  .contact-lede {
+    font-size: 1.05rem;
+  }
+
+  .contact-form {
+    padding: var(--space-5) var(--space-4);
+  }
+
+  .contact-field input,
+  .contact-field select,
+  .contact-field textarea {
+    font-size: 1rem;
+  }
+
+  .contact-aside__meta {
+    margin-top: var(--space-6);
+  }
+
+  .contact-cta__actions > * {
+    width: 100%;
+  }
+}

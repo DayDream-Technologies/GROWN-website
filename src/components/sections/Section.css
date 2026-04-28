@@ -18,3 +18,9 @@
   max-width: var(--content-max);
   margin: 0 auto;
 }
+
+@media (max-width: 800px) {
+  .grown-section {
+    padding: var(--space-8) var(--space-4);
+  }
+}

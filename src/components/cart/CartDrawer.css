@@ -201,3 +201,21 @@
   font: inherit;
   cursor: pointer;
 }
+
+@media (max-width: 700px) {
+  .cart-drawer {
+    width: 100vw;
+  }
+
+  .cart-drawer__header,
+  .cart-drawer__list,
+  .cart-drawer__footer,
+  .cart-drawer__empty {
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+  }
+
+  .cart-drawer__qty input {
+    width: 3rem;
+  }
+}

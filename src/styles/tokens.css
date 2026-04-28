@@ -68,3 +68,15 @@
   --content-max: 1080px;
   --header-height: 72px;
 }
+
+@media (max-width: 800px) {
+  :root {
+    --header-height: 64px;
+    --space-6: 1.5rem;
+    --space-8: 2.5rem;
+    --space-10: 3rem;
+    --space-12: 4rem;
+    --text-display-xl: clamp(1.75rem, 5vw + 0.85rem, 2.35rem);
+    --text-display-lg: clamp(1.45rem, 3.4vw + 0.85rem, 1.95rem);
+  }
+}
