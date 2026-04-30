@@ -116,7 +116,9 @@ export function Header() {
       <nav
         id={mobileMenuId}
         className={`site-header__mobile-nav${mobileMenuOpen ? " is-open" : ""}`}
-        aria-label="Main mobile"
+        aria-label="Main menu"
+        aria-hidden={!mobileMenuOpen}
+        inert={mobileMenuOpen ? undefined : true}
       >
         <NavLink
           to="/"
