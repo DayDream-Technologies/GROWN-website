@@ -160,7 +160,7 @@ export function ProductDetailModal({ product, onClose }: Props) {
                     </div>
                   ) : null}
                 </dl>
-                {purchasable && unitCents != null ? (
+                {purchasable ? (
                   <div className="product-modal__cart-actions">
                     <Button
                       type="button"
