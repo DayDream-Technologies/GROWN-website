@@ -4,14 +4,17 @@ import { LinkButton } from "../components/LinkButton";
 import { Section } from "../components/sections/Section";
 import { ProductCard } from "../components/sections/ProductCard";
 import { siteImage } from "../lib/images";
-import { parseShopCategory, type ShopCategoryId } from "../lib/shopCategory";
+import {
+  parseShopCategory,
+  productMatchesShopCategory,
+  type ShopCategoryId,
+} from "../lib/shopCategory";
 import { products, getFulfillmentBadge } from "../data/products";
 import { useProductModal } from "../context/useProductModal";
 import { getProductListImage } from "../lib/productImages";
 import "./ShopPage.css";
 
-/** Same catalog on every shop URL; search is never limited to the page theme. */
-const CATALOG_SEARCH_PLACEHOLDER = "Search all products";
+const SEARCH_ALL_PLACEHOLDER = "Search all products";
 
 const LEGACY_FILTER_TO_CATEGORY: Record<string, ShopCategoryId> = {
   "fresh-produce": "fresh-produce",
@@ -27,6 +30,7 @@ const CATEGORY_COPY: Record<
     intro: string;
     image: string;
     imageAlt: string;
+    searchPlaceholder: string;
     showContactPricing: boolean;
     showVarietyRow: boolean;
     varietyLine?: string;
@@ -43,6 +47,7 @@ const CATEGORY_COPY: Record<
       "We supply restaurants and wholesale buyers with an array of fresh herbs, leafy greens, and mushrooms.",
     image: "site/home-produce.png",
     imageAlt: "Fresh leafy greens and produce",
+    searchPlaceholder: "Search lettuce, herbs, and more",
     showContactPricing: true,
     showVarietyRow: false,
     showProduceGallery: true,
@@ -57,6 +62,7 @@ const CATEGORY_COPY: Record<
       "Full trays and harvested microgreens for restaurants and home kitchens — picked for flavor, color, and nutrition.",
     image: "fresh/microgreens-full-tray.jpg",
     imageAlt: "Tray of fresh microgreens",
+    searchPlaceholder: "Search microgreens",
     showContactPricing: true,
     showVarietyRow: true,
     varietyLine:
@@ -73,6 +79,7 @@ const CATEGORY_COPY: Record<
       "Smoothie boosters, mushroom coffee, matcha, and drink refreshers powered by spirulina, saffron, mushrooms, microgreens, and other super-ingredients — crafted for everyday rituals.",
     image: "site/shop-powders.jpg",
     imageAlt: "Pantry blend jars on a counter",
+    searchPlaceholder: "Search blends, matcha, coffee…",
     showContactPricing: false,
     showVarietyRow: false,
     showProduceGallery: false,
@@ -87,6 +94,7 @@ const CATEGORY_COPY: Record<
       "Creative, flavorful blends with about a quarter tray of microgreens in every jar — made for finishing dishes at home or on the line.",
     image: "site/home-seasoning.png",
     imageAlt: "Jars of microgreen seasonings",
+    searchPlaceholder: "Search seasonings",
     showContactPricing: false,
     showVarietyRow: false,
     showProduceGallery: false,
@@ -170,17 +178,24 @@ export function ShopPage() {
   const activeCategory = parseShopCategory(searchParams);
   const copy = activeCategory ? CATEGORY_COPY[activeCategory] : null;
 
-  /** Full placeholder catalog on every shop route; category only drives page chrome. Search narrows the grid. */
+  const inSection = useMemo(() => {
+    if (!activeCategory) return products;
+    return products.filter((p) => productMatchesShopCategory(p, activeCategory));
+  }, [activeCategory]);
+
   const visible = useMemo(() => {
     const q = search.trim().toLowerCase();
-    if (!q) return products;
-    return products.filter(
+    if (!q) return inSection;
+    return inSection.filter(
       (item) =>
         item.name.toLowerCase().includes(q) ||
         item.shortDescription.toLowerCase().includes(q) ||
         item.longDescription.toLowerCase().includes(q),
     );
-  }, [search]);
+  }, [inSection, search]);
+
+  const searchPlaceholder =
+    copy?.searchPlaceholder ?? SEARCH_ALL_PLACEHOLDER;
 
   const defaultTitle = "Shop GROWN";
   const defaultLede =
@@ -279,7 +294,7 @@ export function ShopPage() {
           <input
             type="search"
             className="shop-filter-bar__item shop-filter-bar__input"
-            placeholder={CATALOG_SEARCH_PLACEHOLDER}
+            placeholder={searchPlaceholder}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
@@ -288,8 +303,11 @@ export function ShopPage() {
 
       <Section bg="white" className="shop-grid-section">
         <div className="shop-product-grid">
-          {products.length > 0 && visible.length === 0 && search.trim() ? (
-            <p className="shop-connect__text">No products match your search.</p>
+          {inSection.length > 0 && visible.length === 0 && search.trim() ? (
+            <p className="shop-connect__text">No products in this section match your search.</p>
+          ) : null}
+          {activeCategory && inSection.length === 0 ? (
+            <p className="shop-connect__text">No products are listed in this section yet.</p>
           ) : null}
           {visible.map((item) => (
             <ProductCard
@@ -301,7 +319,9 @@ export function ShopPage() {
               priceSubscription={item.priceSubscription}
               fulfillmentBadge={getFulfillmentBadge(item)}
               imageSrc={siteImage(getProductListImage(item))}
-              imageAlignTop={item.category === "seasoning"}
+              imageAlignTop={
+                item.category === "seasoning" || item.id === "microgreens-full-tray"
+              }
               onOpenDetails={() => openProductById(item.id)}
             />
           ))}

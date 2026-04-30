@@ -1,3 +1,5 @@
+import type { Product } from "../data/products";
+
 export type ShopCategoryId =
   | "fresh-produce"
   | "microgreens"
@@ -32,6 +34,25 @@ function isShopCategoryId(value: string): value is ShopCategoryId {
     value === "seasoning" ||
     value === "pantry-blends"
   );
+}
+
+/** Which placeholder `Product` rows appear under each shop URL (`?category=`). */
+export function productMatchesShopCategory(
+  product: Product,
+  category: ShopCategoryId,
+): boolean {
+  switch (category) {
+    case "pantry-blends":
+      return product.category === "powder";
+    case "seasoning":
+      return product.category === "seasoning";
+    case "microgreens":
+      return product.id === "microgreens-full-tray";
+    case "fresh-produce":
+      return (
+        product.category === "fresh" && product.id !== "microgreens-full-tray"
+      );
+  }
 }
 
 export const SHOP_NAV_CATEGORIES: {
