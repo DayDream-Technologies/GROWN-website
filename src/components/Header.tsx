@@ -26,17 +26,6 @@ export function Header() {
   }, [location.pathname, location.search]);
 
   useEffect(() => {
-    function onWindowResize() {
-      if (window.innerWidth > 800) {
-        setMobileMenuOpen(false);
-      }
-    }
-
-    window.addEventListener("resize", onWindowResize);
-    return () => window.removeEventListener("resize", onWindowResize);
-  }, []);
-
-  useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
         setMobileMenuOpen(false);

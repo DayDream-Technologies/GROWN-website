@@ -12,6 +12,7 @@ import {
 import { products, getFulfillmentBadge } from "../data/products";
 import { useProductModal } from "../context/useProductModal";
 import { getProductListImage } from "../lib/productImages";
+import { contactEmail } from "../config/contact";
 import "./ShopPage.css";
 
 const SEARCH_ALL_PLACEHOLDER = "Search all products";
@@ -205,6 +206,16 @@ export function ShopPage() {
 
   return (
     <>
+      <div className="shop-disclaimer" role="status">
+        <p className="shop-disclaimer__text">
+          <strong>Online ordering is not live yet.</strong> This shop preview will be available
+          soon. For orders or questions, please email{" "}
+          <a className="shop-disclaimer__link" href={`mailto:${contactEmail}`}>
+            {contactEmail}
+          </a>
+          .
+        </p>
+      </div>
       <div className="shop-section-break" aria-hidden />
 
       <Section bg="white" className="shop-hero">

@@ -1,5 +1,4 @@
 import { LinkButton } from "../components/LinkButton";
-import { Button } from "../components/Button";
 import { Section } from "../components/sections/Section";
 import { contactEmail } from "../config/contact";
 import "./ContactPage.css";
@@ -14,7 +13,20 @@ export function ContactPage() {
       </Section>
 
       <Section bg="white" className="contact-body">
-        <div className="contact-grid">
+        <div className="contact-grid contact-grid--single-notice">
+          <div className="contact-notice">
+            <p className="contact-notice__title">Contact us by email</p>
+            <p className="contact-notice__body">
+              The contact form is paused while we finish the new online shop. Please reach out
+              directly at{" "}
+              <a className="contact-notice__link" href={`mailto:${contactEmail}`}>
+                {contactEmail}
+              </a>{" "}
+              for wholesale, retail questions, or product inquiries.
+            </p>
+          </div>
+
+          {/*
           <form
             className="contact-form"
             onSubmit={(e) => e.preventDefault()}
@@ -52,6 +64,7 @@ export function ContactPage() {
               Send message
             </Button>
           </form>
+          */}
 
           <aside className="contact-aside">
             <h2 className="contact-aside__title">Wholesale & restaurants</h2>
