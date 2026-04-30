@@ -23,7 +23,7 @@ const LIST_IMAGE_BY_ID: Partial<Record<string, string>> = {
   "harvest-pesto-blend": "site/home-seasoning.png",
   "ice-balls-frozen": "site/home-produce.png",
   "fresh-butter-lettuce": "site/home-produce.png",
-  "microgreens-full-tray": "fresh/microgreens-full-tray.jpg",
+  "microgreens-full-tray": "site/home-microgreens.png",
   "fresh-rosemary": "site/home-produce.png",
   "fresh-dill": "site/home-produce.png",
   "fresh-italian-parsley": "site/home-produce.png",

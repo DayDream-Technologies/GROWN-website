@@ -21,7 +21,7 @@ const CATEGORY_CARDS = [
     subtitle: "For restaurants and home kitchens",
     detail:
       "Sold as full trays or harvested microgreens — perfect for cooking, garnishing, or everyday nutrition",
-    image: "fresh/microgreens-full-tray.jpg",
+    image: "site/home-microgreens.png",
     imageAlt: "Tray of fresh microgreens",
     href: "/shop?category=microgreens",
     cta: "Explore Microgreens",
@@ -55,7 +55,7 @@ const CATEGORY_CARDS = [
 const HERO_IMAGE_PATHS = [
   "site/hero-home.png",
   "Danelle.jpg",
-  "fresh/microgreens-full-tray.jpg",
+  "site/home-microgreens.png",
 ];
 
 const MISSION_TEXT =
