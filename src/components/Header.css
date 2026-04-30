@@ -3,20 +3,19 @@
   top: 0;
   z-index: 40;
   height: var(--header-height);
-  background: rgba(253, 249, 243, 0.92);
-  backdrop-filter: blur(10px);
+  background: var(--color-page-cream);
   border-bottom: 1px solid var(--color-border-subtle);
 }
 
 .site-header__inner {
-  max-width: var(--content-max);
+  max-width: min(1280px, 100%);
   margin: 0 auto;
   padding: 0 var(--space-6);
   height: var(--header-height);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--space-6);
+  gap: var(--space-4);
 }
 
 .site-header__right {
@@ -26,23 +25,42 @@
   justify-content: flex-end;
 }
 
+.site-header__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  text-decoration: none;
+  color: inherit;
+}
+
+.site-header__brand:hover .site-header__logo {
+  color: var(--color-green);
+}
+
+.site-header__logo-img {
+  height: 2.25rem;
+  width: auto;
+  max-width: 7rem;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
 .site-header__logo {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 1.35rem;
   letter-spacing: 0.06em;
   color: var(--color-heading);
-  text-decoration: none;
-}
-
-.site-header__logo:hover {
-  color: var(--color-green);
 }
 
 .site-header__nav {
   display: flex;
   align-items: center;
-  gap: var(--space-5);
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  row-gap: var(--space-1);
+  column-gap: var(--space-3);
+  max-width: 56rem;
 }
 
 .site-header__menu-toggle {
@@ -70,10 +88,11 @@
 
 .site-header__link {
   font-family: var(--font-body);
-  font-size: var(--text-small);
+  font-size: 0.8125rem;
   font-weight: 500;
   color: var(--color-text-taupe);
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .site-header__link:hover {
@@ -135,7 +154,12 @@
   }
 
   .site-header__logo {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
+  }
+
+  .site-header__logo-img {
+    height: 2rem;
+    max-width: 5.5rem;
   }
 
   .site-header__nav {
@@ -164,7 +188,7 @@
     gap: var(--space-1);
     padding: var(--space-2) var(--space-4) var(--space-4);
     border-top: 1px solid var(--color-border-subtle);
-    background: rgba(253, 249, 243, 0.98);
+    background: var(--color-page-cream);
   }
 
   .site-header__mobile-nav.is-open {

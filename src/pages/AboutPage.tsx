@@ -145,12 +145,12 @@ export function AboutPage() {
       <Section bg="blush" className="about-cta">
         <h2 className="about-cta__title">Bring GROWN home or to your business</h2>
         <div className="about-cta__actions">
-          <LinkButton to="/shop">Shop for Your Home</LinkButton>
+          <LinkButton to="/shop?category=pantry-blends">Shop pantry blends</LinkButton>
           <LinkButton to="/contact" variant="ghost">
             Contact Us
           </LinkButton>
-          <LinkButton to="/partner" variant="ghost">
-            Partner With Us
+          <LinkButton to="/shop?category=fresh-produce" variant="ghost">
+            Fresh produce & wholesale
           </LinkButton>
         </div>
       </Section>

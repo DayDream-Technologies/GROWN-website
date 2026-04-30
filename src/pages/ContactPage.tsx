@@ -54,13 +54,13 @@ export function ContactPage() {
           </form>
 
           <aside className="contact-aside">
-            <h2 className="contact-aside__title">Partner with us</h2>
+            <h2 className="contact-aside__title">Wholesale & restaurants</h2>
             <p className="contact-aside__text">
               Restaurants, cafés, and health-focused teams—tell us what you
               need and we&apos;ll follow up with options.
             </p>
-            <LinkButton to="/partner" variant="ghost">
-              Partner page
+            <LinkButton to="/shop?category=fresh-produce" variant="ghost">
+              Fresh produce catalog
             </LinkButton>
             <div className="contact-aside__meta">
               <p>

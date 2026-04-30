@@ -9,13 +9,15 @@ export function Footer() {
           <hr className="site-footer__rule" aria-hidden="true" />
           <p className="site-footer__wordmark">GROWN Hydroponic Farms</p>
           <p className="site-footer__tagline">
-            From seed to spice, made for everyday life
+            From seed to shelf, made for everyday life
           </p>
         </div>
         <nav className="site-footer__nav" aria-label="Footer">
           <Link to="/">Home</Link>
-          <Link to="/shop">Shop</Link>
-          <Link to="/partner">Partner</Link>
+          <Link to="/shop?category=fresh-produce">Fresh Produce</Link>
+          <Link to="/shop?category=microgreens">Fresh Microgreens</Link>
+          <Link to="/shop?category=pantry-blends">Pantry Blends</Link>
+          <Link to="/shop?category=seasoning">Pantry Seasonings</Link>
           <Link to="/contact">Contact</Link>
           <Link to="/about">About</Link>
         </nav>

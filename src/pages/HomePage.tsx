@@ -6,50 +6,60 @@ import "./HomePage.css";
 
 const CATEGORY_CARDS = [
   {
-    title: "Fresh Produce (Bulk)",
-    subtitle: "Local restaurants",
+    title: "Fresh Produce",
+    subtitle: "For restaurants and wholesale",
+    detail:
+      "Leafy greens, herbs & mushrooms available in bulk",
     image: "site/home-produce.png",
     imageAlt: "Fresh leafy greens",
-    href: "/shop?filter=fresh-produce",
-    cta: "Explore produce",
+    href: "/shop?category=fresh-produce",
+    cta: "Explore Produce",
     buttonVariant: "primary" as const,
   },
   {
     title: "Fresh Microgreens",
-    subtitle: "For local restaurants & home kitchens",
+    subtitle: "For restaurants and home kitchens",
+    detail:
+      "Sold as full trays or harvested microgreens — perfect for cooking, garnishing, or everyday nutrition",
     image: "_unpack/Fw__microgreen_pics_for_home_page/IMG_4187.jpeg",
     imageAlt: "Tray of fresh microgreens",
-    href: "/shop?filter=microgreens",
-    cta: "Explore microgreens",
+    href: "/shop?category=microgreens",
+    cta: "Explore Microgreens",
     buttonVariant: "maroon" as const,
   },
   {
-    title: "Microgreen Seasonings",
-    subtitle: "For home kitchens & wholesale",
+    title: "Pantry Microgreen Seasonings",
+    subtitle: "For restaurants and home kitchens",
+    detail:
+      "Creative, flavorful blends with about a quarter tray of microgreens in every jar",
     image: "site/home-seasoning.png",
     imageAlt: "Jars of microgreen seasonings",
-    href: "/shop?filter=seasoning",
-    cta: "Explore seasonings",
+    href: "/shop?category=seasoning",
+    cta: "Explore Pantry Seasonings",
     buttonVariant: "maroon" as const,
   },
   {
     title: "Pantry Blends",
-    subtitle: "For boosting drinks in home kitchens",
+    subtitle: "For home kitchens",
+    detail:
+      "Smoothie boosters, mushroom coffee, matcha & drink refreshers powered by spirulina, saffron, mushrooms & microgreens",
     image: "site/home-pantry-blend.png",
     imageAlt: "Pantry blend jars",
-    href: "/shop?filter=powder",
-    cta: "Explore pantry blends",
+    href: "/shop?category=pantry-blends",
+    cta: "Explore Pantry Blends",
     buttonVariant: "maroon" as const,
   },
 ];
 
+/** Potato scene, founder / coffee moment, microgreen tray — per GROWN layout brief */
 const HERO_IMAGE_PATHS = [
   "site/hero-home.png",
   "_unpack/Fw__microgreen_pics_for_home_page/IMG_4190.jpeg",
-  "fresh/fresh-baby-kale.jpg",
-  "products/medi-green-salt.jpg",
-  "site/shop-powders.jpg",
+  "_unpack/Fw__microgreen_pics_for_home_page/IMG_4187.jpeg",
 ];
+
+const MISSION_TEXT =
+  "We grow what we can in-house — hydroponic microgreens and fresh produce, and partner with local farms that share our growing philosophy for anything we don’t grow ourselves. Every ingredient is clean-grown and chosen with intention. Our blends are crafted to nourish daily life, making it easier to eat well, cook simply, and feel connected to real food again.";
 
 export function HomePage() {
   const [heroIndex, setHeroIndex] = useState(0);
@@ -83,26 +93,27 @@ export function HomePage() {
           ))}
           <div className="home-hero__scrim" aria-hidden />
           <div className="home-hero__content">
-            <h1 className="home-hero__title">
-              Nutrient-rich food, grown with intention — from seed to spice
-            </h1>
+            <h1 className="home-hero__title">From seed to shelf</h1>
             <p className="home-hero__lede">
-              Microgreens, pantry blends, and nutrient-dense blends designed for
-              everyday life.
+              Nutrient-rich food, grown with intention — from our farm to your kitchen.
             </p>
           </div>
         </div>
       </Section>
 
-      <Section bg="white" className="home-ribbon" aria-labelledby="home-ribbon-heading">
-        <div className="home-ribbon__row">
-          <span className="home-ribbon__line" aria-hidden />
-          <h2 id="home-ribbon-heading" className="home-ribbon__title">
-            From seed to spice
-          </h2>
-          <span className="home-ribbon__line" aria-hidden />
-        </div>
-        <p className="home-ribbon__pipeline">grow → preserve → use</p>
+      <Section bg="warm" className="home-shelf" aria-labelledby="home-shelf-heading">
+        <div className="home-shelf__break" aria-hidden />
+        <p className="home-shelf__eyebrow">From seed to shelf</p>
+        <h2 id="home-shelf-heading" className="home-shelf__title">
+          From seed to shelf
+        </h2>
+        <p className="home-shelf__pipeline">grow • preserve • use</p>
+        <p className="home-shelf__body">
+          We grow fresh produce and microgreens, preserve excess through freeze-drying, and transform
+          them into nutrient-dense pantry seasonings and blends. No shortcuts — just real ingredients
+          and steady craft.
+        </p>
+        <div className="home-shelf__break" aria-hidden />
       </Section>
 
       <Section bg="white" className="home-categories">
@@ -122,6 +133,7 @@ export function HomePage() {
               <div className="home-cat-card__body">
                 <h3 className="home-cat-card__title">{c.title}</h3>
                 <p className="home-cat-card__subtitle">{c.subtitle}</p>
+                <p className="home-cat-card__detail">{c.detail}</p>
                 <LinkButton
                   to={c.href}
                   variant={c.buttonVariant}
@@ -144,14 +156,7 @@ export function HomePage() {
             </h2>
             <span className="home-mission__line" aria-hidden />
           </div>
-          <blockquote className="home-mission__quote">
-            At GROWN, we believe food should be simple, intentional, and deeply
-            nourishing. We grow with care, preserve with purpose, and craft blends
-            that support everyday life — without the noise, without chasing
-            trends, and without compromise. From seed to spice, our work is rooted
-            in quality, transparency, and the belief that nutrition should feel
-            natural.
-          </blockquote>
+          <p className="home-mission__text">{MISSION_TEXT}</p>
         </div>
       </Section>
       <div className="home-mission__bands" aria-hidden="true">
