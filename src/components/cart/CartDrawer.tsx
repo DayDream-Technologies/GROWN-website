@@ -1,12 +1,10 @@
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useRef } from "react";
 import { formatUsdFromCents } from "../../lib/money";
 import { useCart } from "../../context/useCart";
-import { createSquareCheckout } from "../../lib/squareApi";
+import { contactEmail } from "../../config/contact";
 import "./CartDrawer.css";
 
 export function CartDrawer() {
-  const [checkoutError, setCheckoutError] = useState<string | null>(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const panelId = useId();
   const closeRef = useRef<HTMLButtonElement>(null);
   const {
@@ -37,19 +35,24 @@ export function CartDrawer() {
 
   if (!isOpen) return null;
 
-  const handleCheckout = async () => {
-    try {
-      setCheckoutError(null);
-      setIsSubmitting(true);
-      const payload = getCheckoutPayload();
-      const checkoutUrl = await createSquareCheckout(payload.lines);
-      window.location.assign(checkoutUrl);
-    } catch (error) {
-      setCheckoutError(
-        error instanceof Error ? error.message : "Unable to create checkout link.",
-      );
-      setIsSubmitting(false);
-    }
+  const handleCheckout = () => {
+    const payload = getCheckoutPayload();
+    if (payload.lines.length === 0) return;
+    const subject = encodeURIComponent("Website cart — order request");
+    const body = encodeURIComponent(
+      [
+        "Please use this as a starting point for my order:",
+        "",
+        ...payload.lines.map(
+          (l) =>
+            `- ${l.productName} × ${l.quantity} @ ${formatUsdFromCents(l.unitAmountCents)} each`,
+        ),
+        "",
+        `Subtotal: ${formatUsdFromCents(payload.subtotalCents)}`,
+      ].join("\n"),
+    );
+    window.location.href = `mailto:${contactEmail}?subject=${subject}&body=${body}`;
+    closeCart();
   };
 
   return (
@@ -134,17 +137,17 @@ export function CartDrawer() {
                 Free shipping on orders over $60. Subscription orders include free
                 shipping and 7% off eligible items. Taxes calculated at checkout.
               </p>
-              {checkoutError ? (
-                <p className="cart-drawer__hint">{checkoutError}</p>
-              ) : null}
+              <p className="cart-drawer__hint">
+                Checkout opens an email to {contactEmail} with your cart. We will confirm
+                availability and next steps.
+              </p>
               <div className="cart-drawer__actions">
                 <button
                   type="button"
                   className="cart-drawer__checkout"
-                  onClick={() => void handleCheckout()}
-                  disabled={isSubmitting}
+                  onClick={handleCheckout}
                 >
-                  {isSubmitting ? "Redirecting..." : "Checkout"}
+                  Email order request
                 </button>
                 <button
                   type="button"

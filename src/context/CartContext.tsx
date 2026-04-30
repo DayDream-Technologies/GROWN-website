@@ -177,8 +177,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
     return {
       currency: "usd",
       lines: state.lines.map((l) => ({
-        catalogObjectId: l.productId,
+        productId: l.productId,
+        productName: l.productName,
         quantity: l.quantity,
+        unitAmountCents: l.unitAmountCents,
       })),
       subtotalCents,
     };

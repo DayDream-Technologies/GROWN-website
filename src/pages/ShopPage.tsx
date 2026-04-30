@@ -5,10 +5,13 @@ import { Section } from "../components/sections/Section";
 import { ProductCard } from "../components/sections/ProductCard";
 import { siteImage } from "../lib/images";
 import { parseShopCategory, type ShopCategoryId } from "../lib/shopCategory";
-import { useSquareCatalog } from "../context/useSquareCatalog";
+import { products, getFulfillmentBadge } from "../data/products";
 import { useProductModal } from "../context/useProductModal";
-import { formatUsdFromCents } from "../lib/money";
+import { getProductListImage } from "../lib/productImages";
 import "./ShopPage.css";
+
+/** Same catalog on every shop URL; search is never limited to the page theme. */
+const CATALOG_SEARCH_PLACEHOLDER = "Search all products";
 
 const LEGACY_FILTER_TO_CATEGORY: Record<string, ShopCategoryId> = {
   "fresh-produce": "fresh-produce",
@@ -24,7 +27,6 @@ const CATEGORY_COPY: Record<
     intro: string;
     image: string;
     imageAlt: string;
-    searchPlaceholder: string;
     showContactPricing: boolean;
     showVarietyRow: boolean;
     varietyLine?: string;
@@ -41,7 +43,6 @@ const CATEGORY_COPY: Record<
       "We supply restaurants and wholesale buyers with an array of fresh herbs, leafy greens, and mushrooms.",
     image: "site/home-produce.png",
     imageAlt: "Fresh leafy greens and produce",
-    searchPlaceholder: "Search fresh produce",
     showContactPricing: true,
     showVarietyRow: false,
     showProduceGallery: true,
@@ -56,7 +57,6 @@ const CATEGORY_COPY: Record<
       "Full trays and harvested microgreens for restaurants and home kitchens — picked for flavor, color, and nutrition.",
     image: "fresh/microgreens-full-tray.jpg",
     imageAlt: "Tray of fresh microgreens",
-    searchPlaceholder: "Search microgreens",
     showContactPricing: true,
     showVarietyRow: true,
     varietyLine:
@@ -73,7 +73,6 @@ const CATEGORY_COPY: Record<
       "Smoothie boosters, mushroom coffee, matcha, and drink refreshers powered by spirulina, saffron, mushrooms, microgreens, and other super-ingredients — crafted for everyday rituals.",
     image: "site/shop-powders.jpg",
     imageAlt: "Pantry blend jars on a counter",
-    searchPlaceholder: "Search pantry blends",
     showContactPricing: false,
     showVarietyRow: false,
     showProduceGallery: false,
@@ -88,7 +87,6 @@ const CATEGORY_COPY: Record<
       "Creative, flavorful blends with about a quarter tray of microgreens in every jar — made for finishing dishes at home or on the line.",
     image: "site/home-seasoning.png",
     imageAlt: "Jars of microgreen seasonings",
-    searchPlaceholder: "Search seasonings",
     showContactPricing: false,
     showVarietyRow: false,
     showProduceGallery: false,
@@ -149,7 +147,6 @@ const MICRO_GALLERY = [
 
 export function ShopPage() {
   const { openProductById } = useProductModal();
-  const { items, isLoading, error, reload } = useSquareCatalog();
   const [searchParams, setSearchParams] = useSearchParams();
   const [search, setSearch] = useState("");
   const categoryParam = searchParams.get("category");
@@ -173,16 +170,17 @@ export function ShopPage() {
   const activeCategory = parseShopCategory(searchParams);
   const copy = activeCategory ? CATEGORY_COPY[activeCategory] : null;
 
-  /** Full Square catalog on every shop route; category only drives page chrome. Search narrows the grid. */
+  /** Full placeholder catalog on every shop route; category only drives page chrome. Search narrows the grid. */
   const visible = useMemo(() => {
     const q = search.trim().toLowerCase();
-    if (!q) return items;
-    return items.filter(
+    if (!q) return products;
+    return products.filter(
       (item) =>
         item.name.toLowerCase().includes(q) ||
-        item.description.toLowerCase().includes(q),
+        item.shortDescription.toLowerCase().includes(q) ||
+        item.longDescription.toLowerCase().includes(q),
     );
-  }, [items, search]);
+  }, [search]);
 
   const defaultTitle = "Shop GROWN";
   const defaultLede =
@@ -281,7 +279,7 @@ export function ShopPage() {
           <input
             type="search"
             className="shop-filter-bar__item shop-filter-bar__input"
-            placeholder={copy?.searchPlaceholder ?? "Search catalog"}
+            placeholder={CATALOG_SEARCH_PLACEHOLDER}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
@@ -289,55 +287,25 @@ export function ShopPage() {
       </Section>
 
       <Section bg="white" className="shop-grid-section">
-        {isLoading ? (
-          <p className="shop-connect__text">Loading products from Square...</p>
-        ) : error ? (
-          <div>
-            <p className="shop-connect__text">
-              We could not load the Square catalog right now.
-            </p>
-            <button type="button" className="shop-filter-bar__item" onClick={() => void reload()}>
-              Retry
-            </button>
-          </div>
-        ) : (
-          <div className="shop-product-grid">
-            {!isLoading &&
-            !error &&
-            items.length > 0 &&
-            visible.length === 0 &&
-            search.trim() ? (
-              <p className="shop-connect__text">No products match your search.</p>
-            ) : null}
-            {!isLoading && !error && items.length === 0 ? (
-              <p className="shop-connect__text">
-                No items in the Square catalog yet. Add catalog items in Square and they will appear
-                here.
-              </p>
-            ) : null}
-            {visible.map((item) => {
-              const cents =
-                typeof item.amountCents === "number" && Number.isFinite(item.amountCents)
-                  ? item.amountCents
-                  : 0;
-              const thumb = item.imageUrls?.find(
-                (u) => typeof u === "string" && u.length > 0,
-              );
-              return (
-                <ProductCard
-                  key={item.id}
-                  name={item.name}
-                  shortDescription={item.description}
-                  priceOneTime={`${formatUsdFromCents(cents)} one-time`}
-                  priceSubscription={null}
-                  fulfillmentBadge="Square catalog item"
-                  imageSrc={thumb}
-                  onOpenDetails={() => openProductById(item.id)}
-                />
-              );
-            })}
-          </div>
-        )}
+        <div className="shop-product-grid">
+          {products.length > 0 && visible.length === 0 && search.trim() ? (
+            <p className="shop-connect__text">No products match your search.</p>
+          ) : null}
+          {visible.map((item) => (
+            <ProductCard
+              key={item.id}
+              name={item.name}
+              subtitle={item.subtitle}
+              shortDescription={item.shortDescription}
+              priceOneTime={item.priceOneTime}
+              priceSubscription={item.priceSubscription}
+              fulfillmentBadge={getFulfillmentBadge(item)}
+              imageSrc={siteImage(getProductListImage(item))}
+              imageAlignTop={item.category === "seasoning"}
+              onOpenDetails={() => openProductById(item.id)}
+            />
+          ))}
+        </div>
       </Section>
 
       {copy?.showConnect ? (

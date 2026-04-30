@@ -1,7 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { CartProvider } from "../context/CartContext";
 import { ProductModalProvider } from "../context/ProductModalProvider";
-import { SquareCatalogProvider } from "../context/SquareCatalogContext";
 import { useProductModal } from "../context/useProductModal";
 import { CartDrawer } from "./cart/CartDrawer";
 import { ProductDetailModal } from "./shop/ProductDetailModal";
@@ -28,11 +27,9 @@ function LayoutShell() {
 export function Layout() {
   return (
     <CartProvider>
-      <SquareCatalogProvider>
-        <ProductModalProvider>
-          <LayoutShell />
-        </ProductModalProvider>
-      </SquareCatalogProvider>
+      <ProductModalProvider>
+        <LayoutShell />
+      </ProductModalProvider>
     </CartProvider>
   );
 }

@@ -1,19 +1,18 @@
 import { useCallback, useMemo, useState, type ReactNode } from "react";
-import { useSquareCatalog } from "./useSquareCatalog";
+import { products } from "../data/products";
 import { ProductModalContext } from "./productModalContext";
 
 export function ProductModalProvider({ children }: { children: ReactNode }) {
-  const { items } = useSquareCatalog();
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const selectedProduct = useMemo(() => {
     if (!selectedId) return null;
-    return items.find((item) => item.id === selectedId) ?? null;
-  }, [items, selectedId]);
+    return products.find((item) => item.id === selectedId) ?? null;
+  }, [selectedId]);
 
   const openProductById = useCallback((id: string) => {
-    if (items.some((item) => item.id === id)) setSelectedId(id);
-  }, [items]);
+    if (products.some((item) => item.id === id)) setSelectedId(id);
+  }, []);
 
   const closeProduct = useCallback(() => {
     setSelectedId(null);

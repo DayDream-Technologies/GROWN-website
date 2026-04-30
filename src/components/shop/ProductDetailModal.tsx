@@ -1,13 +1,16 @@
 import { useEffect, useId, useRef } from "react";
-import type { SquareCatalogItem } from "../../types/square";
+import type { Product } from "../../data/products";
 import { useCart } from "../../context/useCart";
 import { Button } from "../Button";
 import { PlaceholderImage } from "../PlaceholderImage";
-import { formatUsdFromCents } from "../../lib/money";
+import { FreshProductInquiryForm } from "./FreshProductInquiryForm";
+import { siteImage } from "../../lib/images";
+import { getProductListImage } from "../../lib/productImages";
+import { getOneTimeUnitCents } from "../../lib/productPricing";
 import "./ProductDetailModal.css";
 
 type Props = {
-  product: SquareCatalogItem | null;
+  product: Product | null;
   onClose: () => void;
 };
 
@@ -64,19 +67,16 @@ export function ProductDetailModal({ product, onClose }: Props) {
     }
   };
 
-  const subLine = product
-    ? product.variationName
-      ? `${product.name} — ${product.variationName}`
+  const titleLine = product
+    ? product.subtitle
+      ? `${product.name} — ${product.subtitle}`
       : product.name
     : "";
 
-  const heroUrl =
-    product?.imageUrls?.find((u) => typeof u === "string" && u.length > 0) ??
-    null;
-  const amountCents =
-    typeof product?.amountCents === "number" && Number.isFinite(product.amountCents)
-      ? product.amountCents
-      : 0;
+  const heroPath = product ? getProductListImage(product) : null;
+  const heroUrl = heroPath ? siteImage(heroPath) : null;
+  const unitCents = product ? getOneTimeUnitCents(product) : null;
+  const purchasable = unitCents != null && !product?.contactForPricing;
 
   return (
     <dialog
@@ -95,7 +95,7 @@ export function ProductDetailModal({ product, onClose }: Props) {
         >
           <header className="product-modal__header">
             <h2 id={titleId} className="product-modal__title">
-              {subLine}
+              {titleLine}
             </h2>
             <button
               ref={closeBtnRef}
@@ -114,7 +114,7 @@ export function ProductDetailModal({ product, onClose }: Props) {
                 <img
                   className="product-modal__hero-img"
                   src={heroUrl}
-                  alt={`${subLine} — product photo`}
+                  alt={`${titleLine} — product photo`}
                   loading="lazy"
                   decoding="async"
                 />
@@ -122,29 +122,64 @@ export function ProductDetailModal({ product, onClose }: Props) {
                 <PlaceholderImage label="No product photo" tone="warm" />
               )}
             </div>
-            <p className="product-modal__lede">{product.description ?? ""}</p>
-            <dl className="product-modal__prices">
-              <div>
-                <dt>Price</dt>
-                <dd>{formatUsdFromCents(amountCents)}</dd>
-              </div>
-            </dl>
-            <div className="product-modal__cart-actions">
-              <Button
-                type="button"
-                variant="primary"
-                className="product-modal__add"
-                onClick={() => {
-                  addLine({
-                    productId: product.id,
-                    unitAmountCents: amountCents,
-                    productName: subLine,
-                  });
-                }}
-              >
-                Add to cart
-              </Button>
+            <p className="product-modal__meta">{product.size}</p>
+            <p className="product-modal__lede">{product.shortDescription}</p>
+            <div className="product-modal__prose">
+              <p>{product.longDescription}</p>
             </div>
+            <details className="product-modal__details-block">
+              <summary>Ingredients</summary>
+              <p>{product.ingredients}</p>
+            </details>
+            {product.recipes.length > 0 ? (
+              <details className="product-modal__details-block">
+                <summary>Ideas & recipes</summary>
+                <ul className="product-modal__recipe-list">
+                  {product.recipes.map((r) => (
+                    <li key={r.title}>
+                      <strong>{r.title}</strong> — {r.body}
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            ) : null}
+
+            {product.contactForPricing ? (
+              <FreshProductInquiryForm productLabel={titleLine} />
+            ) : (
+              <>
+                <dl className="product-modal__prices">
+                  <div>
+                    <dt>One-time</dt>
+                    <dd>{product.priceOneTime}</dd>
+                  </div>
+                  {product.priceSubscription ? (
+                    <div>
+                      <dt>Subscribe & save</dt>
+                      <dd>{product.priceSubscription}</dd>
+                    </div>
+                  ) : null}
+                </dl>
+                {purchasable && unitCents != null ? (
+                  <div className="product-modal__cart-actions">
+                    <Button
+                      type="button"
+                      variant="primary"
+                      className="product-modal__add"
+                      onClick={() => {
+                        addLine({
+                          productId: product.id,
+                          unitAmountCents: unitCents,
+                          productName: titleLine,
+                        });
+                      }}
+                    >
+                      Add to cart
+                    </Button>
+                  </div>
+                ) : null}
+              </>
+            )}
           </div>
         </div>
       ) : null}

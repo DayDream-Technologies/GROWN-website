@@ -1,8 +1,8 @@
 import { createContext } from "react";
-import type { SquareCatalogItem } from "../types/square";
+import type { Product } from "../data/products";
 
 export type ProductModalContextValue = {
-  selectedProduct: SquareCatalogItem | null;
+  selectedProduct: Product | null;
   openProductById: (id: string) => void;
   closeProduct: () => void;
 };
