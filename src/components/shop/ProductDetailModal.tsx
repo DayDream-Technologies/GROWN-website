@@ -2,6 +2,7 @@ import { useEffect, useId, useRef } from "react";
 import type { SquareCatalogItem } from "../../types/square";
 import { useCart } from "../../context/useCart";
 import { Button } from "../Button";
+import { PlaceholderImage } from "../PlaceholderImage";
 import { formatUsdFromCents } from "../../lib/money";
 import "./ProductDetailModal.css";
 
@@ -21,14 +22,22 @@ export function ProductDetailModal({ product, onClose }: Props) {
     if (!el) return;
 
     if (product) {
-      if (!el.open) {
-        el.showModal();
+      try {
+        if (typeof el.showModal === "function" && !el.open) {
+          el.showModal();
+        }
+      } catch {
+        /* InvalidStateError if top-layer / open race (e.g. StrictMode double effect) */
       }
       queueMicrotask(() => {
         closeBtnRef.current?.focus();
       });
     } else if (el.open) {
-      el.close();
+      try {
+        el.close();
+      } catch {
+        /* ignore */
+      }
     }
   }, [product]);
 
@@ -60,6 +69,14 @@ export function ProductDetailModal({ product, onClose }: Props) {
       ? `${product.name} — ${product.variationName}`
       : product.name
     : "";
+
+  const heroUrl =
+    product?.imageUrls?.find((u) => typeof u === "string" && u.length > 0) ??
+    null;
+  const amountCents =
+    typeof product?.amountCents === "number" && Number.isFinite(product.amountCents)
+      ? product.amountCents
+      : 0;
 
   return (
     <dialog
@@ -93,19 +110,23 @@ export function ProductDetailModal({ product, onClose }: Props) {
 
           <div className="product-modal__body">
             <div className="product-modal__hero">
-              <img
-                className="product-modal__hero-img"
-                src={product.imageUrls[0]}
-                alt={`${subLine} — product photo`}
-                loading="lazy"
-                decoding="async"
-              />
+              {heroUrl ? (
+                <img
+                  className="product-modal__hero-img"
+                  src={heroUrl}
+                  alt={`${subLine} — product photo`}
+                  loading="lazy"
+                  decoding="async"
+                />
+              ) : (
+                <PlaceholderImage label="No product photo" tone="warm" />
+              )}
             </div>
-            <p className="product-modal__lede">{product.description}</p>
+            <p className="product-modal__lede">{product.description ?? ""}</p>
             <dl className="product-modal__prices">
               <div>
                 <dt>Price</dt>
-                <dd>{formatUsdFromCents(product.amountCents)}</dd>
+                <dd>{formatUsdFromCents(amountCents)}</dd>
               </div>
             </dl>
             <div className="product-modal__cart-actions">
@@ -116,7 +137,7 @@ export function ProductDetailModal({ product, onClose }: Props) {
                 onClick={() => {
                   addLine({
                     productId: product.id,
-                    unitAmountCents: product.amountCents,
+                    unitAmountCents: amountCents,
                     productName: subLine,
                   });
                 }}

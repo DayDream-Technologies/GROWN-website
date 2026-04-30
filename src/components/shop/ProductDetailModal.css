@@ -80,6 +80,12 @@
   background: var(--color-warm-neutral);
 }
 
+.product-modal__hero .placeholder-image {
+  min-height: 12rem;
+  border-radius: 0;
+  border-inline: none;
+}
+
 .product-modal__hero-img {
   display: block;
   width: 100%;
