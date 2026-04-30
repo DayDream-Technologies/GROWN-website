@@ -7,6 +7,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build && node scripts/spa-static-paths.mjs",
+    "extract:layout-shop-images": "node scripts/extract-layout-shop-images.mjs",
     "lint": "eslint .",
     "preview": "vite preview"
   },
