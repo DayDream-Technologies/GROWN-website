@@ -21,7 +21,7 @@ const CATEGORY_CARDS = [
     subtitle: "For restaurants and home kitchens",
     detail:
       "Sold as full trays or harvested microgreens — perfect for cooking, garnishing, or everyday nutrition",
-    image: "_unpack/Fw__microgreen_pics_for_home_page/IMG_4187.jpeg",
+    image: "fresh/microgreens-full-tray.jpg",
     imageAlt: "Tray of fresh microgreens",
     href: "/shop?category=microgreens",
     cta: "Explore Microgreens",
@@ -51,11 +51,11 @@ const CATEGORY_CARDS = [
   },
 ];
 
-/** Potato scene, founder / coffee moment, microgreen tray — per GROWN layout brief */
+/** Hero slides — paths must live under `public/images/` (gitignored `_unpack/` is not deployed). */
 const HERO_IMAGE_PATHS = [
   "site/hero-home.png",
-  "_unpack/Fw__microgreen_pics_for_home_page/IMG_4190.jpeg",
-  "_unpack/Fw__microgreen_pics_for_home_page/IMG_4187.jpeg",
+  "Danelle.jpg",
+  "fresh/microgreens-full-tray.jpg",
 ];
 
 const MISSION_TEXT =

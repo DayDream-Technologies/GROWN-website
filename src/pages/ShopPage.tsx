@@ -58,7 +58,7 @@ const CATEGORY_COPY: Record<
     title: "Fresh Microgreens",
     intro:
       "Full trays and harvested microgreens for restaurants and home kitchens — picked for flavor, color, and nutrition.",
-    image: "_unpack/Fw__microgreen_pics_for_home_page/IMG_4187.jpeg",
+    image: "fresh/microgreens-full-tray.jpg",
     imageAlt: "Tray of fresh microgreens",
     searchPlaceholder: "Search microgreens",
     showContactPricing: true,
@@ -134,13 +134,13 @@ const MICRO_GALLERY = [
   {
     title: "Full trays",
     body: "Living trays delivered on a rhythm that matches your kitchen.",
-    image: "_unpack/Fw__microgreen_pics_for_home_page/IMG_4190.jpeg",
+    image: "fresh/microgreens-full-tray.jpg",
     imageAlt: "Microgreen growing tray",
   },
   {
     title: "Harvested greens",
     body: "Cut and packed for fast pickup, garnishes, and nutrition-forward plates.",
-    image: "_unpack/Fw__microgreen_pics_for_home_page/IMG_4187.jpeg",
+    image: "site/home-microgreens.png",
     imageAlt: "Harvested microgreens",
   },
   {
