@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import { BRAND_FOOTER_LOGO } from "../config/branding";
+import { siteImage } from "../lib/images";
 import "./Footer.css";
 
 export function Footer() {
@@ -7,7 +9,15 @@ export function Footer() {
       <div className="site-footer__inner">
         <div className="site-footer__brand">
           <hr className="site-footer__rule" aria-hidden="true" />
-          <p className="site-footer__wordmark">GROWN Hydroponic Farms</p>
+          <img
+            className="site-footer__logo"
+            src={siteImage(BRAND_FOOTER_LOGO)}
+            alt="GROWN Hydroponic Farms"
+            width={320}
+            height={121}
+            loading="lazy"
+            decoding="async"
+          />
           <p className="site-footer__tagline">
             From seed to shelf, made for everyday life
           </p>

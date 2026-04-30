@@ -21,13 +21,14 @@
   border: 0;
 }
 
-.site-footer__wordmark {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: clamp(1.25rem, 2vw + 0.75rem, 1.65rem);
-  letter-spacing: 0.04em;
-  color: var(--color-heading);
-  margin: 0;
+.site-footer__logo {
+  display: block;
+  margin: 0 auto;
+  height: auto;
+  max-height: 3.25rem;
+  width: auto;
+  max-width: min(18rem, 88vw);
+  object-fit: contain;
 }
 
 .site-footer__tagline {

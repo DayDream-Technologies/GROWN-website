@@ -1,6 +1,7 @@
 import { useEffect, useId, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { useCart } from "../context/useCart";
+import { BRAND_HEADER_LOGO } from "../config/branding";
 import { SHOP_NAV_CATEGORIES } from "../lib/shopCategory";
 import { siteImage } from "../lib/images";
 import "./Header.css";
@@ -9,6 +10,9 @@ const tailLinks = [
   { to: "/contact", label: "Contact" },
   { to: "/about", label: "About" },
 ] as const;
+
+const headerLogoPath =
+  import.meta.env.VITE_HEADER_LOGO?.trim() || BRAND_HEADER_LOGO;
 
 export function Header() {
   const { itemCount, toggleCart } = useCart();
@@ -50,15 +54,16 @@ export function Header() {
           {!logoFailed ? (
             <img
               className="site-header__logo-img"
-              src={siteImage("site/header-logo.png")}
-              alt=""
-              width={44}
-              height={44}
+              src={siteImage(headerLogoPath)}
+              alt="GROWN Hydroponic Farms"
+              width={200}
+              height={76}
               decoding="async"
               onError={() => setLogoFailed(true)}
             />
-          ) : null}
-          <span className="site-header__logo">GROWN</span>
+          ) : (
+            <span className="site-header__logo">GROWN</span>
+          )}
         </NavLink>
         <div className="site-header__right">
           <nav className="site-header__nav" aria-label="Main">

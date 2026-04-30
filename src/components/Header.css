@@ -37,11 +37,16 @@
   color: var(--color-green);
 }
 
+.site-header__brand:hover .site-header__logo-img {
+  opacity: 0.92;
+}
+
 .site-header__logo-img {
-  height: 2.25rem;
+  height: 2.15rem;
   width: auto;
-  max-width: 7rem;
+  max-width: min(11.5rem, 46vw);
   object-fit: contain;
+  object-position: left center;
   flex-shrink: 0;
 }
 
@@ -158,8 +163,8 @@
   }
 
   .site-header__logo-img {
-    height: 2rem;
-    max-width: 5.5rem;
+    height: 1.85rem;
+    max-width: min(9.5rem, 52vw);
   }
 
   .site-header__nav {
