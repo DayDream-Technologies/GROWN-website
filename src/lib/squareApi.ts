@@ -1,5 +1,6 @@
 import type { SquareCatalogItem } from "../types/square";
 
+/** Production builds: set `VITE_BFF_ORIGIN` to your deployed BFF (HTTPS). Dev: omit to use `/api` + Vite proxy. */
 const baseOrigin = import.meta.env.VITE_BFF_ORIGIN?.trim();
 const apiBase = baseOrigin ? `${baseOrigin.replace(/\/$/, "")}/api` : "/api";
 

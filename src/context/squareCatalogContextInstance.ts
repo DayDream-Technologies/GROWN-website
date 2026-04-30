@@ -6,6 +6,8 @@ export type SquareCatalogContextValue = {
   isLoading: boolean;
   error: string | null;
   reload: () => Promise<void>;
+  /** Public Square application id (e.g. Web Payments SDK, diagnostics). */
+  applicationId: string;
 };
 
 export const SquareCatalogContext =

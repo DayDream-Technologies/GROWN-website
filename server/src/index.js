@@ -175,6 +175,6 @@ app.post("/api/checkout", async (req, res) => {
   }
 });
 
-app.listen(Number(PORT), () => {
-  console.info(`[square-bff] Listening on http://localhost:${PORT}`);
+app.listen(Number(PORT), "0.0.0.0", () => {
+  console.info(`[square-bff] Listening on port ${PORT}`);
 });

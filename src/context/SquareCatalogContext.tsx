@@ -5,6 +5,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { SQUARE_APPLICATION_ID } from "../config/square";
 import { fetchSquareCatalog } from "../lib/squareApi";
 import type { SquareCatalogItem } from "../types/square";
 import { SquareCatalogContext } from "./squareCatalogContextInstance";
@@ -36,6 +37,7 @@ export function SquareCatalogProvider({ children }: { children: ReactNode }) {
       isLoading,
       error,
       reload: load,
+      applicationId: SQUARE_APPLICATION_ID,
     }),
     [items, isLoading, error, load],
   );
