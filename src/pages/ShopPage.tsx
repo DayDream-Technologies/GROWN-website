@@ -4,11 +4,7 @@ import { LinkButton } from "../components/LinkButton";
 import { Section } from "../components/sections/Section";
 import { ProductCard } from "../components/sections/ProductCard";
 import { siteImage } from "../lib/images";
-import {
-  itemMatchesShopCategory,
-  parseShopCategory,
-  type ShopCategoryId,
-} from "../lib/shopCategory";
+import { parseShopCategory, type ShopCategoryId } from "../lib/shopCategory";
 import { useSquareCatalog } from "../context/useSquareCatalog";
 import { useProductModal } from "../context/useProductModal";
 import { formatUsdFromCents } from "../lib/money";
@@ -177,21 +173,16 @@ export function ShopPage() {
   const activeCategory = parseShopCategory(searchParams);
   const copy = activeCategory ? CATEGORY_COPY[activeCategory] : null;
 
-  const visible = useMemo(
-    () =>
-      items.filter((item) => {
-        if (activeCategory && !itemMatchesShopCategory(item, activeCategory)) {
-          return false;
-        }
-        const q = search.trim().toLowerCase();
-        if (!q) return true;
-        return (
-          item.name.toLowerCase().includes(q) ||
-          item.description.toLowerCase().includes(q)
-        );
-      }),
-    [activeCategory, items, search],
-  );
+  /** Full Square catalog on every shop route; category only drives page chrome. Search narrows the grid. */
+  const visible = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    if (!q) return items;
+    return items.filter(
+      (item) =>
+        item.name.toLowerCase().includes(q) ||
+        item.description.toLowerCase().includes(q),
+    );
+  }, [items, search]);
 
   const defaultTitle = "Shop GROWN";
   const defaultLede =
@@ -290,10 +281,7 @@ export function ShopPage() {
           <input
             type="search"
             className="shop-filter-bar__item shop-filter-bar__input"
-            placeholder={
-              copy?.searchPlaceholder ??
-              (activeCategory ? "Search this category" : "Search catalog")
-            }
+            placeholder={copy?.searchPlaceholder ?? "Search catalog"}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
@@ -314,24 +302,40 @@ export function ShopPage() {
           </div>
         ) : (
           <div className="shop-product-grid">
-            {activeCategory && visible.length === 0 ? (
+            {!isLoading &&
+            !error &&
+            items.length > 0 &&
+            visible.length === 0 &&
+            search.trim() ? (
+              <p className="shop-connect__text">No products match your search.</p>
+            ) : null}
+            {!isLoading && !error && items.length === 0 ? (
               <p className="shop-connect__text">
-                No items matched this category in Square yet. Add or tag catalog items and they will
-                appear here.
+                No items in the Square catalog yet. Add catalog items in Square and they will appear
+                here.
               </p>
             ) : null}
-            {visible.map((item) => (
-              <ProductCard
-                key={item.id}
-                name={item.name}
-                shortDescription={item.description}
-                priceOneTime={`${formatUsdFromCents(item.amountCents)} one-time`}
-                priceSubscription={null}
-                fulfillmentBadge="Square catalog item"
-                imageSrc={item.imageUrls[0]}
-                onOpenDetails={() => openProductById(item.id)}
-              />
-            ))}
+            {visible.map((item) => {
+              const cents =
+                typeof item.amountCents === "number" && Number.isFinite(item.amountCents)
+                  ? item.amountCents
+                  : 0;
+              const thumb = item.imageUrls?.find(
+                (u) => typeof u === "string" && u.length > 0,
+              );
+              return (
+                <ProductCard
+                  key={item.id}
+                  name={item.name}
+                  shortDescription={item.description}
+                  priceOneTime={`${formatUsdFromCents(cents)} one-time`}
+                  priceSubscription={null}
+                  fulfillmentBadge="Square catalog item"
+                  imageSrc={thumb}
+                  onOpenDetails={() => openProductById(item.id)}
+                />
+              );
+            })}
           </div>
         )}
       </Section>
