@@ -10,8 +10,8 @@ const CATEGORY_CARDS = [
     subtitle: "For restaurants and wholesale",
     detail:
       "Leafy greens, herbs & mushrooms available in bulk",
-    image: "site/home-produce.png",
-    imageAlt: "Fresh leafy greens",
+    image: "fresh/fresh-butter-lettuce.jpg",
+    imageAlt: "Fresh butter lettuce",
     href: "/shop?category=fresh-produce",
     cta: "Explore Produce",
     buttonVariant: "primary" as const,

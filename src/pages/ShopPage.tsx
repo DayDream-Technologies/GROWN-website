@@ -45,9 +45,9 @@ const CATEGORY_COPY: Record<
   "fresh-produce": {
     title: "Fresh Produce",
     intro:
-      "We supply restaurants and wholesale buyers with an array of fresh herbs, leafy greens, and mushrooms.",
-    image: "site/home-produce.png",
-    imageAlt: "Fresh leafy greens and produce",
+      "We supply restaurants and wholesale buyers with an array of fresh herbs, leafy greens, and aromatics.",
+    image: "fresh/fresh-butter-lettuce.jpg",
+    imageAlt: "Fresh butter lettuce from the farm",
     searchPlaceholder: "Search lettuce, herbs, and more",
     showContactPricing: true,
     showVarietyRow: false,
@@ -110,14 +110,14 @@ const PRODUCE_GALLERY = [
   {
     label: "Herbs",
     caption: "Basil, cilantro, parsley, mint, and more.",
-    image: "fresh/fresh-baby-kale.jpg",
-    imageAlt: "Fresh herbs and greens",
+    image: "fresh/fresh-basil.jpg",
+    imageAlt: "Fresh basil",
   },
   {
     label: "Lettuce",
     caption: "Tender heads for plates and sandwiches.",
-    image: "site/home-produce.png",
-    imageAlt: "Leafy lettuce and greens",
+    image: "fresh/fresh-butter-lettuce.jpg",
+    imageAlt: "Fresh butter lettuce",
   },
   {
     label: "Kale",
@@ -126,10 +126,10 @@ const PRODUCE_GALLERY = [
     imageAlt: "Fresh kale",
   },
   {
-    label: "Mushrooms",
-    caption: "Clean-grown varieties for wholesale kitchens.",
-    image: "site/hero-home.png",
-    imageAlt: "Fresh mushrooms",
+    label: "Rosemary & aromatics",
+    caption: "Fragrant bunches and classic herbs for wholesale kitchens.",
+    image: "fresh/fresh-rosemary.jpg",
+    imageAlt: "Fresh rosemary",
   },
 ] as const;
 
