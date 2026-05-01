@@ -7,6 +7,7 @@ import { PartnerPage } from "./pages/PartnerPage";
 import { CheckoutPage } from "./pages/CheckoutPage";
 import { CheckoutReturnPage } from "./pages/CheckoutReturnPage";
 import { ShopPage } from "./pages/ShopPage";
+import { StripeProductsDebugPage } from "./pages/StripeProductsDebugPage";
 
 const basename = import.meta.env.BASE_URL;
 
@@ -22,6 +23,7 @@ export default function App() {
           <Route path="contact" element={<ContactPage />} />
           <Route path="checkout/return" element={<CheckoutReturnPage />} />
           <Route path="checkout" element={<CheckoutPage />} />
+          <Route path="stripe-debug" element={<StripeProductsDebugPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>

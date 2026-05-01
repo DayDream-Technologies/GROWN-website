@@ -36,6 +36,7 @@ Resources:
     Properties:
       CorsConfiguration:
         AllowMethods:
+          - GET
           - POST
           - OPTIONS
         AllowHeaders:
@@ -64,6 +65,26 @@ Resources:
             Path: /checkout/session
             Method: POST
 
+  StripeProductsDebugFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Runtime: nodejs20.x
+      Handler: index.handler
+      CodeUri: stripe-products-debug/
+      Environment:
+        Variables:
+          STRIPE_SECRET_KEY: !Ref StripeSecretKey
+          CORS_ORIGIN: !Ref AllowedOrigin
+      Policies:
+        - AWSLambdaBasicExecutionRole
+      Events:
+        StripeProductsDebugApi:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref StripeHttpApi
+            Path: /debug/stripe-products
+            Method: GET
+
   StripeWebhookFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -86,5 +107,5 @@ Resources:
 
 Outputs:
   HttpApiUrl:
-    Description: Base URL for API (append checkout/session and webhooks/stripe paths)
+    Description: Base URL for API (append /checkout/session, /webhooks/stripe, /debug/stripe-products)
     Value: !Sub https://${StripeHttpApi}.execute-api.${AWS::Region}.amazonaws.com

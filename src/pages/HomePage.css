@@ -81,17 +81,17 @@
   left: 50%;
   top: 50%;
   translate: -50% -50%;
-  width: min(118%, 30rem);
+  width: min(100%, 22rem);
   aspect-ratio: 1.4 / 1;
-  max-height: 135%;
+  max-height: 118%;
   border-radius: 50%;
-  /* Harmonize with --color-section-tint (#f9edf0) */
+  /* Harmonize with hero imagery — darker outer stops so the fade ring is less visible */
   background: radial-gradient(
-    ellipse 72% 62% at 50% 44%,
+    ellipse 58% 50% at 50% 44%,
     rgba(253, 249, 243, 0.94) 0%,
     rgba(249, 237, 240, 0.82) 42%,
     rgba(249, 237, 240, 0.35) 58%,
-    transparent 76%
+    transparent 80%
   );
   pointer-events: none;
 }
@@ -345,28 +345,4 @@
   line-height: 1.75;
   color: var(--color-text-taupe);
   text-align: center;
-}
-
-.home-mission__bands {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  width: 100%;
-  min-height: 0.5rem;
-}
-
-.home-mission__band {
-  display: block;
-  min-height: 0.45rem;
-}
-
-.home-mission__band--green {
-  background: var(--color-heading);
-}
-
-.home-mission__band--maroon {
-  background: var(--color-maroon);
-}
-
-.home-mission__band--brown {
-  background: #4a3c32;
 }

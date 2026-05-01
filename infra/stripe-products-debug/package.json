@@ -1,0 +1,9 @@
+{
+  "name": "grown-stripe-products-debug",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "stripe": "^17.7.0"
+  }
+}

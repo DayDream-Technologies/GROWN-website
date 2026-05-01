@@ -42,11 +42,13 @@ jobs:
           cache-dependency-path: |
             infra/checkout-session/package-lock.json
             infra/webhook/package-lock.json
+            infra/stripe-products-debug/package-lock.json
 
       - name: Install Lambda dependencies
         run: |
           cd infra/checkout-session && npm ci
           cd ../webhook && npm ci
+          cd ../stripe-products-debug && npm ci
 
       - uses: aws-actions/setup-sam@v2
 

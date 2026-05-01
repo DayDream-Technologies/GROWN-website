@@ -172,6 +172,8 @@ parameter_overrides:
 
 4. Local testing: [Stripe CLI](https://stripe.com/docs/stripe-cli) `stripe listen --forward-to …`
 
+**Temporary — list Stripe products:** After deploy, the API exposes **`GET {HttpApiUrl}/debug/stripe-products`** (active products and prices). The SPA route **`/stripe-debug`** (not linked in navigation; enter the URL manually) calls that endpoint — remove the Lambda route and page when you no longer need it.
+
 ---
 
 ## 7. Amplify Hosting (or CI) — frontend environment variables
