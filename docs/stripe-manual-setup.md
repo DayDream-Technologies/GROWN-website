@@ -104,12 +104,15 @@ If the Amplify hostname or custom domain changes, update variables and redeploy.
 
 Workflow: [`.github/workflows/stripe-api.yml`](../.github/workflows/stripe-api.yml)
 
-**Secrets** (GitHub → Settings → Secrets and variables → Actions):
+The SAM deploy job uses GitHub Environment **`production`**. Put the following under **Settings → Environments → production** (secrets and variables tabs), not only at the repository level—unless you duplicate them at repo level, environment-scoped values win when the workflow targets `production`.
+
+**Secrets:**
 
 | Secret | Purpose |
 |--------|---------|
-| `AWS_ACCESS_KEY_ID` | Deploy access for CloudFormation / Lambda / API Gateway |
+| `AWS_ACCESS_KEY_ID` | Deploy access for CloudFormation / Lambda / API Gateway (omit if using OIDC; see below) |
 | `AWS_SECRET_ACCESS_KEY` | Pair for the key above |
+| `AWS_ROLE_TO_ASSUME` | IAM role ARN for GitHub OIDC (only if variable **`AWS_USE_OIDC`** is `true`) |
 | `STRIPE_SECRET_KEY` | Stripe secret → Lambda `STRIPE_SECRET_KEY` |
 | `STRIPE_WEBHOOK_SECRET` | Webhook signing secret `whsec_…` |
 
@@ -120,6 +123,11 @@ Workflow: [`.github/workflows/stripe-api.yml`](../.github/workflows/stripe-api.y
 | `SITE_URL` | Same as **SiteUrl** above |
 | `ALLOWED_ORIGIN` | Same as **AllowedOrigin** above |
 | `AWS_REGION` | Optional; defaults to `us-east-1` if unset |
+| `AWS_USE_OIDC` | Optional; set to **`true`** to use OIDC instead of access keys (requires `AWS_ROLE_TO_ASSUME` + IAM OIDC trust for `repo:YOUR_ORG/GROWN-website:ref:refs/heads/main`) |
+
+If **`configure-aws-credentials`** fails with *Could not load credentials from any providers*: you are not supplying credentials—either add **`AWS_ACCESS_KEY_ID`** and **`AWS_SECRET_ACCESS_KEY`** (on the **production** environment), or enable OIDC with **`AWS_USE_OIDC=true`** and **`AWS_ROLE_TO_ASSUME`**. A workflow that passes only `aws-region` / OIDC defaults without **`role-to-assume`** or keys will always fail.
+
+**GitHub Pages** ([`.github/workflows/deploy.yml`](../.github/workflows/deploy.yml)): the **build** job uses **`environment: production`** as well. Optional variable **`VITE_BASE`** (e.g. `/GROWN-website/` for project Pages); if unset, the workflow defaults to **`/GROWN-website/`**.
 
 Stack name: **`grown-stripe-api`**. Use output **`HttpApiUrl`** for Amplify **`VITE_CHECKOUT_API_URL`** ([§7](#7-amplify-hosting-or-ci--frontend-environment-variables)).
 

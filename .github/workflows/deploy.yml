@@ -17,6 +17,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: production
     steps:
       - uses: actions/checkout@v4
 
@@ -27,7 +28,8 @@ jobs:
 
       - run: npm ci
       - env:
-          VITE_BASE: /GROWN-website/
+          # Repository/environment variables: Settings → Environments → production
+          VITE_BASE: ${{ vars.VITE_BASE || '/GROWN-website/' }}
         run: npm run build
 
       - uses: actions/upload-pages-artifact@v3
