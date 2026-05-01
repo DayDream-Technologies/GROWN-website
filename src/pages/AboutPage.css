@@ -38,6 +38,10 @@
   display: block;
 }
 
+.about-story-photo--below-list {
+  margin-top: var(--space-8);
+}
+
 .about-bullet-list {
   margin: 0;
   padding-left: 1.25rem;

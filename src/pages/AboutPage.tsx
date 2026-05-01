@@ -39,18 +39,7 @@ export function AboutPage() {
       </Section>
 
       <Section bg="white" id="our-story">
-        <img
-          className="about-story-photo"
-          src={siteImage("about/story.jpg")}
-          alt="GROWN produce and products"
-          loading="lazy"
-          decoding="async"
-          width={1200}
-          height={800}
-        />
-        <h2 className="about-section-title about-section-title--tight">
-          Our story
-        </h2>
+        <h2 className="about-section-title">Our story</h2>
         <p className="about-prose">
           I started by growing microgreens and freeze-drying them to preserve
           flavor and nutrients, so nothing went to waste. Those freeze-dried
@@ -68,6 +57,15 @@ export function AboutPage() {
             <li key={item}>{item}</li>
           ))}
         </ul>
+        <img
+          className="about-story-photo about-story-photo--below-list"
+          src={siteImage("about/microgreens-grow-shelves.png")}
+          alt="Microgreens growing on indoor racks under grow lights"
+          loading="lazy"
+          decoding="async"
+          width={1200}
+          height={800}
+        />
       </Section>
 
       <Section bg="blush" id="values">
@@ -98,8 +96,8 @@ export function AboutPage() {
         <div className="about-split">
           <img
             className="about-photo"
-            src={siteImage("about/founder.jpg")}
-            alt="Microgreens featured on a home-cooked plate"
+            src={siteImage("about/founder-kitchen-seasoning.png")}
+            alt="Sprinkling GROWN seasoning over a fresh meal in the kitchen"
             loading="lazy"
             decoding="async"
             width={800}
@@ -132,11 +130,11 @@ export function AboutPage() {
           </div>
           <img
             className="about-photo about-photo--rounded"
-            src={siteImage("about/freeze-dry.jpg")}
-            alt="Pantry jars of preserved blends on a counter"
+            src={siteImage("about/hydroponic-greens-pipes.png")}
+            alt="Leafy greens growing in hydroponic channels"
             loading="lazy"
             decoding="async"
-            width={800}
+            width={1200}
             height={800}
           />
         </div>
