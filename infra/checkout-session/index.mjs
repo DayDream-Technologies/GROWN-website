@@ -5,10 +5,50 @@ import Stripe from "stripe";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-/** @type {Record<string, { one_time?: string, subscription?: string }>} */
+/** @type {Record<string, { stripe_product_id?: string, one_time?: string, subscription?: string }>} */
 const catalog = JSON.parse(
   readFileSync(join(__dirname, "stripe-catalog.json"), "utf8"),
 );
+
+/**
+ * Resolve a Stripe Price ID from a Product when the catalog stores `prod_…` only.
+ * Prefers the product’s default price when it matches the requested purchase kind.
+ *
+ * @param {Stripe} stripe
+ * @param {string} stripeProductId
+ * @param {'one_time'|'subscription'} purchaseKind
+ */
+async function resolvePriceIdFromStripeProduct(
+  stripe,
+  stripeProductId,
+  purchaseKind,
+) {
+  const product = await stripe.products.retrieve(stripeProductId);
+  const defaultRef = product.default_price;
+  const defaultPriceId =
+    typeof defaultRef === "string" ? defaultRef : defaultRef?.id;
+
+  const { data: prices } = await stripe.prices.list({
+    product: stripeProductId,
+    active: true,
+    limit: 100,
+  });
+
+  const matches = prices.filter((p) =>
+    purchaseKind === "subscription"
+      ? Boolean(p.recurring)
+      : !p.recurring,
+  );
+
+  if (matches.length === 0) return null;
+
+  const defaultMatch =
+    defaultPriceId && matches.some((p) => p.id === defaultPriceId)
+      ? matches.find((p) => p.id === defaultPriceId)
+      : null;
+
+  return (defaultMatch ?? matches[0]).id;
+}
 
 function headers(origin) {
   return {
@@ -95,6 +135,9 @@ export async function handler(event) {
     /** @type {{ price: string, quantity: number }[]} */
     const line_items = [];
 
+    /** Cache Stripe Product → Price resolution within this invocation */
+    const resolvedPriceCache = new Map();
+
     for (const raw of lines) {
       if (typeof raw !== "object" || raw === null) {
         return {
@@ -154,10 +197,27 @@ export async function handler(event) {
         };
       }
 
-      const priceId =
+      let priceId =
         purchaseKind === "subscription"
           ? row.subscription?.trim()
           : row.one_time?.trim();
+
+      const stripeProductId = row.stripe_product_id?.trim();
+
+      if (!priceId && stripeProductId) {
+        const cacheKey = `${stripeProductId}:${purchaseKind}`;
+        if (resolvedPriceCache.has(cacheKey)) {
+          priceId = resolvedPriceCache.get(cacheKey);
+        } else {
+          const resolved = await resolvePriceIdFromStripeProduct(
+            stripe,
+            stripeProductId,
+            purchaseKind,
+          );
+          resolvedPriceCache.set(cacheKey, resolved ?? "");
+          priceId = resolved ?? "";
+        }
+      }
 
       if (!priceId) {
         return {

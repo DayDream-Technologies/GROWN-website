@@ -12,7 +12,6 @@ import {
 import { products, getFulfillmentBadge } from "../data/products";
 import { useProductModal } from "../context/useProductModal";
 import { getProductListImage } from "../lib/productImages";
-import { contactEmail } from "../config/contact";
 import "./ShopPage.css";
 
 const SEARCH_ALL_PLACEHOLDER = "Search all products";
@@ -206,19 +205,6 @@ export function ShopPage() {
 
   return (
     <>
-      <div className="shop-disclaimer" role="status">
-        <p className="shop-disclaimer__text">
-          <strong>Pantry blends & seasonings:</strong> Add items to your cart and complete checkout
-          with Stripe when checkout is configured for this deployment. Fresh produce and wholesale
-          trays stay inquiry-based — email{" "}
-          <a className="shop-disclaimer__link" href={`mailto:${contactEmail}`}>
-            {contactEmail}
-          </a>{" "}
-          for pricing and availability.
-        </p>
-      </div>
-      <div className="shop-section-break" aria-hidden />
-
       <Section bg="white" className="shop-hero">
         <div className="shop-hero__inner">
           <h1 className="shop-title">{copy?.title ?? defaultTitle}</h1>
