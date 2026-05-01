@@ -46,7 +46,7 @@ const CATEGORY_COPY: Record<
     title: "Fresh Produce",
     intro:
       "We supply restaurants and wholesale buyers with an array of fresh herbs, leafy greens, and aromatics.",
-    image: "fresh/fresh-butter-lettuce.jpg",
+    image: "catalog/products/fresh-butter-lettuce.jpg",
     imageAlt: "Fresh butter lettuce from the farm",
     searchPlaceholder: "Search lettuce, herbs, and more",
     showContactPricing: true,
@@ -61,7 +61,7 @@ const CATEGORY_COPY: Record<
     title: "Fresh Microgreens",
     intro:
       "Full trays and harvested microgreens for restaurants and home kitchens — picked for flavor, color, and nutrition.",
-    image: "site/home-microgreens.png",
+    image: "shop/category-microgreens.jpg",
     imageAlt: "Tray of fresh microgreens",
     searchPlaceholder: "Search microgreens",
     showContactPricing: true,
@@ -78,7 +78,7 @@ const CATEGORY_COPY: Record<
     title: "Pantry Blends",
     intro:
       "Smoothie boosters, mushroom coffee, matcha, and drink refreshers powered by spirulina, saffron, mushrooms, microgreens, and other super-ingredients — crafted for everyday rituals.",
-    image: "site/shop-powders.jpg",
+    image: "shop/category-pantry-blends.jpg",
     imageAlt: "Pantry blend jars on a counter",
     searchPlaceholder: "Search blends, matcha, coffee…",
     showContactPricing: false,
@@ -93,7 +93,7 @@ const CATEGORY_COPY: Record<
     title: "Pantry Microgreen Seasonings",
     intro:
       "Creative, flavorful blends with about a quarter tray of microgreens in every jar — made for finishing dishes at home or on the line.",
-    image: "site/home-seasoning.png",
+    image: "shop/category-seasoning.jpg",
     imageAlt: "Jars of microgreen seasonings",
     searchPlaceholder: "Search seasonings",
     showContactPricing: false,
@@ -110,25 +110,25 @@ const PRODUCE_GALLERY = [
   {
     label: "Herbs",
     caption: "Basil, cilantro, parsley, mint, and more.",
-    image: "fresh/fresh-basil.jpg",
+    image: "catalog/produce/herbs.jpg",
     imageAlt: "Fresh basil",
   },
   {
     label: "Lettuce",
     caption: "Tender heads for plates and sandwiches.",
-    image: "fresh/fresh-butter-lettuce.jpg",
+    image: "catalog/products/fresh-butter-lettuce.jpg",
     imageAlt: "Fresh butter lettuce",
   },
   {
     label: "Kale",
     caption: "Hearty leaves for sautés, juices, and bowls.",
-    image: "fresh/fresh-baby-kale.jpg",
+    image: "catalog/produce/kale.jpg",
     imageAlt: "Fresh kale",
   },
   {
     label: "Rosemary & aromatics",
     caption: "Fragrant bunches and classic herbs for wholesale kitchens.",
-    image: "fresh/fresh-rosemary.jpg",
+    image: "catalog/produce/aromatics.jpg",
     imageAlt: "Fresh rosemary",
   },
 ] as const;
@@ -137,19 +137,19 @@ const MICRO_GALLERY = [
   {
     title: "Full trays",
     body: "Living trays delivered on a rhythm that matches your kitchen.",
-    image: "site/home-microgreens.png",
+    image: "catalog/microgreens/full-trays.jpg",
     imageAlt: "Microgreen growing tray",
   },
   {
     title: "Harvested greens",
     body: "Cut and packed for fast pickup, garnishes, and nutrition-forward plates.",
-    image: "site/home-microgreens.png",
+    image: "catalog/microgreens/harvested.jpg",
     imageAlt: "Harvested microgreens",
   },
   {
     title: "Restaurant & home",
     body: "Sized for line service or home cooking — ask about custom mixes.",
-    image: "site/home-produce.png",
+    image: "catalog/microgreens/restaurant-home.jpg",
     imageAlt: "Microgreens in the kitchen",
   },
 ] as const;
@@ -201,19 +201,20 @@ export function ShopPage() {
   const defaultTitle = "Shop GROWN";
   const defaultLede =
     "Browse everything we offer — or jump to Fresh Produce, Microgreens, Pantry Seasonings, or Pantry Blends from the menu above.";
-  const defaultImage = "site/hero-home.png";
+  const defaultImage = "shop/default.jpg";
   const defaultImageAlt = "GROWN farm products";
 
   return (
     <>
       <div className="shop-disclaimer" role="status">
         <p className="shop-disclaimer__text">
-          <strong>Online ordering is not live yet.</strong> This shop preview will be available
-          soon. For orders or questions, please email{" "}
+          <strong>Pantry blends & seasonings:</strong> Add items to your cart and complete checkout
+          with Stripe when checkout is configured for this deployment. Fresh produce and wholesale
+          trays stay inquiry-based — email{" "}
           <a className="shop-disclaimer__link" href={`mailto:${contactEmail}`}>
             {contactEmail}
-          </a>
-          .
+          </a>{" "}
+          for pricing and availability.
         </p>
       </div>
       <div className="shop-section-break" aria-hidden />

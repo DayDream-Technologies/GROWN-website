@@ -3,7 +3,9 @@
   padding-top: 0;
   padding-bottom: 0;
   padding-inline: 0;
-  background: var(--color-warm-neutral);
+  width: 100%;
+  max-width: none;
+  background: var(--color-section-tint);
   overflow-x: clip;
 }
 
@@ -15,8 +17,9 @@
 
 .home-hero__shell {
   position: relative;
+  /* Edge-to-edge: do not cap with max-width: 100% (that caused a sliver of section bg on the right). */
   width: 100vw;
-  max-width: 100%;
+  max-width: none;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
   min-height: min(88vh, 46rem);
@@ -28,8 +31,12 @@
 .home-hero__bg {
   position: absolute;
   inset: 0;
+  z-index: 0;
   width: 100%;
   height: 100%;
+  min-width: 100%;
+  min-height: 100%;
+  max-width: none; /* override global `img { max-width: 100% }` so cover fills the shell */
   object-fit: cover;
   object-position: 62% center;
   opacity: 0;
@@ -38,24 +45,6 @@
 
 .home-hero__bg.is-active {
   opacity: 1;
-}
-
-.home-hero__scrim {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  background: linear-gradient(
-      180deg,
-      rgba(253, 249, 243, 0.5) 0%,
-      rgba(253, 249, 243, 0.15) 42%,
-      rgba(253, 249, 243, 0.35) 100%
-    ),
-    radial-gradient(
-      ellipse 85% 55% at 50% 45%,
-      rgba(253, 249, 243, 0.55) 0%,
-      rgba(253, 249, 243, 0) 72%
-    );
 }
 
 .home-hero__content {
@@ -70,6 +59,50 @@
   padding: var(--space-12) var(--space-6);
   margin: 0 auto;
   transform: translateY(-1.25rem);
+}
+
+.home-hero__brand {
+  margin: 0;
+  line-height: 0;
+}
+
+/* Soft cream → warm fade behind the wordmark only (not full-bleed hero) */
+.home-hero__logo-wrap {
+  position: relative;
+  display: block;
+  max-width: min(28rem, 92vw);
+  margin-inline: auto;
+}
+
+.home-hero__logo-wrap::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  width: min(118%, 30rem);
+  aspect-ratio: 1.4 / 1;
+  max-height: 135%;
+  border-radius: 50%;
+  /* Harmonize with --color-section-tint (#f9edf0) */
+  background: radial-gradient(
+    ellipse 72% 62% at 50% 44%,
+    rgba(253, 249, 243, 0.94) 0%,
+    rgba(249, 237, 240, 0.82) 42%,
+    rgba(249, 237, 240, 0.35) 58%,
+    transparent 76%
+  );
+  pointer-events: none;
+}
+
+.home-hero__logo {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 1px 0 rgba(253, 249, 243, 0.45));
 }
 
 @media (max-width: 900px) {
@@ -96,32 +129,9 @@
     min-height: min(72vh, 31rem);
   }
 
-  .home-hero__title {
-    font-size: clamp(1.75rem, 7vw, 2.2rem);
-    margin-bottom: var(--space-4);
+  .home-hero__logo-wrap {
+    max-width: min(22rem, 88vw);
   }
-
-  .home-hero__lede {
-    font-size: 1rem;
-    margin-bottom: var(--space-4);
-  }
-}
-
-.home-hero__title {
-  font-size: var(--text-display-xl);
-  font-weight: 600;
-  color: #141814;
-  margin: 0 0 var(--space-5);
-  text-shadow: 0 1px 0 rgba(253, 249, 243, 0.35);
-}
-
-.home-hero__lede {
-  margin: 0 0 var(--space-6);
-  font-family: var(--font-body);
-  color: #1f241f;
-  font-size: 1.125rem;
-  max-width: 32rem;
-  text-shadow: 0 1px 0 rgba(253, 249, 243, 0.25);
 }
 
 .home-hero__actions {
@@ -148,27 +158,12 @@
   height: 3px;
   max-width: 10rem;
   margin: 0 auto var(--space-8);
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(92, 42, 50, 0.55) 20%,
-    rgba(92, 42, 50, 0.55) 80%,
-    transparent
-  );
+  background: var(--color-maroon-rule);
 }
 
 .home-shelf__break:last-of-type {
   margin-top: var(--space-10);
   margin-bottom: 0;
-}
-
-.home-shelf__eyebrow {
-  margin: 0 0 var(--space-3);
-  font-family: var(--font-body);
-  font-size: 1rem;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  color: #141814;
 }
 
 .home-shelf__title {
@@ -207,6 +202,10 @@
   border-top: 1px solid rgba(27, 48, 34, 0.1);
 }
 
+.home-categories .home-mission__heading-row {
+  margin-bottom: var(--space-8);
+}
+
 .home-categories__grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -231,7 +230,10 @@
 }
 
 .home-cat-card__media {
-  aspect-ratio: 16 / 11;
+  /* Uniform strip across cards; cap derived from shortest category asset (home/category-fresh-produce.png @ 1024×971). */
+  width: 100%;
+  height: clamp(13.75rem, 28vw, 23.25rem);
+  overflow: hidden;
   background: var(--color-field-fill);
 }
 
@@ -239,6 +241,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
   display: block;
 }
 

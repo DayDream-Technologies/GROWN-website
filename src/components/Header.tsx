@@ -45,8 +45,8 @@ export function Header() {
               className="site-header__logo-img"
               src={siteImage(headerLogoPath)}
               alt="GROWN Hydroponic Farms"
-              width={200}
-              height={76}
+              width={289}
+              height={200}
               decoding="async"
               onError={() => setLogoFailed(true)}
             />

@@ -42,9 +42,9 @@
 }
 
 .site-header__logo-img {
-  height: 2.15rem;
+  height: 2.4rem;
   width: auto;
-  max-width: min(11.5rem, 46vw);
+  max-width: min(12.25rem, 48vw);
   object-fit: contain;
   object-position: left center;
   flex-shrink: 0;
@@ -320,8 +320,8 @@
   }
 
   .site-header__logo-img {
-    height: 1.85rem;
-    max-width: min(9.5rem, 52vw);
+    height: 2.05rem;
+    max-width: min(10.25rem, 54vw);
   }
 
   .site-header__right {

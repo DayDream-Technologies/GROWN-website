@@ -1,7 +1,7 @@
 .site-footer {
   margin-top: auto;
   background: var(--color-bg-primary);
-  border-top: 1px solid var(--color-border-subtle);
+  border-top: 1px solid var(--color-maroon-rule);
   padding: var(--space-10) var(--space-6) var(--space-8);
 }
 

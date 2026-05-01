@@ -1,0 +1,72 @@
+# Deploy Stripe Lambda + API Gateway (SAM) — separate from GitHub Pages build.
+# Required repo secrets: AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET
+# Required repo variables: SITE_URL, ALLOWED_ORIGIN
+# Optional variable: AWS_REGION (defaults to us-east-1)
+
+name: Deploy Stripe API (SAM)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "infra/**"
+      - ".github/workflows/stripe-api.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: stripe-api-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: |
+            infra/checkout-session/package-lock.json
+            infra/webhook/package-lock.json
+
+      - name: Install Lambda dependencies
+        run: |
+          cd infra/checkout-session && npm ci
+          cd ../webhook && npm ci
+
+      - uses: aws-actions/setup-sam@v2
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ vars.AWS_REGION || 'us-east-1' }}
+
+      - name: sam build
+        working-directory: infra
+        run: sam build
+
+      - name: sam deploy
+        working-directory: infra
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+          ALLOWED_ORIGIN: ${{ vars.ALLOWED_ORIGIN }}
+          STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+          STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
+        run: |
+          sam deploy \
+            --no-confirm-changeset \
+            --no-fail-on-empty-changeset \
+            --resolve-s3 \
+            --capabilities CAPABILITY_IAM \
+            --stack-name grown-stripe-api \
+            --parameter-overrides \
+              "SiteUrl=${SITE_URL}" \
+              "AllowedOrigin=${ALLOWED_ORIGIN}" \
+              "StripeSecretKey=${STRIPE_SECRET_KEY}" \
+              "StripeWebhookSecret=${STRIPE_WEBHOOK_SECRET}"

@@ -41,7 +41,7 @@ export function AboutPage() {
       <Section bg="white" id="our-story">
         <img
           className="about-story-photo"
-          src={siteImage("site/about-story.jpg")}
+          src={siteImage("about/story.jpg")}
           alt="GROWN produce and products"
           loading="lazy"
           decoding="async"
@@ -98,8 +98,8 @@ export function AboutPage() {
         <div className="about-split">
           <img
             className="about-photo"
-            src={siteImage("site/about-founder.jpg")}
-            alt="Founder in a bright home kitchen with a mug"
+            src={siteImage("about/founder.jpg")}
+            alt="Microgreens featured on a home-cooked plate"
             loading="lazy"
             decoding="async"
             width={800}
@@ -132,8 +132,8 @@ export function AboutPage() {
           </div>
           <img
             className="about-photo about-photo--rounded"
-            src={siteImage("site/about-freeze-dry.jpg")}
-            alt="Fresh produce on trays inside a freeze dryer"
+            src={siteImage("about/freeze-dry.jpg")}
+            alt="Pantry jars of preserved blends on a counter"
             loading="lazy"
             decoding="async"
             width={800}

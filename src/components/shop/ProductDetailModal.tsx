@@ -6,7 +6,11 @@ import { PlaceholderImage } from "../PlaceholderImage";
 import { FreshProductInquiryForm } from "./FreshProductInquiryForm";
 import { siteImage } from "../../lib/images";
 import { getProductListImage } from "../../lib/productImages";
-import { getOneTimeUnitCents } from "../../lib/productPricing";
+import {
+  canPurchaseSubscription,
+  getOneTimeUnitCents,
+  getSubscriptionUnitCents,
+} from "../../lib/productPricing";
 import "./ProductDetailModal.css";
 
 type Props = {
@@ -76,7 +80,15 @@ export function ProductDetailModal({ product, onClose }: Props) {
   const heroPath = product ? getProductListImage(product) : null;
   const heroUrl = heroPath ? siteImage(heroPath) : null;
   const unitCents = product ? getOneTimeUnitCents(product) : null;
+  const subscriptionCents = product
+    ? getSubscriptionUnitCents(product)
+    : null;
   const purchasable = unitCents != null && !product?.contactForPricing;
+  const subscribable =
+    product &&
+    purchasable &&
+    canPurchaseSubscription(product) &&
+    subscriptionCents != null;
 
   return (
     <dialog
@@ -169,13 +181,31 @@ export function ProductDetailModal({ product, onClose }: Props) {
                       onClick={() => {
                         addLine({
                           productId: product.id,
+                          purchaseKind: "one_time",
                           unitAmountCents: unitCents,
                           productName: titleLine,
                         });
                       }}
                     >
-                      Add to cart
+                      Add to cart — one-time
                     </Button>
+                    {subscribable ? (
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        className="product-modal__add product-modal__add--subscribe"
+                        onClick={() => {
+                          addLine({
+                            productId: product.id,
+                            purchaseKind: "subscription",
+                            unitAmountCents: subscriptionCents,
+                            productName: titleLine,
+                          });
+                        }}
+                      >
+                        Add to cart — subscribe
+                      </Button>
+                    ) : null}
                   </div>
                 ) : null}
               </>

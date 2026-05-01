@@ -54,7 +54,7 @@ export function PartnerPage() {
         <div className="partner-feature-photo__inner">
           <img
             className="partner-feature-photo__img"
-            src={siteImage("site/partner-hydroponic.jpg")}
+            src={siteImage("partner/hydroponic.jpg")}
             alt="Rows of leafy greens growing in an indoor hydroponic system"
             loading="lazy"
             decoding="async"

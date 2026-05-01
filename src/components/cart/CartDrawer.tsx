@@ -1,7 +1,10 @@
 import { useEffect, useId, useRef } from "react";
+import { Link } from "react-router-dom";
 import { formatUsdFromCents } from "../../lib/money";
+import { cartHasMixedPurchaseKinds } from "../../lib/cartPurchaseKinds";
 import { useCart } from "../../context/useCart";
 import { contactEmail } from "../../config/contact";
+import { isCheckoutConfigured } from "../../lib/checkoutEnv";
 import "./CartDrawer.css";
 
 export function CartDrawer() {
@@ -35,7 +38,12 @@ export function CartDrawer() {
 
   if (!isOpen) return null;
 
-  const handleCheckout = () => {
+  const stripeCheckoutEnabled = isCheckoutConfigured();
+  const mixedKinds = cartHasMixedPurchaseKinds(lines);
+  const canUseStripeCheckout =
+    stripeCheckoutEnabled && lines.length > 0 && !mixedKinds;
+
+  const handleEmailOrderRequest = () => {
     const payload = getCheckoutPayload();
     if (payload.lines.length === 0) return;
     const subject = encodeURIComponent("Website cart — order request");
@@ -43,10 +51,13 @@ export function CartDrawer() {
       [
         "Please use this as a starting point for my order:",
         "",
-        ...payload.lines.map(
-          (l) =>
-            `- ${l.productName} × ${l.quantity} @ ${formatUsdFromCents(l.unitAmountCents)} each`,
-        ),
+        ...payload.lines.map((l) => {
+          const kind =
+            l.purchaseKind === "subscription"
+              ? " (monthly subscription)"
+              : " (one-time)";
+          return `- ${l.productName}${kind} × ${l.quantity} @ ${formatUsdFromCents(l.unitAmountCents)} each`;
+        }),
         "",
         `Subtotal: ${formatUsdFromCents(payload.subtotalCents)}`,
       ].join("\n"),
@@ -93,7 +104,14 @@ export function CartDrawer() {
               {lines.map((line) => (
                 <li key={line.lineKey} className="cart-drawer__line">
                   <div className="cart-drawer__line-top">
-                    <p className="cart-drawer__line-name">{line.productName}</p>
+                    <div>
+                      <p className="cart-drawer__line-name">{line.productName}</p>
+                      <p className="cart-drawer__line-mode">
+                        {line.purchaseKind === "subscription"
+                          ? "Monthly subscription"
+                          : "One-time"}
+                      </p>
+                    </div>
                     <button
                       type="button"
                       className="cart-drawer__remove"
@@ -135,20 +153,50 @@ export function CartDrawer() {
               </div>
               <p className="cart-drawer__hint">
                 Free shipping on orders over $60. Subscription orders include free
-                shipping and 7% off eligible items. Taxes calculated at checkout.
+                shipping and 7% off eligible items. Taxes and shipping are finalized in
+                Stripe checkout.
               </p>
-              <p className="cart-drawer__hint">
-                Checkout opens an email to {contactEmail} with your cart. We will confirm
-                availability and next steps.
-              </p>
+              {stripeCheckoutEnabled ? (
+                mixedKinds ? (
+                  <p className="cart-drawer__hint cart-drawer__hint--warn" role="alert">
+                    Your cart mixes one-time items with subscriptions. Adjust the cart so
+                    it contains only one purchase type, then proceed to checkout.
+                  </p>
+                ) : null
+              ) : (
+                <p className="cart-drawer__hint">
+                  Online checkout uses Stripe when configured. Until then, you can email{" "}
+                  {contactEmail} with your cart using the button below.
+                </p>
+              )}
               <div className="cart-drawer__actions">
-                <button
-                  type="button"
-                  className="cart-drawer__checkout"
-                  onClick={handleCheckout}
-                >
-                  Email order request
-                </button>
+                {canUseStripeCheckout ? (
+                  <Link
+                    className="cart-drawer__checkout cart-drawer__checkout--link"
+                    to="/checkout"
+                    onClick={() => closeCart()}
+                  >
+                    Proceed to checkout
+                  </Link>
+                ) : stripeCheckoutEnabled ? (
+                  <button
+                    type="button"
+                    className="cart-drawer__checkout"
+                    disabled
+                    aria-disabled="true"
+                  >
+                    Proceed to checkout
+                  </button>
+                ) : null}
+                {!stripeCheckoutEnabled ? (
+                  <button
+                    type="button"
+                    className="cart-drawer__checkout"
+                    onClick={handleEmailOrderRequest}
+                  >
+                    Email order request
+                  </button>
+                ) : null}
                 <button
                   type="button"
                   className="cart-drawer__clear"

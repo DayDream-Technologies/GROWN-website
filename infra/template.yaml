@@ -1,0 +1,90 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Stripe Checkout Session + webhook for GROWN website SPA.
+
+Metadata:
+  StripeDashboardChecklist:
+    CreateProducts: Create Stripe Products and Prices for each SKU in stripe-catalog.json; paste price_ IDs into that file before deploy.
+    Webhook: After deploy, copy HttpApi URL from stack Outputs; in Stripe Dashboard add endpoint POST .../webhooks/stripe; subscribe to checkout.session.completed and customer.subscription.* as needed.
+    Secrets: Pass StripeSecretKey and StripeWebhookSecret at deploy time (never commit).
+
+Globals:
+  Function:
+    Timeout: 30
+    MemorySize: 256
+
+Parameters:
+  AllowedOrigin:
+    Type: String
+    Description: Browser origin allowed for CORS (e.g. https://your-app.amplifyapp.com). Use * only for debugging.
+    Default: '*'
+  SiteUrl:
+    Type: String
+    Description: Public site base URL including path prefix if used (no trailing slash). Used for Checkout return_url.
+  StripeSecretKey:
+    Type: String
+    NoEcho: true
+    Description: Stripe secret API key (sk_live_... or sk_test_...)
+  StripeWebhookSecret:
+    Type: String
+    NoEcho: true
+    Description: Signing secret from Stripe webhook endpoint (whsec_...)
+
+Resources:
+  StripeHttpApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      CorsConfiguration:
+        AllowMethods:
+          - POST
+          - OPTIONS
+        AllowHeaders:
+          - content-type
+        AllowOrigins:
+          - !Ref AllowedOrigin
+
+  CheckoutSessionFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Runtime: nodejs20.x
+      Handler: index.handler
+      CodeUri: checkout-session/
+      Environment:
+        Variables:
+          STRIPE_SECRET_KEY: !Ref StripeSecretKey
+          SITE_URL: !Ref SiteUrl
+          CORS_ORIGIN: !Ref AllowedOrigin
+      Policies:
+        - AWSLambdaBasicExecutionRole
+      Events:
+        CheckoutApi:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref StripeHttpApi
+            Path: /checkout/session
+            Method: POST
+
+  StripeWebhookFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Runtime: nodejs20.x
+      Handler: index.handler
+      CodeUri: webhook/
+      Environment:
+        Variables:
+          STRIPE_SECRET_KEY: !Ref StripeSecretKey
+          STRIPE_WEBHOOK_SECRET: !Ref StripeWebhookSecret
+      Policies:
+        - AWSLambdaBasicExecutionRole
+      Events:
+        StripeWebhookApi:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref StripeHttpApi
+            Path: /webhooks/stripe
+            Method: POST
+
+Outputs:
+  HttpApiUrl:
+    Description: Base URL for API (append checkout/session and webhooks/stripe paths)
+    Value: !Sub https://${StripeHttpApi}.execute-api.${AWS::Region}.amazonaws.com

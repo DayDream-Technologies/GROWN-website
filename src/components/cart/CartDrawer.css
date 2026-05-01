@@ -172,6 +172,11 @@
   line-height: 1.45;
 }
 
+.cart-drawer__hint--warn {
+  color: var(--color-maroon);
+  font-weight: 600;
+}
+
 .cart-drawer__actions {
   display: flex;
   flex-direction: column;
@@ -191,6 +196,20 @@
 
 .cart-drawer__checkout:hover {
   filter: brightness(1.05);
+}
+
+.cart-drawer__checkout:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  filter: none;
+}
+
+.cart-drawer__checkout--link {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  text-decoration: none;
 }
 
 .cart-drawer__clear {

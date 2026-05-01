@@ -11,7 +11,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const dist = path.join(__dirname, "..", "dist");
 const indexPath = path.join(dist, "index.html");
 
-const ROUTES = ["shop", "partner", "about", "contact"];
+const ROUTES = ["shop", "partner", "about", "contact", "checkout", "checkout/return"];
 
 if (!fs.existsSync(indexPath)) {
   console.warn("[spa-static-paths] dist/index.html not found; skipping.");

@@ -6,12 +6,9 @@
   background: var(--color-bg-primary);
 }
 
-.grown-section--blush {
-  background: var(--color-bg-secondary);
-}
-
+.grown-section--blush,
 .grown-section--warm {
-  background: var(--color-bg-warm);
+  background: var(--color-section-tint);
 }
 
 .grown-section__inner {

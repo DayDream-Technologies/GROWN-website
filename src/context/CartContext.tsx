@@ -6,7 +6,12 @@ import {
   useRef,
   type ReactNode,
 } from "react";
-import { CART_STORAGE_KEY, type CartLine } from "./cartTypes";
+import {
+  CART_STORAGE_KEY,
+  cartLineKey,
+  type CartLine,
+  type PurchaseKind,
+} from "./cartTypes";
 import type { CheckoutPayload } from "./checkoutPayload";
 import { CartContext } from "./cartContextInstance";
 
@@ -30,20 +35,20 @@ type CartAction =
   | { type: "TOGGLE" }
   | { type: "HYDRATE"; lines: CartLine[] };
 
-function lineKey(productId: string): string {
-  return productId;
-}
-
 function cartReducer(state: CartState, action: CartAction): CartState {
   switch (action.type) {
     case "ADD": {
       const qty = Math.max(1, action.payload.quantity ?? 1);
-      const key = lineKey(action.payload.productId);
+      const key = cartLineKey(
+        action.payload.productId,
+        action.payload.purchaseKind,
+      );
       const idx = state.lines.findIndex((l) => l.lineKey === key);
       if (idx === -1) {
         const line: CartLine = {
           lineKey: key,
           productId: action.payload.productId,
+          purchaseKind: action.payload.purchaseKind,
           quantity: qty,
           unitAmountCents: action.payload.unitAmountCents,
           currency: action.payload.currency,
@@ -95,6 +100,36 @@ function cartReducer(state: CartState, action: CartAction): CartState {
 
 const initialState: CartState = { lines: [], isOpen: false };
 
+function parseStoredCartLines(raw: unknown): CartLine[] {
+  if (!Array.isArray(raw)) return [];
+  const out: CartLine[] = [];
+  for (const item of raw) {
+    if (!item || typeof item !== "object") continue;
+    const o = item as Partial<CartLine>;
+    if (
+      typeof o.productId !== "string" ||
+      typeof o.productName !== "string" ||
+      typeof o.quantity !== "number" ||
+      typeof o.unitAmountCents !== "number" ||
+      o.currency !== "usd" ||
+      (o.purchaseKind !== "one_time" && o.purchaseKind !== "subscription")
+    ) {
+      continue;
+    }
+    const purchaseKind = o.purchaseKind;
+    out.push({
+      lineKey: cartLineKey(o.productId, purchaseKind),
+      productId: o.productId,
+      purchaseKind,
+      quantity: Math.max(0, Math.floor(o.quantity)),
+      unitAmountCents: o.unitAmountCents,
+      currency: "usd",
+      productName: o.productName,
+    });
+  }
+  return out.filter((l) => l.quantity > 0);
+}
+
 export function CartProvider({ children }: { children: ReactNode }) {
   const [state, dispatch] = useReducer(cartReducer, initialState);
   const hydratedRef = useRef(false);
@@ -105,7 +140,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       if (raw) {
         const parsed = JSON.parse(raw) as unknown;
         if (Array.isArray(parsed)) {
-          dispatch({ type: "HYDRATE", lines: parsed as CartLine[] });
+          dispatch({ type: "HYDRATE", lines: parseStoredCartLines(parsed) });
         }
       }
     } catch {
@@ -145,6 +180,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const addLine = useCallback(
     (args: {
       productId: string;
+      purchaseKind: PurchaseKind;
       unitAmountCents: number;
       productName: string;
       quantity?: number;
@@ -153,6 +189,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         type: "ADD",
         payload: {
           productId: args.productId,
+          purchaseKind: args.purchaseKind,
           unitAmountCents: args.unitAmountCents,
           currency: "usd",
           productName: args.productName,
@@ -181,6 +218,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         productName: l.productName,
         quantity: l.quantity,
         unitAmountCents: l.unitAmountCents,
+        purchaseKind: l.purchaseKind,
       })),
       subtotalCents,
     };

@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import { LinkButton } from "../components/LinkButton";
 import { Section } from "../components/sections/Section";
+import { BRAND_HERO_LOGO } from "../config/branding";
 import { siteImage } from "../lib/images";
 import "./HomePage.css";
+
+const heroLogoPath =
+  import.meta.env.VITE_HERO_LOGO?.trim() || BRAND_HERO_LOGO;
 
 const CATEGORY_CARDS = [
   {
@@ -10,8 +14,8 @@ const CATEGORY_CARDS = [
     subtitle: "For restaurants and wholesale",
     detail:
       "Leafy greens, herbs & mushrooms available in bulk",
-    image: "fresh/fresh-butter-lettuce.jpg",
-    imageAlt: "Fresh butter lettuce",
+    image: "home/category-fresh-produce.png",
+    imageAlt: "Fresh cilantro, lettuce, and rosemary on stone",
     href: "/shop?category=fresh-produce",
     cta: "Explore Produce",
     buttonVariant: "primary" as const,
@@ -21,7 +25,7 @@ const CATEGORY_CARDS = [
     subtitle: "For restaurants and home kitchens",
     detail:
       "Sold as full trays or harvested microgreens — perfect for cooking, garnishing, or everyday nutrition",
-    image: "site/home-microgreens.png",
+    image: "home/category-microgreens.jpg",
     imageAlt: "Tray of fresh microgreens",
     href: "/shop?category=microgreens",
     cta: "Explore Microgreens",
@@ -32,7 +36,7 @@ const CATEGORY_CARDS = [
     subtitle: "For restaurants and home kitchens",
     detail:
       "Creative, flavorful blends with about a quarter tray of microgreens in every jar",
-    image: "site/home-seasoning.png",
+    image: "home/category-seasoning.jpg",
     imageAlt: "Jars of microgreen seasonings",
     href: "/shop?category=seasoning",
     cta: "Explore Pantry Seasonings",
@@ -43,7 +47,7 @@ const CATEGORY_CARDS = [
     subtitle: "For home kitchens",
     detail:
       "Smoothie boosters, mushroom coffee, matcha & drink refreshers powered by spirulina, saffron, mushrooms & microgreens",
-    image: "site/home-pantry-blend.png",
+    image: "home/category-pantry-blends.jpg",
     imageAlt: "Pantry blend jars",
     href: "/shop?category=pantry-blends",
     cta: "Explore Pantry Blends",
@@ -51,11 +55,11 @@ const CATEGORY_CARDS = [
   },
 ];
 
-/** Hero slides — paths must live under `public/images/` (gitignored `_unpack/` is not deployed). */
+/** Hero slides — `public/images/home/hero-0{1..3}-*.png` (garden dish → tray → lifestyle). */
 const HERO_IMAGE_PATHS = [
-  "site/hero-home.png",
-  "Danelle.jpg",
-  "site/home-microgreens.png",
+  "home/hero-01-baked-potato-garden.png",
+  "home/hero-02-microgreens-tray.png",
+  "home/hero-03-lifestyle-garden.png",
 ];
 
 const MISSION_TEXT =
@@ -91,32 +95,49 @@ export function HomePage() {
               fetchPriority={index === 0 ? "high" : "auto"}
             />
           ))}
-          <div className="home-hero__scrim" aria-hidden />
           <div className="home-hero__content">
-            <h1 className="home-hero__title">From seed to shelf</h1>
-            <p className="home-hero__lede">
-              Nutrient-rich food, grown with intention — from our farm to your kitchen.
-            </p>
+            <h1 className="home-hero__brand">
+              <span className="home-hero__logo-wrap">
+                <img
+                  className="home-hero__logo"
+                  src={siteImage(heroLogoPath)}
+                  alt="GROWN Hydroponic Farms"
+                  width={380}
+                  height={144}
+                  decoding="async"
+                  fetchPriority="high"
+                />
+              </span>
+            </h1>
           </div>
         </div>
       </Section>
 
       <Section bg="warm" className="home-shelf" aria-labelledby="home-shelf-heading">
         <div className="home-shelf__break" aria-hidden />
-        <p className="home-shelf__eyebrow">From seed to shelf</p>
         <h2 id="home-shelf-heading" className="home-shelf__title">
           From seed to shelf
         </h2>
         <p className="home-shelf__pipeline">grow • preserve • use</p>
         <p className="home-shelf__body">
           We grow fresh produce and microgreens, preserve excess through freeze-drying, and transform
-          them into nutrient-dense pantry seasonings and blends. No shortcuts — just real ingredients
-          and steady craft.
+          them into nutrient-dense pantry seasonings and blends. No shortcuts — just real ingredients.
         </p>
         <div className="home-shelf__break" aria-hidden />
       </Section>
 
-      <Section bg="white" className="home-categories">
+      <Section
+        bg="white"
+        className="home-categories"
+        aria-labelledby="home-offerings-heading"
+      >
+        <div className="home-mission__heading-row">
+          <span className="home-mission__line" aria-hidden />
+          <h2 id="home-offerings-heading" className="home-mission__title">
+            Our Offerings
+          </h2>
+          <span className="home-mission__line" aria-hidden />
+        </div>
         <div className="home-categories__grid">
           {CATEGORY_CARDS.map((c) => (
             <article key={c.href} className="home-cat-card">

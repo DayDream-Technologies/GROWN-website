@@ -10,12 +10,12 @@ function encodePathSegments(relativePath: string): string {
     .join("/");
 }
 
-/** Static files under `public/images/` (e.g. `site/hero-home.jpg`). */
+/** Static files under `public/images/` (e.g. `home/hero-01-lettuce-table.jpg`, `brand/…`). */
 export function siteImage(relativePath: string): string {
   return `${base}images/${encodePathSegments(relativePath)}`;
 }
 
-/** Product photo: `public/images/products/` or `public/images/fresh/` by category. */
+/** Legacy convention: per-id JPG under `products/` or `fresh/` (prefer `getProductListImage`). */
 export function getProductImageUrl(product: Product): string {
   const folder = product.category === "fresh" ? "fresh" : "products";
   return `${base}images/${encodePathSegments(`${folder}/${product.id}.jpg`)}`;
