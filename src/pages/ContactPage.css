@@ -103,6 +103,38 @@
   font-size: 1rem;
 }
 
+.contact-form__status {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  line-height: var(--leading-body);
+}
+
+.contact-form__status--success {
+  color: var(--color-green);
+  font-weight: 600;
+}
+
+.contact-form__status--error {
+  color: var(--color-maroon);
+}
+
+.contact-form__status a {
+  color: var(--color-green);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.12em;
+}
+
+.contact-notice__code {
+  font-family: ui-monospace, monospace;
+  font-size: 0.9em;
+  padding: 0.1em 0.35em;
+  border-radius: var(--radius-sm);
+  background: var(--color-field-fill);
+  border: 1px solid var(--color-card-border);
+}
+
 .contact-field {
   display: flex;
   flex-direction: column;

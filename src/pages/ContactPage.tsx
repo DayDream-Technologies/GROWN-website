@@ -1,9 +1,65 @@
+import { useState, type FormEvent } from "react";
+import { Button } from "../components/Button";
 import { LinkButton } from "../components/LinkButton";
 import { Section } from "../components/sections/Section";
 import { contactEmail } from "../config/contact";
+import { getWeb3FormsAccessKey } from "../config/web3forms";
 import "./ContactPage.css";
 
+const WEB3FORMS_URL = "https://api.web3forms.com/submit";
+
 export function ContactPage() {
+  const accessKey = getWeb3FormsAccessKey();
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">(
+    "idle",
+  );
+
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const key = getWeb3FormsAccessKey();
+    if (!key) {
+      setStatus("error");
+      return;
+    }
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const name = String(formData.get("name") ?? "").trim();
+    const email = String(formData.get("email") ?? "").trim();
+    const message = String(formData.get("message") ?? "").trim();
+
+    setStatus("submitting");
+
+    try {
+      const res = await fetch(WEB3FORMS_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: key,
+          subject: "Contact form — GROWN website",
+          name,
+          email,
+          message,
+        }),
+      });
+
+      const data = (await res.json()) as { success?: boolean; message?: string };
+
+      if (!res.ok || data.success === false) {
+        setStatus("error");
+        return;
+      }
+
+      setStatus("success");
+      form.reset();
+    } catch {
+      setStatus("error");
+    }
+  }
+
   return (
     <>
       <Section bg="white" className="contact-hero">
@@ -13,58 +69,80 @@ export function ContactPage() {
       </Section>
 
       <Section bg="white" className="contact-body">
-        <div className="contact-grid contact-grid--single-notice">
-          <div className="contact-notice">
-            <p className="contact-notice__title">Contact us by email</p>
-            <p className="contact-notice__body">
-              The contact form is paused while we finish the new online shop. Please reach out
-              directly at{" "}
-              <a className="contact-notice__link" href={`mailto:${contactEmail}`}>
-                {contactEmail}
-              </a>{" "}
-              for wholesale, retail questions, or product inquiries.
-            </p>
-          </div>
+        <div className="contact-grid">
+          {accessKey ? (
+            <form
+              className="contact-form"
+              onSubmit={handleSubmit}
+              aria-label="Contact form"
+            >
+              <div className="contact-field">
+                <label htmlFor="contact-name">Name</label>
+                <input
+                  id="contact-name"
+                  name="name"
+                  type="text"
+                  autoComplete="name"
+                  required
+                  disabled={status === "submitting"}
+                />
+              </div>
+              <div className="contact-field">
+                <label htmlFor="contact-email">Email</label>
+                <input
+                  id="contact-email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  required
+                  disabled={status === "submitting"}
+                />
+              </div>
+              <div className="contact-field">
+                <label htmlFor="contact-message">Message</label>
+                <textarea
+                  id="contact-message"
+                  name="message"
+                  rows={6}
+                  required
+                  disabled={status === "submitting"}
+                />
+              </div>
 
-          {/*
-          <form
-            className="contact-form"
-            onSubmit={(e) => e.preventDefault()}
-            aria-label="Contact form"
-          >
-            <div className="contact-field">
-              <label htmlFor="name">Name</label>
-              <input id="name" name="name" type="text" autoComplete="name" />
+              <Button
+                type="submit"
+                variant="rose"
+                className="contact-form__submit"
+                disabled={status === "submitting"}
+              >
+                {status === "submitting" ? "Sending…" : "Submit"}
+              </Button>
+
+              {status === "success" ? (
+                <p className="contact-form__status contact-form__status--success" role="status">
+                  Thanks — your message was sent. We&apos;ll get back to you soon.
+                </p>
+              ) : null}
+              {status === "error" ? (
+                <p className="contact-form__status contact-form__status--error" role="alert">
+                  Something went wrong. Please try again or email us at{" "}
+                  <a href={`mailto:${contactEmail}`}>{contactEmail}</a>.
+                </p>
+              ) : null}
+            </form>
+          ) : (
+            <div className="contact-notice">
+              <p className="contact-notice__title">Contact form unavailable</p>
+              <p className="contact-notice__body">
+                Add <code className="contact-notice__code">VITE_WEB3FORMS_ACCESS_KEY</code> to
+                your environment at build time to enable the form. Until then, reach out at{" "}
+                <a className="contact-notice__link" href={`mailto:${contactEmail}`}>
+                  {contactEmail}
+                </a>
+                .
+              </p>
             </div>
-            <div className="contact-field">
-              <label htmlFor="email">Email</label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                autoComplete="email"
-              />
-            </div>
-            <div className="contact-field">
-              <label htmlFor="topic">Topic</label>
-              <select id="topic" name="topic" defaultValue="general">
-                <option value="general">General question</option>
-                <option value="fresh-pricing">
-                  Fresh produce &amp; microgreens pricing
-                </option>
-                <option value="partner">Wholesale / partner</option>
-                <option value="press">Press</option>
-              </select>
-            </div>
-            <div className="contact-field">
-              <label htmlFor="message">Message</label>
-              <textarea id="message" name="message" rows={5} />
-            </div>
-            <Button type="submit" variant="rose" className="contact-form__submit">
-              Send message
-            </Button>
-          </form>
-          */}
+          )}
 
           <aside className="contact-aside">
             <h2 className="contact-aside__title">Wholesale & restaurants</h2>

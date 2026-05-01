@@ -70,6 +70,20 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ vars.AWS_REGION || 'us-east-1' }}
 
+      # Empty secrets produce StripeWebhookSecret= which SAM CLI rejects as invalid --parameter-overrides format.
+      - name: Validate SAM parameters (production environment)
+        env:
+          SITE_URL: ${{ vars.SITE_URL }}
+          ALLOWED_ORIGIN: ${{ vars.ALLOWED_ORIGIN }}
+          STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+          STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
+        run: |
+          fail() { echo "::error::$1"; exit 1; }
+          [ -n "$SITE_URL" ] || fail "SITE_URL is empty. Add it under Settings → Environments → production → Variables."
+          [ -n "$ALLOWED_ORIGIN" ] || fail "ALLOWED_ORIGIN is empty. Add it under production → Variables."
+          [ -n "$STRIPE_SECRET_KEY" ] || fail "STRIPE_SECRET_KEY is empty. Add it under production → Secrets."
+          [ -n "$STRIPE_WEBHOOK_SECRET" ] || fail "STRIPE_WEBHOOK_SECRET is empty. Add Stripe webhook signing secret whsec_… under production → Secrets (Dashboard → Webhooks → endpoint → Signing secret)."
+
       - name: sam build
         working-directory: infra
         run: sam build

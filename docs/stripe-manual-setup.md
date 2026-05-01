@@ -127,6 +127,8 @@ The SAM deploy job uses GitHub Environment **`production`**. Put the following u
 
 If **`configure-aws-credentials`** fails with *Could not load credentials from any providers*: you are not supplying credentials—either add **`AWS_ACCESS_KEY_ID`** and **`AWS_SECRET_ACCESS_KEY`** (on the **production** environment), or enable OIDC with **`AWS_USE_OIDC=true`** and **`AWS_ROLE_TO_ASSUME`**. A workflow that passes only `aws-region` / OIDC defaults without **`role-to-assume`** or keys will always fail.
 
+If **`sam deploy`** fails with *Invalid value for '--parameter-overrides': StripeWebhookSecret= is not a valid format*: **`STRIPE_WEBHOOK_SECRET`** (or another parameter) is **empty**—SAM cannot accept `Key=` with no value. Add the missing secret or variable on the **production** environment. After creating the webhook endpoint in Stripe, copy the **Signing secret** (`whsec_…`) into **`STRIPE_WEBHOOK_SECRET`**.
+
 **GitHub Pages** ([`.github/workflows/deploy.yml`](../.github/workflows/deploy.yml)): the **build** job uses **`environment: production`** as well. Optional variable **`VITE_BASE`** (e.g. `/GROWN-website/` for project Pages); if unset, the workflow defaults to **`/GROWN-website/`**.
 
 Stack name: **`grown-stripe-api`**. Use output **`HttpApiUrl`** for Amplify **`VITE_CHECKOUT_API_URL`** ([§7](#7-amplify-hosting-or-ci--frontend-environment-variables)).
