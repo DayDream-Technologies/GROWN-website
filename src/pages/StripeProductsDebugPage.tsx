@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { Section } from "../components/sections/Section";
 import {
   fetchStripeProductsDebug,
@@ -52,6 +52,7 @@ function priceRow(p: Record<string, unknown>, key: string) {
 }
 
 export function StripeProductsDebugPage() {
+  const [searchParams] = useSearchParams();
   const [state, setState] = useState<
     | { status: "idle" | "loading" }
     | { status: "ok"; data: StripeProductsDebugSuccess }
@@ -72,7 +73,7 @@ export function StripeProductsDebugPage() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [searchParams]);
 
   return (
     <Section bg="white" className="stripe-debug">
@@ -98,9 +99,15 @@ export function StripeProductsDebugPage() {
             <strong>Request failed</strong>
             <p className="stripe-debug__err">{state.message}</p>
             <p className="stripe-debug__hint">
-              Set <code className="stripe-debug__code">VITE_CHECKOUT_API_URL</code> to
-              your API Gateway base (same as checkout), deploy the stack with the debug
-              Lambda, and open this page on the deployed site.
+              Add{" "}
+              <code className="stripe-debug__code">
+                ?checkoutApi=https://…execute-api….amazonaws.com
+              </code>{" "}
+              (HTTPS, no trailing slash) for a one-off test. For GitHub Pages, set
+              repository variable{" "}
+              <code className="stripe-debug__code">VITE_CHECKOUT_API_URL</code> on
+              the <strong>production</strong> environment so the site build embeds
+              it — same value as <strong>HttpApiUrl</strong> from your SAM stack.
             </p>
           </div>
         )}

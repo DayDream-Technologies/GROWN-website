@@ -150,15 +150,7 @@ export function ContactPage() {
               Restaurants, cafés, and health-focused teams—tell us what you
               need and we&apos;ll follow up with options.
             </p>
-            <LinkButton to="/shop?category=fresh-produce" variant="ghost">
-              Fresh produce catalog
-            </LinkButton>
             <div className="contact-aside__meta">
-              <p>
-                <strong>Email</strong>
-                <br />
-                <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
-              </p>
               <p>
                 <strong>Farm</strong>
                 <br />

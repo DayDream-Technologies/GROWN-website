@@ -30,6 +30,9 @@ jobs:
       - env:
           # Repository/environment variables: Settings → Environments → production
           VITE_BASE: ${{ vars.VITE_BASE || '/GROWN-website/' }}
+          # Same as SAM stack Output HttpApiUrl — required for checkout + /stripe-debug
+          VITE_CHECKOUT_API_URL: ${{ vars.VITE_CHECKOUT_API_URL }}
+          VITE_STRIPE_PUBLISHABLE_KEY: ${{ vars.VITE_STRIPE_PUBLISHABLE_KEY }}
         run: npm run build
 
       - uses: actions/upload-pages-artifact@v3

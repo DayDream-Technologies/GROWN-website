@@ -184,7 +184,7 @@ Set **before** `npm run build`:
 |----------|-------------|
 | **VITE_BASE** | Router/asset base (`/` on Amplify root; include `/repo/` only if hosted under a path). |
 | **VITE_STRIPE_PUBLISHABLE_KEY** | `pk_test_…` / `pk_live_…` |
-| **VITE_CHECKOUT_API_URL** | Same as **`HttpApiUrl`** (no trailing slash). |
+| **VITE_CHECKOUT_API_URL** | Same as **`HttpApiUrl`** (no trailing slash). On **GitHub Pages**, add this to the **production** environment so [`.github/workflows/deploy.yml`](../.github/workflows/deploy.yml) bakes it into the build. |
 
 Optional: **`VITE_PRICES_API_URL`** if you expose **`GET /prices`** on a different base than checkout.
 

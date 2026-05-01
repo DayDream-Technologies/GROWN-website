@@ -1,5 +1,25 @@
 import { checkoutApiBase } from "./checkoutApi";
 
+/**
+ * Resolves API base for the temporary `/stripe-debug` page: env first, then
+ * optional `?checkoutApi=https://…` (no trailing slash) for ad-hoc tests
+ * without rebuilding.
+ */
+export function resolveStripeDebugApiBase(): string {
+  const fromEnv = checkoutApiBase();
+  if (fromEnv) return fromEnv;
+  if (typeof window === "undefined") return "";
+  const q = new URLSearchParams(window.location.search)
+    .get("checkoutApi")
+    ?.trim();
+  if (!q) return "";
+  const normalized = q.replace(/\/$/, "");
+  if (!normalized.startsWith("https://")) {
+    return "";
+  }
+  return normalized;
+}
+
 export type StripeProductsDebugSuccess = {
   ok: true;
   mode: "test" | "live";
@@ -14,10 +34,13 @@ export type StripeProductsDebugResponse =
   | StripeProductsDebugSuccess
   | { ok: false; error: string };
 
+const MISSING_BASE_HINT =
+  "No API base URL: set VITE_CHECKOUT_API_URL (local .env or GitHub → Environments → production for Pages builds), or append ?checkoutApi=https://YOUR.execute-api.REGION.amazonaws.com to this page’s URL (HTTPS only, no trailing slash).";
+
 export async function fetchStripeProductsDebug(): Promise<StripeProductsDebugResponse> {
-  const base = checkoutApiBase();
+  const base = resolveStripeDebugApiBase();
   if (!base) {
-    return { ok: false, error: "VITE_CHECKOUT_API_URL is not set." };
+    return { ok: false, error: MISSING_BASE_HINT };
   }
   const res = await fetch(`${base}/debug/stripe-products`, {
     method: "GET",
