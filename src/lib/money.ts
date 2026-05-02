@@ -13,3 +13,19 @@ export function formatUsdFromCents(cents: number): string {
     currency: "USD",
   }).format(cents / 100);
 }
+
+/** Stripe amounts are minor units (e.g. cents); `currency` is ISO 4217 lowercase. */
+export function formatMoneyFromMinorUnits(
+  minorUnits: number,
+  currency: string,
+): string {
+  const code = currency.trim().toUpperCase() || "USD";
+  try {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: code,
+    }).format(minorUnits / 100);
+  } catch {
+    return formatUsdFromCents(minorUnits);
+  }
+}

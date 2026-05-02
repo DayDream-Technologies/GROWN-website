@@ -5,6 +5,8 @@
   "type": "module",
   "homepage": "https://daydream-technologies.github.io/GROWN-website/",
   "scripts": {
+    "sync-stripe-catalog": "node scripts/sync-stripe-catalog-to-src.mjs",
+    "prebuild": "npm run sync-stripe-catalog",
     "dev": "vite",
     "build": "tsc -b && vite build && node scripts/spa-static-paths.mjs",
     "lint": "eslint .",

@@ -40,8 +40,8 @@ export const products: Product[] = [
     size: "5 oz (56 servings; 2.5 g per serving, 2 scoops)",
     shortDescription:
       "Instant mushroom coffee blend for smooth, energizing flavor.",
-    priceOneTime: "$23.99",
-    priceSubscription: "$22.31 / month",
+    priceOneTime: "",
+    priceSubscription: null,
     fulfillment: "Local and shipping available",
     longDescription:
       "Our Elevated Brew Mushroom Coffee provides a rich and smooth flavor by combining high-quality organic instant coffee with a blend of functional mushrooms. Infused with Lion’s Mane and Reishi, this carefully crafted mix delivers focused energy, cognitive support, and immune resilience without the jitters or crashes. Enjoy it in hot coffee, iced coffee, or smoothies, and experience the delicious fusion of taste and health. Each serving is built with freeze-dried microgreens—roughly one-quarter to one-half a tray of fresh greens—for concentrated nutrition in every scoop.",
@@ -72,8 +72,8 @@ export const products: Product[] = [
     size: "8 oz (35 servings; 7 g, 1 scoop)",
     shortDescription:
       "Pure greens powered by freeze-dried microgreens for immune support.",
-    priceOneTime: "$49.99",
-    priceSubscription: "$46.49 / month",
+    priceOneTime: "",
+    priceSubscription: null,
     fulfillment: "Local and shipping available",
     longDescription:
       "Unlock the power of fresh greens with our Immunity Smoothie Booster. Crafted from a premium greens blend—Organic Broccoli, Alfalfa Grass, Kale, Spinach, Spirulina, and Wheatgrass—and enhanced with Organic Inulin, Ashwagandha, Panax Ginseng, and the probiotic Bacillus subtilis, this clean formula delivers concentrated vitamins, antioxidants, and prebiotic fiber without fillers or additives. Use daily in smoothies, bowls, and baking for a nutritional kick that supports your health. Each serving is built with freeze-dried microgreens—roughly one-quarter to one-half a tray of fresh greens—for concentrated nutrition in every scoop.",
@@ -104,8 +104,8 @@ export const products: Product[] = [
     size: "Serving 2 Tbsp; 22.5 servings per container",
     shortDescription:
       "Berry-forward blend powered by microgreens—easy to stir into smoothies, oats, or yogurt.",
-    priceOneTime: "$35.99",
-    priceSubscription: "$33.47 / month",
+    priceOneTime: "",
+    priceSubscription: null,
     fulfillment: "Local and shipping available",
     longDescription:
       "Berry Gut Glow brings together clean berry superfoods and freeze-dried microgreens for a simple daily boost you can blend into smoothies, bowls, or snacks. Each serving is built with freeze-dried microgreens—roughly one-quarter to one-half a tray of fresh greens—for concentrated nutrition in every scoop.",
@@ -136,8 +136,8 @@ export const products: Product[] = [
     size: "8 oz (45 servings; 5 g per serving, 1.5 scoops)",
     shortDescription:
       "Matcha + mushroom complex with microgreens for clean focus and calm energy.",
-    priceOneTime: "$35.99",
-    priceSubscription: "$33.47 / month",
+    priceOneTime: "",
+    priceSubscription: null,
     fulfillment: "Local and shipping available",
     longDescription:
       "Mushroom Matcha blends ceremonial-grade organic matcha with a targeted mushroom complex, providing focused energy and cognitive support without the crash. Combined with freeze-dried microgreens, this blend brings together nature's best to help sustain your daily wellness goals while providing a delicious and refreshing drink.",
@@ -168,7 +168,7 @@ export const products: Product[] = [
     size: "6.2 oz (30 servings; 5.9 g, 1 scoop)",
     shortDescription:
       "Uplifting saffron blend for mood and energy.",
-    priceOneTime: "$39.99",
+    priceOneTime: "",
     priceSubscription: null,
     fulfillment: "Local and shipping available",
     longDescription:
@@ -199,7 +199,7 @@ export const products: Product[] = [
     size: "4.2 oz (32 servings; 4 g per serving, 2 scoops)",
     shortDescription:
       "Refreshing blend with a boost from spirulina and lemon.",
-    priceOneTime: "$26.99",
+    priceOneTime: "",
     priceSubscription: null,
     fulfillment: "Local and shipping available",
     longDescription:
@@ -229,8 +229,8 @@ export const products: Product[] = [
     size: "4 oz (48 servings; 1/2 tsp per serving)",
     shortDescription:
       "Finishing green salt powered by freeze-dried microgreens and organic herbs.",
-    priceOneTime: "$14.99",
-    priceSubscription: "$13.94 / month",
+    priceOneTime: "",
+    priceSubscription: null,
     fulfillment: "Local and shipping available",
     longDescription:
       "Medi Green Salt is a finishing salt that brings savory, herbaceous flavor and concentrated microgreen nutrition to everyday dishes. Freeze-dried pea microgreens and organic spinach powder lend vitamins and phytonutrients to a balanced blend of oregano, basil, garlic, and pepper. Use it as a table seasoning or finishing sprinkle to boost flavor and micronutrients with a single pinch. Each jar contains one-quarter to one-half a tray of fresh microgreens, boosting nutrition in every sprinkle.",
@@ -268,8 +268,8 @@ export const products: Product[] = [
     size: "4 oz (48 servings; 1/2 tsp per serving)",
     shortDescription:
       "Creamy, herby vegan ranch seasoning with a microgreen nutrient boost.",
-    priceOneTime: "$10.99",
-    priceSubscription: "$10.22 / month",
+    priceOneTime: "",
+    priceSubscription: null,
     fulfillment: "Local and shipping available",
     longDescription:
       "Our Plant-Based Ranch Seasoning recreates the classic creamy ranch flavor in a dry, vegan-friendly seasoning. Organic herbs, garlic, and onion, along with nutritional yeast, provide savory depth while freeze-dried pea microgreens contribute extra micronutrients. Use it to make quick dips, dressings, or to season roasted vegetables for a familiar, health-forward flavor. Each jar contains one-quarter to one-half a tray of fresh microgreens, boosting nutrition in every sprinkle.",
@@ -307,8 +307,8 @@ export const products: Product[] = [
     size: "4 oz (48 servings; 1/2 tsp per serving)",
     shortDescription:
       "Bright, cilantro-lime salsa verde seasoning with a microgreen lift.",
-    priceOneTime: "$10.99",
-    priceSubscription: "$10.22 / month",
+    priceOneTime: "",
+    priceSubscription: null,
     fulfillment: "Local and shipping available",
     longDescription:
       "This Plant-Based Salsa Verde Seasoning captures the bright citrus herb profile of salsa verde in a dry, concentrated form. Organic cilantro, lime zest, cumin, and oregano combine with freeze-dried microgreens to add freshness and nutrition to salsas, marinades, and dressings — no preservatives, just clean organic herbs. Each jar contains one-quarter to one-half a tray of fresh microgreens, boosting nutrition in every sprinkle.",
@@ -346,8 +346,8 @@ export const products: Product[] = [
     size: "4 oz (48 servings; 1/2 tsp per serving)",
     shortDescription:
       "Shelf-stable pesto seasoning: basil, nutritional yeast, and ground seeds for quick pesto flavor.",
-    priceOneTime: "$10.99",
-    priceSubscription: "$10.22 / month",
+    priceOneTime: "",
+    priceSubscription: null,
     fulfillment: "Local and shipping available",
     longDescription:
       "Plant-Based Pesto Seasoning brings the bright basil-forward taste of pesto to a convenient, shelf-stable format. Nutritional yeast and ground seeds create a creamy umami backbone while freeze-dried microgreens add extra vitamins. Use as an instant sauce base, spread, or finishing seasoning for broad culinary uses. Each jar contains one-quarter to one-half a tray of fresh microgreens, boosting nutrition in every sprinkle.",

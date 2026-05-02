@@ -64,6 +64,12 @@ Resources:
             ApiId: !Ref StripeHttpApi
             Path: /checkout/session
             Method: POST
+        CatalogOneTimePricesApi:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref StripeHttpApi
+            Path: /catalog/one-time-prices
+            Method: GET
 
   StripeProductsDebugFunction:
     Type: AWS::Serverless::Function
@@ -107,5 +113,5 @@ Resources:
 
 Outputs:
   HttpApiUrl:
-    Description: Base URL for API (append /checkout/session, /webhooks/stripe, /debug/stripe-products)
+    Description: Base URL for API (/checkout/session, GET /catalog/one-time-prices, /webhooks/stripe, /debug/stripe-products)
     Value: !Sub https://${StripeHttpApi}.execute-api.${AWS::Region}.amazonaws.com

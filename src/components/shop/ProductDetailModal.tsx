@@ -1,16 +1,16 @@
 import { useEffect, useId, useRef } from "react";
 import type { Product } from "../../data/products";
 import { useCart } from "../../context/useCart";
+import { useStripePricesFetchState } from "../../context/useStripePricesFetchState";
 import { Button } from "../Button";
 import { PlaceholderImage } from "../PlaceholderImage";
 import { FreshProductInquiryForm } from "./FreshProductInquiryForm";
 import { siteImage } from "../../lib/images";
 import { getProductListImage } from "../../lib/productImages";
 import {
-  canPurchaseSubscription,
-  getOneTimeUnitCents,
-  getSubscriptionUnitCents,
-} from "../../lib/productPricing";
+  getOneTimePresentation,
+  getSubscriptionPresentation,
+} from "../../lib/stripePricePresentation";
 import "./ProductDetailModal.css";
 
 type Props = {
@@ -20,6 +20,7 @@ type Props = {
 
 export function ProductDetailModal({ product, onClose }: Props) {
   const { addLine } = useCart();
+  const stripePricesState = useStripePricesFetchState();
   const dialogRef = useRef<HTMLDialogElement>(null);
   const titleId = useId();
   const closeBtnRef = useRef<HTMLButtonElement>(null);
@@ -79,16 +80,19 @@ export function ProductDetailModal({ product, onClose }: Props) {
 
   const heroPath = product ? getProductListImage(product) : null;
   const heroUrl = heroPath ? siteImage(heroPath) : null;
-  const unitCents = product ? getOneTimeUnitCents(product) : null;
-  const subscriptionCents = product
-    ? getSubscriptionUnitCents(product)
+  const oneTime = product
+    ? getOneTimePresentation(product, stripePricesState)
     : null;
-  const purchasable = unitCents != null && !product?.contactForPricing;
-  const subscribable =
-    product &&
-    purchasable &&
-    canPurchaseSubscription(product) &&
-    subscriptionCents != null;
+  const subscriptionInfo = product
+    ? getSubscriptionPresentation(product)
+    : null;
+  const unitCents = oneTime?.cents ?? null;
+  const subscriptionCents = subscriptionInfo?.cents ?? null;
+  const purchasable =
+    Boolean(oneTime?.purchasableOneTime) && !product?.contactForPricing;
+  const subscribable = Boolean(
+    product && purchasable && subscriptionInfo?.subscribable,
+  );
 
   return (
     <dialog
@@ -163,12 +167,12 @@ export function ProductDetailModal({ product, onClose }: Props) {
                 <dl className="product-modal__prices">
                   <div>
                     <dt>One-time</dt>
-                    <dd>{product.priceOneTime}</dd>
+                    <dd>{oneTime?.label ?? "—"}</dd>
                   </div>
-                  {product.priceSubscription ? (
+                  {subscriptionInfo?.label && subscriptionInfo.subscribable ? (
                     <div>
                       <dt>Subscribe & save</dt>
-                      <dd>{product.priceSubscription}</dd>
+                      <dd>{subscriptionInfo.label}</dd>
                     </div>
                   ) : null}
                 </dl>
@@ -179,6 +183,7 @@ export function ProductDetailModal({ product, onClose }: Props) {
                       variant="primary"
                       className="product-modal__add"
                       onClick={() => {
+                        if (unitCents == null) return;
                         addLine({
                           productId: product.id,
                           purchaseKind: "one_time",
@@ -195,6 +200,7 @@ export function ProductDetailModal({ product, onClose }: Props) {
                         variant="ghost"
                         className="product-modal__add product-modal__add--subscribe"
                         onClick={() => {
+                          if (subscriptionCents == null) return;
                           addLine({
                             productId: product.id,
                             purchaseKind: "subscription",

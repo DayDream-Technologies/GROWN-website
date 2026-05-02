@@ -10,6 +10,9 @@ import {
   type ShopCategoryId,
 } from "../lib/shopCategory";
 import { products, getFulfillmentBadge } from "../data/products";
+import { useStripePricesFetchState } from "../context/useStripePricesFetchState";
+import { canPurchaseSubscription } from "../lib/productPricing";
+import { getOneTimePresentation } from "../lib/stripePricePresentation";
 import { useProductModal } from "../context/useProductModal";
 import { getProductListImage } from "../lib/productImages";
 import "./ShopPage.css";
@@ -154,6 +157,7 @@ const MICRO_GALLERY = [
 ] as const;
 
 export function ShopPage() {
+  const stripePricesState = useStripePricesFetchState();
   const { openProductById } = useProductModal();
   const [searchParams, setSearchParams] = useSearchParams();
   const [search, setSearch] = useState("");
@@ -313,8 +317,10 @@ export function ShopPage() {
               name={item.name}
               subtitle={item.subtitle}
               shortDescription={item.shortDescription}
-              priceOneTime={item.priceOneTime}
-              priceSubscription={item.priceSubscription}
+              priceOneTime={getOneTimePresentation(item, stripePricesState).label}
+              priceSubscription={
+                canPurchaseSubscription(item) ? item.priceSubscription : null
+              }
               fulfillmentBadge={getFulfillmentBadge(item)}
               imageSrc={siteImage(getProductListImage(item))}
               imageAlignTop={
