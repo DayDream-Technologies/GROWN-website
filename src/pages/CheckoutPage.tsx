@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
-import { initEmbeddedCheckoutFromSession } from "../lib/stripeEmbeddedCheckout";
+import { createEmbeddedCheckoutPageFromSession } from "../lib/stripeEmbeddedCheckout";
 import { Section } from "../components/sections/Section";
 import { LinkButton } from "../components/LinkButton";
 import { useCart } from "../context/useCart";
@@ -55,7 +55,7 @@ export function CheckoutPage() {
         const stripe = await loadStripe(pk);
         if (!stripe) throw new Error("Unable to load Stripe.");
 
-        const checkout = await initEmbeddedCheckoutFromSession(
+        const checkout = await createEmbeddedCheckoutPageFromSession(
           stripe,
           session.clientSecret,
         );
