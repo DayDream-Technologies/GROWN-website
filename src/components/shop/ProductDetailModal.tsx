@@ -138,7 +138,9 @@ export function ProductDetailModal({ product, onClose }: Props) {
                 <PlaceholderImage label="No product photo" tone="warm" />
               )}
             </div>
-            <p className="product-modal__meta">{product.size}</p>
+            {product.category !== "seasoning" ? (
+              <p className="product-modal__meta">{product.size}</p>
+            ) : null}
             <p className="product-modal__lede">{product.shortDescription}</p>
             <div className="product-modal__prose">
               <p>{product.longDescription}</p>

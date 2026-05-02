@@ -110,7 +110,7 @@ export const products: Product[] = [
     longDescription:
       "Berry Gut Glow brings together clean berry superfoods and freeze-dried microgreens for a simple daily boost you can blend into smoothies, bowls, or snacks. Each serving is built with freeze-dried microgreens—roughly one-quarter to one-half a tray of fresh greens—for concentrated nutrition in every scoop.",
     ingredients:
-      "Organic blueberry powder, organic chia seeds, organic flax berry powder, organic Acai Powder, Organic Camu Camu Powder, Sea Salt.",
+      "Organic blueberry powder, organic chia seeds, organic flax berry powder, organic Acai Powder, Organic Camu Camu Powder, Sea Salt, Hydroponic Microgreens Blend.",
     recipes: [
       {
         title: "Berry Gut Smoothie",
@@ -174,7 +174,7 @@ export const products: Product[] = [
     longDescription:
       "Experience the uplifting properties of saffron with our Saffron Drink blend, designed to support mood, energy levels, and emotional balance. Combining the calming effects of chamomile and lavender with the mood-enhancing benefits of saffron, this drink also includes key nutrients like vitamin D and magnesium. Enjoy a soothing, flavorful drink that fits seamlessly into your daily routine, promoting a balanced, vibrant lifestyle.",
     ingredients:
-      "Active ingredients: Vitamin D (as Vitamin D3, Cholecalciferol) 125 mcg (5000 IU), 625% DV; Calcium (as Calcium Citrate) 20 mg, <2% DV; Magnesium (as Magnesium Citrate) 50 mg, 12% DV; Sodium (as Himalayan Pink Salt) 25 mg, 1% DV; Potassium (as Potassium Citrate) 20 mg, <2% DV; FiberSMART® Soluble Tapioca Fiber 4,440 mg; Passion Flower (Passiflora incarnata) (flower) Extract 250 mg; Lavender (Lavandula angustifolia) (aerial parts) 50 mg; Chamomile (Matricaria chamomilla L.) (flower) Extract 50 mg; Saffron (Crocus sativus) (stigma) Extract 45 mg; L-Theanine 20 mg. Additional ingredients: Natural Fruit Flavors, Citric Acid, Stevia Leaf Extract.",
+      "Organic Lavender, Passion Flower, Chamomile, Saffron, L-Theanine, Citric Acid, Stevia Leaf Extract.",
     recipes: [
       {
         title: "Evening Calm Latte",
@@ -204,7 +204,7 @@ export const products: Product[] = [
     fulfillment: "Local and shipping available",
     longDescription:
       "Our Lemon + Spirulina blend combines the refreshing zest of lemon with the nutrient power of spirulina, designed to hydrate and nourish. Perfect for busy individuals looking to enhance their nutrition on the go, simply mix it into water or your favorite drinks for an easy boost anytime.",
-    ingredients: "Organic Spirulina Powder, Lemon Juice Powder.",
+    ingredients: "Organic Spirulina Powder, Organic Lemon Powder.",
     recipes: [
       {
         title: "Lemon Spirulina Water",

@@ -31,6 +31,10 @@
   margin-top: var(--space-4);
 }
 
+.shop-hero--microgreens {
+  padding-bottom: var(--space-3);
+}
+
 .shop-hero__inner {
   max-width: 40rem;
   margin: 0 auto;
@@ -191,27 +195,24 @@
   color: var(--color-text-taupe);
 }
 
-.shop-filter-bar__input {
-  flex: 1;
-  min-width: 12rem;
-  text-align: left;
-  border: 1px solid var(--color-card-border);
-  border-radius: var(--radius-sm);
-  padding: var(--space-2) var(--space-3);
-  background: var(--color-card);
-  color: var(--color-heading);
-}
-
 .shop-feature-visual .grown-section__inner {
   max-width: 920px;
 }
 
 .shop-feature-visual--tight {
-  padding-top: var(--space-4);
   padding-bottom: var(--space-6);
 }
 
 .shop-feature-visual--tight .grown-section__inner {
+  padding-top: 0;
+}
+
+/* Fresh Produce + Microgreens: less space between “Contact for pricing” and hero image */
+.shop-feature-visual--snug-under-hero {
+  padding-top: var(--space-5);
+}
+
+.shop-feature-visual--snug-under-hero .grown-section__inner {
   padding-top: 0;
 }
 
@@ -230,59 +231,6 @@
   vertical-align: middle;
   aspect-ratio: 16 / 10;
   object-fit: cover;
-}
-
-.shop-filters {
-  padding-top: 0;
-  padding-bottom: var(--space-4);
-}
-
-.shop-filter-bar {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--space-2);
-  padding: var(--space-3);
-  border-radius: var(--radius-md);
-  border: 1px solid var(--color-card-border);
-  background: var(--color-card);
-}
-
-.shop-filter-bar__item {
-  font-family: var(--font-body);
-  font-size: var(--text-small);
-  font-weight: 500;
-  padding: var(--space-2) var(--space-4);
-  border-radius: var(--radius-sm);
-  border: none;
-  background: transparent;
-  color: var(--color-text-taupe);
-  cursor: pointer;
-}
-
-.shop-filter-bar__item:focus-visible {
-  outline: 2px solid var(--color-green);
-  outline-offset: 2px;
-}
-
-.shop-filter-bar__item--active {
-  background: var(--color-price-pill);
-  color: var(--color-heading);
-  font-weight: 600;
-}
-
-@media (max-width: 700px) {
-  .shop-filter-bar {
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    padding: var(--space-2);
-  }
-
-  .shop-filter-bar__item {
-    white-space: nowrap;
-  }
 }
 
 .shop-grid-section {
@@ -440,4 +388,88 @@
   margin: 0;
   font-family: var(--font-body);
   color: var(--color-text-taupe);
+}
+
+/* Pantry Seasonings: ways to use + potato hero */
+.shop-seasoning-uses {
+  padding-top: var(--space-10);
+  padding-bottom: var(--space-10);
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.shop-seasoning-uses .grown-section__inner {
+  max-width: 960px;
+}
+
+.shop-seasoning-uses__title {
+  font-family: var(--font-display);
+  font-size: var(--text-display-lg);
+  font-weight: 600;
+  color: var(--color-heading);
+  text-align: center;
+  margin: 0 0 var(--space-8);
+}
+
+.shop-seasoning-uses__layout {
+  display: grid;
+  gap: var(--space-8);
+  align-items: start;
+}
+
+@media (min-width: 768px) {
+  .shop-seasoning-uses__layout {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    gap: var(--space-10);
+    align-items: center;
+  }
+}
+
+.shop-seasoning-uses__media {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid rgba(92, 42, 50, 0.12);
+  box-shadow: var(--shadow-soft);
+  background: var(--color-field-fill);
+}
+
+.shop-seasoning-uses__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.shop-seasoning-uses__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: var(--leading-body);
+  color: var(--color-text-taupe);
+}
+
+.shop-seasoning-uses__item {
+  margin: 0 0 var(--space-5);
+}
+
+.shop-seasoning-uses__item:last-child {
+  margin-bottom: 0;
+}
+
+.shop-seasoning-uses__item-title {
+  color: var(--color-heading);
+  font-weight: 600;
+}
+
+@media (max-width: 560px) {
+  .shop-seasoning-uses__title {
+    font-size: 1.5rem;
+    margin-bottom: var(--space-6);
+  }
+
+  .shop-seasoning-uses__list {
+    font-size: 1rem;
+  }
 }

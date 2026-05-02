@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { LinkButton } from "../components/LinkButton";
 import { Section } from "../components/sections/Section";
@@ -17,8 +17,6 @@ import { useProductModal } from "../context/useProductModal";
 import { getProductListImage } from "../lib/productImages";
 import "./ShopPage.css";
 
-const SEARCH_ALL_PLACEHOLDER = "Search all products";
-
 const LEGACY_FILTER_TO_CATEGORY: Record<string, ShopCategoryId> = {
   "fresh-produce": "fresh-produce",
   microgreens: "microgreens",
@@ -33,14 +31,11 @@ const CATEGORY_COPY: Record<
     intro: string;
     image: string;
     imageAlt: string;
-    searchPlaceholder: string;
     showContactPricing: boolean;
     showVarietyRow: boolean;
     varietyLine?: string;
     showProduceGallery: boolean;
     showMicroGallery: boolean;
-    /** When false, catalog search bar is hidden for this category. */
-    showCatalogSearch: boolean;
     showConnect: boolean;
     /** Title + optional image only (no body copy / CTA button). */
     connectLayout?: "default" | "pink-visual";
@@ -56,12 +51,10 @@ const CATEGORY_COPY: Record<
       "We supply restaurants and wholesale buyers with fresh herbs, leafy greens, and mushrooms grown for year\u2011round consistency. Everything is harvested at peak freshness, with additional items sourced from trusted partners who meet our standards.",
     image: "catalog/products/fresh-butter-lettuce.jpg",
     imageAlt: "Fresh butter lettuce from the farm",
-    searchPlaceholder: "Search lettuce, herbs, and more",
     showContactPricing: true,
     showVarietyRow: false,
     showProduceGallery: false,
     showMicroGallery: false,
-    showCatalogSearch: false,
     showConnect: true,
     connectLayout: "pink-visual",
     connectImage: "shop/fresh-produce-connect-salad.png",
@@ -75,14 +68,12 @@ const CATEGORY_COPY: Record<
       "Full trays and harvested microgreens for restaurants and home kitchens — picked for flavor, color, and nutrition.",
     image: "shop/category-microgreens.jpg",
     imageAlt: "Tray of fresh microgreens",
-    searchPlaceholder: "Search microgreens",
     showContactPricing: true,
     showVarietyRow: true,
     varietyLine:
       "Broccoli • Radish • Sunflower • Pea shoots • Basil • Cabbage • Custom",
     showProduceGallery: false,
     showMicroGallery: true,
-    showCatalogSearch: true,
     showConnect: false,
     showStrip: false,
     showSubscribe: false,
@@ -90,15 +81,13 @@ const CATEGORY_COPY: Record<
   "pantry-blends": {
     title: "Pantry Blends",
     intro:
-      "Smoothie boosters, mushroom coffee, matcha, and drink refreshers powered by spirulina, saffron, mushrooms, microgreens, and other super-ingredients — crafted for everyday rituals.",
+      "Smoothie boosters, mushroom coffee, matcha, and drink refreshers powered by spirulina, saffron, mushrooms, microgreens, and other super-ingredients crafted for everyday rituals.",
     image: "shop/category-pantry-blends.jpg",
     imageAlt: "Pantry blend jars on a counter",
-    searchPlaceholder: "Search blends, matcha, coffee…",
     showContactPricing: false,
     showVarietyRow: false,
     showProduceGallery: false,
     showMicroGallery: false,
-    showCatalogSearch: true,
     showConnect: false,
     showStrip: true,
     showSubscribe: true,
@@ -109,12 +98,10 @@ const CATEGORY_COPY: Record<
       "Creative, flavorful blends with about a quarter tray of microgreens in every jar — made for finishing dishes at home or on the line.",
     image: "shop/category-seasoning.jpg",
     imageAlt: "Jars of microgreen seasonings",
-    searchPlaceholder: "Search seasonings",
     showContactPricing: false,
     showVarietyRow: false,
     showProduceGallery: false,
     showMicroGallery: false,
-    showCatalogSearch: true,
     showConnect: false,
     showStrip: true,
     showSubscribe: true,
@@ -169,11 +156,39 @@ const MICRO_GALLERY = [
   },
 ] as const;
 
+const SEASONING_WAYS_TO_USE = [
+  {
+    title: "Roasted Vegetables",
+    body: "Toss potatoes, carrots, or squash with olive oil and a sprinkle of seasoning for a bright, herb-forward finish.",
+  },
+  {
+    title: "Sautéed Greens",
+    body: "Add to warm kale, spinach, or broccolini for clean flavor and extra nutrients.",
+  },
+  {
+    title: "Grain Bowls",
+    body: "Mix into quinoa, rice, or farro bowls to add depth without heavy sauces.",
+  },
+  {
+    title: "Avocado Toast",
+    body: "Finish with a pinch for color, crunch, and a nutrient-dense boost.",
+  },
+  {
+    title: "Soups & Stews",
+    body: "Stir in just before serving to brighten the flavor of plant-based dishes.",
+  },
+  {
+    title: "Roasted Potatoes",
+    body: "Coat crispy potatoes with your ranch, pesto, or medi-green salt for a gourmet upgrade.",
+  },
+] as const;
+
+const SEASONING_WAYS_IMAGE = "home/hero-01-baked-potato-garden.png";
+
 export function ShopPage() {
   const stripePricesState = useStripePricesFetchState();
   const { openProductById } = useProductModal();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [search, setSearch] = useState("");
   const categoryParam = searchParams.get("category");
   const filterParam = searchParams.get("filter");
 
@@ -200,20 +215,6 @@ export function ShopPage() {
     return products.filter((p) => productMatchesShopCategory(p, activeCategory));
   }, [activeCategory]);
 
-  const visible = useMemo(() => {
-    const q = search.trim().toLowerCase();
-    if (!q) return inSection;
-    return inSection.filter(
-      (item) =>
-        item.name.toLowerCase().includes(q) ||
-        item.shortDescription.toLowerCase().includes(q) ||
-        item.longDescription.toLowerCase().includes(q),
-    );
-  }, [inSection, search]);
-
-  const searchPlaceholder =
-    copy?.searchPlaceholder ?? SEARCH_ALL_PLACEHOLDER;
-
   const defaultTitle = "Shop GROWN";
   const defaultLede =
     "Browse everything we offer — or jump to Fresh Produce, Microgreens, Pantry Seasonings, or Pantry Blends from the menu above.";
@@ -221,12 +222,14 @@ export function ShopPage() {
   const defaultImageAlt = "GROWN farm products";
 
   const freshProduceLayout = activeCategory === "fresh-produce";
+  const microgreensLayout = activeCategory === "microgreens";
+  const seasoningLayout = activeCategory === "seasoning";
 
   return (
     <>
       <Section
         bg="white"
-        className={`shop-hero${freshProduceLayout ? " shop-hero--fresh-produce" : ""}`}
+        className={`shop-hero${freshProduceLayout ? " shop-hero--fresh-produce" : ""}${microgreensLayout ? " shop-hero--microgreens" : ""}`}
       >
         <div className="shop-hero__inner">
           <h1 className="shop-title">{copy?.title ?? defaultTitle}</h1>
@@ -247,7 +250,7 @@ export function ShopPage() {
 
       <Section
         bg="white"
-        className={`shop-feature-visual${freshProduceLayout ? " shop-feature-visual--tight" : ""}`}
+        className={`shop-feature-visual${freshProduceLayout ? " shop-feature-visual--tight" : ""}${freshProduceLayout || microgreensLayout ? " shop-feature-visual--snug-under-hero" : ""}`}
       >
         <div className="shop-feature-visual__frame">
           <img
@@ -312,29 +315,12 @@ export function ShopPage() {
         </Section>
       ) : null}
 
-      {copy?.showCatalogSearch !== false ? (
-        <Section bg="white" className="shop-filters">
-          <div className="shop-filter-bar" aria-label="Catalog search">
-            <input
-              type="search"
-              className="shop-filter-bar__item shop-filter-bar__input"
-              placeholder={searchPlaceholder}
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          </div>
-        </Section>
-      ) : null}
-
       <Section bg="white" className="shop-grid-section">
         <div className="shop-product-grid">
-          {inSection.length > 0 && visible.length === 0 && search.trim() ? (
-            <p className="shop-connect__text">No products in this section match your search.</p>
-          ) : null}
           {activeCategory && inSection.length === 0 ? (
             <p className="shop-connect__text">No products are listed in this section yet.</p>
           ) : null}
-          {visible.map((item) => (
+          {inSection.map((item) => (
             <ProductCard
               key={item.id}
               name={item.name}
@@ -389,18 +375,61 @@ export function ShopPage() {
         <Section bg="blush" className="shop-strip">
           <h2 className="shop-strip__title">Grown locally. Delivered fresh.</h2>
           <p className="shop-strip__text">
-            Hydroponic greens picked at peak nutrition—consistent quality from seed to shelf.
-            Pricing and subscriptions for fresh produce and microgreen trays are handled personally:
-            open any fresh item for the inquiry form, or{" "}
-            <Link className="shop-strip__link" to="/contact">
-              contact us
-            </Link>{" "}
-            directly.
+            Hydroponic greens picked at peak nutrition—consistent quality from seed to shelf.{" "}
+            {freshProduceLayout ? (
+              <>
+                Pricing for wholesale and restaurant orders is handled personally: open any fresh
+                item for the inquiry form, or{" "}
+                <Link className="shop-strip__link" to="/contact">
+                  contact us
+                </Link>{" "}
+                directly.
+              </>
+            ) : (
+              <>
+                Pricing and subscriptions for fresh produce and microgreen trays are handled
+                personally: open any fresh item for the inquiry form, or{" "}
+                <Link className="shop-strip__link" to="/contact">
+                  contact us
+                </Link>{" "}
+                directly.
+              </>
+            )}
           </p>
         </Section>
       ) : null}
 
-      {copy?.showSubscribe ? (
+      {seasoningLayout ? (
+        <Section bg="white" className="shop-seasoning-uses">
+          <h2 className="shop-seasoning-uses__title">Ways to Use Microgreen Seasonings</h2>
+          <div className="shop-seasoning-uses__layout">
+            <div className="shop-seasoning-uses__media">
+              <img
+                className="shop-seasoning-uses__img"
+                src={siteImage(SEASONING_WAYS_IMAGE)}
+                alt="Seasoned roasted potato dish with garden greens"
+                loading="lazy"
+                decoding="async"
+                width={1600}
+                height={1200}
+              />
+            </div>
+            <ul className="shop-seasoning-uses__list">
+              {SEASONING_WAYS_TO_USE.map((row) => (
+                <li key={row.title} className="shop-seasoning-uses__item">
+                  <strong className="shop-seasoning-uses__item-title">{row.title}</strong>
+                  <span className="shop-seasoning-uses__item-dash"> — </span>
+                  <span>{row.body}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Section>
+      ) : null}
+
+      {copy?.showSubscribe &&
+      activeCategory !== "fresh-produce" &&
+      activeCategory !== "microgreens" ? (
         <Section bg="warm" className="shop-subscribe">
           <h2 className="shop-subscribe__title">Subscribe & save</h2>
           <p className="shop-subscribe__text">
