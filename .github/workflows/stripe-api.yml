@@ -50,6 +50,9 @@ jobs:
           cd ../webhook && npm ci
           cd ../stripe-products-debug && npm ci
 
+      - name: Sync stripe-catalog into debug Lambda
+        run: cd infra/stripe-products-debug && npm run sync-catalog
+
       - uses: aws-actions/setup-sam@v2
 
       # configure-aws-credentials needs EITHER access keys OR role-to-assume (OIDC).

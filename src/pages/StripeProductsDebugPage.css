@@ -140,3 +140,83 @@
 .stripe-debug__small {
   font-size: 0.8125rem;
 }
+
+.stripe-debug__catalog-banner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 0 0 var(--space-6);
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-card-border);
+  font-size: var(--text-small);
+  line-height: var(--leading-body);
+}
+
+.stripe-debug__catalog-banner strong {
+  font-size: var(--text-body);
+  color: var(--color-heading);
+}
+
+.stripe-debug__catalog-banner--pass {
+  background: rgba(45, 90, 60, 0.08);
+  border-color: rgba(45, 90, 60, 0.25);
+}
+
+.stripe-debug__catalog-banner--fail {
+  background: rgba(92, 42, 50, 0.08);
+  border-color: rgba(92, 42, 50, 0.3);
+}
+
+.stripe-debug__catalog-note {
+  margin: 0 0 var(--space-4);
+  font-size: var(--text-small);
+  line-height: var(--leading-body);
+  color: var(--color-text-secondary);
+  max-width: 48rem;
+}
+
+.stripe-debug__catalog-note--warn {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: rgba(120, 90, 40, 0.1);
+  border: 1px solid rgba(120, 90, 40, 0.25);
+}
+
+.stripe-debug__table--catalog td:last-child {
+  min-width: 6rem;
+}
+
+.stripe-debug__badge-cell {
+  display: inline-block;
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.2em 0.5em;
+  border-radius: var(--radius-sm);
+}
+
+.stripe-debug__badge-cell--pass {
+  color: #1f4d2f;
+  background: rgba(45, 90, 60, 0.15);
+}
+
+.stripe-debug__badge-cell--fail {
+  color: var(--color-maroon);
+  background: rgba(92, 42, 50, 0.12);
+}
+
+.stripe-debug__issues {
+  margin: var(--space-2) 0 0;
+  padding-left: 1.1rem;
+  font-size: 0.8125rem;
+  color: var(--color-maroon);
+  line-height: 1.45;
+}
+
+.stripe-debug__footnote {
+  margin: var(--space-2) 0 0;
+  font-size: 0.75rem;
+  color: var(--color-text-taupe);
+}

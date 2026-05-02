@@ -1,0 +1,50 @@
+{
+  "elevated-brew-mushroom": {
+    "stripe_product_id": "prod_UQoMMyLLINPWAQ",
+    "one_time": "",
+    "subscription": ""
+  },
+  "green-leaf": {
+    "stripe_product_id": "prod_UQoOYqzDsWNhxH",
+    "one_time": "",
+    "subscription": ""
+  },
+  "berry-gut-glow": {
+    "stripe_product_id": "prod_UQoQ9A3W3vqELF",
+    "one_time": "",
+    "subscription": ""
+  },
+  "matcha-revival": {
+    "stripe_product_id": "prod_UQoTEtFVhSP47E",
+    "one_time": "",
+    "subscription": ""
+  },
+  "golden-calm": {
+    "stripe_product_id": "prod_UQoFhqf0SXpF7A",
+    "one_time": ""
+  },
+  "lemon-zest": {
+    "stripe_product_id": "prod_UQoYENgr6EYszJ",
+    "one_time": ""
+  },
+  "medi-green-salt": {
+    "stripe_product_id": "prod_UQobdcuxmIgduz",
+    "one_time": "",
+    "subscription": ""
+  },
+  "garden-luxe-ranch": {
+    "stripe_product_id": "prod_UQojG5MOfqKt7g",
+    "one_time": "",
+    "subscription": ""
+  },
+  "salsa-verde-zest": {
+    "stripe_product_id": "prod_UQolEm8i3J2pqh",
+    "one_time": "",
+    "subscription": ""
+  },
+  "harvest-pesto-blend": {
+    "stripe_product_id": "prod_UQoi3Vo5aHEs5I",
+    "one_time": "",
+    "subscription": ""
+  }
+}

@@ -1,4 +1,53 @@
+import { readFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import Stripe from "stripe";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+/** @type {Record<string, { stripe_product_id?: string, one_time?: string, subscription?: string }>} */
+const siteCatalog = JSON.parse(
+  readFileSync(join(__dirname, "stripe-catalog.json"), "utf8"),
+);
+
+/**
+ * Same resolution rules as checkout-session Lambda (prod_… → price_…).
+ *
+ * @param {Stripe} stripe
+ * @param {string} stripeProductId
+ * @param {'one_time'|'subscription'} purchaseKind
+ */
+async function resolvePriceIdFromStripeProduct(
+  stripe,
+  stripeProductId,
+  purchaseKind,
+) {
+  const product = await stripe.products.retrieve(stripeProductId);
+  const defaultRef = product.default_price;
+  const defaultPriceId =
+    typeof defaultRef === "string" ? defaultRef : defaultRef?.id;
+
+  const { data: prices } = await stripe.prices.list({
+    product: stripeProductId,
+    active: true,
+    limit: 100,
+  });
+
+  const matches = prices.filter((p) =>
+    purchaseKind === "subscription"
+      ? Boolean(p.recurring)
+      : !p.recurring,
+  );
+
+  if (matches.length === 0) return null;
+
+  const defaultMatch =
+    defaultPriceId && matches.some((p) => p.id === defaultPriceId)
+      ? matches.find((p) => p.id === defaultPriceId)
+      : null;
+
+  return (defaultMatch ?? matches[0]).id;
+}
 
 function headers(origin) {
   return {
@@ -10,7 +59,22 @@ function headers(origin) {
 }
 
 /**
- * Lists active Stripe products and prices (temporary diagnostic endpoint).
+ * @param {Record<string, unknown>} row
+ */
+function expectsOneTime(row) {
+  return Object.prototype.hasOwnProperty.call(row, "one_time");
+}
+
+/**
+ * @param {Record<string, unknown>} row
+ */
+function expectsSubscription(row) {
+  return Object.prototype.hasOwnProperty.call(row, "subscription");
+}
+
+/**
+ * Lists active Stripe products and prices, and verifies `stripe-catalog.json`
+ * against the Stripe API (same checks checkout uses for prod-only IDs).
  * GET /debug/stripe-products
  */
 export async function handler(event) {
@@ -57,6 +121,137 @@ export async function handler(event) {
       }),
     ]);
 
+    const catalogChecks = [];
+
+    for (const internalId of Object.keys(siteCatalog).sort()) {
+      const row = /** @type {Record<string, unknown>} */ (siteCatalog[internalId]);
+      const stripeProductId =
+        typeof row.stripe_product_id === "string"
+          ? row.stripe_product_id.trim()
+          : "";
+      const explicitOt =
+        typeof row.one_time === "string" ? row.one_time.trim() : "";
+      const explicitSub =
+        typeof row.subscription === "string" ? row.subscription.trim() : "";
+
+      /** @type {string[]} */
+      const issues = [];
+
+      if (!stripeProductId) {
+        issues.push("Missing stripe_product_id in stripe-catalog.json");
+        catalogChecks.push({
+          internalId,
+          stripeProductId: "",
+          stripeName: null,
+          stripeActive: null,
+          inActiveProductList: false,
+          expectsOneTime: expectsOneTime(row),
+          expectsSubscription: expectsSubscription(row),
+          explicitOneTimePriceId: explicitOt || null,
+          explicitSubscriptionPriceId: explicitSub || null,
+          resolvedOneTimePriceId: null,
+          resolvedSubscriptionPriceId: null,
+          oneTimeOk: false,
+          subscriptionOk: false,
+          issues,
+        });
+        continue;
+      }
+
+      let stripeName = null;
+      let stripeActive = null;
+      let inActiveProductList = products.data.some((p) => p.id === stripeProductId);
+
+      try {
+        const prod = await stripe.products.retrieve(stripeProductId);
+        stripeName = typeof prod.name === "string" ? prod.name : null;
+        stripeActive = prod.active;
+        if (!prod.active) {
+          issues.push("Stripe product exists but is not active");
+        }
+      } catch {
+        issues.push("stripe.products.retrieve failed (wrong ID or deleted)");
+      }
+
+      let resolvedOneTimePriceId = explicitOt || null;
+      let resolvedSubscriptionPriceId = explicitSub || null;
+
+      if (!explicitOt && stripeProductId) {
+        try {
+          resolvedOneTimePriceId = await resolvePriceIdFromStripeProduct(
+            stripe,
+            stripeProductId,
+            "one_time",
+          );
+        } catch (e) {
+          issues.push(
+            `Resolve one_time price: ${e instanceof Error ? e.message : String(e)}`,
+          );
+          resolvedOneTimePriceId = null;
+        }
+      }
+
+      if (!explicitSub && stripeProductId && expectsSubscription(row)) {
+        try {
+          resolvedSubscriptionPriceId = await resolvePriceIdFromStripeProduct(
+            stripe,
+            stripeProductId,
+            "subscription",
+          );
+        } catch (e) {
+          issues.push(
+            `Resolve subscription price: ${e instanceof Error ? e.message : String(e)}`,
+          );
+          resolvedSubscriptionPriceId = null;
+        }
+      }
+
+      const needOt = expectsOneTime(row);
+      const needSub = expectsSubscription(row);
+
+      const oneTimeOk =
+        !needOt ||
+        Boolean(explicitOt ? explicitOt.startsWith("price_") : resolvedOneTimePriceId);
+
+      const subscriptionOk =
+        !needSub ||
+        Boolean(
+          explicitSub
+            ? explicitSub.startsWith("price_")
+            : resolvedSubscriptionPriceId,
+        );
+
+      if (needOt && !oneTimeOk) {
+        issues.push("No one-time Price resolved (add active one-time Price in Stripe)");
+      }
+      if (needSub && !subscriptionOk) {
+        issues.push(
+          "No recurring Price resolved (add active monthly Price in Stripe)",
+        );
+      }
+
+      catalogChecks.push({
+        internalId,
+        stripeProductId,
+        stripeName,
+        stripeActive,
+        inActiveProductList,
+        expectsOneTime: needOt,
+        expectsSubscription: needSub,
+        explicitOneTimePriceId: explicitOt || null,
+        explicitSubscriptionPriceId: explicitSub || null,
+        resolvedOneTimePriceId,
+        resolvedSubscriptionPriceId,
+        oneTimeOk,
+        subscriptionOk,
+        issues,
+      });
+    }
+
+    const catalogAllOk = catalogChecks.every(
+      (r) => r.oneTimeOk && r.subscriptionOk && r.stripeActive === true,
+    );
+
     return {
       statusCode: 200,
       headers: hdrs,
@@ -68,6 +263,9 @@ export async function handler(event) {
         priceCount: prices.data.length,
         products: products.data,
         prices: prices.data,
+        siteCatalog,
+        catalogChecks,
+        catalogAllOk,
       }),
     };
   } catch (e) {

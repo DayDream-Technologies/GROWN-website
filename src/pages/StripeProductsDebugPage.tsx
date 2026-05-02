@@ -3,6 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import { Section } from "../components/sections/Section";
 import {
   fetchStripeProductsDebug,
+  type StripeCatalogCheckRow,
   type StripeProductsDebugSuccess,
 } from "../lib/stripeDebugApi";
 import "./StripeProductsDebugPage.css";
@@ -51,6 +52,19 @@ function priceRow(p: Record<string, unknown>, key: string) {
   );
 }
 
+function catalogRowStatus(row: StripeCatalogCheckRow): {
+  label: string;
+  variant: "pass" | "fail";
+} {
+  const ok =
+    Boolean(row.stripeProductId) &&
+    row.stripeActive === true &&
+    row.oneTimeOk &&
+    row.subscriptionOk &&
+    row.issues.length === 0;
+  return ok ? { label: "OK", variant: "pass" } : { label: "Fail", variant: "fail" };
+}
+
 export function StripeProductsDebugPage() {
   const [searchParams] = useSearchParams();
   const [state, setState] = useState<
@@ -83,8 +97,11 @@ export function StripeProductsDebugPage() {
           <h1 className="stripe-debug__title">Stripe products (live API)</h1>
           <p className="stripe-debug__lede">
             Active products and prices from your Stripe account via{" "}
-            <code className="stripe-debug__code">GET /debug/stripe-products</code>.
-            Not linked from site navigation.
+            <code className="stripe-debug__code">GET /debug/stripe-products</code>,
+            plus a pass/fail table for each SKU in{" "}
+            <code className="stripe-debug__code">stripe-catalog.json</code> (same
+            Product IDs checkout uses). Redeploy the debug Lambda after catalog
+            changes. Not linked from site navigation.
           </p>
           <Link to="/" className="stripe-debug__back">
             ← Home
@@ -127,6 +144,102 @@ export function StripeProductsDebugPage() {
                 {state.data.fetchedAt}
               </span>
             </p>
+
+            {state.data.catalogChecks && state.data.catalogChecks.length > 0 ? (
+              <>
+                <div
+                  className={`stripe-debug__catalog-banner stripe-debug__catalog-banner--${
+                    state.data.catalogAllOk ? "pass" : "fail"
+                  }`}
+                  role="status"
+                >
+                  <strong>Catalog checkout readiness</strong>
+                  <span>
+                    {state.data.catalogAllOk
+                      ? "All mapped SKUs resolve one-time (and subscription where configured) Prices on active Stripe Products."
+                      : "One or more SKUs failed verification — fix Stripe or stripe-catalog.json before relying on checkout."}
+                  </span>
+                </div>
+
+                <h2 className="stripe-debug__h2">
+                  Site catalog ↔ Stripe (full test)
+                </h2>
+                <p className="stripe-debug__catalog-note">
+                  Rows mirror <code className="stripe-debug__code">stripe-catalog.json</code>{" "}
+                  shipped with the debug Lambda.{" "}
+                  <code className="stripe-debug__code">Resolved</code> prices use the same
+                  rules as <code className="stripe-debug__code">POST /checkout/session</code>{" "}
+                  when only <code className="stripe-debug__code">stripe_product_id</code> is
+                  set.
+                </p>
+                <div className="stripe-debug__table-wrap">
+                  <table className="stripe-debug__table stripe-debug__table--catalog">
+                    <thead>
+                      <tr>
+                        <th>Internal ID</th>
+                        <th>Stripe product</th>
+                        <th>Name (Stripe)</th>
+                        <th>One-time price</th>
+                        <th>Subscription price</th>
+                        <th>In list*</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {state.data.catalogChecks.map((row) => {
+                        const st = catalogRowStatus(row);
+                        const ot =
+                          row.explicitOneTimePriceId ?? row.resolvedOneTimePriceId ?? "—";
+                        const sub = row.expectsSubscription
+                          ? row.explicitSubscriptionPriceId ??
+                            row.resolvedSubscriptionPriceId ??
+                            "—"
+                          : "—";
+                        return (
+                          <tr key={row.internalId}>
+                            <td className="stripe-debug__mono">{row.internalId}</td>
+                            <td className="stripe-debug__mono stripe-debug__small">
+                              {row.stripeProductId || "—"}
+                            </td>
+                            <td>{row.stripeName ?? "—"}</td>
+                            <td className="stripe-debug__mono stripe-debug__small">
+                              {typeof ot === "string" ? ot : "—"}
+                            </td>
+                            <td className="stripe-debug__mono stripe-debug__small">
+                              {typeof sub === "string" ? sub : "—"}
+                            </td>
+                            <td>{row.inActiveProductList ? "yes" : "no"}</td>
+                            <td>
+                              <span
+                                className={`stripe-debug__badge-cell stripe-debug__badge-cell--${st.variant}`}
+                              >
+                                {st.label}
+                              </span>
+                              {row.issues.length > 0 ? (
+                                <ul className="stripe-debug__issues">
+                                  {row.issues.map((msg) => (
+                                    <li key={msg}>{msg}</li>
+                                  ))}
+                                </ul>
+                              ) : null}
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+                <p className="stripe-debug__footnote">
+                  *First 100 active products only; “no” can still be OK if the Product exists.
+                </p>
+              </>
+            ) : (
+              <p className="stripe-debug__catalog-note stripe-debug__catalog-note--warn">
+                This API response has no <code className="stripe-debug__code">catalogChecks</code>
+                — redeploy the Stripe SAM stack so the debug Lambda includes the latest catalog
+                verifier.
+              </p>
+            )}
 
             <h2 className="stripe-debug__h2">Products (active)</h2>
             <div className="stripe-debug__table-wrap">

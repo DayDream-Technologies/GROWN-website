@@ -20,6 +20,23 @@ export function resolveStripeDebugApiBase(): string {
   return normalized;
 }
 
+export type StripeCatalogCheckRow = {
+  internalId: string;
+  stripeProductId: string;
+  stripeName: string | null;
+  stripeActive: boolean | null;
+  inActiveProductList: boolean;
+  expectsOneTime: boolean;
+  expectsSubscription: boolean;
+  explicitOneTimePriceId: string | null;
+  explicitSubscriptionPriceId: string | null;
+  resolvedOneTimePriceId: string | null;
+  resolvedSubscriptionPriceId: string | null;
+  oneTimeOk: boolean;
+  subscriptionOk: boolean;
+  issues: string[];
+};
+
 export type StripeProductsDebugSuccess = {
   ok: true;
   mode: "test" | "live";
@@ -28,6 +45,11 @@ export type StripeProductsDebugSuccess = {
   priceCount: number;
   products: Record<string, unknown>[];
   prices: Record<string, unknown>[];
+  /** Bundled `stripe-catalog.json` from the debug Lambda (must match checkout-session catalog). */
+  siteCatalog?: Record<string, Record<string, unknown>>;
+  /** Per-SKU checks: Product exists, active, and prices resolve like checkout. */
+  catalogChecks?: StripeCatalogCheckRow[];
+  catalogAllOk?: boolean;
 };
 
 export type StripeProductsDebugResponse =

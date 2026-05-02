@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "scripts": {
+    "sync-catalog": "node sync-catalog.mjs"
+  },
   "dependencies": {
     "stripe": "^17.7.0"
   }
