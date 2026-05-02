@@ -145,10 +145,20 @@ export function ContactPage() {
           )}
 
           <aside className="contact-aside">
-            <h2 className="contact-aside__title">Wholesale & restaurants</h2>
+            <h2 className="contact-aside__title">Partner With GROWN</h2>
             <p className="contact-aside__text">
-              Restaurants, cafés, and health-focused teams—tell us what you
-              need and we&apos;ll follow up with options.
+              Whether you&apos;re a restaurant, café, wellness team, or an individual
+              looking for nutrient{'\u2011'}dense produce, we&apos;ll build a custom order that
+              fits your needs.
+            </p>
+            <p className="contact-aside__subhead">We offer:</p>
+            <ul className="contact-aside__list">
+              <li>Bulk fresh produce</li>
+              <li>Custom microgreen trays or harvested microgreens</li>
+            </ul>
+            <p className="contact-aside__text">
+              Tell us what you&apos;re looking for, and we&apos;ll follow up with options,
+              availability, and next steps.
             </p>
             <div className="contact-aside__meta">
               <p>

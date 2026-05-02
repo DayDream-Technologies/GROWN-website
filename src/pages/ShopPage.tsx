@@ -39,7 +39,13 @@ const CATEGORY_COPY: Record<
     varietyLine?: string;
     showProduceGallery: boolean;
     showMicroGallery: boolean;
+    /** When false, catalog search bar is hidden for this category. */
+    showCatalogSearch: boolean;
     showConnect: boolean;
+    /** Title + optional image only (no body copy / CTA button). */
+    connectLayout?: "default" | "pink-visual";
+    connectImage?: string;
+    connectImageAlt?: string;
     showStrip: boolean;
     showSubscribe: boolean;
   }
@@ -47,17 +53,21 @@ const CATEGORY_COPY: Record<
   "fresh-produce": {
     title: "Fresh Produce",
     intro:
-      "We supply restaurants and wholesale buyers with an array of fresh herbs, leafy greens, and aromatics.",
+      "We supply restaurants and wholesale buyers with fresh herbs, leafy greens, and mushrooms grown for year\u2011round consistency. Everything is harvested at peak freshness, with additional items sourced from trusted partners who meet our standards.",
     image: "catalog/products/fresh-butter-lettuce.jpg",
     imageAlt: "Fresh butter lettuce from the farm",
     searchPlaceholder: "Search lettuce, herbs, and more",
     showContactPricing: true,
     showVarietyRow: false,
-    showProduceGallery: true,
+    showProduceGallery: false,
     showMicroGallery: false,
+    showCatalogSearch: false,
     showConnect: true,
+    connectLayout: "pink-visual",
+    connectImage: "shop/fresh-produce-connect-salad.png",
+    connectImageAlt: "Fresh salad and produce from GROWN",
     showStrip: true,
-    showSubscribe: true,
+    showSubscribe: false,
   },
   microgreens: {
     title: "Fresh Microgreens",
@@ -72,6 +82,7 @@ const CATEGORY_COPY: Record<
       "Broccoli • Radish • Sunflower • Pea shoots • Basil • Cabbage • Custom",
     showProduceGallery: false,
     showMicroGallery: true,
+    showCatalogSearch: true,
     showConnect: false,
     showStrip: false,
     showSubscribe: false,
@@ -87,6 +98,7 @@ const CATEGORY_COPY: Record<
     showVarietyRow: false,
     showProduceGallery: false,
     showMicroGallery: false,
+    showCatalogSearch: true,
     showConnect: false,
     showStrip: true,
     showSubscribe: true,
@@ -102,6 +114,7 @@ const CATEGORY_COPY: Record<
     showVarietyRow: false,
     showProduceGallery: false,
     showMicroGallery: false,
+    showCatalogSearch: true,
     showConnect: false,
     showStrip: true,
     showSubscribe: true,
@@ -207,9 +220,14 @@ export function ShopPage() {
   const defaultImage = "shop/default.jpg";
   const defaultImageAlt = "GROWN farm products";
 
+  const freshProduceLayout = activeCategory === "fresh-produce";
+
   return (
     <>
-      <Section bg="white" className="shop-hero">
+      <Section
+        bg="white"
+        className={`shop-hero${freshProduceLayout ? " shop-hero--fresh-produce" : ""}`}
+      >
         <div className="shop-hero__inner">
           <h1 className="shop-title">{copy?.title ?? defaultTitle}</h1>
           <hr className="shop-hero__rule" />
@@ -227,7 +245,10 @@ export function ShopPage() {
         </div>
       </Section>
 
-      <Section bg="white" className="shop-feature-visual">
+      <Section
+        bg="white"
+        className={`shop-feature-visual${freshProduceLayout ? " shop-feature-visual--tight" : ""}`}
+      >
         <div className="shop-feature-visual__frame">
           <img
             className="shop-feature-visual__img"
@@ -291,17 +312,19 @@ export function ShopPage() {
         </Section>
       ) : null}
 
-      <Section bg="white" className="shop-filters">
-        <div className="shop-filter-bar" aria-label="Catalog search">
-          <input
-            type="search"
-            className="shop-filter-bar__item shop-filter-bar__input"
-            placeholder={searchPlaceholder}
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </div>
-      </Section>
+      {copy?.showCatalogSearch !== false ? (
+        <Section bg="white" className="shop-filters">
+          <div className="shop-filter-bar" aria-label="Catalog search">
+            <input
+              type="search"
+              className="shop-filter-bar__item shop-filter-bar__input"
+              placeholder={searchPlaceholder}
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
+        </Section>
+      ) : null}
 
       <Section bg="white" className="shop-grid-section">
         <div className="shop-product-grid">
@@ -332,7 +355,24 @@ export function ShopPage() {
         </div>
       </Section>
 
-      {copy?.showConnect ? (
+      {copy?.showConnect && copy.connectLayout === "pink-visual" && copy.connectImage ? (
+        <Section bg="blush" className="shop-connect shop-connect--pink">
+          <h2 className="shop-connect__title shop-connect__title--solo">
+            Connect with GROWN
+          </h2>
+          <div className="shop-connect__visual-frame">
+            <img
+              className="shop-connect__visual-img"
+              src={siteImage(copy.connectImage)}
+              alt={copy.connectImageAlt ?? "Fresh GROWN produce"}
+              loading="lazy"
+              decoding="async"
+              width={1200}
+              height={800}
+            />
+          </div>
+        </Section>
+      ) : copy?.showConnect ? (
         <Section bg="white" className="shop-connect">
           <h2 className="shop-connect__title">Connect With GROWN</h2>
           <p className="shop-connect__text">

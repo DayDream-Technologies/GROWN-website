@@ -181,7 +181,34 @@
 .contact-aside__text {
   margin: 0 0 var(--space-4);
   font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
   color: var(--color-text-taupe);
+}
+
+.contact-aside__subhead {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  font-weight: 600;
+  color: var(--color-heading);
+}
+
+.contact-aside__list {
+  margin: 0 0 var(--space-4);
+  padding-left: 1.25rem;
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  color: var(--color-text-taupe);
+}
+
+.contact-aside__list li {
+  margin-bottom: var(--space-2);
+}
+
+.contact-aside__list li:last-child {
+  margin-bottom: 0;
 }
 
 .contact-aside__meta {

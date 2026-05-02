@@ -23,6 +23,14 @@
   padding-bottom: var(--space-6);
 }
 
+.shop-hero--fresh-produce {
+  padding-bottom: var(--space-3);
+}
+
+.shop-hero--fresh-produce .shop-hero__cta {
+  margin-top: var(--space-4);
+}
+
 .shop-hero__inner {
   max-width: 40rem;
   margin: 0 auto;
@@ -198,6 +206,15 @@
   max-width: 920px;
 }
 
+.shop-feature-visual--tight {
+  padding-top: var(--space-4);
+  padding-bottom: var(--space-6);
+}
+
+.shop-feature-visual--tight .grown-section__inner {
+  padding-top: 0;
+}
+
 .shop-feature-visual__frame {
   border-radius: var(--radius-lg);
   overflow: hidden;
@@ -272,6 +289,10 @@
   padding-top: var(--space-4);
 }
 
+.shop-feature-visual--tight + .shop-grid-section {
+  padding-top: var(--space-5);
+}
+
 .shop-product-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -331,6 +352,44 @@
 
 .shop-connect__btn {
   min-width: 12rem;
+}
+
+/* Fresh Produce: pink band, heading only + photo */
+.shop-connect--pink {
+  border-top: none;
+  padding-top: var(--space-10);
+  padding-bottom: var(--space-10);
+  background: linear-gradient(
+    180deg,
+    #fce9ef 0%,
+    #f5dbe6 48%,
+    #efd5e0 100%
+  ) !important;
+}
+
+.shop-connect--pink .grown-section__inner {
+  max-width: 920px;
+}
+
+.shop-connect__title--solo {
+  margin-bottom: var(--space-6);
+}
+
+.shop-connect__visual-frame {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid rgba(92, 42, 50, 0.12);
+  box-shadow: var(--shadow-soft);
+  background: var(--color-field-fill);
+}
+
+.shop-connect__visual-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  vertical-align: middle;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
 }
 
 .shop-strip {
