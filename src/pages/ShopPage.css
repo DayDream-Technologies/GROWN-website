@@ -473,3 +473,39 @@
     font-size: 1rem;
   }
 }
+
+/* All shop routes: blush band above site footer */
+.shop-footer-message {
+  text-align: center;
+  border-top: 1px solid rgba(92, 42, 50, 0.08);
+}
+
+.shop-footer-message .grown-section__inner {
+  max-width: 42rem;
+}
+
+.shop-footer-message__title {
+  font-family: var(--font-display);
+  font-size: var(--text-display-lg);
+  font-weight: 600;
+  color: var(--color-heading);
+  margin: 0 0 var(--space-4);
+}
+
+.shop-footer-message__text {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: var(--leading-body);
+  color: var(--color-text-taupe);
+}
+
+@media (max-width: 560px) {
+  .shop-footer-message__title {
+    font-size: 1.5rem;
+  }
+
+  .shop-footer-message__text {
+    font-size: 1rem;
+  }
+}

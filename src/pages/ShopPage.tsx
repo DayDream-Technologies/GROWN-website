@@ -478,6 +478,20 @@ export function ShopPage() {
           </Section>
         </>
       ) : null}
+
+      <Section bg="blush" className="shop-footer-message">
+        <h2 className="shop-footer-message__title">Grown locally. Delivered fresh.</h2>
+        <p className="shop-footer-message__text">
+          Hydroponic greens picked at peak nutrition—consistent quality from seed to shelf. Pricing
+          for fresh produce and microgreen trays is handled personally: open any fresh item for the
+          inquiry form or{" "}
+          <Link className="shop-strip__link" to="/contact">
+            contact us
+          </Link>{" "}
+          directly. Pantry orders of $60 or more qualify for free shipping. Subscribe & Save pantry
+          blend subscriptions launch August 2026—stay tuned.
+        </p>
+      </Section>
     </>
   );
 }
