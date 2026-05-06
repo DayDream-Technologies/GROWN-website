@@ -15,7 +15,7 @@ const LIST_IMAGE_BY_ID: Partial<Record<string, string>> = {
   "green-leaf": "catalog/products/green-leaf.jpg",
   "berry-gut-glow": "catalog/products/berry-gut-glow.jpg",
   "matcha-revival": "catalog/products/matcha-revival.jpg",
-  "golden-calm": "catalog/products/golden-calm.jpg",
+  "golden-calm": "catalog/products/golden_calm_tea.jpg",
   "lemon-zest": "catalog/products/lemon-zest.jpg",
   "medi-green-salt": "catalog/products/medi-green-salt.jpg",
   "garden-luxe-ranch": "catalog/products/garden-luxe-ranch.jpg",

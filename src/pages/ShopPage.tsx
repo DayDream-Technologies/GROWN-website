@@ -41,42 +41,36 @@ const CATEGORY_COPY: Record<
     connectLayout?: "default" | "pink-visual";
     connectImage?: string;
     connectImageAlt?: string;
-    showStrip: boolean;
-    showSubscribe: boolean;
   }
 > = {
   "fresh-produce": {
     title: "Fresh Produce",
     intro:
       "We supply restaurants and wholesale buyers with fresh herbs, leafy greens, and mushrooms grown for year\u2011round consistency. Everything is harvested at peak freshness, with additional items sourced from trusted partners who meet our standards.",
-    image: "catalog/products/fresh-butter-lettuce.jpg",
-    imageAlt: "Fresh butter lettuce from the farm",
-    showContactPricing: true,
+    image: "catalog/produce/lettuce_growing_rows.jpg",
+    imageAlt: "Rows of lettuce growing in the farm",
+    showContactPricing: false,
     showVarietyRow: false,
     showProduceGallery: false,
     showMicroGallery: false,
     showConnect: true,
     connectLayout: "pink-visual",
-    connectImage: "shop/fresh-produce-connect-salad.png",
-    connectImageAlt: "Fresh salad and produce from GROWN",
-    showStrip: true,
-    showSubscribe: false,
+    connectImage: "catalog/produce/Salad.jpg",
+    connectImageAlt: "Fresh salad with seasonal produce",
   },
   microgreens: {
     title: "Fresh Microgreens",
     intro:
-      "Full trays and harvested microgreens for restaurants and home kitchens — picked for flavor, color, and nutrition.",
+      "Full trays and harvested microgreens for restaurants and home kitchens - picked for flavor, color, and nutrition.",
     image: "shop/category-microgreens.jpg",
     imageAlt: "Tray of fresh microgreens",
-    showContactPricing: true,
+    showContactPricing: false,
     showVarietyRow: true,
     varietyLine:
-      "Broccoli • Radish • Sunflower • Pea shoots • Basil • Cabbage • Custom",
+      "Broccoli | Radish | Sunflower | Pea shoots | Basil | Cabbage | Custom",
     showProduceGallery: false,
     showMicroGallery: true,
     showConnect: false,
-    showStrip: false,
-    showSubscribe: false,
   },
   "pantry-blends": {
     title: "Pantry Blends",
@@ -89,13 +83,11 @@ const CATEGORY_COPY: Record<
     showProduceGallery: false,
     showMicroGallery: false,
     showConnect: false,
-    showStrip: true,
-    showSubscribe: true,
   },
   seasoning: {
     title: "Pantry Microgreen Seasonings",
     intro:
-      "Creative, flavorful blends with about a quarter tray of microgreens in every jar — made for finishing dishes at home or on the line.",
+      "Creative, flavorful blends with about a quarter tray of microgreens in every jar - made for finishing dishes at home or on the line.",
     image: "shop/category-seasoning.jpg",
     imageAlt: "Jars of microgreen seasonings",
     showContactPricing: false,
@@ -103,35 +95,33 @@ const CATEGORY_COPY: Record<
     showProduceGallery: false,
     showMicroGallery: false,
     showConnect: false,
-    showStrip: true,
-    showSubscribe: true,
   },
 };
 
 const PRODUCE_GALLERY = [
   {
+    label: "Mushrooms",
+    caption: "A selection of fresh mushroom varieties.",
+    image: "catalog/produce/Mushrooms.jpg",
+    imageAlt: "Fresh mushroom varieties",
+  },
+  {
     label: "Herbs",
-    caption: "Basil, cilantro, parsley, mint, and more.",
-    image: "catalog/produce/herbs.jpg",
-    imageAlt: "Fresh basil",
+    caption: "A variety of fresh culinary herbs.",
+    image: "catalog/produce/herbs_bowl.jpg",
+    imageAlt: "Fresh culinary herbs",
+  },
+  {
+    label: "Kale & Baby Kale",
+    caption: "Kale and tender baby kale options.",
+    image: "catalog/produce/kale.jpg",
+    imageAlt: "Fresh kale and baby kale",
   },
   {
     label: "Lettuce",
-    caption: "Tender heads for plates and sandwiches.",
-    image: "catalog/products/fresh-butter-lettuce.jpg",
-    imageAlt: "Fresh butter lettuce",
-  },
-  {
-    label: "Kale",
-    caption: "Hearty leaves for sautés, juices, and bowls.",
-    image: "catalog/produce/kale.jpg",
-    imageAlt: "Fresh kale",
-  },
-  {
-    label: "Rosemary & aromatics",
-    caption: "Fragrant bunches and classic herbs for wholesale kitchens.",
-    image: "catalog/produce/aromatics.jpg",
-    imageAlt: "Fresh rosemary",
+    caption: "Butter lettuce and other crisp, fresh varieties.",
+    image: "catalog/produce/butter_lettuce.jpg",
+    imageAlt: "Fresh lettuce varieties",
   },
 ] as const;
 
@@ -139,7 +129,7 @@ const MICRO_GALLERY = [
   {
     title: "Full trays",
     body: "Living trays delivered on a rhythm that matches your kitchen.",
-    image: "catalog/microgreens/full-trays.jpg",
+    image: "catalog/microgreens/microgreen-trays-2.png",
     imageAlt: "Microgreen growing tray",
   },
   {
@@ -150,9 +140,39 @@ const MICRO_GALLERY = [
   },
   {
     title: "Restaurant & home",
-    body: "Sized for line service or home cooking — ask about custom mixes.",
+    body: "Sized for line service or home cooking - ask about custom mixes.",
     image: "catalog/microgreens/restaurant-home.jpg",
     imageAlt: "Microgreens in the kitchen",
+  },
+] as const;
+
+const MICROGREENS_USE_CASES = [
+  {
+    title: "Smoothies",
+    body: "Add a handful for a clean, nutrient-dense boost without changing the flavor.",
+  },
+  {
+    title: "Nutrition Boost",
+    body: "Mix into bowls, eggs, or weeknight meals for extra vitamins and antioxidants.",
+  },
+  {
+    title: "Gourmet Finish",
+    body: "Elevate dishes with delicate greens that add freshness, texture, and color.",
+  },
+  {
+    title: "Salad Garnish",
+    body: "Top salads with a bright, crisp layer of microgreens for added depth.",
+  },
+] as const;
+
+const MICROGREENS_USE_IMAGES = [
+  {
+    src: "catalog/microgreens/salad_microgreen.jpg",
+    alt: "Salad topped with fresh microgreens",
+  },
+  {
+    src: "catalog/microgreens/smoothie_microgreen.JPG",
+    alt: "Green smoothie prepared with microgreens",
   },
 ] as const;
 
@@ -162,7 +182,7 @@ const SEASONING_WAYS_TO_USE = [
     body: "Toss potatoes, carrots, or squash with olive oil and a sprinkle of seasoning for a bright, herb-forward finish.",
   },
   {
-    title: "Sautéed Greens",
+    title: "Sauteed Greens",
     body: "Add to warm kale, spinach, or broccolini for clean flavor and extra nutrients.",
   },
   {
@@ -183,7 +203,7 @@ const SEASONING_WAYS_TO_USE = [
   },
 ] as const;
 
-const SEASONING_WAYS_IMAGE = "home/hero-01-baked-potato-garden.png";
+const SEASONING_WAYS_IMAGE = "catalog/products/potato_seasoned.jpg";
 
 export function ShopPage() {
   const stripePricesState = useStripePricesFetchState();
@@ -212,24 +232,31 @@ export function ShopPage() {
 
   const inSection = useMemo(() => {
     if (!activeCategory) return products;
-    return products.filter((p) => productMatchesShopCategory(p, activeCategory));
+    const matchingProducts = products.filter((p) =>
+      productMatchesShopCategory(p, activeCategory),
+    );
+    if (activeCategory === "microgreens") {
+      return matchingProducts.filter((p) => p.id !== "microgreens-full-tray");
+    }
+    return matchingProducts;
   }, [activeCategory]);
 
   const defaultTitle = "Shop GROWN";
   const defaultLede =
-    "Browse everything we offer — or jump to Fresh Produce, Microgreens, Pantry Seasonings, or Pantry Blends from the menu above.";
+    "Browse everything we offer - or jump to Fresh Produce, Microgreens, Pantry Seasonings, or Pantry Blends from the menu above.";
   const defaultImage = "shop/default.jpg";
   const defaultImageAlt = "GROWN farm products";
 
   const freshProduceLayout = activeCategory === "fresh-produce";
   const microgreensLayout = activeCategory === "microgreens";
+  const pantryBlendsLayout = activeCategory === "pantry-blends";
   const seasoningLayout = activeCategory === "seasoning";
 
   return (
     <>
       <Section
         bg="white"
-        className={`shop-hero${freshProduceLayout ? " shop-hero--fresh-produce" : ""}${microgreensLayout ? " shop-hero--microgreens" : ""}`}
+        className={`shop-hero${freshProduceLayout ? " shop-hero--fresh-produce" : ""}${microgreensLayout ? " shop-hero--microgreens" : ""}${pantryBlendsLayout ? " shop-hero--pantry-blends" : ""}${seasoningLayout ? " shop-hero--seasoning" : ""}`}
       >
         <div className="shop-hero__inner">
           <h1 className="shop-title">{copy?.title ?? defaultTitle}</h1>
@@ -250,7 +277,7 @@ export function ShopPage() {
 
       <Section
         bg="white"
-        className={`shop-feature-visual${freshProduceLayout ? " shop-feature-visual--tight" : ""}${freshProduceLayout || microgreensLayout ? " shop-feature-visual--snug-under-hero" : ""}`}
+        className={`shop-feature-visual${freshProduceLayout ? " shop-feature-visual--tight" : ""}${freshProduceLayout || microgreensLayout || pantryBlendsLayout || seasoningLayout ? " shop-feature-visual--snug-under-hero" : ""}`}
       >
         <div className="shop-feature-visual__frame">
           <img
@@ -315,37 +342,107 @@ export function ShopPage() {
         </Section>
       ) : null}
 
+      {microgreensLayout ? (
+        <Section bg="white" className="shop-microgreens-uses">
+          <h2 className="shop-microgreens-uses__title">How to Use Microgreens</h2>
+          <div className="shop-microgreens-uses__layout">
+            <div className="shop-microgreens-uses__media">
+              <img
+                className="shop-microgreens-uses__img"
+                src={siteImage(MICROGREENS_USE_IMAGES[0].src)}
+                alt={MICROGREENS_USE_IMAGES[0].alt}
+                loading="lazy"
+                decoding="async"
+                width={1200}
+                height={900}
+              />
+            </div>
+            <ul className="shop-microgreens-uses__list">
+              {MICROGREENS_USE_CASES.map((useCase) => (
+                <li key={useCase.title} className="shop-microgreens-uses__item">
+                  <strong className="shop-microgreens-uses__item-title">{useCase.title}</strong>
+                  <span className="shop-microgreens-uses__item-dash"> - </span>
+                  <span>{useCase.body}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Section>
+      ) : null}
+
       <Section bg="white" className="shop-grid-section">
-        <div className="shop-product-grid">
-          {activeCategory && inSection.length === 0 ? (
-            <p className="shop-connect__text">No products are listed in this section yet.</p>
-          ) : null}
-          {inSection.map((item) => (
-            <ProductCard
-              key={item.id}
-              name={item.name}
-              subtitle={item.subtitle}
-              shortDescription={item.shortDescription}
-              priceOneTime={getOneTimePresentation(item, stripePricesState).label}
-              priceSubscription={
-                canPurchaseSubscription(item) ? item.priceSubscription : null
-              }
-              fulfillmentBadge={getFulfillmentBadge(item)}
-              imageSrc={siteImage(getProductListImage(item))}
-              imageAlignTop={
-                item.category === "seasoning" || item.id === "microgreens-full-tray"
-              }
-              onOpenDetails={() => openProductById(item.id)}
-            />
-          ))}
-        </div>
+        {freshProduceLayout || pantryBlendsLayout || seasoningLayout ? (
+          <>
+            <h2 className="shop-grid-heading">
+              {pantryBlendsLayout
+                ? "Shop Pantry Blends"
+                : seasoningLayout
+                  ? "Pantry Microgreen Seasonings"
+                  : "Shop Fresh Produce"}
+            </h2>
+            <hr className="shop-grid-heading__rule" />
+          </>
+        ) : null}
+        {freshProduceLayout ? (
+          <div className="shop-produce-category-grid">
+            {PRODUCE_GALLERY.map((row) => (
+              <article key={row.label} className="shop-produce-category-card">
+                <div className="shop-produce-category-card__media">
+                  <img
+                    src={siteImage(row.image)}
+                    alt={row.imageAlt}
+                    loading="lazy"
+                    decoding="async"
+                    width={800}
+                    height={520}
+                  />
+                </div>
+                <div className="shop-produce-category-card__body">
+                  <h3 className="shop-produce-category-card__title">{row.label}</h3>
+                  <p className="shop-produce-category-card__caption">{row.caption}</p>
+                  <LinkButton
+                    to="/contact"
+                    variant="primary"
+                    className="grown-btn--sharp shop-produce-category-card__btn"
+                  >
+                    Contact for Pricing
+                  </LinkButton>
+                </div>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <div
+            className={`shop-product-grid${seasoningLayout ? " shop-product-grid--seasoning" : ""}`}
+          >
+            {inSection.map((item) => (
+              <ProductCard
+                key={item.id}
+                name={item.name}
+                subtitle={item.subtitle}
+                shortDescription={item.shortDescription}
+                priceOneTime={getOneTimePresentation(item, stripePricesState).label}
+                priceSubscription={
+                  canPurchaseSubscription(item) ? item.priceSubscription : null
+                }
+                fulfillmentBadge={getFulfillmentBadge(item)}
+                imageSrc={siteImage(getProductListImage(item))}
+                imageAlignTop={
+                  item.category === "seasoning" || item.id === "microgreens-full-tray"
+                }
+                onOpenDetails={() => openProductById(item.id)}
+              />
+            ))}
+          </div>
+        )}
       </Section>
 
       {copy?.showConnect && copy.connectLayout === "pink-visual" && copy.connectImage ? (
         <Section bg="blush" className="shop-connect shop-connect--pink">
           <h2 className="shop-connect__title shop-connect__title--solo">
-            Connect with GROWN
+            Always fresh, always in season
           </h2>
+          <hr className="shop-connect__rule" />
           <div className="shop-connect__visual-frame">
             <img
               className="shop-connect__visual-img"
@@ -371,34 +468,6 @@ export function ShopPage() {
         </Section>
       ) : null}
 
-      {copy?.showStrip ? (
-        <Section bg="blush" className="shop-strip">
-          <h2 className="shop-strip__title">Grown locally. Delivered fresh.</h2>
-          <p className="shop-strip__text">
-            Hydroponic greens picked at peak nutrition—consistent quality from seed to shelf.{" "}
-            {freshProduceLayout ? (
-              <>
-                Pricing for wholesale and restaurant orders is handled personally: open any fresh
-                item for the inquiry form, or{" "}
-                <Link className="shop-strip__link" to="/contact">
-                  contact us
-                </Link>{" "}
-                directly.
-              </>
-            ) : (
-              <>
-                Pricing and subscriptions for fresh produce and microgreen trays are handled
-                personally: open any fresh item for the inquiry form, or{" "}
-                <Link className="shop-strip__link" to="/contact">
-                  contact us
-                </Link>{" "}
-                directly.
-              </>
-            )}
-          </p>
-        </Section>
-      ) : null}
-
       {seasoningLayout ? (
         <Section bg="white" className="shop-seasoning-uses">
           <h2 className="shop-seasoning-uses__title">Ways to Use Microgreen Seasonings</h2>
@@ -418,26 +487,12 @@ export function ShopPage() {
               {SEASONING_WAYS_TO_USE.map((row) => (
                 <li key={row.title} className="shop-seasoning-uses__item">
                   <strong className="shop-seasoning-uses__item-title">{row.title}</strong>
-                  <span className="shop-seasoning-uses__item-dash"> — </span>
+                  <span className="shop-seasoning-uses__item-dash"> - </span>
                   <span>{row.body}</span>
                 </li>
               ))}
             </ul>
           </div>
-        </Section>
-      ) : null}
-
-      {copy?.showSubscribe &&
-      activeCategory !== "fresh-produce" &&
-      activeCategory !== "microgreens" ? (
-        <Section bg="warm" className="shop-subscribe">
-          <h2 className="shop-subscribe__title">Subscribe & save</h2>
-          <p className="shop-subscribe__text">
-            Monthly subscriptions save 7% and include free shipping. Build a box of any three
-            seasonings, or any two products from our other categories (Golden Calm and Lemon Zest are
-            one-time only). Orders of $60 or more qualify for free shipping. Open any eligible
-            product for one-time and subscription options.
-          </p>
         </Section>
       ) : null}
 
@@ -453,43 +508,20 @@ export function ShopPage() {
               Get in touch
             </LinkButton>
           </Section>
-
-          <Section bg="blush" className="shop-strip">
-            <h2 className="shop-strip__title">Grown locally. Delivered fresh.</h2>
-            <p className="shop-strip__text">
-              Hydroponic greens picked at peak nutrition—consistent quality from seed to shelf.
-              Pricing and subscriptions for fresh produce and microgreen trays are handled
-              personally: open any fresh item for the inquiry form, or{" "}
-              <Link className="shop-strip__link" to="/contact">
-                contact us
-              </Link>{" "}
-              directly.
-            </p>
-          </Section>
-
-          <Section bg="warm" className="shop-subscribe">
-            <h2 className="shop-subscribe__title">Subscribe & save</h2>
-            <p className="shop-subscribe__text">
-              Monthly subscriptions save 7% and include free shipping. Build a box of any three
-              seasonings, or any two products from our other categories (Golden Calm and Lemon Zest
-              are one-time only). Orders of $60 or more qualify for free shipping. Open any eligible
-              product for one-time and subscription options.
-            </p>
-          </Section>
         </>
       ) : null}
 
       <Section bg="blush" className="shop-footer-message">
         <h2 className="shop-footer-message__title">Grown locally. Delivered fresh.</h2>
         <p className="shop-footer-message__text">
-          Hydroponic greens picked at peak nutrition—consistent quality from seed to shelf. Pricing
+          Hydroponic greens picked at peak nutrition consistent quality from seed to shelf. Pricing
           for fresh produce and microgreen trays is handled personally: open any Fresh item for the
           inquiry form or{" "}
           <Link className="shop-footer-message__link" to="/contact">
             contact us
           </Link>{" "}
           directly. Pantry orders of $60 or more qualify for free shipping. Subscribe & Save pantry
-          blend subscriptions launch August 2026—stay tuned.
+          blend subscriptions launch August 2026 stay tuned.
         </p>
       </Section>
     </>

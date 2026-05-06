@@ -65,7 +65,7 @@ export const SHOP_NAV_CATEGORIES: {
   { id: "pantry-blends", label: "Pantry Blends", path: "/shop?category=pantry-blends" },
   {
     id: "seasoning",
-    label: "Pantry Seasonings",
+    label: "Pantry Microgreen Seasonings",
     path: "/shop?category=seasoning",
   },
 ];
