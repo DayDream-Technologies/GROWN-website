@@ -9,7 +9,7 @@ const audiences = [
     text: "Consistent microgreens and blends for plates that need color, crunch, and nutrition.",
   },
   {
-    title: "Cafés & juice bars",
+    title: "Cafes & juice bars",
     text: "Bright garnishes and smoothie-friendly greens with reliable weekly rhythm.",
   },
   {
@@ -82,7 +82,7 @@ export function PartnerPage() {
       <Section bg="warm" className="partner-cta">
         <h2 className="partner-cta__title">Start a conversation</h2>
         <p className="partner-cta__text">
-          Share a few details about your business—we typically respond within
+          Share a few details about your business - we typically respond within
           24 hours.
         </p>
         <LinkButton to="/contact">Connect with GROWN</LinkButton>

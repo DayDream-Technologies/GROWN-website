@@ -58,12 +58,12 @@ const CATEGORY_CARDS = [
 /** Hero slides — `public/images/home/hero-0{1..3}-*.png` (garden dish → tray → lifestyle). */
 const HERO_IMAGE_PATHS = [
   "home/hero-01-baked-potato-garden.png",
-  "home/hero-02-microgreens-tray.png",
+  "home/hero-02-powders.png",
   "home/hero-03-lifestyle-garden.png",
 ];
 
 const MISSION_TEXT =
-  "We grow what we can in-house — hydroponic microgreens and fresh produce, and partner with local farms that share our growing philosophy for anything we don’t grow ourselves. Every ingredient is clean-grown and chosen with intention. Our blends are crafted to nourish daily life, making it easier to eat well, cook simply, and feel connected to real food again.";
+  "We supply restaurants and wholesale buyers with fresh herbs, leafy greens, and mushrooms grown for year-round consistency. Everything is harvested at peak freshness, with additional items sourced from trusted partners who meet our standards.";
 
 export function HomePage() {
   const [heroIndex, setHeroIndex] = useState(0);

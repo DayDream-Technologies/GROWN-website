@@ -23,7 +23,7 @@ export type Product = {
   labelNotes?: string;
   extraNotes?: string[];
   category: ProductCategory;
-  /** When true, card shows “Local only” and can be filtered */
+  /** When true, card shows â€œLocal onlyâ€ and can be filtered */
   localOnly?: boolean;
   /**
    * When true, show inquiry form instead of cart and omit purchasable price parsing.
@@ -35,30 +35,30 @@ export type Product = {
 export const products: Product[] = [
   {
     id: "elevated-brew-mushroom",
-    name: "Elevated Brew Mushroom",
-    subtitle: "Powered by microgreens",
-    size: "5 oz (56 servings; 2.5 g per serving, 2 scoops)",
+    name: "Elevated Brew Coffee",
+    subtitle: "Powered by Mushrooms",
+    size: "5 oz (28 servings; 5g per serving, 1 scoop)",
     shortDescription:
       "Instant mushroom coffee blend for smooth, energizing flavor.",
-    priceOneTime: "",
+    priceOneTime: "$28.99",
     priceSubscription: null,
     fulfillment: "Local and shipping available",
     longDescription:
-      "Our Elevated Brew Mushroom Coffee provides a rich and smooth flavor by combining high-quality organic instant coffee with a blend of functional mushrooms. Infused with Lion’s Mane and Reishi, this carefully crafted mix delivers focused energy, cognitive support, and immune resilience without the jitters or crashes. Enjoy it in hot coffee, iced coffee, or smoothies, and experience the delicious fusion of taste and health. Each serving is built with freeze-dried microgreens—roughly one-quarter to one-half a tray of fresh greens—for concentrated nutrition in every scoop.",
+      "Our Elevated Brew Coffee provides a rich and smooth flavor by combining high-quality organic instant coffee with a blend of functional mushrooms. Infused with Lion's Mane and Reishi, this carefully crafted mix delivers focused energy, cognitive support, and immune resilience without the jitters or crashes. Enjoy it in hot coffee, iced coffee, or smoothies, and experience the delicious fusion of taste and health.",
     ingredients:
-      "Organic Instant Coffee (Arabica), Organic Lion’s Mane Powder, Organic Reishi Powder, Organic Chaga Powder, Organic Cordyceps Powder, Organic Turkey Tail Powder, Organic Shiitake Powder, Organic Maitake Powder, Organic Mesima Powder, Organic Wood Ear Powder, Organic Oyster Powder.",
+      "Organic Instant Coffee (Arabica), Organic Lion's Mane Powder, Organic Reishi Powder, Organic Chaga Powder, Organic Cordyceps Powder, Organic Turkey Tail Powder, Organic Shiitake Powder, Organic Maitake Powder, Organic Mesima Powder, Organic Wood Ear Powder, Organic Oyster Powder.",
     recipes: [
       {
         title: "Brain-Power Mocha",
-        body: "Brewed coffee + 1 tbsp cocoa + 1/2 cup almond milk + sweetener.",
+        body: "1 cup of Elevated Brew Coffee + 1 tbsp cocoa + 1/2 cup almond milk + sweetener.",
       },
       {
         title: "Mushroom Coffee Smoothie",
-        body: "1 cup cooled brewed coffee + frozen banana + 1 tbsp oats + 1 tbsp almond butter, blend.",
+        body: "1 cup Elevated Brew Coffee (cooled) + frozen banana + 1 tbsp oats + 1 tbsp almond butter, blend.",
       },
       {
         title: "Iced Vanilla Mushroom Latte",
-        body: "Chilled coffee + 1/2 cup oat milk + 1 tsp vanilla over ice.",
+        body: "1 cup Elevated Brew Coffee + 1/2 cup oat milk + 1 tsp vanilla over ice.",
       },
     ],
     labelNotes:
@@ -67,7 +67,7 @@ export const products: Product[] = [
   },
   {
     id: "green-leaf",
-    name: "Green Leaf",
+    name: "Immune Leaf",
     subtitle: "Powered by Microgreens",
     size: "8 oz (35 servings; 7 g, 1 scoop)",
     shortDescription:
@@ -76,13 +76,13 @@ export const products: Product[] = [
     priceSubscription: null,
     fulfillment: "Local and shipping available",
     longDescription:
-      "Unlock the power of fresh greens with our Immunity Smoothie Booster. Crafted from a premium greens blend—Organic Broccoli, Alfalfa Grass, Kale, Spinach, Spirulina, and Wheatgrass—and enhanced with Organic Inulin, Ashwagandha, Panax Ginseng, and the probiotic Bacillus subtilis, this clean formula delivers concentrated vitamins, antioxidants, and prebiotic fiber without fillers or additives. Use daily in smoothies, bowls, and baking for a nutritional kick that supports your health. Each serving is built with freeze-dried microgreens—roughly one-quarter to one-half a tray of fresh greens—for concentrated nutrition in every scoop.",
+      "Unlock the power of fresh greens with our Immunity Smoothie Booster. Crafted from a premium greens blend: Organic Broccoli, Alfalfa Grass, Kale, Spinach, Spirulina, and Wheatgrass; and enhanced with Organic Inulin, Ashwagandha, Panax Ginseng, and the probiotic Bacillus subtilis, this clean formula delivers concentrated vitamins, antioxidants, and prebiotic fiber without fillers or additives. Use daily in smoothies, bowls, and baking for a nutritional kick that supports your health. Each serving is built with freeze-dried microgreens for concentrated nutrition in every scoop.",
     ingredients:
       "Organic Broccoli Powder, Organic Alfalfa Grass Powder, Organic Kale Powder, Organic Spinach Powder, Organic Spirulina Powder, Organic Wheatgrass Powder, Organic Inulin (chicory root), Organic Ashwagandha Root Powder, Organic Panax Ginseng Root Powder, Bacillus subtilis (probiotic), Hydroponic Microgreens Blend.",
     recipes: [
       {
         title: "Green Smoothie",
-        body: "1 scoop + 1 banana + 1 cup almond milk + 1/2 cup berries — blend.",
+        body: "1 scoop + 1 banana + 1 cup almond milk + 1/2 cup berries, blend.",
       },
       {
         title: "Green Yogurt Bowl",
@@ -101,28 +101,28 @@ export const products: Product[] = [
     id: "berry-gut-glow",
     name: "Berry Gut Glow",
     subtitle: "Powered by Microgreens",
-    size: "Serving 2 Tbsp; 22.5 servings per container",
+    size: "5 oz (45 servings; 5g per serving, 3 scoops)",
     shortDescription:
-      "Berry-forward blend powered by microgreens—easy to stir into smoothies, oats, or yogurt.",
-    priceOneTime: "",
+      "Berry-forward blend powered by microgreens; easy to stir into smoothies, oats, or yogurt.",
+    priceOneTime: "$38.99",
     priceSubscription: null,
     fulfillment: "Local and shipping available",
     longDescription:
-      "Berry Gut Glow brings together clean berry superfoods and freeze-dried microgreens for a simple daily boost you can blend into smoothies, bowls, or snacks. Each serving is built with freeze-dried microgreens—roughly one-quarter to one-half a tray of fresh greens—for concentrated nutrition in every scoop.",
+      "Berry Gut Glow brings together clean berry superfoods and freeze-dried microgreens for a simple daily boost you can blend into smoothies, bowls, or snacks. Each serving is built with freeze-dried microgreens for concentrated nutrition in every scoop.",
     ingredients:
       "Organic blueberry powder, organic chia seeds, organic flax berry powder, organic Acai Powder, Organic Camu Camu Powder, Sea Salt, Hydroponic Microgreens Blend.",
     recipes: [
       {
         title: "Berry Gut Smoothie",
-        body: "2 Tbsp + 1 cup mixed berries + 1 cup almond milk + extra chia if you like, blend.",
+        body: "2 Tbsp Berry Gut Glow + 1 cup mixed berries + 1 cup almond milk + extra chia if you like, blend.",
       },
       {
         title: "Tropical Digestive Smoothie",
-        body: "2 Tbsp + 1/2 banana + 1/2 cup pineapple + 1 cup coconut milk, blend.",
+        body: "2 Tbsp Berry Gut Glow + 1/2 banana + 1/2 cup pineapple + 1 cup coconut milk, blend.",
       },
       {
         title: "Green Detox Shake",
-        body: "2 Tbsp + 1/2 avocado + 1 cup spinach + 1 cup cucumber juice, blend.",
+        body: "2 Tbsp Berry Gut Glow + 1/2 avocado + 1 cup spinach + 1 cup cucumber juice, blend.",
       },
     ],
     labelNotes:
@@ -136,25 +136,25 @@ export const products: Product[] = [
     size: "8 oz (45 servings; 5 g per serving, 1.5 scoops)",
     shortDescription:
       "Matcha + mushroom complex with microgreens for clean focus and calm energy.",
-    priceOneTime: "",
+    priceOneTime: "$38.99",
     priceSubscription: null,
     fulfillment: "Local and shipping available",
     longDescription:
       "Mushroom Matcha blends ceremonial-grade organic matcha with a targeted mushroom complex, providing focused energy and cognitive support without the crash. Combined with freeze-dried microgreens, this blend brings together nature's best to help sustain your daily wellness goals while providing a delicious and refreshing drink.",
     ingredients:
-      "Organic Matcha Green Tea Powder, Organic Lion’s Mane Powder, Organic Reishi Powder, Organic Chaga Powder, Organic Maitake Powder, Organic Cordyceps Powder, Organic Turkey Tail Powder, Organic Shiitake Powder, Hydroponic Microgreens Blend.",
+      "Organic Matcha Green Tea Powder, Organic Lion's Mane Powder, Organic Reishi Powder, Organic Chaga Powder, Organic Maitake Powder, Organic Cordyceps Powder, Organic Turkey Tail Powder, Organic Shiitake Powder, Hydroponic Microgreens Blend.",
     recipes: [
       {
         title: "Matcha Mushroom Latte",
-        body: "1 tsp + 1 cup warm milk, whisk.",
+        body: "2 tsp Matcha Revival + 1 cup warm milk, honey, whisk.",
       },
       {
         title: "Green Power Smoothie",
-        body: "1 tsp + banana + 1 cup spinach + 1 cup coconut water, blend.",
+        body: "2 tsp Matcha Revival + banana + 1 cup spinach + 1 cup coconut water, blend.",
       },
       {
         title: "Matcha Oats",
-        body: "1 tsp + 1/2 cup oats + 1 cup oat milk, refrigerate overnight.",
+        body: "2 tsp Matcha Revival + 1/2 cup oats + 1 cup oat milk, refrigerate overnight.",
       },
     ],
     labelNotes:
@@ -163,30 +163,30 @@ export const products: Product[] = [
   },
   {
     id: "golden-calm",
-    name: "Golden Calm",
+    name: "Golden Calm Tea",
     subtitle: "Powered by Saffron",
-    size: "6.2 oz (30 servings; 5.9 g, 1 scoop)",
+    size: "Loose-leaf tea blend",
     shortDescription:
-      "Uplifting saffron blend for mood and energy.",
-    priceOneTime: "",
+      "Soothing loose-leaf tea with chamomile, lavender, saffron, and microgreens.",
+    priceOneTime: "$29.99",
     priceSubscription: null,
     fulfillment: "Local and shipping available",
     longDescription:
-      "Experience the uplifting properties of saffron with our Saffron Drink blend, designed to support mood, energy levels, and emotional balance. Combining the calming effects of chamomile and lavender with the mood-enhancing benefits of saffron, this drink also includes key nutrients like vitamin D and magnesium. Enjoy a soothing, flavorful drink that fits seamlessly into your daily routine, promoting a balanced, vibrant lifestyle.",
+      "A soothing loose-leaf blend of organic chamomile, organic lavender, saffron threads, and freeze-dried microgreens. Naturally calming with gentle floral notes. Saffron adds a subtle mood-supporting lift, making this blend ideal for winding down or creating a quiet moment anytime.",
     ingredients:
-      "Organic Lavender, Passion Flower, Chamomile, Saffron, L-Theanine, Citric Acid, Stevia Leaf Extract.",
+      "Organic chamomile, Organic lavender, Saffron Threads, Hydroponic Microgreens Blend.",
     recipes: [
       {
-        title: "Evening Calm Latte",
-        body: "1 heaping tsp + 6–8 oz warmed milk, whisk.",
+        title: "Bedtime Latte",
+        body: "1 tbsp Golden Calm Tea + 8 oz warm milk (oat, almond, or dairy) + 1/2 tsp vanilla + monkfruit. Steep 5 minutes, strain, sip warm.",
       },
       {
-        title: "Citrus Chamomile Cooler",
-        body: "1 heaping tsp + 6 oz cold water/tea + 1 oz lemon, shake with ice.",
+        title: "Golden Calm Lemon Honey Shot",
+        body: "Brew 2 tbsp in 4 oz hot water. Add 1 tsp honey + squeeze of lemon.",
       },
       {
-        title: "Bedtime Yogurt Parfait",
-        body: "1 heaping tsp stirred into 6 oz yogurt, top with berries & granola.",
+        title: "Calm-Infused Simple Syrup",
+        body: "Perfect for mocktails or drizzle over fruit. Simmer 1 cup water + 1 cup sugar, add 2 tbsp Golden Calm Tea, steep 10 minutes, strain.",
       },
     ],
     extraNotes: ["Not eligible for monthly subscription."],
@@ -196,27 +196,28 @@ export const products: Product[] = [
     id: "lemon-zest",
     name: "Lemon Zest",
     subtitle: "Powered by Spirulina",
-    size: "4.2 oz (32 servings; 4 g per serving, 2 scoops)",
+    size: "4.2 oz (32 servings; 4 g per serving, 1 scoop)",
     shortDescription:
       "Refreshing blend with a boost from spirulina and lemon.",
-    priceOneTime: "",
+    priceOneTime: "$35.99",
     priceSubscription: null,
     fulfillment: "Local and shipping available",
     longDescription:
       "Our Lemon + Spirulina blend combines the refreshing zest of lemon with the nutrient power of spirulina, designed to hydrate and nourish. Perfect for busy individuals looking to enhance their nutrition on the go, simply mix it into water or your favorite drinks for an easy boost anytime.",
-    ingredients: "Organic Spirulina Powder, Organic Lemon Powder.",
+    ingredients:
+      "Organic Lemon Powder, Organic Spirulina Powder, Organic Monkfruit, Hydroponic Microgreens Blend.",
     recipes: [
       {
         title: "Lemon Spirulina Water",
-        body: "1 scoop + 1 cup cold water, stir or shake.",
+        body: "1 scoop Lemon Zest + 1 cup cold water, stir or shake.",
       },
       {
         title: "Zesty Mocktail",
-        body: "1 scoop + 1 cup seltzer + lemon slice + mint, stir over ice.",
+        body: "1 scoop Lemon Zest + 1 cup seltzer + lemon slice + mint, stir over ice.",
       },
       {
         title: "Citrus Smoothie",
-        body: "1 scoop + 1 banana + 1 cup almond milk + handful of spinach, blend.",
+        body: "1 scoop Lemon Zest + 1 banana + 1 cup almond milk + handful of spinach, blend.",
       },
     ],
     extraNotes: ["Not eligible for monthly subscription."],
@@ -243,7 +244,7 @@ export const products: Product[] = [
       },
       {
         title: "Avocado Toast",
-        body: "Sprinkle 1/4–1/2 tsp over toast + lemon.",
+        body: "Sprinkle 1/4â€“1/2 tsp over toast + lemon.",
       },
       {
         title: "Simple Vinaigrette",
@@ -286,7 +287,7 @@ export const products: Product[] = [
       },
       {
         title: "Ranch Roasted Cauliflower",
-        body: "Toss florets with oil + 1–2 tsp seasoning, roast.",
+        body: "Toss florets with oil + 1â€“2 tsp seasoning, roast.",
       },
     ],
     suggestedUses: [
@@ -311,7 +312,7 @@ export const products: Product[] = [
     priceSubscription: null,
     fulfillment: "Local and shipping available",
     longDescription:
-      "This Plant-Based Salsa Verde Seasoning captures the bright citrus herb profile of salsa verde in a dry, concentrated form. Organic cilantro, lime zest, cumin, and oregano combine with freeze-dried microgreens to add freshness and nutrition to salsas, marinades, and dressings — no preservatives, just clean organic herbs. Each jar contains one-quarter to one-half a tray of fresh microgreens, boosting nutrition in every sprinkle.",
+      "This Plant-Based Salsa Verde Seasoning captures the bright citrus herb profile of salsa verde in a dry, concentrated form. Organic cilantro, lime zest, cumin, and oregano combine with freeze-dried microgreens to add freshness and nutrition to salsas, marinades, and dressings â€” no preservatives, just clean organic herbs. Each jar contains one-quarter to one-half a tray of fresh microgreens, boosting nutrition in every sprinkle.",
     ingredients:
       "Organic Dried Cilantro, Organic Lime Zest (powder), Organic Garlic Powder, Organic Cumin, Organic Dried Oregano, Organic Sea Salt, Organic Black Pepper, Hydroponic Microgreen Blend.",
     recipes: [
@@ -388,7 +389,7 @@ export const products: Product[] = [
     priceSubscription: null,
     fulfillment: "Local only (fresh/frozen)",
     longDescription:
-      "Hand-made frozen ice balls with fresh herbs and citrus for elevated beverages and events. We use farm-fresh mint, basil and citrus to create beautiful, flavorful ice — sustainable, local and perfect for entertaining. Freeze-dried herb options may be available—ask when you reach out.",
+      "Hand-made frozen ice balls with fresh herbs and citrus for elevated beverages and events. We use farm-fresh mint, basil and citrus to create beautiful, flavorful ice â€” sustainable, local and perfect for entertaining. Freeze-dried herb options may be availableâ€”ask when you reach out.",
     ingredients:
       "Fresh mint leaves, lemon or lime slices, basil leaves, filtered water.",
     recipes: [
@@ -403,14 +404,14 @@ export const products: Product[] = [
   },
   {
     id: "fresh-butter-lettuce",
-    name: "Fresh Produce — Butter Lettuce",
+    name: "Fresh Produce â€” Butter Lettuce",
     size: "12 heads per order",
     shortDescription: "Fresh locally grown butter lettuce.",
     priceOneTime: "Contact for pricing",
     priceSubscription: null,
     fulfillment: "Local only (Michigan)",
     longDescription:
-      "Tender, sweet butter lettuce grown locally. Perfect for family salads and sandwiches — sustainably grown and harvested fresh.",
+      "Tender, sweet butter lettuce grown locally. Perfect for family salads and sandwiches â€” sustainably grown and harvested fresh.",
     ingredients: "Fresh butter lettuce.",
     recipes: [
       { title: "Simple salad", body: "Wash, tear, dress with vinaigrette." },
@@ -426,14 +427,14 @@ export const products: Product[] = [
     id: "microgreens-full-tray",
     name: "Microgreens (full tray)",
     subtitle: "Pea, Radish, Spicy Salad, Broccoli, Arugula, Mustard",
-    size: 'One full 10"×20" tray (contact us for availability)',
+    size: 'One full 10"Ã—20" tray (contact us for availability)',
     shortDescription:
       "Fresh microgreen trays grown locally; also available freeze-dried for powders.",
     priceOneTime: "Contact for pricing",
     priceSubscription: null,
     fulfillment: "Local only",
     longDescription:
-      "Fresh microgreens harvested at peak nutrient density — pea, radish, spicy salad, broccoli, arugula and mustard. Microgreens are tiny nutrition powerhouses (vitamins, minerals, antioxidants); we also freeze-dry surplus greens to make shelf-stable powders so families can access produce nutrition year-round. Sustainable, flavor-rich and perfect for busy households and restaurants. Pricing, subscriptions, and wholesale are handled directly — reach out via the form and we will reply with options.",
+      "Fresh microgreens harvested at peak nutrient density â€” pea, radish, spicy salad, broccoli, arugula and mustard. Microgreens are tiny nutrition powerhouses (vitamins, minerals, antioxidants); we also freeze-dry surplus greens to make shelf-stable powders so families can access produce nutrition year-round. Sustainable, flavor-rich and perfect for busy households and restaurants. Pricing, subscriptions, and wholesale are handled directly â€” reach out via the form and we will reply with options.",
     ingredients: "Live microgreens (variety).",
     recipes: [
       { title: "Garnish salads", body: "Top finished salads for crunch and flavor." },
@@ -442,7 +443,7 @@ export const products: Product[] = [
     ],
     labelNotes: "Variety, harvest date, storage & shelf life, local farm origin.",
     extraNotes: [
-      "Harvest and packaging add-ons available for restaurant orders—ask when you reach out.",
+      "Harvest and packaging add-ons available for restaurant ordersâ€”ask when you reach out.",
     ],
     category: "fresh",
     localOnly: true,
@@ -457,7 +458,7 @@ export const products: Product[] = [
     priceSubscription: null,
     fulfillment: "Local",
     longDescription:
-      "Fragrant, fresh rosemary grown locally — ideal for roasting, marinades and infused oils. We supply both retail and restaurant customers with consistent weekly harvests.",
+      "Fragrant, fresh rosemary grown locally â€” ideal for roasting, marinades and infused oils. We supply both retail and restaurant customers with consistent weekly harvests.",
     ingredients: "Fresh rosemary.",
     recipes: [
       { title: "Roast potatoes", body: "Toss with oil, salt, and chopped rosemary." },
@@ -477,7 +478,7 @@ export const products: Product[] = [
     priceSubscription: null,
     fulfillment: "Local",
     longDescription:
-      "Bright, delicate dill harvested locally — perfect for dressings, pickles, fish and potato salads.",
+      "Bright, delicate dill harvested locally â€” perfect for dressings, pickles, fish and potato salads.",
     ingredients: "Fresh dill.",
     recipes: [
       { title: "Dill dip", body: "Stir chopped dill into yogurt or sour cream." },
@@ -497,7 +498,7 @@ export const products: Product[] = [
     priceSubscription: null,
     fulfillment: "Local only",
     longDescription:
-      "Fresh, robust Italian parsley — versatile and nutrient-dense, great for gremolata, salads and finishing.",
+      "Fresh, robust Italian parsley â€” versatile and nutrient-dense, great for gremolata, salads and finishing.",
     ingredients: "Fresh Italian parsley.",
     recipes: [
       { title: "Gremolata", body: "Mince with lemon zest and garlic for topping." },
@@ -518,7 +519,7 @@ export const products: Product[] = [
     priceSubscription: null,
     fulfillment: "Local only",
     longDescription:
-      "Cooling, aromatic mint for cocktails, teas and cooking — grown and harvested locally then packaged fresh. Freeze-dried herb options may be available through our pantry line—ask when you reach out.",
+      "Cooling, aromatic mint for cocktails, teas and cooking â€” grown and harvested locally then packaged fresh. Freeze-dried herb options may be available through our pantry lineâ€”ask when you reach out.",
     ingredients: "Fresh mint.",
     recipes: [
       { title: "Mint iced tea", body: "Steep leaves with black tea, chill, sweeten." },
@@ -539,7 +540,7 @@ export const products: Product[] = [
     priceSubscription: null,
     fulfillment: "Local only",
     longDescription:
-      "Vibrant, aromatic basil grown locally — ideal for pesto, salads and finishing dishes. Shelf-stable freeze-dried basil may be available as a pantry item—ask when you reach out.",
+      "Vibrant, aromatic basil grown locally â€” ideal for pesto, salads and finishing dishes. Shelf-stable freeze-dried basil may be available as a pantry itemâ€”ask when you reach out.",
     ingredients: "Fresh basil.",
     recipes: [
       { title: "Classic pesto", body: "Blend with pine nuts, garlic, oil, and cheese." },
@@ -561,15 +562,15 @@ export const products: Product[] = [
     priceSubscription: null,
     fulfillment: "Local only",
     longDescription:
-      "Fresh baby kale harvested young for tender texture and high nutrient content — ideal for salads, smoothies and sautés. We grow sustainably and offer weekly delivery for regular customers.",
+      "Fresh baby kale harvested young for tender texture and high nutrient content â€” ideal for salads, smoothies and sautÃ©s. We grow sustainably and offer weekly delivery for regular customers.",
     ingredients: "Fresh baby kale.",
     recipes: [
       { title: "Kale salad with lemon tahini", body: "Massage with dressing, add toppings." },
       { title: "Kale smoothie", body: "Blend with fruit and liquid base." },
-      { title: "Sautéed garlic kale", body: "Quick sauté with garlic and oil." },
+      { title: "SautÃ©ed garlic kale", body: "Quick sautÃ© with garlic and oil." },
     ],
     extraNotes: [
-      "Weekly bulk delivery available—share your route needs in the form.",
+      "Weekly bulk delivery availableâ€”share your route needs in the form.",
     ],
     category: "fresh",
     localOnly: true,
@@ -597,5 +598,5 @@ export function getFulfillmentBadge(p: Product): string {
   if (/michigan/i.test(f)) return "Local (Michigan)";
   if (/local only/i.test(f)) return "Local only";
   if (/^local$/i.test(f.trim())) return "Local";
-  return f.length > 40 ? `${f.slice(0, 37)}…` : f;
+  return f.length > 40 ? `${f.slice(0, 37)}â€¦` : f;
 }

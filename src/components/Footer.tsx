@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
-import { BRAND_FOOTER_LOGO } from "../config/branding";
+import { BRAND_HERO_LOGO } from "../config/branding";
 import { siteImage } from "../lib/images";
 import "./Footer.css";
+
+const footerLogoPath =
+  import.meta.env.VITE_HERO_LOGO?.trim() || BRAND_HERO_LOGO;
 
 export function Footer() {
   return (
@@ -11,7 +14,7 @@ export function Footer() {
           <hr className="site-footer__rule" aria-hidden="true" />
           <img
             className="site-footer__logo"
-            src={siteImage(BRAND_FOOTER_LOGO)}
+            src={siteImage(footerLogoPath)}
             alt="GROWN Hydroponic Farms"
             width={320}
             height={121}
@@ -27,7 +30,7 @@ export function Footer() {
           <Link to="/shop?category=fresh-produce">Fresh Produce</Link>
           <Link to="/shop?category=microgreens">Fresh Microgreens</Link>
           <Link to="/shop?category=pantry-blends">Pantry Blends</Link>
-          <Link to="/shop?category=seasoning">Pantry Seasonings</Link>
+          <Link to="/shop?category=seasoning">Pantry Microgreen Seasonings</Link>
           <Link to="/contact">Contact</Link>
           <Link to="/about">About</Link>
         </nav>

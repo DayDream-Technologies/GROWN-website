@@ -26,7 +26,7 @@
   --color-maroon-rule: rgba(92, 42, 50, 0.55);
 
   /* Accents (mockups: price chips, submit, soft highlights) */
-  --color-price-pill: #e9c1c1;
+  --color-price-pill: var(--color-section-tint);
   --color-rose: #d9b4b0;
   --color-rose-hover: #cfaaa5;
 
