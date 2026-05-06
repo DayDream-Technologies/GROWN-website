@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Section } from "../components/sections/Section";
-import { LinkButton } from "../components/LinkButton";
 import { useCart } from "../context/useCart";
 import "./CheckoutReturnPage.css";
 
@@ -29,9 +28,6 @@ export function CheckoutReturnPage() {
           </p>
         ) : null}
         <div className="checkout-return__actions">
-          <LinkButton to="/shop" variant="primary">
-            Continue shopping
-          </LinkButton>
           <Link className="checkout-return__link" to="/contact">
             Questions? Contact us
           </Link>

@@ -176,11 +176,9 @@ export function ContactPage() {
 
       <Section bg="blush" className="contact-cta">
         <p className="contact-cta__text">
-          Prefer to browse first? Start on the shop or read more about our
-          story.
+          Prefer to learn more first? Read more about our story.
         </p>
         <div className="contact-cta__actions">
-          <LinkButton to="/shop" variant="primary">Shop for Your Home</LinkButton>
           <LinkButton to="/about" variant="primary">
             About GROWN
           </LinkButton>

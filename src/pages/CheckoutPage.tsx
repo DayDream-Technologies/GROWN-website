@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { createEmbeddedCheckoutPageFromSession } from "../lib/stripeEmbeddedCheckout";
 import { Section } from "../components/sections/Section";
-import { LinkButton } from "../components/LinkButton";
 import { useCart } from "../context/useCart";
 import { cartHasMixedPurchaseKinds } from "../lib/cartPurchaseKinds";
 import { createCheckoutSession } from "../lib/checkoutApi";
@@ -109,9 +108,6 @@ export function CheckoutPage() {
         {error ? (
           <div className="checkout-page__error" role="alert">
             <p>{error}</p>
-            <LinkButton to="/shop" variant="primary">
-              Return to shop
-            </LinkButton>
           </div>
         ) : null}
 

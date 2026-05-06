@@ -11,8 +11,6 @@ const tailLinks = [
   { to: "/about", label: "About" },
 ] as const;
 
-const shopAllLink = { to: "/shop", label: "Shop All" } as const;
-
 const headerLogoPath =
   import.meta.env.VITE_HEADER_LOGO?.trim() || BRAND_HEADER_LOGO;
 
@@ -66,15 +64,6 @@ export function Header() {
               }
             >
               Home
-            </NavLink>
-            <NavLink
-              to={shopAllLink.to}
-              end
-              className={({ isActive }) =>
-                `site-header__link${isActive ? " site-header__link--active" : ""}`
-              }
-            >
-              {shopAllLink.label}
             </NavLink>
             {SHOP_NAV_CATEGORIES.map(({ path, label }) => (
               <NavLink
@@ -140,16 +129,6 @@ export function Header() {
           onClick={() => setMobileMenuOpen(false)}
         >
           Home
-        </NavLink>
-        <NavLink
-          to={shopAllLink.to}
-          end
-          className={({ isActive }) =>
-            `site-header__mobile-link${isActive ? " site-header__mobile-link--active" : ""}`
-          }
-          onClick={() => setMobileMenuOpen(false)}
-        >
-          {shopAllLink.label}
         </NavLink>
         {SHOP_NAV_CATEGORIES.map(({ path, label }) => (
           <NavLink
