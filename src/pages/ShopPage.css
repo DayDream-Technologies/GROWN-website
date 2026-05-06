@@ -31,7 +31,9 @@
   margin-top: var(--space-4);
 }
 
-.shop-hero--microgreens {
+.shop-hero--microgreens,
+.shop-hero--pantry-blends,
+.shop-hero--seasoning {
   padding-bottom: var(--space-3);
 }
 
@@ -77,12 +79,21 @@
   justify-content: center;
 }
 
+.shop-hero__cta .grown-btn {
+  background-color: #163934;
+  color: var(--color-text-on-accent);
+}
+
+.shop-hero__cta .grown-btn:hover {
+  background-color: #1b463f;
+}
+
 .shop-variety-line {
   margin: var(--space-4) 0 0;
   font-family: var(--font-body);
   font-size: 0.9375rem;
   letter-spacing: 0.04em;
-  color: var(--color-text-taupe);
+  color: var(--color-gold);
 }
 
 .shop-gallery-heading {
@@ -97,6 +108,14 @@
 .shop-produce-gallery-wrap .grown-section__inner,
 .shop-micro-gallery-wrap .grown-section__inner {
   max-width: 960px;
+}
+
+.shop-micro-gallery-wrap {
+  padding-top: var(--space-6);
+}
+
+.shop-micro-gallery-wrap .shop-section-break--thin {
+  margin: var(--space-4) auto var(--space-5);
 }
 
 .shop-produce-gallery {
@@ -195,6 +214,89 @@
   color: var(--color-text-taupe);
 }
 
+.shop-microgreens-uses {
+  padding-top: var(--space-10);
+  padding-bottom: var(--space-10);
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.shop-microgreens-uses .grown-section__inner {
+  max-width: 960px;
+}
+
+.shop-microgreens-uses__title {
+  font-family: var(--font-display);
+  font-size: var(--text-display-lg);
+  font-weight: 600;
+  color: var(--color-heading);
+  text-align: center;
+  margin: 0 0 var(--space-8);
+}
+
+.shop-microgreens-uses__layout {
+  display: grid;
+  gap: var(--space-8);
+  align-items: start;
+}
+
+@media (min-width: 768px) {
+  .shop-microgreens-uses__layout {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    gap: var(--space-10);
+    align-items: center;
+  }
+}
+
+.shop-microgreens-uses__media {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid rgba(92, 42, 50, 0.12);
+  box-shadow: var(--shadow-soft);
+  background: var(--color-field-fill);
+}
+
+.shop-microgreens-uses__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.shop-microgreens-uses__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: var(--leading-body);
+  color: var(--color-text-taupe);
+}
+
+.shop-microgreens-uses__item {
+  margin: 0 0 var(--space-5);
+}
+
+.shop-microgreens-uses__item:last-child {
+  margin-bottom: 0;
+}
+
+.shop-microgreens-uses__item-title {
+  color: var(--color-heading);
+  font-weight: 600;
+}
+
+@media (max-width: 560px) {
+  .shop-microgreens-uses__title {
+    font-size: 1.5rem;
+    margin-bottom: var(--space-6);
+  }
+
+  .shop-microgreens-uses__list {
+    font-size: 1rem;
+  }
+}
+
 .shop-feature-visual .grown-section__inner {
   max-width: 920px;
 }
@@ -237,6 +339,23 @@
   padding-top: var(--space-4);
 }
 
+.shop-grid-heading {
+  margin: 0 0 var(--space-6);
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: var(--text-display-lg);
+  font-weight: 600;
+  color: var(--color-heading);
+}
+
+.shop-grid-heading__rule {
+  width: min(12rem, 50%);
+  height: 1px;
+  margin: 0 auto var(--space-6);
+  border: none;
+  background: var(--color-border-subtle);
+}
+
 .shop-feature-visual--tight + .shop-grid-section {
   padding-top: var(--space-5);
 }
@@ -245,6 +364,67 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-8) var(--space-6);
+}
+
+.shop-product-grid--seasoning {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.shop-produce-category-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-8) var(--space-6);
+}
+
+.shop-produce-category-card {
+  overflow: hidden;
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-card);
+  box-shadow: var(--shadow-soft);
+}
+
+.shop-produce-category-card__media {
+  aspect-ratio: 4 / 3;
+  background: var(--color-field-fill);
+  overflow: hidden;
+}
+
+.shop-produce-category-card__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.shop-produce-category-card__body {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  text-align: center;
+}
+
+.shop-produce-category-card__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--color-heading);
+}
+
+.shop-produce-category-card__caption {
+  margin: 0;
+  min-height: 3.3em;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--color-text-taupe);
+}
+
+.shop-produce-category-card__btn {
+  justify-self: center;
+  margin-top: var(--space-2);
 }
 
 @media (max-width: 960px) {
@@ -256,6 +436,14 @@
 @media (max-width: 560px) {
   .shop-product-grid {
     grid-template-columns: 1fr;
+  }
+
+  .shop-produce-category-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .shop-produce-category-card__caption {
+    min-height: 0;
   }
 
   .shop-hero {
@@ -307,12 +495,7 @@
   border-top: none;
   padding-top: var(--space-10);
   padding-bottom: var(--space-10);
-  background: linear-gradient(
-    180deg,
-    #fce9ef 0%,
-    #f5dbe6 48%,
-    #efd5e0 100%
-  ) !important;
+  background: var(--color-section-tint) !important;
 }
 
 .shop-connect--pink .grown-section__inner {
@@ -320,7 +503,15 @@
 }
 
 .shop-connect__title--solo {
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-4);
+}
+
+.shop-connect__rule {
+  width: min(12rem, 50%);
+  height: 1px;
+  margin: 0 auto var(--space-6);
+  border: none;
+  background: var(--color-border-subtle);
 }
 
 .shop-connect__visual-frame {
@@ -366,28 +557,6 @@
   color: var(--color-heading);
   font-weight: 600;
   text-underline-offset: 2px;
-}
-
-.shop-subscribe {
-  text-align: center;
-}
-
-.shop-subscribe .grown-section__inner {
-  max-width: 34rem;
-}
-
-.shop-subscribe__title {
-  font-family: var(--font-display);
-  font-size: 1.75rem;
-  font-weight: 600;
-  color: var(--color-heading);
-  margin: 0 0 var(--space-3);
-}
-
-.shop-subscribe__text {
-  margin: 0;
-  font-family: var(--font-body);
-  color: var(--color-text-taupe);
 }
 
 /* Pantry Seasonings: ways to use + potato hero */

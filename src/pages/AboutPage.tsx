@@ -5,8 +5,8 @@ import "./AboutPage.css";
 
 const whatWeGrow = [
   "Hydroponic microgreens and fresh produce grown with care.",
-  "Nutrient-boosted seasonings and pantry staples made with our freeze-dried microgreens or other clean power ingredients like saffron, spirulina, and functional mushrooms — alone or combined.",
-  "Ready-to-use products for busy lives—sprinkle, stir, or blend them into breakfasts, lunches, snacks, and dinners.",
+  "Nutrient-boosted seasonings and pantry staples made with freeze-dried greens and clean power ingredients.",
+  "Ready-to-use products for busy lives: sprinkle, stir, or blend them into everyday meals.",
 ] as const;
 
 const values = [
@@ -32,46 +32,84 @@ export function AboutPage() {
   return (
     <>
       <Section bg="white" className="about-hero">
-        <h1 className="about-title">About GROWN</h1>
-        <p className="about-tagline">
-          Nutrient-dense food, grown with intention — from seed to shelf.
-        </p>
+        <div className="about-hero__copy">
+          <h1 className="about-title">About GROWN</h1>
+          <hr className="about-title-rule" />
+          <p className="about-tagline">
+            Nutrient-dense food, grown with intention from seed to shelf.
+          </p>
+        </div>
+        <div className="about-hero__media">
+          <img
+            className="about-hero__img"
+            src={siteImage("about/washing_lettuce.jpg")}
+            alt="Fresh lettuce being washed after harvest"
+            decoding="async"
+            fetchPriority="high"
+            width={1600}
+            height={1200}
+          />
+        </div>
       </Section>
 
-      <Section bg="white" id="our-story">
-        <h2 className="about-section-title">Our story</h2>
-        <p className="about-prose">
-          I started by growing microgreens and freeze-drying them to preserve
-          flavor and nutrients, so nothing went to waste. Those freeze-dried
-          greens found their first home in seasoning blends — a pinch here and
-          there that adds vitamins and flavor to everyday meals. From there we
-          expanded: more produce, more clean power ingredients, and more ways to
-          make wholesome eating effortless.
-        </p>
+      <Section bg="white" id="our-story" className="about-story">
+        <div className="about-editorial">
+          <div className="about-editorial__copy">
+            <p className="about-kicker">Our story</p>
+            <h2 className="about-section-title">
+              We grow, preserve, and make food easier to use.
+            </h2>
+            <p className="about-prose">
+              GROWN started with microgreens and the simple goal of preserving their
+              flavor and nutrients so nothing went to waste. Freeze-dried greens found
+              their first home in seasoning blends: a small pinch that adds vitamins,
+              color, and flavor to everyday meals.
+            </p>
+            <p className="about-prose">
+              From there, the work expanded into fresh produce, pantry blends, and
+              wholesale relationships with kitchens that care about consistency.
+            </p>
+          </div>
+          <div className="about-editorial__note">
+            <p>
+              Clean-grown produce, thoughtful preservation, and pantry products that
+              make real food feel easy to reach for.
+            </p>
+          </div>
+        </div>
       </Section>
 
-      <Section bg="white" id="what-we-grow">
-        <h2 className="about-section-title">What we grow and make</h2>
-        <ul className="about-bullet-list">
-          {whatWeGrow.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
-        <img
-          className="about-story-photo about-story-photo--below-list"
-          src={siteImage("about/microgreens-grow-shelves.png")}
-          alt="Microgreens growing on indoor racks under grow lights"
-          loading="lazy"
-          decoding="async"
-          width={1200}
-          height={800}
-        />
+      <Section bg="white" id="what-we-grow" className="about-grow">
+        <div className="about-split">
+          <div className="about-photo-frame">
+            <img
+              className="about-photo"
+              src={siteImage("catalog/produce/lettuce_growing_rows.jpg")}
+              alt="Rows of lettuce growing in the farm"
+              loading="lazy"
+              decoding="async"
+              width={1200}
+              height={800}
+            />
+          </div>
+          <div className="about-split__copy">
+            <p className="about-kicker">What we grow and make</p>
+            <h2 className="about-section-title">Fresh greens become everyday pantry staples.</h2>
+            <ul className="about-bullet-list">
+              {whatWeGrow.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </Section>
 
-      <Section bg="blush" id="values">
+      <Section bg="blush" id="values" className="about-values-section">
+        <p className="about-kicker about-kicker--center">Our values</p>
         <h2 className="about-section-title about-section-title--center">
-          Our values
+          Built for food that feels clean, useful, and close to home.
         </h2>
+        <hr className="about-title-rule" />
         <div className="about-values about-values--four">
           {values.map((v) => (
             <article key={v.title} className="about-value-card">
@@ -82,61 +120,59 @@ export function AboutPage() {
         </div>
       </Section>
 
-      <Section bg="white" id="why-it-matters">
-        <h2 className="about-section-title">Why it matters</h2>
-        <p className="about-prose">
-          You shouldn&apos;t have to choose between convenience and quality. Our
-          products let families add meaningful nutrition to everyday meals
-          without extra time or fuss—so you can feed your family well and get on
-          with the rest of your day.
-        </p>
-      </Section>
-
-      <Section bg="white">
-        <div className="about-split">
-          <img
-            className="about-photo"
-            src={siteImage("about/founder-kitchen-seasoning.png")}
-            alt="Sprinkling GROWN seasoning over a fresh meal in the kitchen"
-            loading="lazy"
-            decoding="async"
-            width={800}
-            height={1000}
-          />
+      <Section bg="white" id="why-it-matters" className="about-kitchen">
+        <div className="about-split about-split--reverse">
           <div className="about-split__copy">
-            <h2 className="about-subheading">From the kitchen table outward</h2>
+            <p className="about-kicker">Why it matters</p>
+            <h2 className="about-section-title">From the kitchen table outward.</h2>
             <p className="about-prose">
-              GROWN is built around the same questions we ask at home: what
-              tastes good, what fuels us, and what can we keep simple? That
-              mindset shapes how we grow, preserve, and share every product.
+              You should not have to choose between convenience and quality. GROWN is
+              built around the same questions we ask at home: what tastes good, what
+              fuels us, and what can we keep simple?
             </p>
+            <p className="about-prose">
+              That mindset shapes how we grow, preserve, and share every product, from
+              fresh greens for restaurants to seasonings and blends for busy kitchens.
+            </p>
+          </div>
+          <div className="about-photo-frame about-photo-frame--portrait">
+            <img
+              className="about-photo"
+              src={siteImage("about/founder-kitchen-seasoning.png")}
+              alt="Sprinkling GROWN seasoning over a fresh meal in the kitchen"
+              loading="lazy"
+              decoding="async"
+              width={800}
+              height={1000}
+            />
           </div>
         </div>
       </Section>
 
-      <Section bg="white" id="process">
-        <h2 className="about-section-title">From our farm to you</h2>
+      <Section bg="white" id="process" className="about-process-section">
         <div className="about-process">
           <div className="about-process__text">
+            <p className="about-kicker">From our farm to you</p>
+            <h2 className="about-section-title">Consistent greens, handled with care.</h2>
             <p className="about-prose">
-              Hydroponic growing lets us control light, water, and nutrients
-              precisely—so greens stay tender, vibrant, and consistent week after
-              week.
+              Hydroponic growing lets us control light, water, and nutrients precisely
+              so greens stay tender, vibrant, and consistent week after week.
             </p>
             <p className="about-prose">
-              Harvest, pack, and deliver with minimal handling and maximum
-              freshness.
+              We harvest, pack, and deliver with minimal handling and maximum freshness.
             </p>
           </div>
-          <img
-            className="about-photo about-photo--rounded"
-            src={siteImage("about/hydroponic-greens-pipes.png")}
-            alt="Leafy greens growing in hydroponic channels"
-            loading="lazy"
-            decoding="async"
-            width={1200}
-            height={800}
-          />
+          <div className="about-photo-frame">
+            <img
+              className="about-photo"
+              src={siteImage("about/hydroponic-greens-pipes.png")}
+              alt="Leafy greens growing in hydroponic channels"
+              loading="lazy"
+              decoding="async"
+              width={1200}
+              height={800}
+            />
+          </div>
         </div>
       </Section>
 
@@ -144,10 +180,8 @@ export function AboutPage() {
         <h2 className="about-cta__title">Bring GROWN home or to your business</h2>
         <div className="about-cta__actions">
           <LinkButton to="/shop?category=pantry-blends">Shop pantry blends</LinkButton>
-          <LinkButton to="/contact" variant="ghost">
-            Contact Us
-          </LinkButton>
-          <LinkButton to="/shop?category=fresh-produce" variant="ghost">
+          <LinkButton to="/contact">Contact Us</LinkButton>
+          <LinkButton to="/shop?category=fresh-produce">
             Fresh produce & wholesale
           </LinkButton>
         </div>

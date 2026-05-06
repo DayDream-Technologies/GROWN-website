@@ -39,7 +39,7 @@ export function ContactPage() {
         },
         body: JSON.stringify({
           access_key: key,
-          subject: "Contact form — GROWN website",
+          subject: "Contact form - GROWN website",
           name,
           email,
           message,
@@ -63,8 +63,10 @@ export function ContactPage() {
   return (
     <>
       <Section bg="white" className="contact-hero">
+        <p className="contact-kicker">Start a conversation</p>
         <h1 className="contact-title">Contact GROWN</h1>
-        <p className="contact-lede">We&apos;d love to hear from you</p>
+        <hr className="contact-title-rule" />
+        <p className="contact-lede">We&apos;d love to hear from you.</p>
         <p className="contact-note">We typically respond within 24 hours</p>
       </Section>
 
@@ -111,16 +113,16 @@ export function ContactPage() {
 
               <Button
                 type="submit"
-                variant="rose"
+                variant="primary"
                 className="contact-form__submit"
                 disabled={status === "submitting"}
               >
-                {status === "submitting" ? "Sending…" : "Submit"}
+                {status === "submitting" ? "Sending..." : "Submit"}
               </Button>
 
               {status === "success" ? (
                 <p className="contact-form__status contact-form__status--success" role="status">
-                  Thanks — your message was sent. We&apos;ll get back to you soon.
+                  Thanks - your message was sent. We&apos;ll get back to you soon.
                 </p>
               ) : null}
               {status === "error" ? (
@@ -145,9 +147,10 @@ export function ContactPage() {
           )}
 
           <aside className="contact-aside">
+            <p className="contact-aside__kicker">Wholesale and local orders</p>
             <h2 className="contact-aside__title">Partner With GROWN</h2>
             <p className="contact-aside__text">
-              Whether you&apos;re a restaurant, café, wellness team, or an individual
+              Whether you&apos;re a restaurant, cafe, wellness team, or an individual
               looking for nutrient{'\u2011'}dense produce, we&apos;ll build a custom order that
               fits your needs.
             </p>
@@ -177,8 +180,8 @@ export function ContactPage() {
           story.
         </p>
         <div className="contact-cta__actions">
-          <LinkButton to="/shop">Shop for Your Home</LinkButton>
-          <LinkButton to="/about" variant="ghost">
+          <LinkButton to="/shop" variant="primary">Shop for Your Home</LinkButton>
+          <LinkButton to="/about" variant="primary">
             About GROWN
           </LinkButton>
         </div>
