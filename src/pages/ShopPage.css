@@ -66,6 +66,7 @@
   font-size: 1.125rem;
   line-height: var(--leading-body);
   color: var(--color-text-taupe);
+  white-space: pre-line;
 }
 
 .shop-lede--primary {
@@ -335,6 +336,53 @@
   object-fit: cover;
 }
 
+.shop-after-image-cta {
+  padding-top: 0;
+  text-align: center;
+}
+
+.shop-after-image-cta .grown-section__inner {
+  padding-top: 0;
+  max-width: 32rem;
+}
+
+.shop-pantry-benefits {
+  padding-top: 0;
+}
+
+.shop-pantry-benefits .grown-section__inner {
+  max-width: 920px;
+  padding-top: 0;
+}
+
+.shop-pantry-benefits__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6);
+}
+
+.shop-pantry-benefit {
+  padding-left: var(--space-5);
+  border-left: 1px solid var(--color-border-subtle);
+}
+
+.shop-pantry-benefit__title {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--color-heading);
+}
+
+.shop-pantry-benefit__body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: var(--leading-body);
+  color: var(--color-text-taupe);
+}
+
 .shop-grid-section {
   padding-top: var(--space-4);
 }
@@ -452,6 +500,10 @@
 
   .shop-lede {
     font-size: 1rem;
+  }
+
+  .shop-pantry-benefits__grid {
+    grid-template-columns: 1fr;
   }
 
   .shop-connect__btn {

@@ -46,7 +46,7 @@ const CATEGORY_COPY: Record<
   "fresh-produce": {
     title: "Fresh Produce",
     intro:
-      "We supply restaurants and wholesale buyers with fresh herbs, leafy greens, and mushrooms grown for year\u2011round consistency. Everything is harvested at peak freshness, with additional items sourced from trusted partners who meet our standards.",
+      "For restaurants and wholesale\n\nLeafy greens and mushrooms available in bulk. Custom orders and pricing to meet your needs.",
     image: "catalog/produce/lettuce_growing_rows.jpg",
     imageAlt: "Rows of lettuce growing in the farm",
     showContactPricing: false,
@@ -61,7 +61,7 @@ const CATEGORY_COPY: Record<
   microgreens: {
     title: "Fresh Microgreens",
     intro:
-      "Full trays and harvested microgreens for restaurants and home kitchens - picked for flavor, color, and nutrition.",
+      "Sold as full trays or harvested microgreens, our greens arrive either as living trays or freshly cut and packaged. You'll never have to deal with soggy, wilted store-bought microgreens again. Research shows that microgreens can contain 4 to 40 times more nutrients than their mature vegetable counterparts in certain vitamins, minerals, and antioxidants - so a little sprinkle goes a long way.",
     image: "shop/category-microgreens.jpg",
     imageAlt: "Tray of fresh microgreens",
     showContactPricing: false,
@@ -75,7 +75,7 @@ const CATEGORY_COPY: Record<
   "pantry-blends": {
     title: "Pantry Blends",
     intro:
-      "Smoothie boosters, mushroom coffee, matcha, and drink refreshers powered by spirulina, saffron, mushrooms, microgreens, and other super-ingredients crafted for everyday rituals.",
+      "Pantry smoothie boosters, mushroom coffee, matcha, and drink refreshers powered by spirulina, saffron, mushrooms, microgreens, and other super-ingredients. Easy, everyday nutrition - just add to smoothies, water, yogurt, and more.",
     image: "shop/category-pantry-blends.jpg",
     imageAlt: "Pantry blend jars on a counter",
     showContactPricing: false,
@@ -87,7 +87,7 @@ const CATEGORY_COPY: Record<
   seasoning: {
     title: "Pantry Microgreen Seasonings",
     intro:
-      "Creative, flavorful blends with about a quarter tray of microgreens in every jar - made for finishing dishes at home or on the line.",
+      "Creative, flavorful blends made with about a quarter tray of microgreens in every jar. Perfect for busy nights, picky eaters, or anyone who wants an easy nutrition upgrade - a simple sprinkle delivers a natural boost. Freeze-dried at peak nutrition and blended with clean, everyday spices to concentrate vitamins, minerals, and antioxidants in every shake. Made with clean ingredients you can trust, so you can feel good about what you're eating.",
     image: "shop/category-seasoning.jpg",
     imageAlt: "Jars of microgreen seasonings",
     showContactPricing: false,
@@ -205,6 +205,25 @@ const SEASONING_WAYS_TO_USE = [
 
 const SEASONING_WAYS_IMAGE = "catalog/products/potato_seasoned.jpg";
 
+const PANTRY_BENEFITS = [
+  {
+    title: "Spirulina - Clean Energy + Antioxidants",
+    body: "A nutrient-dense blue-green algae packed with B-vitamins, iron, and antioxidants. Known for supporting natural energy and filling nutrient gaps when life gets busy.",
+  },
+  {
+    title: "Functional Mushrooms - Focus + Steady Energy",
+    body: "Lion's mane, reishi, cordyceps, and other functional mushrooms used for centuries and studied today for cognitive support, calm focus, and balanced daily energy.",
+  },
+  {
+    title: "Microgreens - 4-40x More Nutrient Dense",
+    body: "Young vegetable greens harvested at peak nutrition. Research shows they can contain 4-40x more vitamins and antioxidants than mature veggies - so even a small scoop delivers real benefits.",
+  },
+  {
+    title: "Saffron - Mood + Emotional Well-Being",
+    body: "A premium botanical long used for emotional balance and now clinically studied for supporting mood, stress resilience, and overall well-being.",
+  },
+] as const;
+
 export function ShopPage() {
   const stripePricesState = useStripePricesFetchState();
   const { openProductById } = useProductModal();
@@ -291,6 +310,28 @@ export function ShopPage() {
           />
         </div>
       </Section>
+
+      {freshProduceLayout || microgreensLayout ? (
+        <Section bg="white" className="shop-after-image-cta">
+          <LinkButton to="/contact" variant="primary" className="grown-btn--sharp">
+            Contact Us
+          </LinkButton>
+        </Section>
+      ) : null}
+
+      {pantryBlendsLayout ? (
+        <Section bg="white" className="shop-pantry-benefits">
+          <div className="shop-section-break shop-section-break--thin" aria-hidden />
+          <div className="shop-pantry-benefits__grid">
+            {PANTRY_BENEFITS.map((item) => (
+              <article key={item.title} className="shop-pantry-benefit">
+                <h2 className="shop-pantry-benefit__title">{item.title}</h2>
+                <p className="shop-pantry-benefit__body">{item.body}</p>
+              </article>
+            ))}
+          </div>
+        </Section>
+      ) : null}
 
       {copy?.showProduceGallery ? (
         <Section bg="white" className="shop-produce-gallery-wrap">
@@ -426,6 +467,7 @@ export function ShopPage() {
                   canPurchaseSubscription(item) ? item.priceSubscription : null
                 }
                 fulfillmentBadge={getFulfillmentBadge(item)}
+                servingLine={item.servingLine}
                 imageSrc={siteImage(getProductListImage(item))}
                 imageAlignTop={
                   item.category === "seasoning" || item.id === "microgreens-full-tray"

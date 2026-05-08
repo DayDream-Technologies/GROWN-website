@@ -74,8 +74,7 @@
   font-family: var(--font-body);
   font-size: var(--text-small);
   font-weight: 600;
-  color: var(--color-heading);
-  opacity: 0.85;
+  color: var(--color-green);
 }
 
 .product-card__blurb {
@@ -97,7 +96,7 @@
   padding: var(--space-2) var(--space-5);
   border-radius: var(--radius-sm);
   background: var(--color-price-pill);
-  color: var(--color-heading);
+  color: var(--color-maroon);
   font-family: var(--font-body);
   font-size: var(--text-small);
   font-weight: 600;
@@ -114,7 +113,15 @@
   margin: 0;
   font-family: var(--font-body);
   font-size: 0.8125rem;
-  color: var(--color-terracotta);
+  color: var(--color-gold);
+  font-weight: 600;
+}
+
+.product-card__serving {
+  margin: calc(-1 * var(--space-2)) 0 0;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  color: var(--color-gold);
   font-weight: 600;
 }
 

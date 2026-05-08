@@ -41,7 +41,7 @@
   font-weight: 600;
   line-height: var(--leading-tight);
   margin: 0;
-  color: var(--color-heading);
+  color: var(--color-green);
 }
 
 .product-modal__close {
@@ -199,7 +199,7 @@
   padding: var(--space-2) var(--space-4);
   border-radius: var(--radius-sm);
   background: var(--color-price-pill);
-  color: var(--color-heading);
+  color: var(--color-maroon);
 }
 
 .product-modal__cart-actions {
@@ -215,10 +215,19 @@
 }
 
 .product-modal__fulfillment {
+  margin: 0 0 var(--space-1);
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  color: var(--color-gold);
+  font-weight: 600;
+}
+
+.product-modal__serving {
   margin: 0 0 var(--space-4);
   font-family: var(--font-body);
   font-size: var(--text-small);
-  color: var(--color-text-taupe);
+  color: var(--color-gold);
+  font-weight: 600;
 }
 
 .product-modal__fulfillment strong {

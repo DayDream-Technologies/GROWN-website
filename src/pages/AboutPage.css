@@ -179,6 +179,7 @@
 
 .about-photo-frame--portrait .about-photo {
   aspect-ratio: 4 / 5;
+  object-position: top center;
 }
 
 .about-bullet-list {

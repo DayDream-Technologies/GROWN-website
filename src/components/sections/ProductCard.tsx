@@ -9,6 +9,7 @@ type Props = {
   priceOneTime?: string;
   priceSubscription?: string | null;
   fulfillmentBadge?: string;
+  servingLine?: string;
   /** When set, shown in the card header area */
   imageSrc?: string;
   /** Prefer top of image in frame (e.g. jar lids) */
@@ -24,6 +25,7 @@ export function ProductCard({
   priceOneTime,
   priceSubscription,
   fulfillmentBadge,
+  servingLine,
   imageSrc,
   imageAlignTop,
   onOpenDetails,
@@ -70,6 +72,9 @@ export function ProductCard({
       ) : null}
       {fulfillmentBadge ? (
         <p className="product-card__fulfillment">{fulfillmentBadge}</p>
+      ) : null}
+      {servingLine ? (
+        <p className="product-card__serving">{servingLine}</p>
       ) : null}
       {onOpenDetails ? (
         <span className="product-card__btn product-card__btn--fake">

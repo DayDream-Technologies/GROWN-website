@@ -34,6 +34,8 @@ export function getOneTimePresentation(
   product: Product,
   fetchState: StripePricesFetchState,
 ): OneTimePresentation {
+  const fallbackLabel = product.priceOneTime.trim() || COMING_SOON_LABEL;
+
   if (product.contactForPricing) {
     return {
       label: product.priceOneTime,
@@ -56,7 +58,7 @@ export function getOneTimePresentation(
     case "skipped":
     case "error":
       return {
-        label: COMING_SOON_LABEL,
+        label: fallbackLabel,
         cents: null,
         currency: "usd",
         purchasableOneTime: false,
@@ -72,7 +74,7 @@ export function getOneTimePresentation(
       const row = fetchState.prices[product.id];
       if (row == null) {
         return {
-          label: COMING_SOON_LABEL,
+          label: fallbackLabel,
           cents: null,
           currency: "usd",
           purchasableOneTime: false,

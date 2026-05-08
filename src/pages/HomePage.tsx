@@ -121,7 +121,11 @@ export function HomePage() {
         <p className="home-shelf__pipeline">grow • preserve • use</p>
         <p className="home-shelf__body">
           We grow fresh produce and microgreens, preserve excess through freeze-drying, and transform
-          them into nutrient-dense pantry seasonings and blends. No shortcuts — just real ingredients.
+          them into nutrient-dense pantry seasonings and blends. Our blends make everyday nutrition
+          easier - sprinkle them over plain noodles for a quick boost, blend a smoothie booster when
+          there's no time for veggies, or reach for our mushroom blends when you want support for
+          focus and steady energy. No shortcuts, just real ingredients from our farm and a process
+          you can trust.
         </p>
         <div className="home-shelf__break" aria-hidden />
       </Section>

@@ -141,6 +141,10 @@ export function ProductDetailModal({ product, onClose }: Props) {
             {product.category !== "seasoning" ? (
               <p className="product-modal__meta">{product.size}</p>
             ) : null}
+            <p className="product-modal__fulfillment">{product.fulfillment}</p>
+            {product.servingLine ? (
+              <p className="product-modal__serving">{product.servingLine}</p>
+            ) : null}
             <p className="product-modal__lede">{product.shortDescription}</p>
             <div className="product-modal__prose">
               <p>{product.longDescription}</p>
