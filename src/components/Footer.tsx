@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import { BRAND_HERO_LOGO } from "../config/branding";
+import { BRAND_FOOTER_LOGO } from "../config/branding";
 import { siteImage } from "../lib/images";
 import "./Footer.css";
 
 const footerLogoPath =
-  import.meta.env.VITE_HERO_LOGO?.trim() || BRAND_HERO_LOGO;
+  import.meta.env.VITE_FOOTER_LOGO?.trim() || BRAND_FOOTER_LOGO;
 
 export function Footer() {
   return (
