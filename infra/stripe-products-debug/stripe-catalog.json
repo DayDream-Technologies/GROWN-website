@@ -2,49 +2,59 @@
   "elevated-brew-mushroom": {
     "stripe_product_id": "prod_UQoMMyLLINPWAQ",
     "one_time": "",
-    "subscription": ""
+    "subscription": "",
+    "shipping_weight_lb": 1.63
   },
   "green-leaf": {
     "stripe_product_id": "prod_UQoOYqzDsWNhxH",
     "one_time": "",
-    "subscription": ""
+    "subscription": "",
+    "shipping_weight_lb": 1.63
   },
   "berry-gut-glow": {
     "stripe_product_id": "prod_UQoQ9A3W3vqELF",
     "one_time": "",
-    "subscription": ""
+    "subscription": "",
+    "shipping_weight_lb": 1.63
   },
   "matcha-revival": {
     "stripe_product_id": "prod_UQoTEtFVhSP47E",
     "one_time": "",
-    "subscription": ""
+    "subscription": "",
+    "shipping_weight_lb": 1.63
   },
   "golden-calm": {
     "stripe_product_id": "prod_UQoFhqf0SXpF7A",
-    "one_time": ""
+    "one_time": "",
+    "shipping_weight_lb": 0.75
   },
   "lemon-zest": {
     "stripe_product_id": "prod_UQoYENgr6EYszJ",
-    "one_time": ""
+    "one_time": "",
+    "shipping_weight_lb": 0.75
   },
   "medi-green-salt": {
     "stripe_product_id": "prod_UQobdcuxmIgduz",
     "one_time": "",
-    "subscription": ""
+    "subscription": "",
+    "shipping_weight_lb": 0.4
   },
   "garden-luxe-ranch": {
     "stripe_product_id": "prod_UQojG5MOfqKt7g",
     "one_time": "",
-    "subscription": ""
+    "subscription": "",
+    "shipping_weight_lb": 0.4
   },
   "salsa-verde-zest": {
     "stripe_product_id": "prod_UQolEm8i3J2pqh",
     "one_time": "",
-    "subscription": ""
+    "subscription": "",
+    "shipping_weight_lb": 0.4
   },
   "harvest-pesto-blend": {
     "stripe_product_id": "prod_UQoi3Vo5aHEs5I",
     "one_time": "",
-    "subscription": ""
+    "subscription": "",
+    "shipping_weight_lb": 0.4
   }
 }

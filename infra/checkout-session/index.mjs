@@ -5,10 +5,54 @@ import Stripe from "stripe";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-/** @type {Record<string, { stripe_product_id?: string, one_time?: string, subscription?: string }>} */
+/** @type {Record<string, { stripe_product_id?: string, one_time?: string, subscription?: string, shipping_weight_lb?: number }>} */
 const catalog = JSON.parse(
   readFileSync(join(__dirname, "stripe-catalog.json"), "utf8"),
 );
+
+const FREE_SHIPPING_SUBTOTAL_CENTS = 10_000;
+const SHIPPING_TIER_ONE_MAX_LB = 1;
+const SHIPPING_TIER_TWO_MAX_LB = 3;
+
+const SHIPPING_PRODUCTS = {
+  tier1: {
+    productId: "prod_UTUZPxfMjTVQkh",
+    amountCents: 1000,
+    displayName: "Shipping Tier One",
+  },
+  tier2: {
+    productId: "prod_UTUZtuQ0JU643n",
+    amountCents: 1300,
+    displayName: "Shipping Tier Two",
+  },
+  tier3: {
+    productId: "prod_UTUaAOqCrcdkoW",
+    amountCents: 1500,
+    displayName: "Shipping Tier Three",
+  },
+  free: {
+    productId: "prod_UTUckCpV6YxpnB",
+    amountCents: 0,
+    displayName: "Free Shipping",
+  },
+};
+
+/**
+ * @param {number} subtotalCents
+ * @param {number} totalWeightLb
+ */
+function resolveShippingTier(subtotalCents, totalWeightLb) {
+  if (subtotalCents >= FREE_SHIPPING_SUBTOTAL_CENTS) {
+    return SHIPPING_PRODUCTS.free;
+  }
+  if (totalWeightLb <= SHIPPING_TIER_ONE_MAX_LB) {
+    return SHIPPING_PRODUCTS.tier1;
+  }
+  if (totalWeightLb <= SHIPPING_TIER_TWO_MAX_LB) {
+    return SHIPPING_PRODUCTS.tier2;
+  }
+  return SHIPPING_PRODUCTS.tier3;
+}
 
 /**
  * Resolve a Stripe Price ID from a Product when the catalog stores `prod_…` only.
@@ -204,6 +248,9 @@ async function handlePostCheckoutSession(event, stripeSecret, siteUrl, hdrs) {
   const line_items = [];
 
   const resolvedPriceCache = new Map();
+  const priceAmountCache = new Map();
+  let subtotalCents = 0;
+  let totalWeightLb = 0;
 
   for (const raw of lines) {
     if (typeof raw !== "object" || raw === null) {
@@ -294,7 +341,50 @@ async function handlePostCheckoutSession(event, stripeSecret, siteUrl, hdrs) {
       };
     }
 
+    if (purchaseKind === "one_time") {
+      const shippingWeightLb = Number(row.shipping_weight_lb);
+      if (!Number.isFinite(shippingWeightLb) || shippingWeightLb <= 0) {
+        return {
+          statusCode: 400,
+          headers: hdrs,
+          body: JSON.stringify({
+            error: `Missing shipping weight for product: ${productId}`,
+          }),
+        };
+      }
+
+      let unitAmountCents;
+      if (priceAmountCache.has(priceId)) {
+        unitAmountCents = priceAmountCache.get(priceId);
+      } else {
+        const price = await stripe.prices.retrieve(priceId);
+        unitAmountCents = price.unit_amount;
+        priceAmountCache.set(priceId, unitAmountCents ?? null);
+      }
+
+      if (!Number.isInteger(unitAmountCents) || unitAmountCents < 0) {
+        return {
+          statusCode: 400,
+          headers: hdrs,
+          body: JSON.stringify({
+            error: `Invalid Stripe price amount for product: ${productId}`,
+          }),
+        };
+      }
+
+      subtotalCents += unitAmountCents * qty;
+      totalWeightLb += shippingWeightLb * qty;
+    }
+
     line_items.push({ price: priceId, quantity: qty });
+  }
+
+  if (line_items.length === 0) {
+    return {
+      statusCode: 400,
+      headers: hdrs,
+      body: JSON.stringify({ error: "Cart is empty" }),
+    };
   }
 
   const returnPath = `/checkout/return?session_id={CHECKOUT_SESSION_ID}`;
@@ -310,6 +400,32 @@ async function handlePostCheckoutSession(event, stripeSecret, siteUrl, hdrs) {
     billing_address_collection: "required",
     shipping_address_collection: { allowed_countries: ["US"] },
   };
+
+  if (purchaseKind === "one_time") {
+    const shippingTier = resolveShippingTier(subtotalCents, totalWeightLb);
+    params.shipping_options = [
+      {
+        shipping_rate_data: {
+          type: "fixed_amount",
+          fixed_amount: {
+            amount: shippingTier.amountCents,
+            currency: "usd",
+          },
+          display_name: shippingTier.displayName,
+          metadata: {
+            shipping_product_id: shippingTier.productId,
+            computed_weight_lb: totalWeightLb.toFixed(2),
+            computed_subtotal_cents: String(subtotalCents),
+          },
+        },
+      },
+    ];
+    params.metadata = {
+      shipping_product_id: shippingTier.productId,
+      shipping_weight_lb: totalWeightLb.toFixed(2),
+      shipping_subtotal_cents: String(subtotalCents),
+    };
+  }
 
   const email = typeof customerEmail === "string" ? customerEmail.trim() : "";
   if (email) {
