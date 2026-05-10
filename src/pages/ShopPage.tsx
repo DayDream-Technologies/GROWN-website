@@ -128,7 +128,7 @@ const PRODUCE_GALLERY = [
 const MICRO_GALLERY = [
   {
     title: "Full trays",
-    body: "Living trays delivered on a rhythm that matches your kitchen.",
+    body: "Delivered as living trays that keep growing on your windowsill. Harvest a little each day for peak freshness and nutrients.",
     image: "catalog/microgreens/microgreen-trays-2.png",
     imageAlt: "Microgreen growing tray",
   },
@@ -562,7 +562,7 @@ export function ShopPage() {
           <Link className="shop-footer-message__link" to="/contact">
             contact us
           </Link>{" "}
-          directly. Pantry orders of $60 or more qualify for free shipping. Subscribe & Save pantry
+          directly. Pantry orders $100 or more qualify for free shipping. Subscribe & Save pantry
           blend subscriptions launch August 2026 stay tuned.
         </p>
       </Section>

@@ -1,6 +1,7 @@
 import { useEffect, useId, useRef } from "react";
 import type { Product } from "../../data/products";
 import { useCart } from "../../context/useCart";
+import type { PurchaseKind } from "../../context/cartTypes";
 import { useStripePricesFetchState } from "../../context/useStripePricesFetchState";
 import { Button } from "../Button";
 import { PlaceholderImage } from "../PlaceholderImage";
@@ -19,7 +20,7 @@ type Props = {
 };
 
 export function ProductDetailModal({ product, onClose }: Props) {
-  const { addLine } = useCart();
+  const { addLine, openCart } = useCart();
   const stripePricesState = useStripePricesFetchState();
   const dialogRef = useRef<HTMLDialogElement>(null);
   const titleId = useId();
@@ -70,6 +71,22 @@ export function ProductDetailModal({ product, onClose }: Props) {
     if (e.target === dialogRef.current) {
       handleClose();
     }
+  };
+
+  const handleAddToCart = (
+    purchaseKind: PurchaseKind,
+    unitAmountCents: number | null,
+    productName: string,
+  ) => {
+    if (!product || unitAmountCents == null) return;
+    addLine({
+      productId: product.id,
+      purchaseKind,
+      unitAmountCents,
+      productName,
+    });
+    onClose();
+    openCart();
   };
 
   const titleLine = product
@@ -188,15 +205,9 @@ export function ProductDetailModal({ product, onClose }: Props) {
                       type="button"
                       variant="primary"
                       className="product-modal__add"
-                      onClick={() => {
-                        if (unitCents == null) return;
-                        addLine({
-                          productId: product.id,
-                          purchaseKind: "one_time",
-                          unitAmountCents: unitCents,
-                          productName: titleLine,
-                        });
-                      }}
+                      onClick={() =>
+                        handleAddToCart("one_time", unitCents, titleLine)
+                      }
                     >
                       Add to cart — one-time
                     </Button>
@@ -205,15 +216,13 @@ export function ProductDetailModal({ product, onClose }: Props) {
                         type="button"
                         variant="ghost"
                         className="product-modal__add product-modal__add--subscribe"
-                        onClick={() => {
-                          if (subscriptionCents == null) return;
-                          addLine({
-                            productId: product.id,
-                            purchaseKind: "subscription",
-                            unitAmountCents: subscriptionCents,
-                            productName: titleLine,
-                          });
-                        }}
+                        onClick={() =>
+                          handleAddToCart(
+                            "subscription",
+                            subscriptionCents,
+                            titleLine,
+                          )
+                        }
                       >
                         Add to cart — subscribe
                       </Button>

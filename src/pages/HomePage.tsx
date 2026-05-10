@@ -63,7 +63,7 @@ const HERO_IMAGE_PATHS = [
 ];
 
 const MISSION_TEXT =
-  "We supply restaurants and wholesale buyers with fresh herbs, leafy greens, and mushrooms grown for year-round consistency. Everything is harvested at peak freshness, with additional items sourced from trusted partners who meet our standards.";
+  "GROWN exists to honor the full life of a plant - from seed to spice. We cultivate fresh microgreens and produce, harvesting everything at peak freshness and sourcing additional ingredients from trusted partners who meet our standards. We freeze-dry any excess and transform every harvest into clean, nutrient-rich pantry staples. Our mission is to make intentional eating simple, sustainable, and deeply nourishing.";
 
 export function HomePage() {
   const [heroIndex, setHeroIndex] = useState(0);

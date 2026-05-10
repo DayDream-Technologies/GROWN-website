@@ -152,7 +152,7 @@ export function CartDrawer() {
                 <strong>{formatUsdFromCents(subtotalCents)}</strong>
               </div>
               <p className="cart-drawer__hint">
-                Free shipping on orders over $60. Subscription orders include free
+                Free shipping on pantry orders $100 or more. Subscription orders include free
                 shipping and 7% off eligible items. Taxes and shipping are finalized in
                 Stripe checkout.
               </p>
