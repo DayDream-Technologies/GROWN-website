@@ -26,10 +26,7 @@ export async function fetchCatalogOneTimePrices(): Promise<CatalogOneTimePricesR
   if (!base) {
     throw new Error("Checkout API URL is not configured.");
   }
-  const res = await fetch(`${base}/catalog/one-time-prices`, {
-    method: "GET",
-    headers: { Accept: "application/json" },
-  });
+  const res = await fetch(`${base}/catalog/one-time-prices`, { method: "GET" });
   const data: unknown = await res.json().catch(() => null);
   if (!res.ok) {
     const err =

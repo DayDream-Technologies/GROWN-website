@@ -49,6 +49,13 @@ async function resolvePriceIdFromStripeProduct(
   return (defaultMatch ?? matches[0]).id;
 }
 
+/** Trim and strip trailing slashes so config can match browser `Origin`. */
+function normalizeOrigin(o) {
+  const t = String(o ?? "").trim();
+  if (!t || t === "*") return t;
+  return t.replace(/\/+$/, "");
+}
+
 function parseCorsAllowlist(raw) {
   const s = String(raw ?? "*").trim();
   if (!s) return ["*"];
@@ -65,17 +72,23 @@ function parseCorsAllowlist(raw) {
 function pickAccessControlAllowOrigin(allowlist, requestHeaders) {
   if (allowlist.includes("*")) return "*";
 
-  const origin =
+  const rawOrigin =
     typeof requestHeaders?.origin === "string"
       ? requestHeaders.origin
       : typeof requestHeaders?.Origin === "string"
         ? requestHeaders.Origin
         : "";
 
-  if (!origin) {
-    return allowlist[0] ?? null;
+  if (!rawOrigin) {
+    const first = allowlist[0];
+    return first && first !== "*" ? normalizeOrigin(first) : first ?? null;
   }
-  if (allowlist.includes(origin)) return origin;
+
+  const normRequest = normalizeOrigin(rawOrigin);
+  for (const entry of allowlist) {
+    if (entry === "*") return "*";
+    if (normalizeOrigin(entry) === normRequest) return rawOrigin;
+  }
   return null;
 }
 
@@ -85,7 +98,7 @@ function corsHeaders(allowOrigin) {
   const h = { "Content-Type": "application/json" };
   if (allowOrigin != null && allowOrigin !== "") {
     h["Access-Control-Allow-Origin"] = allowOrigin;
-    h["Access-Control-Allow-Headers"] = "Content-Type";
+    h["Access-Control-Allow-Headers"] = "Content-Type, Accept";
     h["Access-Control-Allow-Methods"] = "GET,OPTIONS";
   }
   return h;

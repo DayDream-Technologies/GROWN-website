@@ -36,15 +36,6 @@ Parameters:
 Resources:
   StripeHttpApi:
     Type: AWS::Serverless::HttpApi
-    Properties:
-      CorsConfiguration:
-        AllowMethods:
-          - GET
-          - POST
-          - OPTIONS
-        AllowHeaders:
-          - content-type
-        AllowOrigins: !Split [",", !Ref AllowedOrigin]
 
   CheckoutSessionFunction:
     Type: AWS::Serverless::Function
@@ -66,12 +57,24 @@ Resources:
             ApiId: !Ref StripeHttpApi
             Path: /checkout/session
             Method: POST
+        CheckoutApiOptions:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref StripeHttpApi
+            Path: /checkout/session
+            Method: OPTIONS
         CatalogOneTimePricesApi:
           Type: HttpApi
           Properties:
             ApiId: !Ref StripeHttpApi
             Path: /catalog/one-time-prices
             Method: GET
+        CatalogOneTimePricesApiOptions:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref StripeHttpApi
+            Path: /catalog/one-time-prices
+            Method: OPTIONS
 
   StripeProductsDebugFunction:
     Type: AWS::Serverless::Function
@@ -92,6 +95,12 @@ Resources:
             ApiId: !Ref StripeHttpApi
             Path: /debug/stripe-products
             Method: GET
+        StripeProductsDebugApiOptions:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref StripeHttpApi
+            Path: /debug/stripe-products
+            Method: OPTIONS
 
   StripeWebhookFunction:
     Type: AWS::Serverless::Function
