@@ -129,12 +129,46 @@ async function resolveCatalogPriceId(stripe, row, purchaseKind, resolvedPriceCac
   return priceId?.trim() || null;
 }
 
-function headers(origin) {
-  return {
-    "Access-Control-Allow-Origin": origin || "*",
-    "Access-Control-Allow-Headers": "Content-Type",
-    "Content-Type": "application/json",
-  };
+function parseCorsAllowlist(raw) {
+  const s = String(raw ?? "*").trim();
+  if (!s) return ["*"];
+  return s
+    .split(",")
+    .map((x) => x.trim())
+    .filter(Boolean);
+}
+
+/**
+ * @param {string[]} allowlist
+ * @param {Record<string, string | undefined> | undefined} requestHeaders
+ */
+function pickAccessControlAllowOrigin(allowlist, requestHeaders) {
+  if (allowlist.includes("*")) return "*";
+
+  const origin =
+    typeof requestHeaders?.origin === "string"
+      ? requestHeaders.origin
+      : typeof requestHeaders?.Origin === "string"
+        ? requestHeaders.Origin
+        : "";
+
+  if (!origin) {
+    return allowlist[0] ?? null;
+  }
+  if (allowlist.includes(origin)) return origin;
+  return null;
+}
+
+/** @param {string | null} allowOrigin */
+function corsHeaders(allowOrigin) {
+  /** @type {Record<string, string>} */
+  const h = { "Content-Type": "application/json" };
+  if (allowOrigin != null && allowOrigin !== "") {
+    h["Access-Control-Allow-Origin"] = allowOrigin;
+    h["Access-Control-Allow-Headers"] = "Content-Type";
+    h["Access-Control-Allow-Methods"] = "GET, POST, OPTIONS";
+  }
+  return h;
 }
 
 function matchesPath(rawPath, suffix) {
@@ -455,8 +489,10 @@ async function handlePostCheckoutSession(event, stripeSecret, siteUrl, hdrs) {
 }
 
 export async function handler(event) {
-  const corsOrigin = process.env.CORS_ORIGIN || "*";
-  const hdrs = headers(corsOrigin);
+  const allowlist = parseCorsAllowlist(process.env.CORS_ORIGIN);
+  const hdrs = corsHeaders(
+    pickAccessControlAllowOrigin(allowlist, event.headers),
+  );
 
   const httpMethod =
     event.requestContext?.http?.method ?? event.httpMethod ?? "POST";

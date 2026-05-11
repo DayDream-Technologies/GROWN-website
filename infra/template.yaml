@@ -16,7 +16,10 @@ Globals:
 Parameters:
   AllowedOrigin:
     Type: String
-    Description: Browser origin allowed for CORS (e.g. https://your-app.amplifyapp.com). Use * only for debugging.
+    Description: >-
+      Browser origin(s) for CORS — must match the live site(s) exactly (scheme + host, no path).
+      Comma-separated for multiple sites, e.g. https://grownhydrofarms.com,https://preview.amplifyapp.com
+      (no spaces around commas). Use * only for debugging.
     Default: '*'
   SiteUrl:
     Type: String
@@ -41,8 +44,7 @@ Resources:
           - OPTIONS
         AllowHeaders:
           - content-type
-        AllowOrigins:
-          - !Ref AllowedOrigin
+        AllowOrigins: !Split [",", !Ref AllowedOrigin]
 
   CheckoutSessionFunction:
     Type: AWS::Serverless::Function

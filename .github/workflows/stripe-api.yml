@@ -6,6 +6,8 @@
 #     Requires AWS IAM OIDC provider for GitHub + trust policy on the role for this repo.
 #
 # Also required: STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET | Variables: SITE_URL, ALLOWED_ORIGIN
+# SITE_URL: public site base (no trailing slash), e.g. https://grownhydrofarms.com — used for Stripe Checkout return_url.
+# ALLOWED_ORIGIN: exact SPA origin(s), comma-separated, no spaces (e.g. https://grownhydrofarms.com,https://main.d3ok3c3nh0dsqd.amplifyapp.com).
 # Optional variable: AWS_REGION (defaults to us-east-1)
 #
 # Secrets and variables live under GitHub → Settings → Environments → production
