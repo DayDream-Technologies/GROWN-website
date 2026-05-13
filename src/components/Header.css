@@ -2,9 +2,20 @@
   position: sticky;
   top: 0;
   z-index: 40;
-  height: var(--header-height);
   background: var(--color-page-cream);
   border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.site-header__notice {
+  width: 100%;
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-green);
+  color: var(--color-text-on-accent);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.35;
+  text-align: center;
 }
 
 .site-header__inner {
@@ -310,6 +321,11 @@
 }
 
 @media (max-width: 800px) {
+  .site-header__notice {
+    padding: var(--space-2) var(--space-3);
+    font-size: 0.875rem;
+  }
+
   .site-header__inner {
     padding: 0 var(--space-4);
     gap: var(--space-3);
