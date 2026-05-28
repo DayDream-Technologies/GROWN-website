@@ -136,6 +136,11 @@ function normalizeOrigin(o) {
   return t.replace(/\/+$/, "");
 }
 
+/** Strip "www." prefix for loose matching (https://www.foo.com → https://foo.com). */
+function stripWww(origin) {
+  return origin.replace(/^(https?:\/\/)www\./i, "$1");
+}
+
 function parseCorsAllowlist(raw) {
   const s = String(raw ?? "*").trim();
   if (!s) return ["*"];
@@ -165,9 +170,13 @@ function pickAccessControlAllowOrigin(allowlist, requestHeaders) {
   }
 
   const normRequest = normalizeOrigin(rawOrigin);
+  const bareRequest = stripWww(normRequest);
   for (const entry of allowlist) {
     if (entry === "*") return "*";
-    if (normalizeOrigin(entry) === normRequest) return rawOrigin;
+    const normEntry = normalizeOrigin(entry);
+    if (normEntry === normRequest || stripWww(normEntry) === bareRequest) {
+      return rawOrigin;
+    }
   }
   return null;
 }
