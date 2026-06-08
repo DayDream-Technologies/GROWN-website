@@ -455,6 +455,7 @@ async function handlePostCheckoutSession(event, stripeSecret, siteUrl, hdrs) {
     customer_creation: "always",
     billing_address_collection: "required",
     shipping_address_collection: { allowed_countries: ["US"] },
+    allow_promotion_codes: true,
   };
 
   if (purchaseKind === "one_time") {
