@@ -48,7 +48,7 @@ export function Footer() {
           <Link to="/">Home</Link>
           <Link to="/shop?category=fresh-produce">Fresh Produce</Link>
           <Link to="/shop?category=microgreens">Fresh Microgreens</Link>
-          <Link to="/shop?category=pantry-blends">Pantry Blends</Link>
+          <Link to="/shop?category=pantry-blends">Pantry Drink Refresher Powders</Link>
           <Link to="/shop?category=seasoning">Pantry Microgreen Seasonings</Link>
           <Link to="/contact">Contact</Link>
           <Link to="/about">About</Link>

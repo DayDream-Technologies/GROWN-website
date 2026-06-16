@@ -66,7 +66,7 @@ export function AboutPage() {
               color, and flavor to everyday meals.
             </p>
             <p className="about-prose">
-              From there, the work expanded into fresh produce, pantry blends, and
+              From there, the work expanded into fresh produce, drink refresher powders, and
               wholesale relationships with kitchens that care about consistency.
             </p>
           </div>
@@ -179,7 +179,7 @@ export function AboutPage() {
       <Section bg="blush" className="about-cta">
         <h2 className="about-cta__title">Bring GROWN home or to your business</h2>
         <div className="about-cta__actions">
-          <LinkButton to="/shop?category=pantry-blends">Shop pantry blends</LinkButton>
+          <LinkButton to="/shop?category=pantry-blends">Shop drink refresher powders</LinkButton>
           <LinkButton to="/contact">Contact Us</LinkButton>
           <LinkButton to="/shop?category=fresh-produce">
             Fresh produce & wholesale

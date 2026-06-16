@@ -40,13 +40,13 @@ export const products: Product[] = [
     subtitle: "Powered by Mushrooms",
     size: "Net weight: 5 oz (28 servings)",
     shortDescription:
-      "Instant mushroom coffee blend for smooth, energizing flavor.",
+      "Refreshing mushroom coffee blend. Stir 1 scoop (1 tbsp) into 6 oz of hot water, stir and enjoy. Add ice to make iced coffee or add cream and sweetener. Helps with cognitive function, mood, and focus.",
     priceOneTime: "$28.99",
     priceSubscription: null,
     fulfillment: "Local & Delivery",
-    servingLine: "28 servings: $1.03 per serving",
+    servingLine: "28 servings — 1 scoop per serving (1 tbsp)",
     longDescription:
-      "Elevated Brew combines organic instant coffee with functional mushrooms like Lion's Mane and Reishi - ingredients studied for their potential to support cognitive function and steady focus. Freeze-dried microgreens add naturally occurring antioxidants and plant nutrients. Enjoy it hot, iced, or blended into smoothies for a smooth, jitter-free boost.",
+      "Refreshing mushroom coffee blend. Stir 1 scoop (1 tbsp) into 6 oz hot water; add ice or creamer as desired. Helps with cognitive function, mood, and focus. Sugar-free options available. Powered by mushroom complex.",
     ingredients:
       "Organic Instant Coffee (Arabica), Organic Lion's Mane Powder, Organic Reishi Powder, Organic Chaga Powder, Organic Cordyceps Powder, Organic Turkey Tail Powder, Organic Shiitake Powder, Organic Maitake Powder, Organic Mesima Powder, Organic Wood Ear Powder, Organic Oyster Powder.",
     recipes: [
@@ -69,31 +69,31 @@ export const products: Product[] = [
   },
   {
     id: "green-leaf",
-    name: "Immune Leaf",
+    name: "Green Citrus Leaf",
     subtitle: "Powered by Microgreens",
-    size: "Net weight: 8 oz (35 servings)",
+    size: "Net weight: 4.2 oz",
     shortDescription:
-      "Pure greens powered by freeze-dried microgreens for immune support.",
-    priceOneTime: "$49.99",
+      "Revitalize your day with a zesty burst of citrus goodness! Stir 1.5 scoops into 4–6 oz of water, add ice and enjoy. Adjust to taste.",
+    priceOneTime: "$25.99",
     priceSubscription: null,
     fulfillment: "Local & Delivery",
-    servingLine: "35 servings: $1.43 per serving",
+    servingLine: "32 servings — 1.5 scoops (1.5 tsp) per serving",
     longDescription:
-      "Immune Leaf is built on freeze-dried microgreens - shown in USDA-funded university research to contain 4-40x more vitamins and antioxidants than mature greens. This pure greens blend delivers concentrated plant nutrients in every scoop for an easy daily upgrade.",
+      "Enjoy the zesty goodness of our Green Citrus Leaf drink, combining organic lemon powder, organic lime powder, and hydroponic spinach microgreen powder. This invigorating blend delivers a refreshing citrus flavor while offering a boost of nutrients, making it a perfect choice for a revitalizing drink any time of day. Sugar-free, vegan, made with real fruit and veggies. Powered by microgreens.",
     ingredients:
-      "Organic Broccoli Powder, Organic Alfalfa Grass Powder, Organic Kale Powder, Organic Spinach Powder, Organic Spirulina Powder, Organic Wheatgrass Powder, Organic Inulin (chicory root), Organic Ashwagandha Root Powder, Organic Panax Ginseng Root Powder, Bacillus subtilis (probiotic), Hydroponic Microgreens Blend.",
+      "Organic Lemon Powder, Organic Lime Powder, Organic Stevia Powder, Organic Spinach Powder, Hydroponic Microgreen Blend.",
     recipes: [
       {
-        title: "Green Smoothie",
-        body: "1 scoop + 1 banana + 1 cup almond milk + 1/2 cup berries, blend.",
+        title: "Green Citrus Refresher",
+        body: "1.5 scoops Green Citrus Leaf + 6 oz cold water + ice + lime wheel + mint; stir and enjoy.",
       },
       {
-        title: "Green Yogurt Bowl",
-        body: "1 scoop stirred into 6 oz yogurt, top with granola & fruit.",
+        title: "Citrus Green Smoothie",
+        body: "1.5 scoops Green Citrus Leaf + 6 oz coconut water + 1/2 avocado + handful spinach + ice; blend until smooth.",
       },
       {
-        title: "Veggie Soup Boost",
-        body: "1 tsp stirred into 1 cup hot vegetable broth for savory nutrient boost.",
+        title: "Energizing Spritz",
+        body: "1.5 scoops Green Citrus Leaf + 4 oz sparkling water + 2 oz cold water + 1/4 tsp grated ginger + ice; stir and serve.",
       },
     ],
     labelNotes:
@@ -102,31 +102,31 @@ export const products: Product[] = [
   },
   {
     id: "berry-gut-glow",
-    name: "Berry Gut Glow",
-    subtitle: "Powered by Microgreens + Berries",
-    size: "Net weight: 5 oz (45 servings)",
+    name: "Strawberry Rosé",
+    subtitle: "Powered by Microgreens",
+    size: "Net weight: 4.2 oz (24 servings)",
     shortDescription:
-      "Berry-forward blend powered by microgreens; easy to stir into smoothies, oats, or yogurt.",
-    priceOneTime: "$38.99",
+      "Indulge in the refreshing slight sweetness of strawberries with a hint of lemon. Stir 2 tsp into 4–6 oz of water, add ice and enjoy. Adjust to taste.",
+    priceOneTime: "$24.99",
     priceSubscription: null,
     fulfillment: "Local & Delivery",
-    servingLine: "45 servings: $0.87 per serving",
+    servingLine: "24 servings — 2 scoops (2 tsp) per serving",
     longDescription:
-      "Berry Gut Glow brings together clean berry superfoods, natural polyphenols, and freeze-dried microgreens for a simple daily boost. Berries provide fiber and antioxidant compounds that support gentle digestive balance, while microgreens deliver concentrated vitamins and minerals. Blend into smoothies, bowls, or snacks for an easy, nutrient-dense addition to your routine.",
+      "Experience the refreshing taste of our Strawberry Rosé drink, a delightful blend of hydroponic microgreen powder, organic strawberry powder, and organic lemon, sweetened naturally with stevia. This vibrant mix not only offers a delicious flavor but also packs a nutritional punch, providing essential vitamins and minerals to support your wellness. Sugar-free, vegan, made with real fruit and veggies. Powered by microgreens.",
     ingredients:
-      "Organic blueberry powder, organic chia seeds, organic flax berry powder, organic Acai Powder, Organic Camu Camu Powder, Sea Salt, Hydroponic Microgreens Blend.",
+      "Organic Strawberry Powder, Organic Lemon Powder, Organic Stevia Powder, Hydroponic Microgreen Powder.",
     recipes: [
       {
-        title: "Berry Gut Smoothie",
-        body: "2 Tbsp Berry Gut Glow + 1 cup mixed berries + 1 cup almond milk + extra chia if you like, blend.",
+        title: "Strawberry Rosé Cooler",
+        body: "2 scoops Strawberry Rosé + 6 oz cold water + ice + splash lemon juice + basil leaf; stir and serve.",
       },
       {
-        title: "Tropical Digestive Smoothie",
-        body: "2 Tbsp Berry Gut Glow + 1/2 banana + 1/2 cup pineapple + 1 cup coconut milk, blend.",
+        title: "Berry Oat Smoothie",
+        body: "2 scoops Strawberry Rosé + 6 oz oat milk + 1/2 cup frozen berries + 1 tbsp flaxseed; blend until creamy.",
       },
       {
-        title: "Green Detox Shake",
-        body: "2 Tbsp Berry Gut Glow + 1/2 avocado + 1 cup spinach + 1 cup cucumber juice, blend.",
+        title: "Rosé Chia Refresher",
+        body: "2 scoops Strawberry Rosé + 6 oz water + 1 tbsp chia seeds (soak 5 min) + ice + sliced strawberries; stir and serve.",
       },
     ],
     labelNotes:
@@ -137,17 +137,17 @@ export const products: Product[] = [
     id: "matcha-revival",
     name: "Matcha Revival",
     subtitle: "Powered by Matcha + Mushrooms",
-    size: "Net weight: 8 oz (45 servings)",
+    size: "Net weight: 5 oz (33 servings)",
     shortDescription:
-      "Matcha + mushroom complex with microgreens for clean focus and calm energy.",
+      "Matcha + mushroom complex with microgreens for clean focus and calm energy. Stir 2 scoops (2 tsp) into 6 oz of hot water, add your choice of sweetener and enjoy. Can also be enjoyed iced.",
     priceOneTime: "$38.99",
     priceSubscription: null,
     fulfillment: "Local & Delivery",
-    servingLine: "45 servings: $0.87 per serving",
+    servingLine: "33 servings — 1.5 scoops per serving (5 g)",
     longDescription:
-      "Matcha Revival blends ceremonial-grade matcha with a targeted mushroom complex, offering naturally occurring antioxidants and compounds studied for their potential to support cognitive performance and calm, steady energy. Freeze-dried microgreens add concentrated plant nutrients for a refreshing, daily wellness ritual.",
+      "Matcha blended with a mushroom complex and microgreens for calm, focused energy. Prepare hot or iced.",
     ingredients:
-      "Organic Matcha Green Tea Powder, Organic Lion's Mane Powder, Organic Reishi Powder, Organic Chaga Powder, Organic Maitake Powder, Organic Cordyceps Powder, Organic Turkey Tail Powder, Organic Shiitake Powder, Hydroponic Microgreens Blend.",
+      "Organic Matcha Green Tea Powder, Organic Lion's Mane Powder, Organic Reishi Powder, Organic Chaga Powder, Organic Maitake Powder, Organic Cordyceps Powder, Organic Turkey Tail Powder, Organic Shiitake Powder, Organic Stevia Powder, Hydroponic Microgreens Blend.",
     recipes: [
       {
         title: "Matcha Mushroom Latte",
@@ -170,15 +170,15 @@ export const products: Product[] = [
     id: "golden-calm",
     name: "Golden Calm",
     subtitle: "Powered by Saffron + Botanicals",
-    size: "Net weight: 24-48 g (16 servings)",
+    size: "Net weight: 24-48 g (18 servings)",
     shortDescription:
-      "Soothing loose-leaf tea with chamomile, lavender, saffron, and microgreens.",
+      "Soothing loose-leaf tea with chamomile, lavender, saffron, and microgreens. Add 3 scoops to a tea infuser and steep in hot water for about 4 minutes. Remove infuser and enjoy before bed to help wind down.",
     priceOneTime: "$39.99",
     priceSubscription: null,
     fulfillment: "Local & Delivery",
-    servingLine: "16 servings: $2.50 per serving",
+    servingLine: "18 servings — 3 scoops (3 tsp) per serving",
     longDescription:
-      "Golden Calm is a calming botanical blend of chamomile, lavender, saffron threads, and freeze-dried microgreens. Saffron has been clinically studied for its potential to support emotional well-being, while chamomile and lavender offer naturally soothing aromatics. A gentle, floral tea for winding down or creating a quiet moment anytime.",
+      "Soothing loose-leaf tea with chamomile, lavender, saffron, and microgreens. Steep 3 scoops for ~4 minutes. Helps with mood and winding down for the night.",
     ingredients:
       "Organic chamomile, Organic lavender, Saffron Threads, Hydroponic Microgreens Blend.",
     recipes: [
@@ -200,31 +200,31 @@ export const products: Product[] = [
   },
   {
     id: "lemon-zest",
-    name: "Lemon Zest",
+    name: "Blue Lemon Zest",
     subtitle: "Powered by Spirulina + Lemon",
     size: "Net weight: 4.2 oz (32 servings)",
     shortDescription:
-      "Refreshing blend with a boost from spirulina and lemon.",
+      "Refreshing blend with a boost from spirulina and lemon. Stir 1.5 scoops (1.5 tsp) into 4–6 oz of water, add ice and enjoy. Adjust to taste.",
     priceOneTime: "$35.00",
     priceSubscription: null,
     fulfillment: "Local & Delivery",
-    servingLine: "32 servings: $1.09 per serving",
+    servingLine: "32 servings — 1.5 scoops per serving",
     longDescription:
-      "Lemon Zest combines bright lemon with spirulina - a nutrient-dense algae rich in antioxidants, minerals, and plant-based protein. Freeze-dried microgreens add additional concentrated nutrients. Mix into water, tea, or smoothies for a refreshing, hydrating boost that fits easily into busy days.",
+      "A refreshing lemon-forward drink powder enhanced with spirulina for color and nutrition. Sugar-free, vegan, made with real fruit and veggies. Powered by spirulina.",
     ingredients:
       "Organic Lemon Powder, Organic Spirulina Powder, Organic Monkfruit, Hydroponic Microgreens Blend.",
     recipes: [
       {
-        title: "Lemon Spirulina Water",
-        body: "1 scoop Lemon Zest + 1 cup cold water, stir or shake.",
-      },
-      {
         title: "Zesty Mocktail",
-        body: "1 scoop Lemon Zest + 1 cup seltzer + lemon slice + mint, stir over ice.",
+        body: "1.5 scoops Blue Lemon Zest + 6 oz cold water + ice + lemon slice + fresh mint; stir over ice.",
       },
       {
-        title: "Citrus Smoothie",
-        body: "1 scoop Lemon Zest + 1 banana + 1 cup almond milk + handful of spinach, blend.",
+        title: "Citrus Fizz Spritzer",
+        body: "1.5 scoops Blue Lemon Zest + 4 oz sparkling water + 2 oz cold water + ice + cucumber ribbon; gently stir.",
+      },
+      {
+        title: "Lemon Smooth Boost",
+        body: "1.5 scoops Blue Lemon Zest + 6 oz almond milk + 1 frozen banana + handful ice; blend until smooth.",
       },
     ],
     extraNotes: ["Not eligible for monthly subscription."],

@@ -73,11 +73,11 @@ const CATEGORY_COPY: Record<
     showConnect: false,
   },
   "pantry-blends": {
-    title: "Pantry Blends",
+    title: "Pantry Drink Refreshers",
     intro:
-      "Pantry smoothie boosters, mushroom coffee, matcha, and drink refreshers powered by spirulina, saffron, mushrooms, microgreens, and other super-ingredients. Easy, everyday nutrition - just add to smoothies, water, yogurt, and more.",
+      "Simply mix our pure freeze-dried fruit and veggie powders with water to enjoy delicious flavors and nutritional benefits, all powered by microgreens, spirulina, mushrooms, or saffron. Our offerings include Blue Lemon Zest, Strawberry Rosé and Green Citrus Leaf (drink refresher powders), Elevated Brew (mushroom coffee) and Matcha Revival (mushroom matcha), and Golden Calm (loose leaf tea) which can be enjoyed hot or cold.",
     image: "shop/category-pantry-blends.jpg",
-    imageAlt: "Pantry blend jars on a counter",
+    imageAlt: "Pantry drink refresher powder jars on a counter",
     showContactPricing: false,
     showVarietyRow: false,
     showProduceGallery: false,
@@ -262,7 +262,7 @@ export function ShopPage() {
 
   const defaultTitle = "Shop GROWN";
   const defaultLede =
-    "Browse everything we offer - or jump to Fresh Produce, Microgreens, Pantry Seasonings, or Pantry Blends from the menu above.";
+    "Browse everything we offer - or jump to Fresh Produce, Microgreens, Pantry Seasonings, or Pantry Drink Refresher Powders from the menu above.";
   const defaultImage = "shop/default.jpg";
   const defaultImageAlt = "GROWN farm products";
 
@@ -416,7 +416,7 @@ export function ShopPage() {
           <>
             <h2 className="shop-grid-heading">
               {pantryBlendsLayout
-                ? "Shop Pantry Blends"
+                ? "Shop Pantry Drink Refreshers"
                 : seasoningLayout
                   ? "Pantry Microgreen Seasonings"
                   : "Shop Fresh Produce"}

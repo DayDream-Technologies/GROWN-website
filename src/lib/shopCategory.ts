@@ -62,7 +62,11 @@ export const SHOP_NAV_CATEGORIES: {
 }[] = [
   { id: "fresh-produce", label: "Fresh Produce", path: "/shop?category=fresh-produce" },
   { id: "microgreens", label: "Fresh Microgreens", path: "/shop?category=microgreens" },
-  { id: "pantry-blends", label: "Pantry Blends", path: "/shop?category=pantry-blends" },
+  {
+    id: "pantry-blends",
+    label: "Pantry Drink Refresher Powders",
+    path: "/shop?category=pantry-blends",
+  },
   {
     id: "seasoning",
     label: "Pantry Microgreen Seasonings",

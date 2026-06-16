@@ -40,7 +40,7 @@ export function Header() {
     <header className="site-header">
       {/*
       <div className="site-header__notice" role="note">
-        Preorders available now for Pantry Blends and Microgreen seasonings.
+        Preorders available now for Pantry Drink Refresher Powders and Microgreen seasonings.
         Orders ship beginning May 29. Thanks!
       </div>
       */}

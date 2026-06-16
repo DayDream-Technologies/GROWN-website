@@ -43,14 +43,14 @@ const CATEGORY_CARDS = [
     buttonVariant: "maroon" as const,
   },
   {
-    title: "Pantry Blends",
+    title: "Pantry Drink Refresher Powders",
     subtitle: "For home kitchens",
     detail:
-      "Smoothie boosters, mushroom coffee, matcha & drink refreshers powered by spirulina, saffron, mushrooms & microgreens",
+      "Transform your water into a delicious, clean beverage with our Pure Drink Refreshers. All powered by spirulina, saffron, mushrooms & microgreens.",
     image: "home/category-pantry-blends.jpg",
-    imageAlt: "Pantry blend jars",
+    imageAlt: "Pantry drink refresher powder jars",
     href: "/shop?category=pantry-blends",
-    cta: "Explore Pantry Blends",
+    cta: "Explore Drink Refresher Powders",
     buttonVariant: "maroon" as const,
   },
 ];
@@ -120,12 +120,12 @@ export function HomePage() {
         </h2>
         <p className="home-shelf__pipeline">grow • preserve • use</p>
         <p className="home-shelf__body">
-          We grow fresh produce and microgreens, preserve excess through freeze-drying, and transform
-          them into nutrient-dense pantry seasonings and blends. Our blends make everyday nutrition
-          easier - sprinkle them over plain noodles for a quick boost, blend a smoothie booster when
-          there's no time for veggies, or reach for our mushroom blends when you want support for
-          focus and steady energy. No shortcuts, just real ingredients from our farm and a process
-          you can trust.
+          We grow fresh produce and microgreens, preserving excess through freeze-drying to transform
+          it into nutrient-dense pantry seasonings and drink refresher powders. Our blends make
+          everyday nutrition easier—simply sprinkle our seasonings over your favorite foods for a
+          quick boost, or mix our powders with water for a refreshing and nutritious drink that even
+          your kids will love. With no sugar and no fillers, you get only real fruits, veggies, and
+          herbs powered by our super ingredients: microgreens, saffron, spirulina, and mushrooms.
         </p>
         <div className="home-shelf__break" aria-hidden />
       </Section>
