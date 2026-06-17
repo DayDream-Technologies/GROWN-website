@@ -51,6 +51,7 @@
 }
 
 .product-card__visual--packshot {
+  aspect-ratio: 1 / 1;
   background: #fff;
 }
 
