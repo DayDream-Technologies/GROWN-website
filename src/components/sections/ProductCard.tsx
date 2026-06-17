@@ -14,6 +14,8 @@ type Props = {
   imageSrc?: string;
   /** Prefer top of image in frame (e.g. jar lids) */
   imageAlignTop?: boolean;
+  /** Show full white-background product image without lifestyle cropping. */
+  imageContain?: boolean;
   onOpenDetails?: () => void;
 };
 
@@ -28,6 +30,7 @@ export function ProductCard({
   servingLine,
   imageSrc,
   imageAlignTop,
+  imageContain,
   onOpenDetails,
 }: Props) {
   const primaryPrice = priceOneTime ?? price ?? "";
@@ -41,7 +44,9 @@ export function ProductCard({
       <div
         className={
           imageSrc
-            ? "product-card__visual product-card__visual--photo"
+            ? `product-card__visual product-card__visual--photo${
+                imageContain ? " product-card__visual--packshot" : ""
+              }`
             : "product-card__visual"
         }
       >
@@ -49,11 +54,9 @@ export function ProductCard({
           <img
             src={imageSrc}
             alt={`${name} — product photo`}
-            className={
-              imageAlignTop
-                ? "product-card__photo product-card__photo--top"
-                : "product-card__photo"
-            }
+            className={`product-card__photo${
+              imageAlignTop ? " product-card__photo--top" : ""
+            }${imageContain ? " product-card__photo--contain" : ""}`}
             loading="lazy"
             decoding="async"
           />

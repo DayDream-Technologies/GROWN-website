@@ -7,7 +7,7 @@ import { Button } from "../Button";
 import { PlaceholderImage } from "../PlaceholderImage";
 import { FreshProductInquiryForm } from "./FreshProductInquiryForm";
 import { siteImage } from "../../lib/images";
-import { getProductListImage } from "../../lib/productImages";
+import { getProductListImage, isProductPackshot } from "../../lib/productImages";
 import {
   getOneTimePresentation,
   getSubscriptionPresentation,
@@ -97,6 +97,7 @@ export function ProductDetailModal({ product, onClose }: Props) {
 
   const heroPath = product ? getProductListImage(product) : null;
   const heroUrl = heroPath ? siteImage(heroPath) : null;
+  const heroIsPackshot = product ? isProductPackshot(product) : false;
   const oneTime = product
     ? getOneTimePresentation(product, stripePricesState)
     : null;
@@ -142,10 +143,16 @@ export function ProductDetailModal({ product, onClose }: Props) {
           </header>
 
           <div className="product-modal__body">
-            <div className="product-modal__hero">
+            <div
+              className={`product-modal__hero${
+                heroIsPackshot ? " product-modal__hero--packshot" : ""
+              }`}
+            >
               {heroUrl ? (
                 <img
-                  className="product-modal__hero-img"
+                  className={`product-modal__hero-img${
+                    heroIsPackshot ? " product-modal__hero-img--contain" : ""
+                  }`}
                   src={heroUrl}
                   alt={`${titleLine} — product photo`}
                   loading="lazy"

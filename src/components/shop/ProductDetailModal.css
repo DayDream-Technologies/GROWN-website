@@ -80,6 +80,10 @@
   background: var(--color-warm-neutral);
 }
 
+.product-modal__hero--packshot {
+  background: #fff;
+}
+
 .product-modal__hero .placeholder-image {
   min-height: 12rem;
   border-radius: 0;
@@ -91,6 +95,12 @@
   width: 100%;
   max-height: 14rem;
   object-fit: cover;
+  object-position: center;
+}
+
+.product-modal__hero-img--contain {
+  height: 14rem;
+  object-fit: contain;
 }
 
 .product-modal__hero-img--top {
