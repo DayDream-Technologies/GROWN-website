@@ -76,7 +76,7 @@ const CATEGORY_COPY: Record<
     title: "Pantry Drink Refreshers",
     intro:
       "Simply mix our pure freeze-dried fruit and veggie powders with water to enjoy delicious flavors and nutritional benefits, all powered by microgreens, spirulina, mushrooms, or saffron. Our offerings include Blue Lemon Zest, Strawberry Rosé and Green Citrus Leaf (drink refresher powders), Elevated Brew (mushroom coffee) and Matcha Revival (mushroom matcha), and Golden Calm (loose leaf tea) which can be enjoyed hot or cold.",
-    image: "shop/category-pantry-blends.jpg",
+    image: "catalog/products/spices_on_table2.jpg",
     imageAlt: "Pantry drink refresher powder jars on a counter",
     showContactPricing: false,
     showVarietyRow: false,
