@@ -111,6 +111,16 @@ export function CheckoutPage() {
           </div>
         ) : null}
 
+        {!error ? (
+          <aside className="checkout-page__local-notice" aria-label="Local order instructions">
+            <p>
+              If you are placing a local order, please enter the code{" "}
+              <code className="checkout-page__promo-code">LocalOrderOne</code> at checkout to avoid
+              shipping charges. We will reach out within 24 hours to arrange local delivery.
+            </p>
+          </aside>
+        ) : null}
+
         <div
           ref={mountRef}
           className="checkout-page__stripe-root"

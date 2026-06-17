@@ -49,6 +49,32 @@
   color: var(--color-heading);
 }
 
+.checkout-page__local-notice {
+  margin-bottom: var(--space-5);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-card-border);
+  background: var(--color-card);
+  box-shadow: var(--shadow-soft);
+}
+
+.checkout-page__local-notice p {
+  margin: 0;
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  color: var(--color-text-taupe);
+}
+
+.checkout-page__promo-code {
+  font-family: ui-monospace, monospace;
+  font-size: 0.9em;
+  padding: 0.1em 0.35em;
+  border-radius: var(--radius-sm);
+  background: var(--color-field-fill);
+  border: 1px solid var(--color-card-border);
+  color: var(--color-heading);
+}
+
 .checkout-page__stripe-root {
   min-height: 24rem;
 }
