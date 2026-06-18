@@ -137,13 +137,13 @@ export const products: Product[] = [
     id: "matcha-revival",
     name: "Matcha Revival",
     subtitle: "Powered by Matcha + Mushrooms",
-    size: "Net weight: 5 oz (33 servings)",
+    size: "Net weight: 5 oz (46 servings)",
     shortDescription:
-      "Matcha + mushroom complex with microgreens for clean focus and calm energy. Stir 2 scoops (2 tsp) into 6 oz of hot water, add your choice of sweetener and enjoy. Can also be enjoyed iced.",
+      "Matcha + mushroom complex with microgreens for clean focus and calm energy. Stir 1.5 scoops (1.5 tsp) into 6 oz of hot water, add your choice of sweetener and enjoy. Can also be enjoyed iced.",
     priceOneTime: "$38.99",
     priceSubscription: null,
     fulfillment: "Local & Delivery",
-    servingLine: "33 servings — 1.5 scoops per serving (5 g)",
+    servingLine: "46 servings — 1.5 scoops (1.5 tsp) per serving",
     longDescription:
       "Matcha blended with a mushroom complex and microgreens for calm, focused energy. Prepare hot or iced.",
     ingredients:
@@ -151,15 +151,15 @@ export const products: Product[] = [
     recipes: [
       {
         title: "Matcha Mushroom Latte",
-        body: "2 tsp Matcha Revival + 1 cup warm milk, honey, whisk.",
+        body: "1.5 tsp Matcha Revival + 1 cup warm milk, honey, whisk.",
       },
       {
         title: "Green Power Smoothie",
-        body: "2 tsp Matcha Revival + banana + 1 cup spinach + 1 cup coconut water, blend.",
+        body: "1.5 tsp Matcha Revival + banana + 1 cup spinach + 1 cup coconut water, blend.",
       },
       {
         title: "Matcha Oats",
-        body: "2 tsp Matcha Revival + 1/2 cup oats + 1 cup oat milk, refrigerate overnight.",
+        body: "1.5 tsp Matcha Revival + 1/2 cup oats + 1 cup oat milk, refrigerate overnight.",
       },
     ],
     labelNotes:
