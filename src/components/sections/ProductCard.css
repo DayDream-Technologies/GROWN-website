@@ -76,6 +76,25 @@
   transform-origin: center;
 }
 
+.product-card__photo.product-image--seasoning {
+  object-fit: contain;
+  object-position: center;
+  transform-origin: center;
+}
+
+.product-card__photo.product-image--medi-green-salt,
+.product-card__photo.product-image--salsa-verde-zest {
+  transform: scale(1.35);
+}
+
+.product-card__photo.product-image--garden-luxe-ranch {
+  transform: scale(1.12);
+}
+
+.product-card__photo.product-image--harvest-pesto-blend {
+  transform: scale(1.4);
+}
+
 .product-card__name {
   font-family: var(--font-display);
   font-size: var(--text-title);

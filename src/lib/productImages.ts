@@ -43,6 +43,10 @@ const PACKSHOT_IMAGE_IDS = new Set([
 
 const IMAGE_CLASS_BY_ID: Partial<Record<string, string>> = {
   "berry-gut-glow": "product-image--strawberry-rose",
+  "medi-green-salt": "product-image--seasoning product-image--medi-green-salt",
+  "garden-luxe-ranch": "product-image--seasoning product-image--garden-luxe-ranch",
+  "salsa-verde-zest": "product-image--seasoning product-image--salsa-verde-zest",
+  "harvest-pesto-blend": "product-image--seasoning product-image--harvest-pesto-blend",
 };
 
 /** Relative path under `public/images/` for list/detail hero. */

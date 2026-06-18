@@ -473,9 +473,7 @@ export function ShopPage() {
                 fulfillmentBadge={getFulfillmentBadge(item)}
                 servingLine={item.servingLine}
                 imageSrc={siteImage(getProductListImage(item))}
-                imageAlignTop={
-                  item.category === "seasoning" || item.id === "microgreens-full-tray"
-                }
+                imageAlignTop={item.id === "microgreens-full-tray"}
                 imageContain={isProductPackshot(item)}
                 imageClassName={getProductImageClassName(item)}
                 onOpenDetails={() => openProductById(item.id)}
