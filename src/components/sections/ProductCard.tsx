@@ -16,6 +16,8 @@ type Props = {
   imageAlignTop?: boolean;
   /** Show full white-background product image without lifestyle cropping. */
   imageContain?: boolean;
+  /** Optional product-specific display adjustment for mismatched source crops. */
+  imageClassName?: string;
   onOpenDetails?: () => void;
 };
 
@@ -31,6 +33,7 @@ export function ProductCard({
   imageSrc,
   imageAlignTop,
   imageContain,
+  imageClassName,
   onOpenDetails,
 }: Props) {
   const primaryPrice = priceOneTime ?? price ?? "";
@@ -56,7 +59,9 @@ export function ProductCard({
             alt={`${name} — product photo`}
             className={`product-card__photo${
               imageAlignTop ? " product-card__photo--top" : ""
-            }${imageContain ? " product-card__photo--contain" : ""}`}
+            }${imageContain ? " product-card__photo--contain" : ""}${
+              imageClassName ? ` ${imageClassName}` : ""
+            }`}
             loading="lazy"
             decoding="async"
           />

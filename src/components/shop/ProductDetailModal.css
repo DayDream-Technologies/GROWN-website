@@ -78,6 +78,7 @@
   margin: calc(-1 * var(--space-4)) calc(-1 * var(--space-5)) var(--space-4);
   border-bottom: 1px solid var(--color-border-subtle);
   background: var(--color-warm-neutral);
+  overflow: hidden;
 }
 
 .product-modal__hero--packshot {
@@ -105,6 +106,11 @@
 
 .product-modal__hero-img--top {
   object-position: top center;
+}
+
+.product-modal__hero-img.product-image--strawberry-rose {
+  transform: translateY(-8%) scale(1.55);
+  transform-origin: center;
 }
 
 .product-modal__meta {

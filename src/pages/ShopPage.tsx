@@ -14,7 +14,11 @@ import { useStripePricesFetchState } from "../context/useStripePricesFetchState"
 import { canPurchaseSubscription } from "../lib/productPricing";
 import { getOneTimePresentation } from "../lib/stripePricePresentation";
 import { useProductModal } from "../context/useProductModal";
-import { getProductListImage, isProductPackshot } from "../lib/productImages";
+import {
+  getProductImageClassName,
+  getProductListImage,
+  isProductPackshot,
+} from "../lib/productImages";
 import "./ShopPage.css";
 
 const LEGACY_FILTER_TO_CATEGORY: Record<string, ShopCategoryId> = {
@@ -473,6 +477,7 @@ export function ShopPage() {
                   item.category === "seasoning" || item.id === "microgreens-full-tray"
                 }
                 imageContain={isProductPackshot(item)}
+                imageClassName={getProductImageClassName(item)}
                 onOpenDetails={() => openProductById(item.id)}
               />
             ))}

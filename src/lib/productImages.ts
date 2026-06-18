@@ -41,6 +41,10 @@ const PACKSHOT_IMAGE_IDS = new Set([
   "lemon-zest",
 ]);
 
+const IMAGE_CLASS_BY_ID: Partial<Record<string, string>> = {
+  "berry-gut-glow": "product-image--strawberry-rose",
+};
+
 /** Relative path under `public/images/` for list/detail hero. */
 export function getProductListImage(product: Product): string {
   return LIST_IMAGE_BY_ID[product.id] ?? CATEGORY_FALLBACK[product.category];
@@ -48,4 +52,8 @@ export function getProductListImage(product: Product): string {
 
 export function isProductPackshot(product: Product): boolean {
   return PACKSHOT_IMAGE_IDS.has(product.id);
+}
+
+export function getProductImageClassName(product: Product): string | undefined {
+  return IMAGE_CLASS_BY_ID[product.id];
 }
