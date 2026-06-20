@@ -201,7 +201,7 @@ export const products: Product[] = [
   {
     id: "lemon-zest",
     name: "Blue Lemon Zest",
-    subtitle: "Powered by Spirulina + Lemon",
+    subtitle: "Powered by Spirulina + Microgreens",
     size: "Net weight: 4.2 oz (32 servings)",
     shortDescription:
       "Refreshing blend with a boost from spirulina and lemon. Stir 1.5 scoops (1.5 tsp) into 4–6 oz of water, add ice and enjoy. Adjust to taste.",
@@ -212,7 +212,7 @@ export const products: Product[] = [
     longDescription:
       "A refreshing lemon-forward drink powder enhanced with spirulina for color and nutrition. Sugar-free, vegan, made with real fruit and veggies. Powered by spirulina.",
     ingredients:
-      "Organic Lemon Powder, Organic Spirulina Powder, Organic Monkfruit, Hydroponic Microgreens Blend.",
+      "Organic Lemon Powder, Organic Spirulina Powder, Organic Stevia, Hydroponic Microgreens Blend.",
     recipes: [
       {
         title: "Zesty Mocktail",
