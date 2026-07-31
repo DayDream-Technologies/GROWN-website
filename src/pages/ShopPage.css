@@ -418,7 +418,7 @@
   grid-template-columns: repeat(2, 1fr);
 }
 
-.shop-product-grid--seasoning .product-card {
+.shop-product-grid--seasoning .product-card__visual {
   background: #fff;
 }
 
