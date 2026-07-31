@@ -140,7 +140,7 @@ export const products: Product[] = [
     size: "Net weight: 5 oz (46 servings)",
     shortDescription:
       "Matcha + mushroom complex with microgreens for clean focus and calm energy. Stir 1.5 scoops (1.5 tsp) into 6 oz of hot water, add your choice of sweetener and enjoy. Can also be enjoyed iced.",
-    priceOneTime: "$38.99",
+    priceOneTime: "$29.99",
     priceSubscription: null,
     fulfillment: "Local & Delivery",
     servingLine: "46 servings — 1.5 scoops (1.5 tsp) per serving",
@@ -164,38 +164,6 @@ export const products: Product[] = [
     ],
     labelNotes:
       "Net weight, caffeine disclosure, ingredient list, serving size, allergen/processing, manufacturer.",
-    category: "powder",
-  },
-  {
-    id: "golden-calm",
-    name: "Golden Calm",
-    subtitle: "Powered by Saffron + Botanicals",
-    size: "Net weight: 24-48 g (18 servings)",
-    shortDescription:
-      "Soothing loose-leaf tea with chamomile, lavender, saffron, and microgreens. Add 3 scoops to a tea infuser and steep in hot water for about 4 minutes. Remove infuser and enjoy before bed to help wind down.",
-    priceOneTime: "$39.99",
-    priceSubscription: null,
-    fulfillment: "Local & Delivery",
-    servingLine: "18 servings — 3 scoops (3 tsp) per serving",
-    longDescription:
-      "Soothing loose-leaf tea with chamomile, lavender, saffron, and microgreens. Steep 3 scoops for ~4 minutes. Helps with mood and winding down for the night.",
-    ingredients:
-      "Organic chamomile, Organic lavender, Saffron Threads, Hydroponic Microgreens Blend.",
-    recipes: [
-      {
-        title: "Bedtime Latte",
-        body: "1 tbsp Golden Calm Tea + 8 oz warm milk (oat, almond, or dairy) + 1/2 tsp vanilla + monkfruit. Steep 5 minutes, strain, sip warm.",
-      },
-      {
-        title: "Golden Calm Lemon Honey Shot",
-        body: "Brew 2 tbsp in 4 oz hot water. Add 1 tsp honey + squeeze of lemon.",
-      },
-      {
-        title: "Calm-Infused Simple Syrup",
-        body: "Perfect for mocktails or drizzle over fruit. Simmer 1 cup water + 1 cup sugar, add 2 tbsp Golden Calm Tea, steep 10 minutes, strain.",
-      },
-    ],
-    extraNotes: ["Not eligible for monthly subscription."],
     category: "powder",
   },
   {
@@ -231,13 +199,43 @@ export const products: Product[] = [
     category: "powder",
   },
   {
+    id: "garden-broccoli-dust",
+    name: "Garden Broccoli Dust",
+    subtitle: "Powered by Microgreens",
+    size: "",
+    shortDescription:
+      "Powered by microgreens and broccoli powder for an umami-rich finish.",
+    priceOneTime: "$12.99",
+    priceSubscription: null,
+    fulfillment: "Local and shipping",
+    longDescription:
+      "Garden Broccoli Dust blends nutrient-dense freeze-dried broccoli powder with savory nutritional yeast and onion to deliver a bright, cheddar-like richness without the dairy. This versatile dust brings a garden-fresh boost to your favorite snacks and meals. Each jar offers a concentrated source of plant-based flavor and umami in every sprinkle.",
+    ingredients:
+      "Freeze-Dried Broccoli Powder, Nutritional Yeast, Onion Powder, Garlic Powder, Lemon Juice Powder, Mustard Powder, Sea Salt, Hydroponic Microgreen Blend.",
+    recipes: [
+      {
+        title: "Broccoli Bread Dip",
+        body: "Whisk 1 tbsp Garden Broccoli Dust with 3 tbsp high-quality olive oil; serve with crusty warm bread.",
+      },
+      {
+        title: "Creamy Broccoli Soup",
+        body: "Whisk 2 tbsp Garden Broccoli Dust into 1/2 cup hot plant-based cream or milk, add the desired amount of hot water to thin, then throw in a handful of steamed broccoli for an instant, velvety soup.",
+      },
+      {
+        title: "Savory Pasta Finish",
+        body: "Sprinkle generously over oiled pasta, or stir into your favorite vegan mac-and-cheese sauce.",
+      },
+    ],
+    category: "seasoning",
+  },
+  {
     id: "medi-green-salt",
     name: "Medi Green Salt",
     subtitle: "Powered by Microgreens",
     size: "4 oz (48 servings; 1/2 tsp per serving)",
     shortDescription:
       "Finishing green salt powered by freeze-dried microgreens and organic herbs.",
-    priceOneTime: "",
+    priceOneTime: "$12.99",
     priceSubscription: null,
     fulfillment: "Local and shipping available",
     longDescription:

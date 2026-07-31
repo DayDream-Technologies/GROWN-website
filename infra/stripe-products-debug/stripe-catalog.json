@@ -23,15 +23,16 @@
     "subscription": "",
     "shipping_weight_lb": 1.63
   },
-  "golden-calm": {
-    "stripe_product_id": "prod_UQoFhqf0SXpF7A",
-    "one_time": "",
-    "shipping_weight_lb": 0.75
-  },
   "lemon-zest": {
     "stripe_product_id": "prod_UQoYENgr6EYszJ",
     "one_time": "",
     "shipping_weight_lb": 0.75
+  },
+  "garden-broccoli-dust": {
+    "stripe_product_id": "prod_UyWQMYCNkdHap2",
+    "one_time": "",
+    "subscription": "",
+    "shipping_weight_lb": 0.4
   },
   "medi-green-salt": {
     "stripe_product_id": "prod_UQobdcuxmIgduz",

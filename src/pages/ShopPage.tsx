@@ -79,7 +79,7 @@ const CATEGORY_COPY: Record<
   "pantry-blends": {
     title: "Pantry Drink Refreshers",
     intro:
-      "Simply mix our pure freeze-dried fruit and veggie powders with water to enjoy delicious flavors and nutritional benefits, all powered by microgreens, spirulina, mushrooms, or saffron. Our offerings include Blue Lemon Zest, Strawberry Rosé and Green Citrus Leaf (drink refresher powders), Elevated Brew (mushroom coffee) and Matcha Revival (mushroom matcha), and Golden Calm (loose leaf tea) which can be enjoyed hot or cold.",
+      "Simply mix our pure freeze-dried fruit and veggie powders with water to enjoy delicious flavors and nutritional benefits, all powered by microgreens, spirulina, or mushrooms. Our offerings include Blue Lemon Zest, Strawberry Rosé and Green Citrus Leaf (drink refresher powders), Elevated Brew (mushroom coffee), and Matcha Revival (mushroom matcha), which can be enjoyed hot or cold.",
     image: "catalog/products/spices_on_table2.jpg",
     imageAlt: "Pantry drink refresher powder jars on a counter",
     showContactPricing: false,
@@ -221,10 +221,6 @@ const PANTRY_BENEFITS = [
   {
     title: "Microgreens - 4-40x More Nutrient Dense",
     body: "Young vegetable greens harvested at peak nutrition. Research shows they can contain 4-40x more vitamins and antioxidants than mature veggies - so even a small scoop delivers real benefits.",
-  },
-  {
-    title: "Saffron - Mood + Emotional Well-Being",
-    body: "A premium botanical long used for emotional balance and now clinically studied for supporting mood, stress resilience, and overall well-being.",
   },
 ] as const;
 
