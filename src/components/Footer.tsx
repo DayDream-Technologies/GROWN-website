@@ -16,10 +16,6 @@ const nutritionSources = [
     href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC3136577",
   },
   {
-    label: "American Journal of Clinical Nutrition",
-    href: "https://ajcn.nutrition.org/article/S0002-9165(25)00603-3/fulltext",
-  },
-  {
     label: "Functional ingredient research",
     href: "https://pmc.ncbi.nlm.nih.gov/articles/PMC12073738",
   },

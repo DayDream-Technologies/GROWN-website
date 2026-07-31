@@ -125,7 +125,7 @@ export function HomePage() {
           everyday nutrition easier—simply sprinkle our seasonings over your favorite foods for a
           quick boost, or mix our powders with water for a refreshing and nutritious drink that even
           your kids will love. With no sugar and no fillers, you get only real fruits, veggies, and
-          herbs powered by our super ingredients: microgreens, saffron, spirulina, and mushrooms.
+          herbs powered by our super ingredients: microgreens, spirulina, and mushrooms.
         </p>
         <div className="home-shelf__break" aria-hidden />
       </Section>
