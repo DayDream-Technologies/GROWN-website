@@ -91,6 +91,10 @@
   transform: scale(1.12);
 }
 
+.product-card__photo.product-image--garden-broccoli-dust {
+  transform: scale(1.65);
+}
+
 .product-card__photo.product-image--harvest-pesto-blend {
   transform: scale(1.4);
 }

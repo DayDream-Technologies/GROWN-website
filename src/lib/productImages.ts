@@ -15,8 +15,8 @@ const LIST_IMAGE_BY_ID: Partial<Record<string, string>> = {
   "green-leaf": "catalog/products/green_citrus_product_pic.PNG",
   "berry-gut-glow": "catalog/products/strawberry_rose_product_pic.jpg",
   "matcha-revival": "catalog/products/matcha_revival_product_pic.PNG",
-  "golden-calm": "catalog/products/golden_calm_product_pic.jpg",
   "lemon-zest": "catalog/products/blue_lemon_product_pic.PNG",
+  "garden-broccoli-dust": "catalog/products/garden-broccoli-dust.png",
   "medi-green-salt": "catalog/products/medi_green_pic.PNG",
   "garden-luxe-ranch": "catalog/products/garden_luxe_pic.jpeg",
   "salsa-verde-zest": "catalog/products/salsa_verde_pic.jpg",
@@ -37,12 +37,12 @@ const PACKSHOT_IMAGE_IDS = new Set([
   "green-leaf",
   "berry-gut-glow",
   "matcha-revival",
-  "golden-calm",
   "lemon-zest",
 ]);
 
 const IMAGE_CLASS_BY_ID: Partial<Record<string, string>> = {
   "berry-gut-glow": "product-image--strawberry-rose",
+  "garden-broccoli-dust": "product-image--seasoning product-image--garden-broccoli-dust",
   "medi-green-salt": "product-image--seasoning product-image--medi-green-salt",
   "garden-luxe-ranch": "product-image--seasoning product-image--garden-luxe-ranch",
   "salsa-verde-zest": "product-image--seasoning product-image--salsa-verde-zest",
