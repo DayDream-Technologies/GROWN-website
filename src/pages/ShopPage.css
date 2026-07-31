@@ -418,6 +418,10 @@
   grid-template-columns: repeat(2, 1fr);
 }
 
+.shop-product-grid--seasoning .product-card {
+  background: #fff;
+}
+
 .shop-produce-category-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
