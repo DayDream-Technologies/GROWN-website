@@ -46,7 +46,7 @@ const CATEGORY_CARDS = [
     title: "Pantry Drink Refresher Powders",
     subtitle: "For home kitchens",
     detail:
-      "Transform your water into a delicious, clean beverage with our Pure Drink Refreshers. All powered by spirulina, saffron, mushrooms & microgreens.",
+      "Transform your water into a delicious, clean beverage with our Pure Drink Refreshers. All powered by spirulina, mushrooms & microgreens.",
     image: "home/category-pantry-blends.jpg",
     imageAlt: "Pantry drink refresher powder jars",
     href: "/shop?category=pantry-blends",
