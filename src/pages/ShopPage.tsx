@@ -562,8 +562,7 @@ export function ShopPage() {
           <Link className="shop-footer-message__link" to="/contact">
             contact us
           </Link>{" "}
-          directly. Pantry orders $100 or more qualify for free shipping. Subscribe & Save pantry
-          blend subscriptions launch August 2026 stay tuned.
+          directly. Pantry orders $100 or more qualify for free shipping.
         </p>
       </Section>
     </>
